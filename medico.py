@@ -19,6 +19,9 @@ class Medico(Persona):
 
     def getEspecialidad(self):
         return self.especialidad
+
+    def getPacientes(self):
+        return self.pacientes
     
     def recetarPaciente(self, _paciente, _medicamentos, _fecha, _duracion, _observaciones, _dosis):
         receta= Receta()
@@ -30,9 +33,7 @@ class Medico(Persona):
         receta.setDosis(_dosis)
         receta.setMedico(self)
         return receta
-    
-    def mostrarPacientes(self):
-        return self.pacientes
+ 
     
    
     def __str__(self) :

@@ -53,8 +53,7 @@ class Receta():
 
     def getDosis(self):
         return self.dosis
-    
-    
+
     
     
     
