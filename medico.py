@@ -13,6 +13,9 @@ class Medico(Persona):
 
     def setEspecialidad(self,especialidad):
         self.especialidad=especialidad
+    
+    def setPaciente(self,paciente):
+        self.paciente=paciente
 
     def getDisponibilidad(self):
         return self.disponibilidad
