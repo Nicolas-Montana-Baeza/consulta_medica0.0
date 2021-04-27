@@ -8,7 +8,10 @@ class Paciente(Persona):
         self.requerimientos=[]
         self.diagnosticos=[]
         self.forma_pago=""
-        self.citas=[]
+        #billetera
+        self.cartera=0
+        self.cita= Cita()
+        #self.recetas=[]
 
     def setPrevision(self,prevision):
         self.prevision=prevision
