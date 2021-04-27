@@ -111,6 +111,9 @@ class Clinica():
             
             elif cita.fecha==buscar:
                 coincidencias.append(cita)
+            
+            elif cita.codigo==buscar:
+                coincidencias.append(cita)
 
         return coincidencias  
 

@@ -10,10 +10,11 @@ class Cita ():
         self.codigo=""
         self.prestacion=""
         self.estado=""
-        self.pagado=0
+        self.pagado=False
         self.modalidad=""
         self.prioridad=""
         self.estadoTemporal=""
+        self.confirmada=False
 
     def setFecha(self,fecha):
         self.fecha=fecha
@@ -45,6 +46,9 @@ class Cita ():
     def setEstadoTemporal(self,estadoTemporal):
         self.estadoTemporal=estadoTemporal
 
+    def setConfirmada(self,confirmada):
+        self.confirmada=confirmada
+
     def getFecha(self):
         return self.fecha
 
@@ -74,6 +78,9 @@ class Cita ():
     
     def getEstadoTemporal(self):
         return self.estadoTemporal
+    
+    def getConfirmada(self):
+        return self.confirmada
 
         
 
