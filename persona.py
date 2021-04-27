@@ -2,13 +2,29 @@ from math import floor
 
 class Persona():
     def __init__(self):
-        self.nombre=""
+        self.primer_nombre=""
+        self.segundo_nonmbre=""
+        self.apellido_paterno=""
+        self.Apellido_materno=""
         self.edad=0
         self.rut=""
-        self.contacto=""
+        self.email=""
+        self.numero_telefonico=[]
       
-    def setNombre(self,nombre):
-        self.nombre=nombre
+    def setPrimerNombre(self,primer_nombre):
+        self.primer_nombre=primer_nombre
+        
+    def setSegundoNombre(self,segundo_nombre):
+        self.segundo_nombre=segundo_nombre
+        
+    def setApellidoPaterno(self,apellido_paterno):
+        self.apellido_paterno=apellido_paterno
+
+    def setApellidoMaterno(self,apellido_materno):
+        self.apellido_materno=apellido_materno
+        
+    def setNumero_Telefonico(self,numero_telefonico):
+        self.numero_telefonico=numero_telefonico
         
     def setEdad(self,edad):
         self.edad=edad
@@ -16,20 +32,32 @@ class Persona():
     def setRut(self,rut):
         self.rut=rut
 
-    def setContacto(self,contacto):
-        self.contacto=contacto
+    def setEmail(self,email):
+        self.email=email
 
-    def getNombre(self):
-        return self.nombre
+    def getPrimerNombre(self):
+        return self.primer_nombre
+
+    def getSegundoNombre(self):
+        return self.segundo_nombre
+
+    def getApellidoMaterno(self):
+        return self.apellido_materno
+
+    def getApellidoPaterno(self):
+        return self.apellido_paterno
+
+    def getNumeroTelefonico(self):
+        return self.numero_telefonico
+
+    def getEmail(self):
+        return self.email
 
     def getEdad(self):
         return self.edad
 
     def getRut(self):
         return self.rut
-
-    def getContacto(self):
-        return self.contacto
    
     def isRut(self,rut):
         self.rut=rut
@@ -61,4 +89,4 @@ class Persona():
             return False
 
     def __str__(self) :
-        return self.nombre+" "+self.rut+" "+str(self.edad)+" "+self.contacto
+        return self.primer_nombre+" "+self.rut+" "+str(self.edad)+" "+self.contacto

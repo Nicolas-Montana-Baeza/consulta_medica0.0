@@ -8,9 +8,7 @@ class Paciente(Persona):
         self.requerimientos=[]
         self.diagnosticos=[]
         self.forma_pago=""
-        #billetera
-        self.cartera=0
-        self.codigo_cita=""
+        self.citas=[]
 
     def setPrevision(self,prevision):
         self.prevision=prevision
@@ -26,6 +24,9 @@ class Paciente(Persona):
 
     def setFormapago(self,forma_pago):
         self.forma_pago=forma_pago
+    
+    def setCitas(self,citas):
+        self.citas=citas
 
     def getPrevision(self):
         return self.prevision
@@ -39,11 +40,16 @@ class Paciente(Persona):
     def getDiagnosticos(self):
         return self.diagnosticos
 
-    def getFormapago(self,forma_pago):
+    def getFormapago(self):
         return self.forma_pago
     
-   # def pagar(self, dinero):
+    def getCitas(self):
+        return self.citas
 
+    def agendarCita(self,_cita):
+        self.citas.append(_cita)
+
+    def cancelarCita()
 
     def __str__(self):
         return self.prevision+" "+self.ultima_prestacion+" "+self.requerimientos+" "+self.diagnosticos+" "+self.forma_pago

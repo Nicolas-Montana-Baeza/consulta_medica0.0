@@ -1,11 +1,11 @@
 from medico import Medico
 from paciente import Paciente
 
-class Cita (Paciente,Medico):
+class Cita ():
     def __inti__(self):
         self.fecha=""
-        self.medico=""
-        self.paciente=""
+        self.medico= Medico()
+        self.paciente=Paciente()
         self.direccion=""
         self.codigo=""
         self.prestacion=""
@@ -13,6 +13,7 @@ class Cita (Paciente,Medico):
         self.pagado=0
         self.modalidad=""
         self.prioridad=""
+        self.estadoTemporal=""
 
     def setFecha(self,fecha):
         self.fecha=fecha
@@ -41,6 +42,9 @@ class Cita (Paciente,Medico):
     def setModalidad(self,modalidad):
         self.modalidad=modalidad
     
+    def setEstadoTemporal(self,estadoTemporal):
+        self.estadoTemporal=estadoTemporal
+
     def getFecha(self):
         return self.fecha
 
@@ -67,6 +71,11 @@ class Cita (Paciente,Medico):
 
     def getModalidad(self):
         return self.modalidad
+    
+    def getEstadoTemporal(self):
+        return self.estadoTemporal
+
+        
 
 
 

@@ -114,6 +114,20 @@ class Clinica():
 
         return coincidencias  
 
+    def agregarPaciente(self, _paciente):
+        try:
+            self.pacientes.append(_paciente)
+            return True
+        except:
+            return False
+        
+    def agregarMedico(self, _medico):
+            try:
+                self.medicos.append(_medico)
+                return True
+            except:
+                return False
+
     def __str__(self):
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
 
