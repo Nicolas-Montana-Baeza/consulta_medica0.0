@@ -1,12 +1,13 @@
 from paciente import Paciente
 from medico import Medico
+import datetime as dt
 
 class Receta():
 
     def __init__(self):
         self.paciente= Paciente()
         self.medico= Medico()
-        self.medicamentos=""
+        self.farmaco_y_dosis=[]
         self.fecha=""
         self.duracion=""
         self.observaciones=[]
@@ -18,8 +19,8 @@ class Receta():
     def setMedico(self,medico):
         self.medico=medico
 
-    def setMedicamentos(self,medicamentos):
-        self.medicamentos=medicamentos
+    def setFarmacoYDosis(self,farmaco_y_dosis):
+        self.farmaco_y_dosis=farmaco_y_dosis
 
     def setFecha(self,fecha):
         self.fecha=fecha
@@ -39,8 +40,8 @@ class Receta():
     def getMedico(self):
         return self.medico
 
-    def getMedicamentos(self):
-        return self.medicamentos
+    def getFarmacoYDosis(self):
+        return self.farmaco_y_dosis
     
     def getFecha(self):
         return self.fecha
@@ -53,6 +54,13 @@ class Receta():
 
     def getDosis(self):
         return self.dosis
+
+    def isValida(self):
+        """if dt.datetime.now()-self.fecha>self.duracion:
+            return True"""
+        return "not implemented yet"
+            
+
 
     
     

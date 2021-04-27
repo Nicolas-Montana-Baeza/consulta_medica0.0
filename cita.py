@@ -1,6 +1,6 @@
 from medico import Medico
 from paciente import Paciente
-
+import datetime
 class Cita ():
     def __inti__(self):
         self.fecha=""
