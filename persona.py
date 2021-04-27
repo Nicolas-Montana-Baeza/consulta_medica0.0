@@ -89,4 +89,4 @@ class Persona():
             return False
 
     def __str__(self) :
-        return self.primer_nombre+" "+self.rut+" "+str(self.edad)+" "+self.contacto
+        return self.apellido_paterno+" "+apellido_materno" "+self.primer_nombre+" "+self.segundo_nombre+" "+self.rut+" "+str(self.edad)+" "+self.email
