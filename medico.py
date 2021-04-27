@@ -1,5 +1,4 @@
 from persona import Persona
-from receta import Receta
 from paciente import Paciente
 class Medico(Persona):
 
@@ -29,22 +28,10 @@ class Medico(Persona):
     def getPacientes(self):
         return self.pacientes
 
-    def recetarPaciente(self, _paciente, _medicamentos, _fecha, _duracion, _observaciones, _dosis):
-        receta= Receta()
-        receta.setPaciente(_paciente)
-        receta.setMedicamentos(_medicamentos)
-        receta.setFecha(_fecha)
-        receta.setDuracion(_duracion)
-        receta.setObservaciones(_observaciones)
-        receta.setDosis(_dosis)
-        receta.setMedico(self)
-    
-    def despacharPaciente(self, _cita, _paciente):
-
-        return "not implemented yet"
-    
-   
-
+    def recetarPaciente(self, _receta,_paciente):
+        _receta=_paciente.getRecetas.append(_receta)
+        _paciente.set(_receta)
+       
     def __str__(self) :
         return str(self.disponibilidad)+" "+self.especialidad
 

@@ -88,5 +88,40 @@ class Persona():
         else:
             return False
 
+    #def asignarCodigo(self, _objeto):
+
+    def buscarCita(self,buscar):
+            
+            for cita in self.citas:
+                coincidencias=[]
+                
+                if cita.paciente.nombre.lower().find(buscar)!=-1 or cita.medico.nombre.lower().find(buscar)!=-1:
+                    coincidencias.append(cita)
+
+                elif cita.isRut(buscar) :
+
+                    if cita.paciente.rut.find(buscar)!=-1 or cita.medico.rut.find(buscar)!=-1:
+                        coincidencias.append(cita)
+
+                elif cita.medico.especialidad.lower().find(buscar)!=-1:
+                    coincidencias.append(cita)
+                
+                elif cita.fecha==buscar:
+                    coincidencias.append(cita)
+                
+                elif cita.codigo==buscar:
+                    coincidencias.append(cita)
+
+            return coincidencias  
+    
+    def agendarCita(self,_cita):
+        self.citas.append(_cita)
+
+    def reagendarCita(self, _fecha, _codigo_cita):
+        return "not implemented yet"
+    
+    def confirmarCita(self,_cita):
+        _cita.setConfirmada(True)
+
     def __str__(self) :
         return self.apellido_paterno+" "+self.apellido_materno+" "+self.primer_nombre+" "+self.segundo_nombre+" "+self.rut+" "+str(self.edad)+" "+self.email

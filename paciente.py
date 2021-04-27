@@ -1,5 +1,6 @@
 from persona import Persona
 from cita import Cita
+from receta import Receta
 class Paciente(Persona): 
     def __init__(self):
 
@@ -11,7 +12,7 @@ class Paciente(Persona):
         #billetera
         self.cartera=0
         self.citas= []
-        #self.recetas=[]
+        self.recetas=[]
 
     def setPrevision(self,prevision):
         self.prevision=prevision
@@ -31,6 +32,9 @@ class Paciente(Persona):
     def setCitas(self,citas):
         self.citas=citas
 
+    def setRecetas(self,recetas):
+        self.recetas=recetas
+
     def getPrevision(self):
         return self.prevision
 
@@ -49,9 +53,10 @@ class Paciente(Persona):
     def getCitas(self):
         return self.citas
 
-    def agendarCita(self,_cita):
-        return "not implemented yet"
-        
+    def getRecetas(self):
+        return self.citas
+
+      
     def cancelarCita(self, _codigo_cita):
 
         for i in range (len(self.citas)):
@@ -62,18 +67,13 @@ class Paciente(Persona):
 
         return False
 
-    def reagendarCita(self, _fecha):
-        return "not implemented yet"
-    
+
     def pagarCita(self,_cita,_monto_a_pagar):
         if _monto_a_pagar>self.cartera:
             return False
         else:
             _cita.setPagado(True)
             return True
-
-    def confirmarCita(self,_cita):
-        _cita.setConfirmada(True)
 
     def __str__(self):
         return self.prevision+" "+self.ultima_prestacion+" "+self.requerimientos+" "+self.diagnosticos+" "+self.forma_pago

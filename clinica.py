@@ -6,9 +6,7 @@ class Clinica():
         self.nombre=""
         self.direccion=""
         self.tipo=""
-        self.especialidades=[]
         self.horario=[]
-        self.citas=[]
         self.medicos=[]
         self.pacientes=[]
 
@@ -26,9 +24,6 @@ class Clinica():
 
     def setHorario(self,horario):
         self.horario=horario
-
-    def setCitas(self,citas):
-        self.citas=citas
 
     def setDoctores(self,doctores):
         self.doctores=doctores
@@ -93,29 +88,7 @@ class Clinica():
 
         return coincidencias    
     
-    def buscarCita(self,buscar):
-          
-        for cita in self.citas:
-            coincidencias=[]
-            
-            if cita.paciente.nombre.lower().find(buscar)!=-1 or cita.medico.nombre.lower().find(buscar)!=-1:
-                coincidencias.append(cita)
-
-            elif cita.isRut(buscar) :
-
-                if cita.paciente.rut.find(buscar)!=-1 or cita.medico.rut.find(buscar)!=-1:
-                    coincidencias.append(cita)
-
-            elif cita.medico.especialidad.lower().find(buscar)!=-1:
-                coincidencias.append(cita)
-            
-            elif cita.fecha==buscar:
-                coincidencias.append(cita)
-            
-            elif cita.codigo==buscar:
-                coincidencias.append(cita)
-
-        return coincidencias  
+   
 
     def agregarPaciente(self, _paciente):
         try:

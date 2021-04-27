@@ -1,9 +1,9 @@
 from medico import Medico
 from paciente import Paciente
-import datetime
+import datetime as dt
 class Cita ():
     def __inti__(self):
-        self.fecha=""
+        self.fecha=dt.datetime(1,1,1)
         self.medico= Medico()
         self.paciente=Paciente()
         self.direccion=""
