@@ -49,7 +49,8 @@ class Paciente(Persona):
     def agendarCita(self,_cita):
         self.citas.append(_cita)
 
-    def cancelarCita()
+    def cancelarCita(self):
+        return "not immplemented yet"
 
     def __str__(self):
         return self.prevision+" "+self.ultima_prestacion+" "+self.requerimientos+" "+self.diagnosticos+" "+self.forma_pago
