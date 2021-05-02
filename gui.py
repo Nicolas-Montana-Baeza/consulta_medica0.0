@@ -6,26 +6,20 @@ import tkinter as tk
 from tkinter import *
 
 class Root(Tk):
-    def imprima_mes():
-            print(radioLeido)
-            
-    def obtenga_informacion():
-            Monto_Informacion=e1.get()*informaciones[radioLeido.get()]
-            print("informacion:",informaciones[radioLeido.get()])
+  
     def __init__(self):
         super(Root, self).__init__()
         self.title("Consulta medica")
         self.minsize(720, 600)##ancho y alto
         self.configure(background='light blue')
-        
 
-
-        self.createMenu()
-
-        tabControl = ttk.Notebook(self)
-        self.tab1 = ttk.Frame(tabControl)
-        tabControl.add(self.tab1, text="Medico")
-
+        def imprima_mes():
+            print(radioLeido)
+            
+        def obtenga_informacion():
+                Monto_Informacion=e1.get()*informaciones[radioLeido.get()]
+                print("informacion:",informaciones[radioLeido.get()])
+            
         def imprima_mes():
             print(radioLeido)
             
@@ -40,12 +34,7 @@ class Root(Tk):
         radioLeido = IntVar() 
 
         
-        rdioOne = Radiobutton(app, text='Neurologo',
-                                    variable=radioLeido, value=0) 
-        rdioTwo = Radiobutton(app, text='Dentista',
-                                    variable=radioLeido, value=1) 
-        rdioThree = Radiobutton(app, text='Medico general',
-                                    variable=radioLeido, value=2)
+       
         Boton_1 =   Button(app,  text="Aceptar", fg="Blue",command=obtenga_informacion).place(x=250,y=150)
 
         rdioOne.grid(column=0, row=0)
@@ -58,7 +47,6 @@ class Root(Tk):
         tabControl.add(self.tab2, text="Paciente")
         def muestra_datos():
             print("Nombre: ", e1.get(),"Apellido:", e2.get() )
-
         app = Tk()
         Etiqueta_1=Label(app, text="Nombre ").grid(row=0)
         Etiqueta_2=Label(app, text="Apellido ").grid(row=1)
@@ -72,6 +60,9 @@ class Root(Tk):
         e1.grid(row=0, column=1)
         e2.grid(row=1, column=1)
         e3.grid(row=2, column=1)
+        rdioOne = Radiobutton(app, text='Neurologo', variable=radioLeido, value=0) 
+        rdioTwo = Radiobutton(app, text='Dentista', variable=radioLeido, value=1) 
+        rdioThree = Radiobutton(app, text='Medico general', variable=radioLeido, value=2)
 
 
 

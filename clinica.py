@@ -1,4 +1,3 @@
-from cita import Cita
 import datetime as dt
 from math import floor
 class Clinica():
