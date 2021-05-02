@@ -82,7 +82,25 @@ class Cita ():
     def getConfirmada(self):
         return self.confirmada
 
+    def actualizarEstado(self):
+        fecha_actual=dt.datetime.now()
+        dias_restantes=(self.fecha-fecha_actual).days
+
+        if dias_restantes==0:
+            self.setEstadoTemporal("Cita en curso...")
+
+        elif dias_restantes>0:
+            self.setEstadoTemporal("Quedan "+str(dias_restantes)+" dias para su cita...")
+
+        elif dias_restantes<0:
+            self.setEstadoTemporal("su cita fue hace "+str(-1*dias_restantes)+" días")
         
+        else:
+            return False
+        
+        return True
+
+    
 
 
 
