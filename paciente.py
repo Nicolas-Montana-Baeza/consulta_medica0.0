@@ -1,5 +1,4 @@
 from persona import Persona
-from cita import Cita
 from receta import Receta
 class Paciente(Persona): 
     def __init__(self):
