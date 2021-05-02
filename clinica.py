@@ -333,7 +333,6 @@ class Persona():
     def __str__(self) :
         return self.apellido_paterno+" "+self.apellido_materno+" "+self.primer_nombre+" "+self.segundo_nombre+" "+self.rut+" "+str(self.edad)+" "+self.email
 
-
 class Medico(Persona):
 
     def __init__(self):
