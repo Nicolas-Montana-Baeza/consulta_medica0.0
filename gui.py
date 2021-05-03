@@ -1,15 +1,10 @@
 from clinica import Clinica
 from tkinter import *
-#creacion de ventana y fondo
-
-
-ventana_principal.mainloop()
 
 class GuiDominio:
 
-   
-        
     def __init__(self):
+        super(GuiDominio, self).__init__()
         self.clinica= Clinica()
         self.clinica.setNombre(" Clinica de la Salud")
         self.color1="#788890"
@@ -25,7 +20,7 @@ class GuiDominio:
         self.agendar_cita.pack(padx=20,pady=20)
 
         #contiene los radio buttons
-        self.escojer_especialidades=LabelFrame(self.agendar_cita, text="Escoja la Especialidad", padx=5, pady=5, bg=self.self.color3)
+        self.escojer_especialidades=LabelFrame(self.agendar_cita, text="Escoja la Especialidad", padx=5, pady=5, bg=self.color3)
         self.escojer_especialidades.pack(anchor=W)
         self.especialidades=[
         ("Medicina General", "Medicina General"),
@@ -37,8 +32,7 @@ class GuiDominio:
         self.opcion.set("Medicina General")
 
         for texto, especialidad in self.especialidades:
-            Radiobutton(self.escojer_especialidades,highlightthickness=0, text=texto, variable=self.opcion, value=especialidad, bg=self.color3)
-            Radiobutton.pack(anchor=W)
+            Radiobutton(self.escojer_especialidades,highlightthickness=0, text=texto, variable=self.opcion, value=especialidad, bg=self.color3).pack(anchor=W)
 
         #Además se necesitará propiciar una modalidad
         self.modalidad=StringVar()
@@ -50,7 +44,7 @@ class GuiDominio:
 
         #Ingreso de datos del paciente
         self.ingresar_paciente=LabelFrame(self.agendar_cita,text="Datos del Paciente", padx=5, pady=5,bg=self.color3)
-        self.ngresar_paciente.pack(anchor=W)
+        self.ingresar_paciente.pack(anchor=W)
 
             #rut se podria agregar que al ingresar el rut si el paciente ya existe los datos se autocompleten
         self.rut_label=Label(self.ingresar_paciente, text="Rut(sin puntos): ", bg=self.color3).grid(row=0,column=0)
@@ -89,4 +83,5 @@ class GuiDominio:
 
         #en este se mostraran las citas por paciente
         #citas_agendadas=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
-
+ventana_principal= GuiDominio()
+ventana_principal.mainloop()
