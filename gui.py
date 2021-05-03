@@ -1,17 +1,17 @@
 from clinica import Clinica
 from tkinter import *
 
-class GuiDominio:
+class GuiDominio(Tk):
 
     def __init__(self):
         super(GuiDominio, self).__init__()
+        self.ventana_principal=Tk()
         self.clinica= Clinica()
         self.clinica.setNombre(" Clinica de la Salud")
         self.color1="#788890"
         self.color2="#28388f"
         self.color3="#accdec"
         self.color4="#6d6e72"
-        self.ventana_principal = Tk()
         self.ventana_principal.title(str(self.clinica.getNombre())) 
         self.ventana_principal.configure(bg=self.color2)
 
