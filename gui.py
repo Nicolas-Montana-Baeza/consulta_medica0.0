@@ -1,5 +1,5 @@
 from clinica import Clinica
-from tkinter import *
+from tkinter import  Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT
 
 class GuiDominio(Tk):
 
@@ -7,7 +7,7 @@ class GuiDominio(Tk):
         super(GuiDominio, self).__init__()
         self.ventana_principal=Tk()
         self.clinica= Clinica()
-        self.clinica.setNombre(" Clinica de la Salud")
+        self.clinica.setNombre("Clinica de la Salud")
         self.color1="#788890"
         self.color2="#28388f"
         self.color3="#accdec"
@@ -17,7 +17,7 @@ class GuiDominio(Tk):
 
         #en este frame irán todas las entradas necesarias para una cita
         self.agendar_cita=LabelFrame(self.ventana_principal, text="Agendar Cita", padx=5, pady=5, bg=self.color3, relief=FLAT)
-        self.agendar_cita.pack(padx=20,pady=20)
+        self.agendar_cita.pack(padx=10,pady=10)
 
         #contiene los radio buttons
         self.escojer_especialidades=LabelFrame(self.agendar_cita, text="Escoja la Especialidad", padx=5, pady=5, bg=self.color3)
