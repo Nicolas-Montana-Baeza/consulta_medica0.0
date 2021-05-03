@@ -83,5 +83,6 @@ class GuiDominio:
 
         #en este se mostraran las citas por paciente
         #citas_agendadas=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
+
 ventana_principal= GuiDominio()
 ventana_principal.mainloop()
