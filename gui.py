@@ -56,7 +56,7 @@ class GuiDominio:
         self.prevision.set("FONASA")
         Radiobutton(self.ingresar_paciente,highlightthickness=0, text="FONASA", variable=self.prevision,value="FONASA", bg=self.color3).grid(row=2,column=0)
         Radiobutton(self.ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=self.prevision,value="ISAPRE", bg=self.color3).grid(row=2,column=1)
-
+        Radiobutton(self.ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=self.prevision,value="Sin Prevision", bg=self.color3).grid(row=2,column=2)
             #primer nombre
         self.nombre1_label=Label(self.ingresar_paciente, text="Primer Nombre: ", bg=self.color3).grid(row=3,column=0)
         self.nombre1=Entry(self.ingresar_paciente, width=10).grid(row=3,column=1)
