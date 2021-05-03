@@ -19,5 +19,6 @@ def crearSeleccionDeEspecialidad():
 
     for texto, especialidad in especialidades:
         Radiobutton(ventana_principal,highlightthickness=0, text=texto, variable=opcion, value=especialidad, bg="#788890").pack(anchor=W)
+titulo1=Label(ventana_principal,)
 crearSeleccionDeEspecialidad()
 ventana_principal.mainloop()
