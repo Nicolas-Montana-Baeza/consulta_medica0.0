@@ -81,11 +81,16 @@ class GuiDominio(Tk):
         self.email_label=Label(self.ingresar_paciente, text="Correo Electronico: ", bg=self.color3).grid(row=8,column=0)
         self.email=Entry(self.ingresar_paciente, width=10).grid(row=8,column=1)
 
-        #en este se mostraran las citas por paciente
-        #citas_agendadas=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
+        #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
+        self.citas_agendadas=LabelFrame(self.ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
+
+
+        #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE AVUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
         self.disponibilidad_citas=LabelFrame(self.agendar_cita, text="Seleccione la fecha para agendar su cita: ", bg=self.color3)
         self.disponibilidad_citas.pack(anchor=W)
         self.boton_confirmar_fecha=Button(self.disponibilidad_citas, text="CONFIRMAR FECHA").pack()
+
+
 
 ventana_principal= GuiDominio()
 ventana_principal.mainloop()
