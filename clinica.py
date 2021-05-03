@@ -9,6 +9,7 @@ class Clinica():
         self.horario=[]
         self.medicos=[]
         self.pacientes=[]
+        
 
     def setNombre(self,nombre):
         self.nombre=nombre 
