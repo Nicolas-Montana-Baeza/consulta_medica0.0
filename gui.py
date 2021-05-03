@@ -15,9 +15,9 @@ def crearSeleccionDeEspecialidad():
     ("Odontologia", "Odontologia")
     ]
     opcion = StringVar()
-    opcion.set("Medicina General")
+    opcion.set(especialidades[1][0])
 
     for texto, especialidad in especialidades:
-        Radiobutton(ventana_principal, text=texto, variable=opcion, value=especialidad, bg="#788890").pack(anchor=W)
+        Radiobutton(ventana_principal,highlightthickness=0, text=texto, variable=opcion, value=especialidad, bg="#788890").pack(anchor=W)
 crearSeleccionDeEspecialidad()
 ventana_principal.mainloop()
