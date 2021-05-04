@@ -1,6 +1,6 @@
 from clinica import Clinica
-from tkinter import  Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,Text
-
+from tkinter import  Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT
+from tkcalendar import *
 class GuiDominio(Tk):
 
     def __init__(self):
@@ -93,11 +93,15 @@ class GuiDominio(Tk):
         self.boton_cancelar_hora=Button(self.citas_agendadas,text="Cancelar").grid(row=1,column=3)
         self.boton_editar_hora=Button(self.citas_agendadas,text="Reagendar").grid(row=1,column=4)
 
-        #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE AVUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
+        #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
         self.disponibilidad_citas=LabelFrame(self.agendar_cita, text="Seleccione la fecha para agendar su cita: ", bg=self.color3)
+        self.calendario = Calendar(self.disponibilidad_citas)
+        self.calendario.pack(pady=30)
         self.disponibilidad_citas.pack(anchor=W)
-        self.boton_confirmar_fecha=Button(self.disponibilidad_citas, text="CONFIRMAR FECHA").pack()
-
+        def grabar_fecha():
+            self.seleccion.config(text="Su hora será agendada para el día " + self.calendario.get_date())
+        self.boton_confirmar_fecha=Button(self.disponibilidad_citas, text="CONFIRMAR FECHA", command=grabar_fecha).pack()
+        #self.seleccion_hora = Spinbox(self.disponibilidad_citas, 
 
 
 
