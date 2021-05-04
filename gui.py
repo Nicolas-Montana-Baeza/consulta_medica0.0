@@ -81,6 +81,9 @@ class GuiDominio(Tk):
         self.email_label=Label(self.ingresar_paciente, text="Correo Electronico: ", bg=self.color3).grid(row=8,column=0)
         self.email=Entry(self.ingresar_paciente, width=10).grid(row=8,column=1)
 
+        
+
+
         #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
         self.citas_agendadas=LabelFrame(self.ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
 
@@ -89,6 +92,12 @@ class GuiDominio(Tk):
         self.disponibilidad_citas=LabelFrame(self.agendar_cita, text="Seleccione la fecha para agendar su cita: ", bg=self.color3)
         self.disponibilidad_citas.pack(anchor=W)
         self.boton_confirmar_fecha=Button(self.disponibilidad_citas, text="CONFIRMAR FECHA").pack()
+
+        #botones para guardar los datos ingresados o limpiar todos los cambios
+        self.boton_guardar_cita=Button(self.agendar_cita, text="Guardar Cita")
+        self.boton_guardar_cita.pack()
+        self.boton_limpiar_formulario=Button(self.agendar_cita, text="Limpiar Formulario")
+        self.boton_limpiar_formulario.pack()
 
 
 

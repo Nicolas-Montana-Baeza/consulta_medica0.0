@@ -1,5 +1,8 @@
 import datetime as dt
 from math import floor
+from re import search
+import shortuuid
+
 class Clinica():
 
     def __init__(self):
@@ -9,8 +12,8 @@ class Clinica():
         self.horario=[]
         self.medicos=[]
         self.pacientes=[]
+        self.citas=[]
         
-
     def setNombre(self,nombre):
         self.nombre=nombre 
 
@@ -31,6 +34,9 @@ class Clinica():
 
     def setPacientes(self,pacientes):
         self.pacientes=pacientes
+
+    def setCitas(self, citas):
+        self.citas=citas
 
     def getNombre(self):
         return self.nombre
@@ -89,32 +95,33 @@ class Clinica():
 
         return coincidencias    
     
-   
+    def buscarCita(self,buscar):
+        coincidencias=[]
 
+        for cita in self.citas:
+
+            if cita.getCodigo()==buscar:
+                coincidencias.append(cita)
+
+        return coincidencias
+    
     def agregarPaciente(self, _paciente):
-        try:
-            self.pacientes.append(_paciente)
-            return True
-        except:
-            return False
+        self.pacientes.append(_paciente) 
         
     def agregarMedico(self, _medico):
-            try:
-                self.medicos.append(_medico)
-                return True
-            except:
-                return False
+        self.medicos.append(_medico)
 
     def __str__(self):
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
 
 class Cita ():
+    
     def __inti__(self):
         self.fecha=dt.datetime(1,1,1)
         self.medico= Medico()
         self.paciente=Paciente()
         self.direccion=""
-        self.codigo=""
+        self.codigo=str(shortuuid.uuid())
         self.prestacion=""
         self.estado=""
         self.pagado=False
@@ -265,13 +272,21 @@ class Persona():
 
     def getRut(self):
         return self.rut
-   
-    def isRut(self,rut):
-        self.rut=rut
+    
+    def isMail(email):
+        regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+        
+        if(re.search(regex, email)):
+           return True
+    
+        else:
+            return False
+
+    def isRut(_rut):
         serie="234567"
         recorre_serie=0
-        verificador=rut[-1]
-        verificando=rut[:-2]
+        verificador=_rut[-1]
+        verificando=_rut[:-2]
         verificando=verificando[::-1]
         verificar=0
         
@@ -295,32 +310,6 @@ class Persona():
         else:
             return False
 
-    #def asignarCodigo(self, _objeto):
-
-    def buscarCita(self,buscar):
-            
-            for cita in self.citas:
-                coincidencias=[]
-                
-                if cita.paciente.nombre.lower().find(buscar)!=-1 or cita.medico.nombre.lower().find(buscar)!=-1:
-                    coincidencias.append(cita)
-
-                elif cita.isRut(buscar) :
-
-                    if cita.paciente.rut.find(buscar)!=-1 or cita.medico.rut.find(buscar)!=-1:
-                        coincidencias.append(cita)
-
-                elif cita.medico.especialidad.lower().find(buscar)!=-1:
-                    coincidencias.append(cita)
-                
-                elif cita.fecha==buscar:
-                    coincidencias.append(cita)
-                
-                elif cita.codigo==buscar:
-                    coincidencias.append(cita)
-
-            return coincidencias  
-    
     def agendarCita(self,_cita):
         self.citas.append(_cita)
 
