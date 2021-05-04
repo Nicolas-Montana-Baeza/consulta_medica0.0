@@ -1,24 +1,23 @@
 from clinica import Clinica
-from tkinter import  Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,Text
+from tkinter import *
 
 class GuiDominio(Tk):
 
     def __init__(self):
         super(GuiDominio, self).__init__()
-        self.ventana_principal=Tk()
         self.clinica= Clinica()
-        self.clinica.setNombre("Clinica de la Salud")
+        self.clinica.setNombre(" Clinica de la Salud")
         self.color1="#788890"
         self.color2="#28388f"
         self.color3="#accdec"
         self.color4="#6d6e72"
+        self.ventana_principal = Tk()
         self.ventana_principal.title(str(self.clinica.getNombre())) 
         self.ventana_principal.configure(bg=self.color2)
-        
 
         #en este frame irán todas las entradas necesarias para una cita
         self.agendar_cita=LabelFrame(self.ventana_principal, text="Agendar Cita", padx=5, pady=5, bg=self.color3, relief=FLAT)
-        self.agendar_cita.pack(padx=10,pady=10)
+        self.agendar_cita.pack(padx=20,pady=20)
 
         #contiene los radio buttons
         self.escojer_especialidades=LabelFrame(self.agendar_cita, text="Escoja la Especialidad", padx=5, pady=5, bg=self.color3)
@@ -57,7 +56,7 @@ class GuiDominio(Tk):
         self.prevision.set("FONASA")
         Radiobutton(self.ingresar_paciente,highlightthickness=0, text="FONASA", variable=self.prevision,value="FONASA", bg=self.color3).grid(row=2,column=0)
         Radiobutton(self.ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=self.prevision,value="ISAPRE", bg=self.color3).grid(row=2,column=1)
-        Radiobutton(self.ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=self.prevision,value="Sin Prevision", bg=self.color3).grid(row=2,column=2)
+
             #primer nombre
         self.nombre1_label=Label(self.ingresar_paciente, text="Primer Nombre: ", bg=self.color3).grid(row=3,column=0)
         self.nombre1=Entry(self.ingresar_paciente, width=10).grid(row=3,column=1)
@@ -68,7 +67,7 @@ class GuiDominio(Tk):
 
             #Primer Apellido
         self.apellido1_label=Label(self.ingresar_paciente, text="Primer Apellido: ", bg=self.color3).grid(row=5,column=0)
-        self.apellido1=Entry(self.ingresar_paciente, width=10).grid(row=5,column=1)
+        apellido1=Entry(self.ingresar_paciente, width=10).grid(row=5,column=1)
 
             #Segundo Apellido
         self.apellido2_label=Label(self.ingresar_paciente, text="Segundo Apellido: ", bg=self.color3).grid(row=6,column=0)
@@ -82,24 +81,7 @@ class GuiDominio(Tk):
         self.email_label=Label(self.ingresar_paciente, text="Correo Electronico: ", bg=self.color3).grid(row=8,column=0)
         self.email=Entry(self.ingresar_paciente, width=10).grid(row=8,column=1)
 
-        #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
-        #def guardar_cita():
-        self.citas_agendadas=LabelFrame(self.ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
-        self.citas_agendadas.pack(anchor=W)
-        self.citas_agendadas2=Label(self.citas_agendadas, text="Ingrese su codigo: ", bg=self.color3).grid(row=0,column=0)
-        self.citas_agendadas3=Entry(self.citas_agendadas, width=30).grid(row=0,column=1)
-        self.boton_aceptar=Button(self.citas_agendadas,text="Buscar").grid(row=0,column=2)
-        self.boton_agendar_hora=Button(self.citas_agendadas,text="Confirmar").grid(row=1,column=2)
-        self.boton_cancelar_hora=Button(self.citas_agendadas,text="Cancelar").grid(row=1,column=3)
-        self.boton_editar_hora=Button(self.citas_agendadas,text="Reagendar").grid(row=1,column=4)
-
-        #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE AVUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
-        self.disponibilidad_citas=LabelFrame(self.agendar_cita, text="Seleccione la fecha para agendar su cita: ", bg=self.color3)
-        self.disponibilidad_citas.pack(anchor=W)
-        self.boton_confirmar_fecha=Button(self.disponibilidad_citas, text="CONFIRMAR FECHA").pack()
-
-
-
-
+        #en este se mostraran las citas por paciente
+        #citas_agendadas=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=self.color3)
 ventana_principal= GuiDominio()
 ventana_principal.mainloop()
