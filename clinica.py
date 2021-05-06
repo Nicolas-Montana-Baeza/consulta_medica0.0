@@ -337,10 +337,11 @@ class Persona():
 
 class Medico(Persona):
 
-    def __init__(self):
+    def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico,_especialidad):
+        super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
         self.pacientes=[]
         self.disponibilidad=[]
-        self.especialidad=""
+        self.especialidad=_especialidad
 
     def setDisponibilidad(self,disponibilidad):
         self.disponibilidad=disponibilidad
@@ -388,8 +389,8 @@ class Medico(Persona):
         return str(self.disponibilidad)+" "+self.especialidad
 
 class Paciente(Persona): 
-    def __init__(self):
-
+    def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
+        super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
         self.prevision=""
         self.ultima_prestacion=""
         self.requerimientos=[]

@@ -25,7 +25,7 @@ def crearEdad(lista):
         edades.append(edad)
     return edades
 
-def crearPersonas(_nombres,_ruts, _emails,_edades):
+def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     personas=[]
     _nombres=formatoNombres(_nombres)
     
@@ -33,20 +33,33 @@ def crearPersonas(_nombres,_ruts, _emails,_edades):
         
         for i in range (len(_nombres)):
             
-            if len(_nombres[i])>=3 and Persona.isRut(_ruts[i]) and Persona.isMail(_emails[i]) and type(_edades[i])==int and 1 <= int(_edades[i]):
-                persona_aux=Persona(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "")
+            if len(_nombres[i])>=3 and Medico.isRut(_ruts[i]) and Medico.isMail(_emails[i]) and type(_edades[i])==int and 1 <= int(_edades[i]):
+                persona_aux=Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
     else:
         return False
 
+def crearEspecialidades(lista):
+    especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
+    lista_creada=[]
+    
+    for i in range(len(lista)):
+        lista_creada.append(especialidades[randint(0,3)])
+    return lista_creada
+
+"""def crearMedicos(_lista,_lista_especialidades):
+    medicos=[]
+    for i in range(len(_lista)):
+       medicos.append(Medico(_lista[i],_lista_especialidades))
+    return medicos"""
 lista_doctores=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
 lista_emails=crearEmails(lista_doctores)
 lista_edades=crearEdad(lista_doctores)
-
-lista_personas=crearPersonas(lista_doctores,lista_ruts,lista_emails,lista_edades)
+lista_especialidades=crearEspecialidades(lista_doctores)
+lista_medicos=crearMedicos(lista_doctores,lista_ruts,lista_emails,lista_edades,lista_especialidades)
 
 """
 if len(lista_doctores)==len(lista_ruts):
@@ -58,5 +71,6 @@ if len(lista_doctores)==len(lista_ruts):
                 lista_personas.append(persona_aux)
 print("sali")"""
 
-for persona in lista_personas:
-    print(persona.getPrimerNombre())
+#medicos=crearMedicos(lista_personas,lista_especialidades)
+for persona in lista_medicos:
+    print(persona.getEspecialidad())
