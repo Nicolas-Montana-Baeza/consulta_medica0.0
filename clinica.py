@@ -1,6 +1,6 @@
 import datetime as dt
 from math import floor
-from re import search
+import re
 import shortuuid
 
 class Clinica():
