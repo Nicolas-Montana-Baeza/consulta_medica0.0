@@ -7,15 +7,15 @@ from tkinter import  Tk,E,Radiobutton,Label,Button,messagebox,Text,Entry,LabelFr
 from tkcalendar import Calendar
 class Clinica():
 
-    def __init__(self):
-        self.nombre=""
-        self.direccion=""
-        self.tipo=""
-        self.horario=[]
-        self.medicos=[]
-        self.pacientes=[]
-        self.citas=[]
-        
+    def __init__(self,_nombre,_tipo,_direccion,_horario,_medicos,_pacientes,_citas):
+        self.nombre=_nombre
+        self.tipo=_tipo
+        self.direccion=_direccion
+        self.horario=_horario
+        self.medicos=_medicos
+        self.pacientes=_pacientes
+        self.citas=_citas
+    
     def setNombre(self,nombre):
         self.nombre=nombre 
 
@@ -75,7 +75,7 @@ class Clinica():
             elif paciente.isRut(buscar):
 
                 if paciente.rut.find(buscar)!=-1:
-                    coincidencias.append(paciente)
+                    return paciente
 
         return coincidencias
            
@@ -217,29 +217,30 @@ class Cita ():
         return True
 
 class Persona():
-    def __init__(self):
-        self.primer_nombre=""
-        self.segundo_nonmbre=""
-        self.apellido_paterno=""
-        self.Apellido_materno=""
-        self.edad=0
-        self.rut=""
-        self.email=""
-        self.numero_telefonico=[]
-      
-    def setPrimerNombre(self,primer_nombre):
-        self.primer_nombre=primer_nombre
-        
-    def setSegundoNombre(self,segundo_nombre):
-        self.segundo_nombre=segundo_nombre
-        
-    def setApellidoPaterno(self,apellido_paterno):
-        self.apellido_paterno=apellido_paterno
 
-    def setApellidoMaterno(self,apellido_materno):
-        self.apellido_materno=apellido_materno
+    def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
+        self.nombre1=_nombre1
+        self.nombre2=_nombre2
+        self.apellido1=_apellido1
+        self.apellido2=_apellido2
+        self.edad=_edad
+        self.rut=_rut
+        self.email=_email
+        self.numero_telefonico=_numero_telefonico
+         
+    def setPrimerNombre(self,nombre1):
+        self.nombre1=nombre1
         
-    def setNumero_Telefonico(self,numero_telefonico):
+    def setSegundoNombre(self,nombre2):
+        self.nombre2=nombre2
+        
+    def setPrimerApellido(self,apellido1):
+        self.apellido1=apellido1
+
+    def setSegundoApellido(self,apellido2):
+        self.apellido2=apellido2
+        
+    def setNumeroTelefonico(self,numero_telefonico):
         self.numero_telefonico=numero_telefonico
         
     def setEdad(self,edad):
@@ -252,16 +253,16 @@ class Persona():
         self.email=email
 
     def getPrimerNombre(self):
-        return self.primer_nombre
+        return self.nombre1
 
     def getSegundoNombre(self):
-        return self.segundo_nombre
+        return self.nombre2
 
-    def getApellidoMaterno(self):
-        return self.apellido_materno
+    def getPrimerApellido(self):
+        return self.apellido2
 
-    def getApellidoPaterno(self):
-        return self.apellido_paterno
+    def getSegundoApellido(self):
+        return self.apellido1
 
     def getNumeroTelefonico(self):
         return self.numero_telefonico
@@ -274,6 +275,9 @@ class Persona():
 
     def getRut(self):
         return self.rut
+    
+    def getNumeroTelefonico(self):
+        return self.numero_telefonico
     
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
@@ -321,8 +325,15 @@ class Persona():
     def confirmarCita(self,_cita):
         _cita.setConfirmada(True)
 
-    def __str__(self) :
-        return self.apellido_paterno+" "+self.apellido_materno+" "+self.primer_nombre+" "+self.segundo_nombre+" "+self.rut+" "+str(self.edad)+" "+self.email
+  
+
+
+            
+        
+        
+    
+    def __str__(self):
+        return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+self.rut+" "+str(self.edad)+" "+self.email
 
 class Medico(Persona):
 
