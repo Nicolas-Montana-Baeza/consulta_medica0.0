@@ -1,19 +1,24 @@
 import tkinter
-from typing import Text
-from clinica import Clinica
+import clinica
 from tkinter import  Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N
-from tkcalendar import *
+from tkcalendar import Calendar
 
-clinica= Clinica()
-clinica.setNombre("Clinica de la Salud")
+centro_de_salud= clinica.Clinica()
+centro_de_salud.setNombre("Clinica de la Salud")
+cita_aux=clinica.Cita()
+
+def elegir_especialidad():
+    cita_aux.setPrestacion(opcion.get())
+
+
 #hay que agregar datos a la clinica
 color1="#788890"
 color2="#28388f"
 color3="#accdec"
 color4="#6d6e72"
-     
+  
 ventana_principal=Tk()
-ventana_principal.title(str(clinica.getNombre())) 
+ventana_principal.title(str(centro_de_salud.getNombre())) 
 ventana_principal.configure(bg=color2)
 ventana_principal.geometry("1260x656")
 
@@ -23,23 +28,25 @@ agendar_cita=LabelFrame(ventana_principal, text="Agendar Cita", padx=5, pady=5, 
 agendar_cita.grid(row=0,column=1)
 
 #contiene los radio buttons
-
+cita_provisoria= clinica.Cita()
 escojer_especialidades=LabelFrame(agendar_cita, text="Escoja la Especialidad", padx=5, pady=5, bg=color3)
 escojer_especialidades.pack(anchor=W)
 
-especialidades=[
-("Medicina General", "Medicina General"),
-("Kinesiologia", "Kinesiologia"),
-("Pediatria", "Pediatria"),
-("Odontologia", "Odontologia")
-]
+especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
+opcion=StringVar()
+opcion.set(especialidades[0])
 
-opcion = StringVar()
+    
+kine_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[1], variable=opcion, value=especialidades[1], bg=color3, command=elegir_especialidad)
+med_gnrl_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[0], variable=opcion, value=especialidades[0], bg=color3,command=elegir_especialidad)
+pedia_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[2], variable=opcion, value=especialidades[2], bg=color3,command=elegir_especialidad)
+odont_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[3], variable=opcion, value=especialidades[3], bg=color3,command=elegir_especialidad)
 
-opcion.set("Medicina General")
+kine_btn.pack(anchor=W)
+med_gnrl_btn.pack(anchor=W)
+pedia_btn.pack(anchor=W)
+odont_btn.pack(anchor=W)
 
-for texto, especialidad in especialidades:
-    Radiobutton(escojer_especialidades,highlightthickness=0, text=texto, variable=opcion, value=especialidad, bg=color3).pack(anchor=W)
 
 #Además se necesitará propiciar una modalidad
 
@@ -60,16 +67,13 @@ ingresar_paciente.pack(anchor=W)
     #rut se podria agregar que al ingresar el rut si el paciente ya existe los datos se autocompleten
 
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3).grid(row=0,column=0)
-
 rut_entry=Entry(ingresar_paciente, width=10).grid(row=0,column=1)
 
 
     #prevision
 
 prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=color3).grid(row=1,column=0)
-
 prevision_btn=StringVar()
-
 prevision_btn.set("FONASA")
 Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=color3).grid(row=2,column=0)
 Radiobutton(ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=prevision_btn,value="ISAPRE", bg=color3).grid(row=2,column=1)
@@ -77,41 +81,34 @@ Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variab
     #primer nombre
 
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=color3).grid(row=3,column=0)
-
 nombre1=Entry(ingresar_paciente, width=10).grid(row=3,column=1)
 
     #segundo nombre
 
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=color3).grid(row=4,column=0)
-
-nombre2=Entry(ingresar_paciente, width=10).grid(row=4,column=1)
+nombre2_entry=Entry(ingresar_paciente, width=10).grid(row=4,column=1)
 
     #Primer Apellido
 
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=color3).grid(row=5,column=0)
-
-apellido1=Entry(ingresar_paciente, width=10).grid(row=5,column=1)
+apellido1_entry=Entry(ingresar_paciente, width=10).grid(row=5,column=1)
 
     #Segundo Apellido
 
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=color3).grid(row=6,column=0)
-
-apellido2=Entry(ingresar_paciente, width=10).grid(row=6,column=1)
+apellido2_entry=Entry(ingresar_paciente, width=10).grid(row=6,column=1)
 
     #numero contacto
 
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=color3).grid(row=7,column=0)
-
 tel_contacto_entry=Entry(ingresar_paciente, width=10).grid(row=7,column=1)
 
     #email
 
 email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=color3).grid(row=8,column=0)
-
 email_entry=Entry(ingresar_paciente, width=10).grid(row=8,column=1)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
-#def guardar_cita():
 citas_agendadas_frame=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=color3)
 citas_agendadas_frame.grid(row=0,column=2,sticky=N)
 

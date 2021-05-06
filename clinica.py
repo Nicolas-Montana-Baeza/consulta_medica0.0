@@ -1,8 +1,10 @@
 import datetime as dt
 from math import floor
 import re
+from tkinter.ttk import Label
 import shortuuid
-
+from tkinter import  Tk,E,Radiobutton,Label,Button,messagebox,Text,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N
+from tkcalendar import Calendar
 class Clinica():
 
     def __init__(self):
@@ -508,4 +510,6 @@ class Receta():
         """if dt.datetime.now()-self.fecha>self.duracion:
             return True"""
         return "not implemented yet"
-  
+
+
+ 
