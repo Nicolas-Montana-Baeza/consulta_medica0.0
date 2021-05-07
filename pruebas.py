@@ -50,6 +50,26 @@ def crearEspecialidades(lista):
     for i in range(len(lista)):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
+"""
+def autocompletar_paciente():
+
+    _busqueda=busqueda.get()
+    paciente=clinica_objeto.buscarPaciente(_busqueda)[0]
+    datos_paciente=[ paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    prevision_btn.set(paciente.getPrevision())
+    nombre1_entry.delete(0)
+    nombre2_entry.delete(0)
+    apellido1_entry.delete(0)
+    apellido2_entry.delete(0)
+    tel_contacto_entry.delete(0)
+    email_entry.delete(0)
+    nombre1_entry.insert(0,paciente.getPrimerNombre())
+    nombre2_entry.instert(0,paciente.getSegundoNombre())
+    apellido1_entry.instert(0,paciente.getPrimerApellido())
+    apellido2_entry.instert(0,paciente.getSegundoApellido())
+    tel_contacto_entry.instert(0,paciente.getNumeroTelefonico())
+    email_entry.instert(0,paciente.getEmail())
+"""
 
 """def crearMedicos(_lista,_lista_especialidades):
     medicos=[]
@@ -100,9 +120,8 @@ for i in clinica_objeto.getMedicos():
     ruts.append(i.getRut())
 rut=clinica_objeto.getPacientes()[0].getRut()
 
-print(type(rut))
-encontrado=clinica_objeto.buscarPaciente(rut)
-encontrado.getNombreCompleto()
-print(encontrado.getNombreCompleto())
+paciente=clinica_objeto.buscarPaciente("14077811-7")
+print(type(paciente))
+
 #print(clinica_objeto.buscarPaciente(lista_pacientes[0].getRut()))
 

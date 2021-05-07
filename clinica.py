@@ -258,10 +258,10 @@ class Persona():
         return self.nombre2
 
     def getPrimerApellido(self):
-        return self.apellido2
+        return self.apellido1
 
     def getSegundoApellido(self):
-        return self.apellido1
+        return self.apellido2
 
     def getNumeroTelefonico(self):
         return self.numero_telefonico
@@ -288,6 +288,9 @@ class Persona():
             return False
 
     def isRut(_rut):
+        if len(_rut) ==0:
+            return False
+
         serie="234567"
         recorre_serie=0
         verificador=_rut[-1]
@@ -392,7 +395,7 @@ class Medico(Persona):
 class Paciente(Persona): 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
         super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
-        self.prevision=""
+        self.prevision="Sin Prevision"
         self.ultima_prestacion=""
         self.requerimientos=[]
         self.diagnosticos=[]

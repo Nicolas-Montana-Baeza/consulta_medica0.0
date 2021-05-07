@@ -93,17 +93,25 @@ def enableChildren(parent):
 #hay que agregar datos a la clinica
 
 def autocompletar_paciente():
-    try:
-        print(rut_entry)
-        paciente=clinica_objeto.buscarPaciente(rut_entry.get())
-        datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre,paciente.getPrimerApelllido(), paciente.getSegundoApellido, paciente.getNumeroTelefonico(),paciente.getEmail()]
-        for i in range(len(datos_paciente)):
-           lista_medicos_listbox[i].delete(0)
-           lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
-        return
-    except:
 
-        return False
+    _busqueda=rut_entry.get()
+    paciente=clinica_objeto.buscarPaciente(_busqueda)
+    if type(paciente)==list:
+        return
+    datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    if paciente.getPrevision=="ISAPRE":
+        isapre_btn.select()
+    elif paciente.getPrevision=="FONASA":
+        fonasa_btn.select()
+    else:
+        sin_prevision_btn.select()
+
+    prevision_btn=paciente.getPrevision()
+    for i in range(len(datos_paciente)):
+        lista_entry_datos_paciente[i].delete(0)
+        lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
+       
+
 
 #def buscar(busqueda):
     
@@ -143,13 +151,12 @@ odont_btn.pack(anchor=W)
 """
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico", bg=color3)
 buscar_medico_frame.pack(anchor=W)
-buscar_doctor_StrVar=StringVar()
-buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=color3)
-buscar_doctor_label.grid(row=0,column=0,sticky=W)
+buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=color3).grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30)
 buscar_doctor_entry.grid(row=1,column=0)
 
-buscar_btn=Button(buscar_medico_frame,text="Buscar").grid(row=1,column=2)
+buscar_btn=Button(buscar_medico_frame,text="Buscar")
+buscar_btn.grid(row=1,column=2)
 lista_medicos_listbox=Listbox(buscar_medico_frame,width=30)
 lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
 
@@ -157,13 +164,15 @@ lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
 
 modalidad=StringVar()
 
-modalidad.set("Online")
+
 
 escojer_modalidad=LabelFrame(agendar_cita_frame,text="Modalidad",padx=5, pady=5, bg=color3)
 
 escojer_modalidad.pack(anchor=W)
-Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=color3).grid(row=0,column=0)
-Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=color3).grid(row=0,column=1)
+online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=color3)
+online_btn.grid(row=0,column=0)
+presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=color3)
+presencial_btn.grid(row=0,column=1)
 
 #Ingreso de datos del paciente
 
@@ -175,7 +184,7 @@ ingresar_paciente.pack(anchor=W)
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3).grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1)
-buscar_rut_btn=Button(ingresar_paciente,text="Buscar",textvariable=busqueda ,command=autocompletar_paciente())
+buscar_rut_btn=Button(ingresar_paciente, text="Autocompletar" ,command=lambda:autocompletar_paciente())
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3)
 rut_autocompletar_label.grid(row=0,column=0)
@@ -185,41 +194,51 @@ rut_autocompletar_label.grid(row=0,column=0)
 
 prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=color3).grid(row=1,column=0)
 prevision_btn=StringVar()
-prevision_btn.set("FONASA")
-Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=color3).grid(row=2,column=0)
-Radiobutton(ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=prevision_btn,value="ISAPRE", bg=color3).grid(row=2,column=1)
-Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=color3).grid(row=2,column=2)
+prevision_btn.set("Sin Prevision")
+fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=color3)
+fonasa_btn.grid(row=2,column=0)
+isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=prevision_btn,value="ISAPRE", bg=color3)
+isapre_btn.grid(row=2,column=1)
+sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=color3)
+sin_prevision_btn.grid(row=2,column=2)
 
     #primer nombre
 
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=color3).grid(row=3,column=0)
-nombre1_entry=Entry(ingresar_paciente, width=10).grid(row=3,column=1)
+nombre1_entry=Entry(ingresar_paciente, width=10)
+nombre1_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
     #segundo nombre
 
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=color3).grid(row=4,column=0)
-nombre2_entry=Entry(ingresar_paciente, width=10).grid(row=4,column=1)
+nombre2_entry=Entry(ingresar_paciente, width=10)
+nombre2_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
     #Primer Apellido
 
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=color3).grid(row=5,column=0)
-apellido1_entry=Entry(ingresar_paciente, width=10).grid(row=5,column=1)
+apellido1_entry=Entry(ingresar_paciente, width=10)
+apellido1_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
     #Segundo Apellido
 
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=color3).grid(row=6,column=0)
-apellido2_entry=Entry(ingresar_paciente, width=10).grid(row=6,column=1)
+apellido2_entry=Entry(ingresar_paciente, width=10)
+apellido2_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
     #numero contacto
 
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=color3).grid(row=7,column=0)
-tel_contacto_entry=Entry(ingresar_paciente, width=10).grid(row=7,column=1)
+tel_contacto_entry=Entry(ingresar_paciente, width=10)
+tel_contacto_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
     #email
 
 email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=color3).grid(row=8,column=0)
-email_entry=Entry(ingresar_paciente, width=10).grid(row=8,column=1)
+email_entry=Entry(ingresar_paciente, width=10)
+email_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(email_entry)
+
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 citas_agendadas_frame=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=color3)
@@ -229,7 +248,8 @@ codigo_frame=LabelFrame(citas_agendadas_frame,text="Buscar cita por codigo", bg=
 codigo_frame.pack(anchor=W)
 
 ingresar_codigo_label=Label(codigo_frame, text="Ingrese su codigo: ", bg=color3).grid(row=0,column=0,sticky=W)
-ingresar_codigo_entry=Entry(codigo_frame, width=30).grid(row=1,column=0)
+ingresar_codigo_entry=Entry(codigo_frame, width=30)
+ingresar_codigo_entry.grid(row=1,column=0)
 
 buscar_btn=Button(codigo_frame,text="Buscar").grid(row=1,column=2)
 
@@ -241,11 +261,14 @@ info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.grid(row=1,column=0)
 
-agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar").grid(row=2,column=0)
+agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar")
+agendar_hora_btn.grid(row=2,column=0)
 
-cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar").grid(row=2,column=1)
+cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar")
+cancelar_hora_btn.grid(row=2,column=1)
 
-reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar").grid(row=2,column=2)
+reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar")
+cancelar_hora_btn.grid(row=2,column=2)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
 
