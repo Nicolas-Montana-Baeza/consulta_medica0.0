@@ -92,7 +92,7 @@ def enableChildren(parent):
     #if ventana_principal.focus_get()=
 #hay que agregar datos a la clinica
 
-def autocompletar_paciente():
+def autocompletarPaciente():
 
     _busqueda=rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
@@ -111,7 +111,8 @@ def autocompletar_paciente():
         lista_entry_datos_paciente[i].delete(0)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
        
-
+def agregarCita():
+    return
 
 #def buscar(busqueda):
     
@@ -184,7 +185,7 @@ ingresar_paciente.pack(anchor=W)
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3).grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1)
-buscar_rut_btn=Button(ingresar_paciente, text="Autocompletar" ,command=lambda:autocompletar_paciente())
+buscar_rut_btn=Button(ingresar_paciente, text="Autocompletar" ,command=lambda:autocompletarPaciente())
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3)
 rut_autocompletar_label.grid(row=0,column=0)
