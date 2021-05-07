@@ -1,10 +1,8 @@
 import datetime as dt
 from math import floor
 import re
-from tkinter.ttk import Label
 import shortuuid
-from tkinter import  Tk,E,Radiobutton,Label,Button,messagebox,Text,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N
-from tkcalendar import Calendar
+
 class Clinica():
 
     def __init__(self,_nombre,_tipo,_direccion,_horario,_medicos,_pacientes,_citas):
@@ -58,23 +56,24 @@ class Clinica():
     def getCitas(self):
         return self.citas
     
-    def getDoctores(self):
-        return self.doctores
+    def getMedicos(self):
+        return self.medicos
 
     def getPacientes(self):
         return self.pacientes
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
-        buscar=buscar.lower()
+        print(buscar)
+        print(Persona.isRut(buscar))
         for paciente in self.pacientes:
 
-            if paciente.nombre.lower().find(buscar)!=-1:
+            if paciente.getNombreCompleto().find(buscar.title())!=-1:
                 coincidencias.append(paciente)
 
-            elif paciente.isRut(buscar):
+            elif Paciente.isRut(buscar):
 
-                if paciente.rut.find(buscar)!=-1:
+                if paciente.getRut().find(buscar)!=-1:
                     return paciente
 
         return coincidencias
@@ -324,7 +323,9 @@ class Persona():
     
     def confirmarCita(self,_cita):
         _cita.setConfirmada(True)
-
+ 
+    def getNombreCompleto(self):
+        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
   
 
 
@@ -463,7 +464,7 @@ class Paciente(Persona):
             return True
 
     def __str__(self):
-        return self.prevision+" "+self.ultima_prestacion+" "+self.requerimientos+" "+self.diagnosticos+" "+self.forma_pago
+        return super().__str__()+" "+str(self.prevision)+" "+str(self.ultima_prestacion)+" "+str(self.requerimientos)+" "+str(self.diagnosticos)+" "+str(self.forma_pago)
 
 class Receta():
 
@@ -523,5 +524,3 @@ class Receta():
             return True"""
         return "not implemented yet"
 
-
- 

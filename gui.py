@@ -35,8 +35,10 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
         
         for i in range (len(_nombres)):
-            
-            if len(_nombres[i])>=3 and clinica.Medico.isRut(_ruts[i]) and clinica.Medico.isMail(_emails[i]) and type(_edades[i])==int and 1 <= int(_edades[i]):
+            rut=_ruts[i]
+            email=_emails[i]
+            print(clinica.Persona.isRut(rut))
+            if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
                 persona_aux=clinica.Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
@@ -67,7 +69,7 @@ color1="#788890"
 color2="#28388f"
 color3="#accdec"
 color4="#6d6e72"
- 
+
 def disableChildren(parent):
     for child in parent.winfo_children():
         wtype = child.winfo_class()
@@ -85,12 +87,14 @@ def enableChildren(parent):
         else:
             enableChildren(child)
 
-def mostrar_listbox():
-    print(ventana_principal.focus_get())
+#def mostrar_listbox():
+ #   print(ventana_principal.focus_get())
     #if ventana_principal.focus_get()=
 #hay que agregar datos a la clinica
+
 def autocompletar_paciente():
     try:
+        print(rut_entry)
         paciente=clinica_objeto.buscarPaciente(rut_entry.get())
         datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre,paciente.getPrimerApelllido(), paciente.getSegundoApellido, paciente.getNumeroTelefonico(),paciente.getEmail()]
         for i in range(len(datos_paciente)):
@@ -101,11 +105,16 @@ def autocompletar_paciente():
 
         return False
 
+#def buscar(busqueda):
+    
+
+
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
 ventana_principal.geometry("1260x656")
-
+#variable para obtener el texto de los entry para buscar (paciente por rut y medicopor especialidad, nombre, |||o fecha|||)
+busqueda=StringVar()
 #en este frame irán todas las entradas necesarias para una cita
 
 agendar_cita_frame=LabelFrame(ventana_principal, text="Agendar Cita", padx=5, pady=5, bg=color3, relief=FLAT)
@@ -140,7 +149,7 @@ buscar_doctor_label.grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30)
 buscar_doctor_entry.grid(row=1,column=0)
 
-buscar_btn=Button(buscar_medico_frame,text="Buscar",command=autocompletar_paciente()).grid(row=1,column=2)
+buscar_btn=Button(buscar_medico_frame,text="Buscar").grid(row=1,column=2)
 lista_medicos_listbox=Listbox(buscar_medico_frame,width=30)
 lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
 
@@ -166,7 +175,7 @@ ingresar_paciente.pack(anchor=W)
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3).grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1)
-buscar_rut_btn=Button(ingresar_paciente,text="Buscar", command=autocompletar_paciente())
+buscar_rut_btn=Button(ingresar_paciente,text="Buscar",textvariable=busqueda ,command=autocompletar_paciente())
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3)
 rut_autocompletar_label.grid(row=0,column=0)

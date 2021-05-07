@@ -1,4 +1,4 @@
-from clinica import *
+import clinica
 from random import randint
 def formatoNombres(_nombres):
     nombres_aux=[]
@@ -32,9 +32,11 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
         
         for i in range (len(_nombres)):
-            
-            if len(_nombres[i])>=3 and Medico.isRut(_ruts[i]) and Medico.isMail(_emails[i]) and type(_edades[i])==int and 1 <= int(_edades[i]):
-                persona_aux=Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
+            rut=_ruts[i]
+            email=_emails[i]
+            print(clinica.Persona.isRut(rut))
+            if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
+                persona_aux=clinica.Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
@@ -53,7 +55,7 @@ def crearEspecialidades(lista):
     medicos=[]
     for i in range(len(_lista)):
        medicos.append(Medico(_lista[i],_lista_especialidades))
-    return medicos"""
+    return medicos
 lista_doctores=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
 lista_emails=crearEmails(lista_doctores)
@@ -61,7 +63,7 @@ lista_edades=crearEdad(lista_doctores)
 lista_especialidades=crearEspecialidades(lista_doctores)
 lista_medicos=crearMedicos(lista_doctores,lista_ruts,lista_emails,lista_edades,lista_especialidades)
 
-"""
+
 if len(lista_doctores)==len(lista_ruts):
     for i in range (len(lista_doctores)):
         print("entre"+str(i))
@@ -69,8 +71,38 @@ if len(lista_doctores)==len(lista_ruts):
                 print("cree")
                 persona_aux=Persona(lista_doctores[i][0],lista_doctores[i][1::-2],lista_doctores[i][-2],lista_doctores[i][-1],lista_ruts[i],lista_edades[i],lista_emails,"")
                 lista_personas.append(persona_aux)
-print("sali")"""
+print("sali")
 
-#medicos=crearMedicos(lista_personas,lista_especialidades)
+
 for persona in lista_medicos:
     print(persona.getEspecialidad())
+"""
+
+
+lista_doctores=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
+lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
+lista_emails=crearEmails(lista_doctores)
+lista_edades=crearEdad(lista_doctores)
+lista_especialidades=crearEspecialidades(lista_doctores)
+lista_medicos=crearMedicos(lista_doctores,lista_ruts,lista_emails , lista_edades , lista_especialidades)
+lista_citas=[]
+lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
+clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
+cita_aux=clinica.Cita()
+lista_entry_datos_paciente=[]
+color1="#788890"
+color2="#28388f"
+color3="#accdec"
+color4="#6d6e72"
+#lista_paciente=clinica_objeto.getPacientes()
+ruts=[]
+for i in clinica_objeto.getMedicos():
+    ruts.append(i.getRut())
+rut=clinica_objeto.getPacientes()[0].getRut()
+
+print(type(rut))
+encontrado=clinica_objeto.buscarPaciente(rut)
+encontrado.getNombreCompleto()
+print(encontrado.getNombreCompleto())
+#print(clinica_objeto.buscarPaciente(lista_pacientes[0].getRut()))
+
