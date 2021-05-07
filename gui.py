@@ -27,6 +27,7 @@ def crearEdad(lista):
         edad=randint(25,63)
         edades.append(edad)
     return edades
+
 def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     personas=[]
     _nombres=formatoNombres(_nombres)
