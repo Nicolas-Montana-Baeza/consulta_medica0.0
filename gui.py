@@ -2,7 +2,7 @@ import clinica
 from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N,Text
 from tkcalendar import Calendar
 from random import randint
-#Creacion de algunas listas para darle datos a algunos objetos
+#Creacion de algunas listas para darle datos a nuestro objeto Clinica
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -53,7 +53,7 @@ def crearEspecialidades(lista):
     for i in range(len(lista)):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
-
+#hay que agregar datos a la clinica
 lista_doctores=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
 lista_emails=crearEmails(lista_doctores)
@@ -90,7 +90,7 @@ def enableChildren(parent):
 #def mostrar_listbox():
  #   print(ventana_principal.focus_get())
     #if ventana_principal.focus_get()=
-#hay que agregar datos a la clinica
+
 
 def autocompletarPaciente():
 
