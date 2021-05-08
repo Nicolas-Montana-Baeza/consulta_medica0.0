@@ -1,5 +1,5 @@
 import clinica
-from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N,Text
+from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N,Text, ACTIVE
 from tkcalendar import Calendar
 from random import randint
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
@@ -14,9 +14,8 @@ def formatoNombres(_nombres):
 
 def crearEmails(lista_nombres):
     lista_emails=[]
-    lista_doctores=formatoNombres(lista_nombres)
     
-    for i in range(len(lista_doctores)):
+    for i in range(len(lista_nombres)):
         lista_emails.append(lista_nombres[i][0].upper()+"."+lista_nombres[i][-2].upper()+"@gmail.com")
     
     return lista_emails
@@ -30,8 +29,7 @@ def crearEdad(lista):
 
 def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     personas=[]
-    _nombres=formatoNombres(_nombres)
-    
+    print(str(len(_nombres))+ str(len(_ruts))+str(len(_emails))+str(len(_edades)))
     if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
         
         for i in range (len(_nombres)):
@@ -39,7 +37,15 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
             email=_emails[i]
             print(clinica.Persona.isRut(rut))
             if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
-                persona_aux=clinica.Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
+                nombre2=""
+                if not(_nombres[i][1::-2]=="."):
+                
+                    for j in _nombres[i][1::-2]:
+                        nombre2+=j+" "
+                    
+                    nombre2=nombre2[:-1]
+                    nombre2=nombre2.replace(".","")
+                persona_aux=clinica.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
@@ -53,15 +59,22 @@ def crearEspecialidades(lista):
     for i in range(len(lista)):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
+
+def crearDisponibilidad():
+
+    return
 #hay que agregar datos a la clinica
-lista_doctores=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
+lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
+lista_nombres=formatoNombres(lista_nombres)
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
-lista_emails=crearEmails(lista_doctores)
-lista_edades=crearEdad(lista_doctores)
-lista_especialidades=crearEspecialidades(lista_doctores)
-lista_medicos=crearMedicos(lista_doctores,lista_ruts,lista_emails , lista_edades , lista_especialidades)
+lista_emails=crearEmails(lista_nombres)
+lista_edades=crearEdad(lista_nombres)
+lista_especialidades=crearEspecialidades(lista_nombres)
+lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
 lista_citas=[]
 lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
+lista_pacientes[0].setPrevision("FONASA")
+clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
 clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
 cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
@@ -94,36 +107,43 @@ def enableChildren(parent):
 def autocompletarPaciente():
     _busqueda=rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
-    
-    if type(paciente)==list:
-        return
-    
-    datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
-    
-    if paciente.getPrevision=="ISAPRE":
-        isapre_btn.select()
-    
-    elif paciente.getPrevision=="FONASA":
-        fonasa_btn.select()
-    
-    else:
-        sin_prevision_btn.select()
 
-    prevision_btn=paciente.getPrevision()
+    if len(paciente)==0:
+        messagebox.showwarning(message="No se ha podido encontrar el rut ingresado...", title="Error")
+    
+        for i in range(len(lista_entry_datos_paciente)):
+            lista_entry_datos_paciente[i].delete(0,END)
+    
+        return
+    paciente=paciente[0]
+    datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+
+    prevision_btn.set(paciente.getPrevision())
     
     for i in range(len(datos_paciente)):
-        lista_entry_datos_paciente[i].delete(0)
+        lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
        
 def agregarCita():
     return
-
-#def buscar(busqueda):
     
 def buscarMedico():
     _busqueda=buscar_doctor_entry.get()
-    
+    return clinica_objeto.buscarMedico(_busqueda)
 
+def actualizarListbox():
+    lista_medicos_listbox.delete(0,END)
+    _medicos=clinica_objeto.getMedicos()
+    for medico in _medicos:
+        lista_medicos_listbox.insert(END, medico)
+    
+    return
+
+def seleccionarMedico():
+    medico_seleccionado_label=Label(buscar_medico_frame, bg=color3, text=lista_medicos_listbox.get(ACTIVE))
+    medico_seleccionado_label.grid(row=3,column=0)
+
+    return
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
@@ -159,10 +179,10 @@ buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=c
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30)
 buscar_doctor_entry.grid(row=1,column=0)
 
-buscar_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:buscarMedico())
-buscar_btn.grid(row=1,column=2)
-lista_medicos_listbox=Listbox(buscar_medico_frame,width=30)
-#lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
+buscar_medico_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:buscarMedico())
+buscar_medico_btn.grid(row=1,column=2)
+lista_medicos_listbox=Listbox(buscar_medico_frame,width=30,height=5)
+lista_medicos_listbox.grid(row=2, column=0, sticky=S)
 
 #Además se necesitará propiciar una modalidad
 
@@ -199,12 +219,14 @@ rut_autocompletar_label.grid(row=0,column=0)
 prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=color3).grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
-fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=color3)
-fonasa_btn.grid(row=2,column=0)
+sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=color3)
+sin_prevision_btn.grid(row=2,column=0)
 isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="ISAPRE", variable=prevision_btn,value="ISAPRE", bg=color3)
 isapre_btn.grid(row=2,column=1)
-sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=color3)
-sin_prevision_btn.grid(row=2,column=2)
+fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=color3)
+fonasa_btn.grid(row=2,column=2)
+
+
 
     #primer nombre
 
@@ -288,5 +310,6 @@ disponibilidad_citas_frame.pack(anchor=W)
 # seleccion_hora = Spinbox(
 # disponibilidad_citas_frame, 
 
-
+actualizarListbox()
+lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico())
 ventana_principal.mainloop()

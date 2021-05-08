@@ -64,8 +64,8 @@ class Clinica():
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
-        print(buscar)
-        print(Persona.isRut(buscar))
+        if len(buscar)==0:
+            return coincidencias
         for paciente in self.pacientes:
 
             if paciente.getNombreCompleto().find(buscar.title())!=-1:
@@ -74,7 +74,7 @@ class Clinica():
             elif Paciente.isRut(buscar):
 
                 if paciente.getRut().find(buscar)!=-1:
-                    return paciente
+                    coincidencias.append(paciente)
 
         return coincidencias
            
@@ -83,15 +83,15 @@ class Clinica():
         buscar=buscar.lower()
         for medico in self.medicos:
 
-            if medico.nombre.lower().find()!=-1:
+            if medico.getNombreCompleto().lower().find(buscar)!=-1:
                 coincidencias.append(medico)
 
             elif medico.isRut(buscar):
 
-                if medico.rut.find(buscar)!=-1:
+                if medico.getRut().find(buscar)!=-1:
                     coincidencias.append(medico)
 
-            elif medico.especialidad.lower().find(buscar)!=-1:
+            elif medico.getEspecialidad().lower().find(buscar)!=-1:
                 coincidencias.append(medico)
 
         return coincidencias    
@@ -209,11 +209,6 @@ class Cita ():
 
         elif dias_restantes<0:
             self.setEstadoTemporal("su cita fue hace "+str(-1*dias_restantes)+" días")
-        
-        else:
-            return False
-        
-        return True
 
 class Persona():
 
@@ -288,14 +283,16 @@ class Persona():
             return False
 
     def isRut(_rut):
-        if len(_rut) ==0:
+        rut=_rut.replace("-","")
+        verificador=rut[-1]
+        verificando=rut[:-1]
+        verificando=verificando[::-1]
+        if len(verificador) ==0 or not(rut.isdigit()):
             return False
 
         serie="234567"
         recorre_serie=0
-        verificador=_rut[-1]
-        verificando=_rut[:-2]
-        verificando=verificando[::-1]
+    
         verificar=0
         
         if verificador == "k":
@@ -375,8 +372,6 @@ class Medico(Persona):
     def requerirExamen(self, _examen, _paciente):
         _examen=_paciente.getRequerimientos().append(_examen)
         _paciente.setRequerimientos(_examen)
-        return _paciente
-
 
     def isDisponible(self, _fecha):
         for disponible in self.disponibilidad:
@@ -387,10 +382,9 @@ class Medico(Persona):
     def diagnosticarPaciente(self, _diagnostico, _paciente):
         _diagnostico=_paciente.getDiagnosticos().append(_diagnostico)
         _paciente.setDiagnosticos(_diagnostico)
-        return _paciente
 
     def __str__(self) :
-        return str(self.disponibilidad)+" "+self.especialidad
+        return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+" "+str(self.especialidad)
 
 class Paciente(Persona): 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
@@ -454,17 +448,12 @@ class Paciente(Persona):
 
             if _codigo_cita==self.citas[i].codigo:
                 self.citas.pop(i)
-                return True
-
-        return False
-
 
     def pagarCita(self,_cita,_monto_a_pagar):
         if _monto_a_pagar>self.cartera:
-            return False
+            return 
         else:
             _cita.setPagado(True)
-            return True
 
     def __str__(self):
         return super().__str__()+" "+str(self.prevision)+" "+str(self.ultima_prestacion)+" "+str(self.requerimientos)+" "+str(self.diagnosticos)+" "+str(self.forma_pago)
