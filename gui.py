@@ -1,5 +1,5 @@
 from datosDeRelleno import *
-from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,sW,StringVar,FLAT,NE,END,N,Text,ACTIVE
+from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE
 from tkcalendar import Calendar
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 cita_aux=clinica.Cita()
@@ -67,7 +67,7 @@ def actualizarListbox():
 
 def seleccionarMedico():
     medico_seleccionado_label=Label(buscar_medico_frame, bg=color3, text=lista_medicos_listbox.get(ACTIVE))
-    medico_seleccionado_label.grid_forget()
+    medico_seleccionado_label.grid_remove()
     medico_seleccionado_label.grid(row=3,column=0)
 
     return
