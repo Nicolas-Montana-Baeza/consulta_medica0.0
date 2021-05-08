@@ -1,5 +1,5 @@
 from datosDeRelleno import *
-from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE
+from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
 from tkcalendar import Calendar
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 cita_aux=clinica.Cita()
@@ -39,6 +39,7 @@ def autocompletarPaciente():
     
         for i in range(len(lista_entry_datos_paciente)):
             lista_entry_datos_paciente[i].delete(0,END)
+            prevision_btn.set("Sin Prevision")
     
         return
     paciente=paciente[0]
@@ -57,20 +58,30 @@ def buscarMedico():
     _busqueda=buscar_doctor_entry.get()
     return clinica_objeto.buscarMedico(_busqueda)
 
-def actualizarListbox():
+def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
-    _medicos=clinica_objeto.getMedicos()
-    for medico in _medicos:
+    for medico in datos:
         lista_medicos_listbox.insert(END, medico)
     
     return
 
-def seleccionarMedico():
-    medico_seleccionado_label=Label(buscar_medico_frame, bg=color3, text=lista_medicos_listbox.get(ACTIVE))
-    medico_seleccionado_label.grid_remove()
-    medico_seleccionado_label.grid(row=3,column=0)
+def seleccionarMedico(evento):
+    medico_seleccionado_entry.config(state=NORMAL) 
+    medico_seleccionado_entry.delete(0,END)
+    medico_seleccionado_entry.insert(0,lista_medicos_listbox.get(ACTIVE))
+    medico_seleccionado_entry.config(state=DISABLED)  
 
     return
+
+def buscar(evento):
+    escrito=buscar_doctor_entry.get()
+    
+    if escrito == "":
+        datos=clinica_objeto.getMedicos()
+    else:
+        datos=clinica_objeto.buscarMedico(escrito)
+    
+    actualizarListbox(datos)
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
@@ -105,12 +116,22 @@ buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico", bg=color
 buscar_medico_frame.pack(anchor=W)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=color3).grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30)
-buscar_doctor_entry.grid(row=1,column=0)
+buscar_doctor_entry.grid(row=1,column=0, sticky=W)
 
 buscar_medico_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:buscarMedico())
-buscar_medico_btn.grid(row=1,column=2)
-lista_medicos_listbox=Listbox(buscar_medico_frame,width=30,height=5)
-lista_medicos_listbox.grid(row=2, column=0, sticky=S)
+buscar_medico_btn.grid(row=1,column=0,sticky=E)
+framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT, bg=color3)
+framelistbox.grid(row=2,column=0)
+lista_medicos_listbox=Listbox(framelistbox,width=45,height=5)
+lista_medicos_listbox.pack(side=LEFT)
+medico_seleccionado_entry=Entry(buscar_medico_frame,width=45, state=DISABLED,disabledbackground="white",disabledforeground="black")
+buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido: ", bg=color3).grid(row=3,column=0,sticky=W)
+medico_seleccionado_entry.grid(row=4,column=0,sticky=W)
+scrollbar = Scrollbar(framelistbox)
+scrollbar.pack(side=RIGHT,fill=Y)
+lista_medicos_listbox.config(yscrollcommand=scrollbar.set)
+ 
+scrollbar.config(command=lista_medicos_listbox.yview)
 
 #Además se necesitará propiciar una modalidad
 
@@ -195,6 +216,7 @@ lista_entry_datos_paciente.append(email_entry)
 
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
+
 citas_agendadas_frame=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=color3)
 citas_agendadas_frame.grid(row=0,column=2,sticky=N)
 
@@ -210,7 +232,8 @@ buscar_btn=Button(codigo_frame,text="Buscar").grid(row=1,column=2)
 #una vez encontrada la cita se muestra en este Frame
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita", bg=color3)
 gestionar_cita_frame.pack()
-
+info_cita_frame=LabelFrame(gestionar_cita_frame,relief=FLAT,bg=color3)
+info_cita_frame.grid()
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.grid(row=1,column=0)
@@ -238,6 +261,7 @@ disponibilidad_citas_frame.pack(anchor=W)
 # seleccion_hora = Spinbox(
 # disponibilidad_citas_frame, 
 
-actualizarListbox()
-lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico())
+actualizarListbox(clinica_objeto.getMedicos())
+lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
+buscar_doctor_entry.bind("<KeyRelease>", buscar)
 ventana_principal.mainloop()

@@ -86,7 +86,7 @@ class Clinica():
             if medico.getNombreCompleto().lower().find(buscar)!=-1:
                 coincidencias.append(medico)
 
-            elif medico.isRut(buscar):
+            elif Medico.isRut(buscar):
 
                 if medico.getRut().find(buscar)!=-1:
                     coincidencias.append(medico)
