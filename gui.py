@@ -1,4 +1,4 @@
-from tkinter import YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
+from tkinter import font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
 from tkcalendar import Calendar
 from PIL import Image, ImageTk
 
@@ -84,31 +84,25 @@ def buscar(evento):
     
     actualizarListbox(datos)
 
-def resize_image(event):
-    new_width = event.width
-    new_height = event.height
-    image = copy_of_image.resize((new_width, new_height))
-    photo = ImageTk.PhotoImage(image)
-    label.config(image = photo)
-    label.image = photo #avoid garbage collection
-
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
-ventana_principal.configure(bg=color2)
-ventana_principal.geometry("1260x656")
+ventana_principal.configure(bg=Eucalyptus)
+ventana_principal.geometry("1000x656")
 
+"""
 image = Image.open('imagenes/fondoPrincipal.png')
-copy_of_image = image.copy()
-photo = ImageTk.PhotoImage(image)
-label = Label(ventana_principal, image = photo)
-label.bind('<Configure>', resize_image)
-label.pack(fill=BOTH, expand = YES)
 
+photo = ImageTk.PhotoImage(image)
+fondo = Label(ventana_principal, image = photo)
+fondo.place(x=0,y=0,relheight=1,relwidth=1)
+"""
 #en este frame irán todas las entradas necesarias para una cita
 
-agendar_cita_frame=LabelFrame(ventana_principal, text="Agendar Cita", padx=5, pady=5, bg=color3, relief=FLAT)
-agendar_cita_frame.grid(row=0,column=1)
-
+agendar_cita_frame=LabelFrame(ventana_principal, text="Agendar Cita",fg=Charade, padx=5, pady=5, bg=color4, relief=FLAT)
+agendar_cita_frame.grid(row=0,column=0,padx=40,pady=40,sticky=N)
+agendar_cita_font = font.Font(family="Arial",weight="bold")
+agendar_cita_font.configure(size=45)
+agendar_cita_frame.config(font=agendar_cita_font)
 
 """
 #contiene los radio buttons
@@ -149,20 +143,6 @@ lista_medicos_listbox.config(yscrollcommand=scrollbar.set)
  
 scrollbar.config(command=lista_medicos_listbox.yview)
 
-#Además se necesitará propiciar una modalidad
-
-modalidad=StringVar()
-
-
-
-escojer_modalidad=LabelFrame(agendar_cita_frame,text="Modalidad",padx=5, pady=5, bg=color3)
-
-escojer_modalidad.pack(anchor=W)
-online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=color3)
-online_btn.grid(row=0,column=0)
-presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=color3)
-presencial_btn.grid(row=0,column=1)
-
 #Ingreso de datos del paciente
 
 ingresar_paciente=LabelFrame(agendar_cita_frame,text="Datos del Paciente", padx=5, pady=5,bg=color3)
@@ -172,8 +152,8 @@ ingresar_paciente.pack(anchor=W)
 
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3).grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
-rut_entry.grid(row=0,column=1)
-buscar_rut_btn=Button(ingresar_paciente, text="Autocompletar" ,command=lambda:autocompletarPaciente())
+rut_entry.grid(row=0,column=1,sticky=W)
+buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente())
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=color3)
 rut_autocompletar_label.grid(row=0,column=0)
@@ -234,7 +214,7 @@ lista_entry_datos_paciente.append(email_entry)
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
 citas_agendadas_frame=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=color3)
-citas_agendadas_frame.grid(row=0,column=2,sticky=N)
+citas_agendadas_frame.grid(row=0,column=1,padx=40,pady=40,sticky=N)
 
 ingresar_codigo_label=Label(citas_agendadas_frame, text="Ingrese su codigo: ", bg=color3).grid(row=0,column=0,sticky=W)
 ingresar_codigo_entry=Entry(citas_agendadas_frame, width=30)
@@ -260,18 +240,27 @@ reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar")
 reagendar_hora_btn.grid(row=2,column=0,sticky=W)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
-
-disponibilidad_citas_frame=LabelFrame(agendar_cita_frame, text="Seleccione la fecha para agendar su cita: ", bg=color3)
-
-calendario = Calendar(disponibilidad_citas_frame)
-
-calendario.pack(pady=30)
-
-disponibilidad_citas_frame.pack(anchor=W)
-
-#
 # seleccion_hora = Spinbox(
 # disponibilidad_citas_frame, 
+
+#Además se necesitará propiciar una modalidad
+
+modalidad=StringVar()
+
+escojer_fecha_frame=LabelFrame(agendar_cita_frame, text="Fecha y Modalidad de la Cita")
+escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5, bg=color3)
+escojer_modalidad.pack(anchor=W)
+online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=color3)
+online_btn.grid(row=0,column=0)
+presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=color3)
+presencial_btn.grid(row=0,column=1)
+
+disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ", bg=color3)
+calendario = Calendar(disponibilidad_citas_frame)
+calendario.pack(pady=30)
+disponibilidad_citas_frame.pack(anchor=W)
+
+
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)

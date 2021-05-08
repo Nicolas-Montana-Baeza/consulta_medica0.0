@@ -5,6 +5,6 @@ GuardsmanRed="#b50600"
 Eucalyptus="#14855f"
 JungleGreen="#21a67a"
 color3="#accdec"
-color4="#6d6e72"
+color4="#a6a9a9"
 Charade="#282c36"
 
