@@ -1,5 +1,6 @@
-from tkinter import NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
+from tkinter import YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
 from tkcalendar import Calendar
+from PIL import Image, ImageTk
 
 from datosDeRelleno import *
 from estilo import*
@@ -83,13 +84,25 @@ def buscar(evento):
     
     actualizarListbox(datos)
 
+def resize_image(event):
+    new_width = event.width
+    new_height = event.height
+    image = copy_of_image.resize((new_width, new_height))
+    photo = ImageTk.PhotoImage(image)
+    label.config(image = photo)
+    label.image = photo #avoid garbage collection
+
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
 ventana_principal.geometry("1260x656")
-background_image=tk.PhotoImage(file="imagenes/fondoPrincipal.png")
-background_label = tk.Label(ventana_principal, image=background_image)
-background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+image = Image.open('imagenes/fondoPrincipal.png')
+copy_of_image = image.copy()
+photo = ImageTk.PhotoImage(image)
+label = Label(ventana_principal, image = photo)
+label.bind('<Configure>', resize_image)
+label.pack(fill=BOTH, expand = YES)
 
 #en este frame irán todas las entradas necesarias para una cita
 
