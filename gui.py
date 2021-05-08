@@ -1,81 +1,7 @@
-import clinica
-from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame, W,StringVar,FLAT,NE,END,N,Text, ACTIVE
+from datosDeRelleno import *
+from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,sW,StringVar,FLAT,NE,END,N,Text,ACTIVE
 from tkcalendar import Calendar
-from random import randint
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
-def formatoNombres(_nombres):
-    nombres_aux=[]
-   
-    for nombre in _nombres:
-        nombre=nombre.title().split()
-        nombres_aux.append(nombre)
-    
-    return nombres_aux
-
-def crearEmails(lista_nombres):
-    lista_emails=[]
-    
-    for i in range(len(lista_nombres)):
-        lista_emails.append(lista_nombres[i][0].upper()+"."+lista_nombres[i][-2].upper()+"@gmail.com")
-    
-    return lista_emails
-
-def crearEdad(lista):
-    edades=[]
-    for i in range(len(lista)):
-        edad=randint(25,63)
-        edades.append(edad)
-    return edades
-
-def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
-    personas=[]
-    print(str(len(_nombres))+ str(len(_ruts))+str(len(_emails))+str(len(_edades)))
-    if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
-        
-        for i in range (len(_nombres)):
-            rut=_ruts[i]
-            email=_emails[i]
-            print(clinica.Persona.isRut(rut))
-            if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
-                nombre2=""
-                if not(_nombres[i][1::-2]=="."):
-                
-                    for j in _nombres[i][1::-2]:
-                        nombre2+=j+" "
-                    
-                    nombre2=nombre2[:-1]
-                    nombre2=nombre2.replace(".","")
-                persona_aux=clinica.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
-                personas.append(persona_aux)
-    
-        return personas
-    else:
-        return False
-
-def crearEspecialidades(lista):
-    especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
-    lista_creada=[]
-    
-    for i in range(len(lista)):
-        lista_creada.append(especialidades[randint(0,3)])
-    return lista_creada
-
-def crearDisponibilidad():
-
-    return
-#hay que agregar datos a la clinica
-lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
-lista_nombres=formatoNombres(lista_nombres)
-lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
-lista_emails=crearEmails(lista_nombres)
-lista_edades=crearEdad(lista_nombres)
-lista_especialidades=crearEspecialidades(lista_nombres)
-lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
-lista_citas=[]
-lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
-lista_pacientes[0].setPrevision("FONASA")
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
 cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
 color1="#788890"
@@ -141,9 +67,11 @@ def actualizarListbox():
 
 def seleccionarMedico():
     medico_seleccionado_label=Label(buscar_medico_frame, bg=color3, text=lista_medicos_listbox.get(ACTIVE))
+    medico_seleccionado_label.grid_forget()
     medico_seleccionado_label.grid(row=3,column=0)
 
     return
+
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
