@@ -87,6 +87,9 @@ ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
 ventana_principal.geometry("1260x656")
+background_image=tk.PhotoImage(file="imagenes/fondoPrincipal.png")
+background_label = tk.Label(ventana_principal, image=background_image)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 #en este frame irán todas las entradas necesarias para una cita
 
