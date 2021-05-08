@@ -1,0 +1,10 @@
+color2="#28388f"
+CuriousBlue="#2b9dd6"
+Cinnabar="#ef3934"
+GuardsmanRed="#b50600"
+Eucalyptus="#14855f"
+JungleGreen="#21a67a"
+color3="#accdec"
+color4="#6d6e72"
+Charade="#282c36"
+

@@ -1,13 +1,12 @@
-from datosDeRelleno import *
-from tkinter import  Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
+from tkinter import NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
 from tkcalendar import Calendar
+
+from datosDeRelleno import *
+from estilo import*
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
-color1="#788890"
-color2="#28388f"
-color3="#accdec"
-color4="#6d6e72"
+
 
 def disableChildren(parent):
     for child in parent.winfo_children():
@@ -122,7 +121,7 @@ buscar_medico_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:busca
 buscar_medico_btn.grid(row=1,column=0,sticky=E)
 framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT, bg=color3)
 framelistbox.grid(row=2,column=0)
-lista_medicos_listbox=Listbox(framelistbox,width=45,height=5)
+lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
 lista_medicos_listbox.pack(side=LEFT)
 medico_seleccionado_entry=Entry(buscar_medico_frame,width=45, state=DISABLED,disabledbackground="white",disabledforeground="black")
 buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido: ", bg=color3).grid(row=3,column=0,sticky=W)
@@ -220,20 +219,16 @@ lista_entry_datos_paciente.append(email_entry)
 citas_agendadas_frame=LabelFrame(ventana_principal, text="Mis Citas", padx=5, pady=5, bg=color3)
 citas_agendadas_frame.grid(row=0,column=2,sticky=N)
 
-codigo_frame=LabelFrame(citas_agendadas_frame,text="Buscar cita por codigo", bg=color3)
-codigo_frame.pack(anchor=W)
+ingresar_codigo_label=Label(citas_agendadas_frame, text="Ingrese su codigo: ", bg=color3).grid(row=0,column=0,sticky=W)
+ingresar_codigo_entry=Entry(citas_agendadas_frame, width=30)
+ingresar_codigo_entry.grid(row=1,column=0,sticky=W)
 
-ingresar_codigo_label=Label(codigo_frame, text="Ingrese su codigo: ", bg=color3).grid(row=0,column=0,sticky=W)
-ingresar_codigo_entry=Entry(codigo_frame, width=30)
-ingresar_codigo_entry.grid(row=1,column=0)
-
-buscar_btn=Button(codigo_frame,text="Buscar").grid(row=1,column=2)
+buscar_btn=Button(citas_agendadas_frame,text="Buscar").grid(row=1,column=0,sticky=E)
 
 #una vez encontrada la cita se muestra en este Frame
+
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita", bg=color3)
-gestionar_cita_frame.pack()
-info_cita_frame=LabelFrame(gestionar_cita_frame,relief=FLAT,bg=color3)
-info_cita_frame.grid()
+gestionar_cita_frame.grid(row=2,column=0)
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.grid(row=1,column=0)
@@ -242,10 +237,10 @@ agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar")
 agendar_hora_btn.grid(row=2,column=0)
 
 cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar")
-cancelar_hora_btn.grid(row=2,column=1)
+cancelar_hora_btn.grid(row=2,column=0,sticky=E)
 
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar")
-cancelar_hora_btn.grid(row=2,column=2)
+reagendar_hora_btn.grid(row=2,column=0,sticky=W)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
 
