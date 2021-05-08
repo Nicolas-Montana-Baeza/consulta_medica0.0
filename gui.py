@@ -91,22 +91,26 @@ def enableChildren(parent):
  #   print(ventana_principal.focus_get())
     #if ventana_principal.focus_get()=
 
-
 def autocompletarPaciente():
-
     _busqueda=rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
+    
     if type(paciente)==list:
         return
+    
     datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    
     if paciente.getPrevision=="ISAPRE":
         isapre_btn.select()
+    
     elif paciente.getPrevision=="FONASA":
         fonasa_btn.select()
+    
     else:
         sin_prevision_btn.select()
 
     prevision_btn=paciente.getPrevision()
+    
     for i in range(len(datos_paciente)):
         lista_entry_datos_paciente[i].delete(0)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
@@ -116,21 +120,23 @@ def agregarCita():
 
 #def buscar(busqueda):
     
-
+def buscarMedico():
+    _busqueda=buscar_doctor_entry.get()
+    
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.configure(bg=color2)
 ventana_principal.geometry("1260x656")
-#variable para obtener el texto de los entry para buscar (paciente por rut y medicopor especialidad, nombre, |||o fecha|||)
-busqueda=StringVar()
+
 #en este frame irán todas las entradas necesarias para una cita
 
 agendar_cita_frame=LabelFrame(ventana_principal, text="Agendar Cita", padx=5, pady=5, bg=color3, relief=FLAT)
 agendar_cita_frame.grid(row=0,column=1)
 
-#contiene los radio buttons
+
 """
+#contiene los radio buttons
 escojer_especialidades=LabelFrame(agendar_cita_frame, text="Escoja la Especialidad", padx=5, pady=5, bg=color3)
 escojer_especialidades.pack(anchor=W)
 
@@ -138,28 +144,25 @@ especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
 opcion=StringVar()
 opcion.set(especialidades[0])
 
-    
 kine_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[1], variable=opcion, value=especialidades[1], bg=color3)
 med_gnrl_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[0], variable=opcion, value=especialidades[0], bg=color3,)
 pedia_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[2], variable=opcion, value=especialidades[2], bg=color3)
 odont_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[3], variable=opcion, value=especialidades[3], bg=color3)
-
 kine_btn.pack(anchor=W)
 med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
-odont_btn.pack(anchor=W)
+odont_btn.pack(anchor=W)"""
 
-"""
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico", bg=color3)
 buscar_medico_frame.pack(anchor=W)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=color3).grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30)
 buscar_doctor_entry.grid(row=1,column=0)
 
-buscar_btn=Button(buscar_medico_frame,text="Buscar")
+buscar_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:buscarMedico())
 buscar_btn.grid(row=1,column=2)
 lista_medicos_listbox=Listbox(buscar_medico_frame,width=30)
-lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
+#lista_medicos_listbox.grid(rowspan=2, row=2, column=0, sticky=S)
 
 #Además se necesitará propiciar una modalidad
 
