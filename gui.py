@@ -111,12 +111,7 @@ med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
 odont_btn.pack(anchor=W)"""
 
-<<<<<<< HEAD
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade, font=subtitulo_font, labelanchor=N)
-=======
-#BUSCAR Y/O SELECCIONAR MEDICO
-buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade, font=subtitulo2_font)
 buscar_doctor_label.grid(row=0,column=0,sticky=W)
@@ -154,11 +149,7 @@ rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
-<<<<<<< HEAD
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, font=subtitulo4_font)
-=======
-rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, )
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 rut_autocompletar_label.grid(row=0,column=0)
 
 
@@ -177,11 +168,7 @@ fonasa_btn.grid(row=2,column=2)
 
     #primer nombre
 
-<<<<<<< HEAD
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
-=======
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=Charade)
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
