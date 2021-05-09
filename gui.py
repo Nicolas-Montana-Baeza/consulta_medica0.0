@@ -78,10 +78,11 @@ photo = ImageTk.PhotoImage(image)
 fondo = Label(ventana_principal, image = photo)
 fondo.place(x=0,y=0,relheight=1,relwidth=1)
 """
-#en este frame irán todas las entradas necesarias para una cita
+#FUENTES
 titulo_font = font.Font(family="Arial",weight="bold",size=35)
 
 
+#en este frame irán todas las entradas necesarias para una cita
 agendar_cita_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
 agendar_cita_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
 agendar_cita_label=Label(agendar_cita_frame, text="Agendar Cita",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
@@ -105,6 +106,7 @@ med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
 odont_btn.pack(anchor=W)"""
 
+#BUSCAR Y/O SELECCIONAR MEDICO
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade)
@@ -159,7 +161,7 @@ fonasa_btn.grid(row=2,column=2)
 
     #primer nombre
 
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade)
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=Charade)
 nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)

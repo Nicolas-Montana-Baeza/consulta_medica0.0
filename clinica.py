@@ -97,14 +97,12 @@ class Clinica():
         return coincidencias    
     
     def buscarCita(self,buscar):
-        coincidencias=[]
 
         for cita in self.citas:
 
             if cita.getCodigo()==buscar:
-                coincidencias.append(cita)
+                return cita
 
-        return coincidencias
     
     def agregarPaciente(self, _paciente):
         self.pacientes.append(_paciente) 
