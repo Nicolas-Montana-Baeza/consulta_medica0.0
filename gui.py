@@ -214,6 +214,19 @@ citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Cita
 citas_agendadas_label.pack(fill=X)
 #aca se ingresa el codigo
 
+#Frame de botones
+botones_paciente_frame=LabelFrame(agendar_cita_frame, bg=Charade)
+agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_btn=Button(botones_paciente_frame,text="Confirmar", image = agendar_hora_ic)
+agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
+
+cancelar_hora_ic = Image.open('./imagenes/cancelar(1).png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_hora_ic)
+cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 #una vez encontrada la cita se muestra en este Frame
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade)
