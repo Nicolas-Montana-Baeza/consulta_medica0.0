@@ -118,7 +118,8 @@ class Clinica():
 class Cita ():
     
     def __inti__(self):
-        self.fecha=dt.datetime(1,1,1)
+        self.fecha_citada=dt.datetime(1,1,1)
+        self.fecha_actual=dt.datetime.now()
         self.medico= Medico()
         self.paciente=Paciente()
         self.direccion=""
@@ -128,7 +129,7 @@ class Cita ():
         self.pagado=False
         self.modalidad=""
         self.prioridad=""
-        self.estadoTemporal=""
+        self.tiempo_restante="s"
         self.confirmada=False
 
     def setFecha(self,fecha):
@@ -199,16 +200,16 @@ class Cita ():
 
     def actualizarEstado(self):
         fecha_actual=dt.datetime.now()
-        dias_restantes=(self.fecha-fecha_actual).days
+        fecha_restante=self.fecha_citada-fecha_actual
 
-        if dias_restantes==0:
+        if fecha_restante==0:
             self.setEstadoTemporal("Cita en curso...")
 
-        elif dias_restantes>0:
-            self.setEstadoTemporal("Quedan "+str(dias_restantes)+" dias para su cita...")
+        elif fecha_restante>0:
+            self.setEstadoTemporal("Quedan "+str(fecha_restante)+" dias para su cita...")
 
-        elif dias_restantes<0:
-            self.setEstadoTemporal("su cita fue hace "+str(-1*dias_restantes)+" días")
+        elif fecha_restante<0:
+            self.setEstadoTemporal("su cita fue hace "+str(-1*fecha_restante)+" días")
 
 class Persona():
 

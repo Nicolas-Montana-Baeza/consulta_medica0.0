@@ -1,5 +1,6 @@
 import clinica
 from random import randint
+import datetime as dt
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -70,3 +71,5 @@ color2="#28388f"
 color3="#accdec"
 color4="#6d6e72"
 ruts=[]
+fecha_actual=dt.datetime.now()
+print(fecha_actual)
