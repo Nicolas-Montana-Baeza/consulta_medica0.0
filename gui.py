@@ -4,7 +4,7 @@ from tkcalendar import Calendar
 from PIL import Image,ImageTk
 import ttkbootstrap
 from datosDeRelleno import *
-
+from PIL import Image,ImageTk
 from estilo import*
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
@@ -78,7 +78,7 @@ photo = ImageTk.PhotoImage(image)
 fondo = Label(ventana_principal, image = photo)
 fondo.place(x=0,y=0,relheight=1,relwidth=1)
 """
-#en este frame irán todas las entradas necesarias para una cita
+#FUENTES
 titulo_font = font.Font(family="Arial",weight="bold",size=35)
 subtitulo_font = font.Font(family="Arial Nova", weight="bold",size= 20)
 subtitulo2_font = font.Font(family="Arial Narrow", weight="bold",size=15)
@@ -87,6 +87,7 @@ subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
 
 
+#en este frame irán todas las entradas necesarias para una cita
 agendar_cita_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
 agendar_cita_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
 agendar_cita_label=Label(agendar_cita_frame, text="Agendar Cita",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
@@ -110,7 +111,12 @@ med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
 odont_btn.pack(anchor=W)"""
 
+<<<<<<< HEAD
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade, font=subtitulo_font, labelanchor=N)
+=======
+#BUSCAR Y/O SELECCIONAR MEDICO
+buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
+>>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade, font=subtitulo2_font)
 buscar_doctor_label.grid(row=0,column=0,sticky=W)
@@ -140,12 +146,19 @@ ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
     #rut se podria agregar que al ingresar el rut si el paciente ya existe los datos se autocompleten
 
+buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
+buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
+buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
 rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ").grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
-buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente())
+buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
+<<<<<<< HEAD
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, font=subtitulo4_font)
+=======
+rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, )
+>>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 rut_autocompletar_label.grid(row=0,column=0)
 
 
@@ -164,7 +177,11 @@ fonasa_btn.grid(row=2,column=2)
 
     #primer nombre
 
+<<<<<<< HEAD
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
+=======
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=Charade)
+>>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
@@ -222,19 +239,32 @@ ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
-buscar_btn=Button(gestionar_cita_frame,text="Buscar")
+#Icono
+buscar_cita_ic = Image.open('./imagenes/buscacita.png')
+buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
+buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
+buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic)
 buscar_btn.pack(  pady=10)
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.pack(padx=10)
 
-agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar")
+agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar", image = agendar_hora_ic)
 agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
 
-cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar")
+cancelar_hora_ic = Image.open('./imagenes/cancelar(1).png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic)
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
-reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar")
+reagendar_hora_ic = Image.open('./imagenes/reagendar.png')
+reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
+reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic)
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
