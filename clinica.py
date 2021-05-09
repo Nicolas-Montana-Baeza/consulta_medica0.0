@@ -516,4 +516,3 @@ class Receta():
         """if dt.datetime.now()-self.fecha>self.duracion:
             return True"""
         return "not implemented yet"
-
