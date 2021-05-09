@@ -72,4 +72,5 @@ color3="#accdec"
 color4="#6d6e72"
 ruts=[]
 fecha_actual=dt.datetime.now()
-print(fecha_actual)
+fecha_citada=dt.datetime(2021,6,9,14,30)
+print(fecha_citada-fecha_actual)
