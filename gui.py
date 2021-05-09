@@ -11,28 +11,6 @@ from estilo import*
 cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
 
-
-def disableChildren(parent):
-    for child in parent.winfo_children():
-        wtype = child.winfo_class()
-        if wtype not in ('Frame','Labelframe'):
-            child.configure(state='disable')
-        else:
-            disableChildren(child)
-
-def enableChildren(parent):
-    for child in parent.winfo_children():
-        wtype = child.winfo_class()
-        print (wtype)
-        if wtype not in ('Frame','Labelframe'):
-            child.configure(state='normal')
-        else:
-            enableChildren(child)
-
-#def mostrar_listbox():
- #   print(ventana_principal.focus_get())
-    #if ventana_principal.focus_get()=
-
 def autocompletarPaciente():
     _busqueda=rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
@@ -129,7 +107,7 @@ odont_btn.pack(anchor=W)"""
 
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
-buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:")
+buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade)
 buscar_doctor_label.grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30, highlightthickness=0,relief=FLAT)
 buscar_doctor_entry.grid(row=1,column=0, sticky=W)
@@ -162,55 +140,62 @@ rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente())
 buscar_rut_btn.grid(row=0,column=2)
-rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
+rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade)
 rut_autocompletar_label.grid(row=0,column=0)
 
 
     #prevision
 
-prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:").grid(row=1,column=0)
+prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Charade)
+prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
-sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision")
+sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=Charade)
 sin_prevision_btn.grid(row=2,column=0)
 isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE")
 isapre_btn.grid(row=2,column=1)
-fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA")
+fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade)
 fonasa_btn.grid(row=2,column=2)
 
     #primer nombre
 
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ").grid(row=3,column=0)
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade)
+nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
     #segundo nombre
 
-nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ").grid(row=4,column=0)
+nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=Charade)
+nombre2_label.grid(row=4,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
     #Primer Apellido
 
-apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ").grid(row=5,column=0)
+apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=Charade)
+apellido1_label.grid(row=5,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
     #Segundo Apellido
 
-apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ").grid(row=6,column=0)
+apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=Charade)
+apellido2_label.grid(row=6,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
     #numero contacto
 
-tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ").grid(row=7,column=0)
+tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade)
+tel_contacto_label.grid(row=7,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
     #email
 
-email_label=Label(ingresar_paciente, text="Correo Electronico: ").grid(row=8,column=0)
+email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade)
+email_label.grid(row=8,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(email_entry)
@@ -228,7 +213,7 @@ citas_agendadas_label.pack(fill=X)
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade)
 gestionar_cita_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
-ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita")
+ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
