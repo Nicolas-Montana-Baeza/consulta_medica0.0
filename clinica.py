@@ -17,20 +17,17 @@ class Clinica():
     def setNombre(self,nombre):
         self.nombre=nombre 
 
-    def setDireccion(self,direccion):
-        self.direccion=direccion
-
     def setTipo(self,tipo):
         self.tipo=tipo
-
-    def setEspecialidades(self,especialidades):
-        self.especialidades=especialidades
+    
+    def setDireccion(self,direccion):
+        self.direccion=direccion
 
     def setHorario(self,horario):
         self.horario=horario
 
-    def setDoctores(self,doctores):
-        self.doctores=doctores
+    def setMedicos(self,medicos):
+        self.medicos=medicos
 
     def setPacientes(self,pacientes):
         self.pacientes=pacientes
@@ -40,27 +37,24 @@ class Clinica():
 
     def getNombre(self):
         return self.nombre
+    
+    def getTipo(self):
+        return self.tipo
 
     def getDireccion(self):
         return self.direccion
 
-    def getTipo(self):
-        return self.tipo
-
-    def getEspecialidades(self):
-        return self.especialidades
-
     def getHorario(self):
         return self.horario
-    
-    def getCitas(self):
-        return self.citas
     
     def getMedicos(self):
         return self.medicos
 
     def getPacientes(self):
         return self.pacientes
+    
+    def getCitas(self):
+        return self.citas
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
@@ -155,19 +149,23 @@ class Clinica():
         return False
 
     def __str__(self):
+<<<<<<< HEAD
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.medicos)+" "+str(self.pacientes)
+=======
+        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
+>>>>>>> 02a5b97e2cc6f53fc925047519d28ff4adc4786a
 
 class Cita ():
     
-    def __inti__(self):
+    def __init__(self, fecha_citada, medico, paciente, modalidad):
         #
         self.fecha_citada=dt.datetime(1,1,1)
 
         self.fecha_actual=dt.datetime.now()
     #
-        self.medico= Medico()
+        self.medico= medico
     #
-        self.paciente=Paciente()
+        self.paciente= paciente
         self.direccion=""
         self.codigo=str(shortuuid.uuid())
     #esta depende del medico
@@ -181,8 +179,11 @@ class Cita ():
         self.tiempo_restante="s"
         self.confirmada=False
 
-    def setFecha(self,fecha):
-        self.fecha=fecha
+    def setFechaCitada(self,fecha_citada): 
+        self.fecha_citada = fecha_citada
+    
+    def setFechaActual(self,fecha_actual):
+        self.fecha_actual = fecha_actual
 
     def setMedico(self,medico):
         self.medico=medico
@@ -199,23 +200,23 @@ class Cita ():
     def setPrestacion(self,prestacion):
         self.prestacion=prestacion
 
-    def setEstado(self,estado):
-        self.estado=estado
-
     def setPagado(self,pagado):
         self.pagado=pagado
 
-    def setModalidad(self,modalidad):
+    def setModalidad(self,modalidad): 
         self.modalidad=modalidad
     
-    def setEstadoTemporal(self,estadoTemporal):
-        self.estadoTemporal=estadoTemporal
+    def setTiempoRestante(self,tiempo_restante):
+        self.tiempo_restante=tiempo_restante
 
     def setConfirmada(self,confirmada):
         self.confirmada=confirmada
 
-    def getFecha(self):
-        return self.fecha
+    def getFechaCitada(self):
+        return self.fecha_citada
+
+    def getFechaActual(self):
+        return self.fecha_actual
 
     def getMedico(self):
         return self.medico
@@ -232,33 +233,23 @@ class Cita ():
     def getPrestacion(self):
         return self.prestacion
 
-    def getEstado(self):
-        return self.estado
-
     def getPagado(self):
         return self.pagado
 
     def getModalidad(self):
         return self.modalidad
     
-    def getEstadoTemporal(self):
-        return self.estadoTemporal
+    def getTiempoRestante(self):
+        return self.tiempo_restante
     
     def getConfirmada(self):
         return self.confirmada
 
     def actualizarEstado(self):
-        fecha_actual=dt.datetime.now()
+        fecha_actual=dt.datetime.now()       
         fecha_restante=self.fecha_citada-fecha_actual
 
-        if fecha_restante==0:
-            self.setEstadoTemporal("Cita en curso...")
-
-        elif fecha_restante>0:
-            self.setEstadoTemporal("Quedan "+str(fecha_restante)+" dias para su cita...")
-
-        elif fecha_restante<0:
-            self.setEstadoTemporal("su cita fue hace "+str(-1*fecha_restante)+" días")
+    #    self.tiempo_restante = 
 
 class Persona():
 
