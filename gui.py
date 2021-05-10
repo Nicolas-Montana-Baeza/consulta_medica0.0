@@ -13,7 +13,7 @@ cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
 
 def autocompletarPaciente():
-    _busqueda=rut_entry.get()
+    _busqueda=buscar_rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
 
     if len(paciente)==0:
@@ -67,7 +67,7 @@ def buscar(evento):
 
 def agregarDatosPaciente():
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
-    email_entry.get(), numero_telefonico_entry.get())
+    email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
     return
 
@@ -156,10 +156,10 @@ ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
 buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
 buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
-rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
-rut_label.grid(row=0,column=0)
-rut_entry=Entry(ingresar_paciente, width=10)
-rut_entry.grid(row=0,column=1,sticky=W)
+buscar_rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
+buscar_rut_label.grid(row=0,column=0)
+buscar_rut_entry=Entry(ingresar_paciente, width=10)
+buscar_rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Buscar paciente por Rut: ", bg=Charade, font=subtitulo4_font)
@@ -228,6 +228,10 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+    #edad
+edad_label=Label(ingresar_paciente,text="Edad:",bg=Charade, font=subtitulo4_font)
+edad_label.grid(row=10,column=0)
+edad_entry=Entry
 
 #Frame de botones
 
@@ -306,7 +310,6 @@ online_btn.grid(row=0,column=0)
 presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial")
 presencial_btn.grid(row=0,column=1)
 
-disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
 disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
 seleccion_Dia=Spinbox(escojer_fecha_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
 seleccion_Dia.pack(pady=20)
