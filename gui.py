@@ -66,10 +66,16 @@ def buscar(evento):
     actualizarListbox(datos)
 
 def agregarDatosPaciente():
+    if clinica.Persona.isRut(rut_entry.get()) :
+        messagebox.showwarning(message="No se ha podido encontrar el rut ingresado...", title="Error")
+        return
+    if clinica.Persona.isMail(email_entry.get()):
+        messagebox.showwarning(message="El mail ingresado no es válido.", title="Error")
+        return
+    
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
     email_entry.get(), numero_telefonico_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
-    return
 
 def cancelarDatosPaciente():
     
