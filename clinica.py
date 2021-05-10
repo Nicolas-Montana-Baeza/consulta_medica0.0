@@ -245,7 +245,7 @@ class Cita ():
         fecha_actual=dt.datetime.now()       
         fecha_restante=self.fecha_citada-fecha_actual
 
-         self.tiempo_restante = fecha_restante
+        self.tiempo_restante = fecha_restante
 
 class Persona():
 
