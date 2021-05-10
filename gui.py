@@ -307,9 +307,14 @@ presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presenc
 presencial_btn.grid(row=0,column=1)
 
 disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
-calendario = Calendar(disponibilidad_citas_frame)
-calendario.pack(pady=30)
-disponibilidad_citas_frame.pack(anchor=W)
+disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
+seleccion_Dia=Spinbox(escojer_fecha_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
+seleccion_Dia.pack(pady=20)
+seleccion_Mes=Spinbox(escojer_fecha_frame,values=("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"))
+seleccion_Mes.pack(pady=20)
+seleccion_Año=Spinbox(escojer_fecha_frame,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
+seleccion_Año.pack(pady=20)
+disponibilidad_citas_frame.pack()
 
 def obtener():
     print(seleccion_hora.get())
