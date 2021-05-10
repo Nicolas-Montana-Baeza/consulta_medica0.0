@@ -13,7 +13,7 @@ cita_aux=clinica.Cita()
 lista_entry_datos_paciente=[]
 
 def autocompletarPaciente():
-    _busqueda=rut_entry.get()
+    _busqueda=buscar_rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
 
     if len(paciente)==0:
@@ -156,10 +156,10 @@ ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
 buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
 buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
-rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
-rut_label.grid(row=0,column=0)
-rut_entry=Entry(ingresar_paciente, width=10)
-rut_entry.grid(row=0,column=1,sticky=W)
+buscar_rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
+buscar_rut_label.grid(row=0,column=0)
+buscar_rut_entry=Entry(ingresar_paciente, width=10)
+buscar_rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Buscar paciente por Rut: ", bg=Charade, font=subtitulo4_font)
@@ -184,9 +184,9 @@ fonasa_btn.pack(side=LEFT)
     #primer nombre
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
-nombre1_entry=Entry(ingresar_paciente, width=10)
-nombre1_entry.grid(row=3,column=1)
-lista_entry_datos_paciente.append(nombre1_entry)
+rut_entry=Entry(ingresar_paciente, width=10)
+rut_entry.grid(row=3,column=1)
+lista_entry_datos_paciente.append(rut_entry)
 
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
@@ -228,6 +228,10 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+    #edad
+edad_label=Label(ingresar_paciente,text="Edad:",bg=Charade, font=subtitulo4_font)
+edad_label.grid(row=10,column=0)
+edad_entry=Entry
 
 #Frame de botones
 
