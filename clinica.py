@@ -427,7 +427,7 @@ class Medico(Persona):
         _paciente.setDiagnosticos(_diagnostico)
 
     def __str__(self) :
-        return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+" "+str(self.especialidad)
+        return str(self.nombre1)+" "+str(self.nombre2)+" "+str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.especialidad)
 
 class Paciente(Persona): 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):

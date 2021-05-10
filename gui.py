@@ -48,10 +48,7 @@ def actualizarListbox(datos):
     return
 
 def seleccionarMedico(evento):
-    medico_seleccionado_entry.config(state=NORMAL) 
-    medico_seleccionado_entry.delete(0,END)
-    medico_seleccionado_entry.insert(0,lista_medicos_listbox.get(ACTIVE))
-    medico_seleccionado_entry.config(state=DISABLED)  
+    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
 
     return
 
@@ -78,6 +75,7 @@ def cancelarDatosPaciente():
         prevision_btn.set("Sin Prevision")
 
 def agendarCita():
+
     return
     
 ventana_principal=Tk()
@@ -139,10 +137,10 @@ framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT)
 framelistbox.grid(row=2,column=0)
 lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
 lista_medicos_listbox.pack(side=LEFT)
-medico_seleccionado_entry=Entry(buscar_medico_frame,width=45, state=DISABLED, highlightthickness=0,relief=FLAT)
+medico_seleccionado_label=Label(buscar_medico_frame, bg=Charade, font=subtitulo5_font)
 buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido:", bg=Charade, font=subtitulo2_font)
 buscar_doctor_label.grid(row=3,column=0,sticky=W)
-medico_seleccionado_entry.grid(row=4,column=0,sticky=W)
+medico_seleccionado_label.grid(row=4,column=0,sticky=W)
 scrollbar = Scrollbar(framelistbox)
 scrollbar.pack(side=RIGHT,fill=Y)
 lista_medicos_listbox.config(yscrollcommand=scrollbar.set)
