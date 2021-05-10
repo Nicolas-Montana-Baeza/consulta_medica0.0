@@ -149,11 +149,7 @@ class Clinica():
         return False
 
     def __str__(self):
-<<<<<<< HEAD
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.medicos)+" "+str(self.pacientes)
-=======
-        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
->>>>>>> 02a5b97e2cc6f53fc925047519d28ff4adc4786a
 
 class Cita ():
     
