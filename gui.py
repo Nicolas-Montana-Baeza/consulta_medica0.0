@@ -214,7 +214,7 @@ lista_entry_datos_paciente.append(email_entry)
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
 citas_agendadas_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
-citas_agendadas_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
+citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anchor=N)
 citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
 citas_agendadas_label.pack(fill=X)
 #aca se ingresa el codigo
@@ -235,7 +235,7 @@ cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 #una vez encontrada la cita se muestra en este Frame
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
-gestionar_cita_frame.pack(fill=X, expand=True, padx=30, pady=10)
+gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
@@ -246,6 +246,7 @@ buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
 buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
 buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic)
 buscar_btn.pack(  pady=10)
+
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.pack(padx=10)
