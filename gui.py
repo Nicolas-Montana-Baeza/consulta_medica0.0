@@ -1,4 +1,4 @@
-from tkinter import X,SW,S,SE,ttk,font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
+from tkinter import X,SW,S,SE,ttk,font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from tkinter.constants import BOTTOM, TOP
 from tkcalendar import Calendar
 from PIL import Image,ImageTk
@@ -6,6 +6,7 @@ import ttkbootstrap
 from datosDeRelleno import *
 from PIL import Image,ImageTk
 from estilo import*
+
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 cita_aux=clinica.Cita()
@@ -268,7 +269,8 @@ reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagend
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
-# seleccion_hora = Spinbox(
+
+
 # disponibilidad_citas_frame, 
 
 #Además se necesitará propiciar una modalidad
@@ -288,7 +290,15 @@ calendario = Calendar(disponibilidad_citas_frame)
 calendario.pack(pady=30)
 disponibilidad_citas_frame.pack(anchor=W)
 
-
+def obtener():
+    print(seleccion_hora.get())
+hora = StringVar()
+seleccion_hora=Spinbox(escojer_fecha_frame,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
+seleccion_minutos=Spinbox(escojer_fecha_frame,values=("00","30"))
+seleccion_hora.pack(pady=20)
+seleccion_minutos.pack(padx=40)
+boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener()).pack()
+escojer_fecha_frame.pack()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
