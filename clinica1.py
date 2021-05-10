@@ -5,29 +5,31 @@ import shortuuid
 
 class Clinica():
 
-    def __init__(self,_nombre,_tipo,_direccion,_horario,_medicos,_pacientes):
+    def __init__(self,_nombre,_tipo,_direccion,_horario,_medicos,_pacientes,_citas):
         self.nombre=_nombre
         self.tipo=_tipo
         self.direccion=_direccion
         self.horario=_horario
         self.medicos=_medicos
         self.pacientes=_pacientes
-        self.citas=[]
     
     def setNombre(self,nombre):
         self.nombre=nombre 
 
-    def setTipo(self,tipo):
-        self.tipo=tipo
-    
     def setDireccion(self,direccion):
         self.direccion=direccion
+
+    def setTipo(self,tipo):
+        self.tipo=tipo
+
+    def setEspecialidades(self,especialidades):
+        self.especialidades=especialidades
 
     def setHorario(self,horario):
         self.horario=horario
 
-    def setMedicos(self,medicos):
-        self.medicos=medicos
+    def setDoctores(self,doctores):
+        self.doctores=doctores
 
     def setPacientes(self,pacientes):
         self.pacientes=pacientes
@@ -37,15 +39,21 @@ class Clinica():
 
     def getNombre(self):
         return self.nombre
-    
-    def getTipo(self):
-        return self.tipo
 
     def getDireccion(self):
         return self.direccion
 
+    def getTipo(self):
+        return self.tipo
+
+    def getEspecialidades(self):
+        return self.especialidades
+
     def getHorario(self):
         return self.horario
+    
+    def getCitas(self):
+        return self.citas
     
     def getMedicos(self):
         return self.medicos
@@ -53,17 +61,13 @@ class Clinica():
     def getPacientes(self):
         return self.pacientes
     
-    def getCitas(self):
-        return self.citas
-    
     def buscarPaciente(self,buscar):
         coincidencias=[]
-        buscar=buscar.lower()
         if len(buscar)==0:
             return coincidencias
         for paciente in self.pacientes:
 
-            if paciente.getNombreCompleto().lower().find(buscar.title())!=-1:
+            if paciente.getNombreCompleto().find(buscar.title())!=-1:
                 coincidencias.append(paciente)
 
             elif Paciente.isRut(buscar):
@@ -90,72 +94,34 @@ class Clinica():
                 coincidencias.append(medico)
 
         return coincidencias    
+      
+    def agregarPersona(self, _persona):
+        for persona in self.pacientes, self.medicos:
+            if _persona.getRut()==persona.getRut():
+                return
+        self.pacientes.append(_persona)
     
-    def buscarCita(self,buscar):
-
-        for cita in self.citas:
-
-            if cita.getCodigo()==buscar:
-                return cita
-
-    
-    def agregarPaciente(self, _paciente):
-        for paciente in self.pacientes:
-            if paciente.getRut==_paciente.getRut():
-                return False
-        self.pacientes.append(_paciente)
-        return True
-
-    def eliminarPaciente(self,_rut):
-        for paciente in self.pacientes:
-            if paciente.getRut==_rut:
-                self.pacientes.remove(paciente)
-                return True
-        return False
-    
-    def modificarPaciente(self,_paciente):
-        for paciente in self.pacientes:
-            if paciente.getRut==_paciente.getRut():
-                paciente
-                return True
-        return False
-
-
-    def agregarMedico(self, _medico):
-        self.medicos.append(_medico)
-
     def __str__(self):
-        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
+        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
 
 class Cita ():
     
-    def __init__(self, fecha_citada, medico, paciente, modalidad):
-        #
-        self.fecha_citada=dt.datetime(1,1,1)
-
-        self.fecha_actual=dt.datetime.now()
-    #
-        self.medico= medico
-    #
-        self.paciente= paciente
-        self.direccion=""
-        self.codigo=str(shortuuid.uuid())
-    #esta depende del medico
-        self.prestacion=""
-        self.pagado=False
-    #
+    def __init__(self,medico,paciente,modalidad,fecha_citada,prioridad):
+        self.fecha_citada=""
+        self.medico= ""
+        self.paciente=""
         self.modalidad=""
-    #esto no creo que sea necesaria
         self.prioridad=""
-    #fecha citada menos fecha actual
-        self.tiempo_restante="s"
+        self.direccion=""
+        self.pagado=False
         self.confirmada=False
+        self.fecha_actual=dt.datetime.now()
+        self.tiempo_restante=""
+        self.codigo=str(shortuuid.uuid())
+        self.servicio_prestado=self.medico.getEspecialidad()
 
-    def setFechaCitada(self,fecha_citada): 
-        self.fecha_citada = fecha_citada
-    
-    def setFechaActual(self,fecha_actual):
-        self.fecha_actual = fecha_actual
+    def setFechaCitada(self,fecha_citada):
+        self.fechaCitada=fecha_citada
 
     def setMedico(self,medico):
         self.medico=medico
@@ -172,23 +138,23 @@ class Cita ():
     def setPrestacion(self,prestacion):
         self.prestacion=prestacion
 
+    def setEstado(self,estado):
+        self.estado=estado
+
     def setPagado(self,pagado):
         self.pagado=pagado
 
-    def setModalidad(self,modalidad): 
+    def setModalidad(self,modalidad):
         self.modalidad=modalidad
     
-    def setTiempoRestante(self,tiempo_restante):
-        self.tiempo_restante=tiempo_restante
+    def setEstadoTemporal(self,estadoTemporal):
+        self.estadoTemporal=estadoTemporal
 
     def setConfirmada(self,confirmada):
         self.confirmada=confirmada
 
-    def getFechaCitada(self):
-        return self.fecha_citada
-
-    def getFechaActual(self):
-        return self.fecha_actual
+    def getFecha(self):
+        return self.fecha
 
     def getMedico(self):
         return self.medico
@@ -205,23 +171,24 @@ class Cita ():
     def getPrestacion(self):
         return self.prestacion
 
+    def getEstado(self):
+        return self.estado
+
     def getPagado(self):
         return self.pagado
 
     def getModalidad(self):
         return self.modalidad
     
-    def getTiempoRestante(self):
-        return self.tiempo_restante
+    def getEstadoTemporal(self):
+        return self.estadoTemporal
     
     def getConfirmada(self):
         return self.confirmada
 
     def actualizarEstado(self):
-        fecha_actual=dt.datetime.now()       
-        fecha_restante=self.fecha_citada-fecha_actual
-
-    #    self.tiempo_restante = 
+        fecha_actual=dt.datetime.now()
+        self.tiempo_restante=self.fecha_citada-fecha_actual
 
 class Persona():
 
@@ -234,13 +201,14 @@ class Persona():
         self.rut=_rut
         self.email=_email
         self.numero_telefonico=_numero_telefonico
-         
+        self.citas= []
+
     def setPrimerNombre(self,nombre1):
         self.nombre1=nombre1
-        
+
     def setSegundoNombre(self,nombre2):
         self.nombre2=nombre2
-        
+
     def setPrimerApellido(self,apellido1):
         self.apellido1=apellido1
 
@@ -258,6 +226,9 @@ class Persona():
 
     def setEmail(self,email):
         self.email=email
+    
+    def setCitas(self,citas):
+        self.citas=citas
 
     def getPrimerNombre(self):
         return self.nombre1
@@ -285,6 +256,9 @@ class Persona():
     
     def getNumeroTelefonico(self):
         return self.numero_telefonico
+
+    def getNombreCompleto(self):
+        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
     
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
@@ -297,17 +271,17 @@ class Persona():
 
     def isRut(_rut):
         rut=_rut.replace("-","")
+        rut=_rut.replace(".","")
         verificador=rut[-1]
         verificando=rut[:-1]
         verificando=verificando[::-1]
+        serie="234567"
+        recorre_serie=0
+        verificar=0
+
         if len(verificador) ==0 or not(rut.isdigit()):
             return False
 
-        serie="234567"
-        recorre_serie=0
-    
-        verificar=0
-        
         if verificador == "k":
             verificador == 10
 
@@ -325,27 +299,46 @@ class Persona():
 
         if verificar==int(verificador):
             return True
+        
         else:
             return False
+    
+    def buscarCita(self,buscar):
+        for cita in self.citas:
 
+            if cita.getCodigo()==buscar:
+                return cita
+        
+        return False
+    
     def agendarCita(self,_cita):
+        if self.buscarCita(_cita.getCodigo()):
+            return False
+
         self.citas.append(_cita)
-
-    def reagendarCita(self, _fecha, _codigo_cita):
-        return "not implemented yet"
     
-    def confirmarCita(self,_cita):
-        _cita.setConfirmada(True)
- 
-    def getNombreCompleto(self):
-        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
-  
 
+    def confirmarCita(self,codigo):
+        for cita in self.citas:
 
-            
+            if self.buscarCita(codigo):
+                cita.setFechaCitada()
+                return True
+
+        return False
+       
+       
+    def eliminarCita(self,codigo):
+        for cita in self.citas:
+
+            if self.buscarCita(codigo):
+                self.citas.remove(cita)
+                return True
+
+        return False
         
-        
-    
+                
+
     def __str__(self):
         return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+self.rut+" "+str(self.edad)+" "+self.email
 
@@ -409,7 +402,6 @@ class Paciente(Persona):
         self.forma_pago=""
         #billetera
         self.cartera=0
-        self.citas= []
         self.recetas=[]
 
     def setPrevision(self,prevision):
@@ -474,19 +466,12 @@ class Paciente(Persona):
 class Receta():
 
     def __init__(self):
-        #
         self.paciente= Paciente()
-        #
         self.medico= Medico()
-        #
         self.farmaco_y_dosis=[]
-        #
         self.fecha=""
-        #
         self.duracion=""
-        #
         self.observaciones=[]
-        #
         self.dosis=""
     
     def setPaciente(self,paciente):

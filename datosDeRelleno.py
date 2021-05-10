@@ -56,12 +56,11 @@ def crearEspecialidades(lista):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
 
-def agregarDisponibilidad(medico,disponibilidad):
-    
-    medico.setDisponibilidad
+def crearDisponibilidad():
 
 
     return
+
 #hay que agregar datos a la clinica
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_nombres=formatoNombres(lista_nombres)
@@ -73,5 +72,5 @@ lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades 
 lista_citas=[]
 lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","")]
 lista_pacientes[0].setPrevision("FONASA")
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes, lista_citas)
+clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
