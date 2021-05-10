@@ -9,7 +9,7 @@ from estilo import*
 
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
-cita_aux=clinica.Cita()
+
 lista_entry_datos_paciente=[]
 
 def autocompletarPaciente():
