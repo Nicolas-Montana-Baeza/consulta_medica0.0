@@ -145,6 +145,7 @@ class Clinica():
                 medico.setEdad(_medico.getEdad())
                 medico.setEmail(_medico.getEmail())
                 medico.setNumeroTelefonico(_medico.getNumeroTelefonico())
+                medico.setEspecialidad(_medico.getEspecialidad())
                 return True
         return False
 
