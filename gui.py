@@ -159,12 +159,14 @@ prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Char
 prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
-sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="SIN PREVISION", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
-sin_prevision_btn.grid(row=2,column=0)
-isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
-isapre_btn.grid(row=2,column=1)
-fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
-fonasa_btn.grid(row=2,column=2)
+opciones_prevision_frame=LabelFrame(ingresar_paciente, bg=Charade, relief=FLAT, bd=0)
+opciones_prevision_frame.grid(columnspan=3)
+sin_prevision_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
+sin_prevision_btn.pack(side=LEFT)
+isapre_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0,bg=Charade, text="Isapre", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
+isapre_btn.pack(side=LEFT)
+fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
+fonasa_btn.pack(side=LEFT)
 
     #primer nombre
 
