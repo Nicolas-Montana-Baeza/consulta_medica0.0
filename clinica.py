@@ -12,7 +12,7 @@ class Clinica():
         self.horario=_horario
         self.medicos=_medicos
         self.pacientes=_pacientes
-        self.citas=[]
+
     
     def setNombre(self,nombre):
         self.nombre=nombre 
@@ -31,9 +31,6 @@ class Clinica():
 
     def setPacientes(self,pacientes):
         self.pacientes=pacientes
-
-    def setCitas(self, citas):
-        self.citas=citas
 
     def getNombre(self):
         return self.nombre
@@ -54,7 +51,7 @@ class Clinica():
         return self.pacientes
     
     def getCitas(self):
-        return self.citas
+        return self.medicos.getCitas()
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
