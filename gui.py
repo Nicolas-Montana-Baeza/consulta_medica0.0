@@ -62,6 +62,7 @@ def buscar(evento):
 
 def agregarDatosPaciente():
     if clinica.Persona.isRut(rut_entry.get()) :
+        
         messagebox.showwarning(message="No se ha podido encontrar el rut ingresado...", title="Error")
         return
     if clinica.Persona.isMail(email_entry.get()):

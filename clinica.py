@@ -107,22 +107,22 @@ class Clinica():
 
 class Cita ():
     
-    def __init__(self):
-        self.fecha_citada=dt.datetime(1,1,1)
-        self.fecha_actual=dt.datetime.now()
-        self.medico= Medico()
-        self.paciente=Paciente()
+    def __init__(self,medico,paciente,modalidad,fecha_citada,prioridad):
+        self.fecha_citada=fecha_citada
+        self.medico= medico
+        self.paciente=paciente
+        self.modalidad=modalidad
+        self.prioridad=prioridad
         self.direccion=""
+        self.pagado=False
+        self.confirmada=False
+        self.fecha_actual=dt.datetime.now()
+        self.tiempo_restante=self.fecha_citada-self.fecha_actual
         self.codigo=str(shortuuid.uuid())
         self.servicio_prestado=self.medico.getEspecialidad()
-        self.pagado=False
-        self.modalidad=""
-        self.prioridad=""
-        self.tiempo_restante=self.fecha_citada-dt.datetime.now()
-        self.confirmada=False
 
-    def setFecha(self,fecha):
-        self.fecha=fecha
+    def setFechaCitada(self,fecha_citada):
+        self.fechaCitada=fecha_citada
 
     def setMedico(self,medico):
         self.medico=medico
@@ -261,7 +261,6 @@ class Persona():
     def getNombreCompleto(self):
         return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
     
-    
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
         
@@ -273,17 +272,17 @@ class Persona():
 
     def isRut(_rut):
         rut=_rut.replace("-","")
+        rut=_rut.replace(".","")
         verificador=rut[-1]
         verificando=rut[:-1]
         verificando=verificando[::-1]
+        serie="234567"
+        recorre_serie=0
+        verificar=0
+
         if len(verificador) ==0 or not(rut.isdigit()):
             return False
 
-        serie="234567"
-        recorre_serie=0
-    
-        verificar=0
-        
         if verificador == "k":
             verificador == 10
 
@@ -301,39 +300,42 @@ class Persona():
 
         if verificar==int(verificador):
             return True
+        
         else:
             return False
     
     def buscarCita(self,buscar):
-
         for cita in self.citas:
 
             if cita.getCodigo()==buscar:
                 return cita
+        
         return False
     
     def agendarCita(self,_cita):
         if self.buscarCita(_cita.getCodigo()):
             return False
+
         self.citas.append(_cita)
     
-#sin implementar debido a ser redundantes
-    #def reagendarCita():   
-    #def desconfirmarCita():
 
     def confirmarCita(self,codigo):
         for cita in self.citas:
+
             if self.buscarCita(codigo):
                 cita.setFechaCitada()
                 return True
+
         return False
        
        
     def eliminarCita(self,codigo):
         for cita in self.citas:
+
             if self.buscarCita(codigo):
                 self.citas.remove(cita)
                 return True
+
         return False
         
                 
