@@ -6,7 +6,7 @@ import ttkbootstrap
 from datosDeRelleno import *
 from PIL import Image,ImageTk
 from estilo import*
-
+from datetime import dt
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 
@@ -240,7 +240,7 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
-    #edad
+    # edad
 edad_label=Label(ingresar_paciente,text="Edad:",bg=Charade, font=subtitulo4_font)
 edad_label.grid(row=10,column=0)
 edad_entry=Entry
