@@ -140,12 +140,13 @@ scrollbar.config(command=lista_medicos_listbox.yview)
 ingresar_paciente=LabelFrame(agendar_cita_frame,text="Datos del Paciente", bg=Charade, font=subtitulo_font, labelanchor=N)
 ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
-    #rut se podria agregar que al ingresar el rut si el paciente ya existe los datos se autocompleten
+#autocompletar con rut
 
 buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
 buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
 buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
-rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ").grid(row=0,column=0)
+rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
+rut_label.grid(row=0,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
@@ -170,60 +171,65 @@ fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fona
 fonasa_btn.pack(side=LEFT)
 
     #primer nombre
-
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
-nombre1_label.grid(row=3,column=0)
+rut_label=Label(ingresar_paciente, text="Rut (sin puntos)",bg=Charade, font=subtitulo4_font)
+rut_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
+lista_entry_datos_paciente.append(nombre1_entry)
+
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
+nombre1_label.grid(row=4,column=0)
+nombre1_entry=Entry(ingresar_paciente, width=10)
+nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
     #segundo nombre
 
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=Charade, font=subtitulo4_font)
-nombre2_label.grid(row=4,column=0)
+nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
-nombre2_entry.grid(row=4,column=1)
+nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
     #Primer Apellido
 
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=Charade, font=subtitulo4_font)
-apellido1_label.grid(row=5,column=0)
+apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
-apellido1_entry.grid(row=5,column=1)
+apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
     #Segundo Apellido
 
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=Charade, font=subtitulo4_font)
-apellido2_label.grid(row=6,column=0)
+apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
-apellido2_entry.grid(row=6,column=1)
+apellido2_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
     #numero contacto
 
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade, font=subtitulo4_font)
-tel_contacto_label.grid(row=7,column=0)
+tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
-tel_contacto_entry.grid(row=7,column=1)
+tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
     #email
 
 email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade, font=subtitulo4_font)
-email_label.grid(row=8,column=0)
+email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
-email_entry.grid(row=8,column=1)
+email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
 #Frame de botones
-botones_paciente_frame=LabelFrame(ingresar_paciente, bg=Charade).grid()
-agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
-agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
-agendar_hora_btn=Button(botones_paciente_frame,text="Confirmar", image = agendar_hora_ic)
-agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
+botones_paciente_frame=LabelFrame(ingresar_paciente, bg=Charade,text="hola").grid(row=10,column=0, columnspan=3)
+confirmar_paciente_ic = Image.open('./imagenes/confirmar_paciente.png')
+confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
+confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
+confirmar_paciente_btn=Button(botones_paciente_frame,text="Confirmar", image = confirmar_paciente_ic)
+confirmar_paciente_btn.pack(side=LEFT,padx=15,pady=10)
 
-cancelar_hora_ic = Image.open('./imagenes/cancelar(1).png')
-cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
-cancelar_hora_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_hora_ic)
-cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
+cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
+cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
+cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
+cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic)
+cancelar_paciente_btn.pack(side=RIGHT,padx=15,pady=10)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
@@ -231,24 +237,25 @@ citas_agendadas_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
 citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anchor=N)
 citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
 citas_agendadas_label.pack(fill=X)
-#aca se ingresa el codigo
 
 
-#una vez encontrada la cita se muestra en este Frame
 
+#ingresa el codigo
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
 gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
-#Icono
+
+#Boton buscar
 buscar_cita_ic = Image.open('./imagenes/buscacita.png')
 buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
 buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
 buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic)
 buscar_btn.pack(  pady=10)
 
+#muestra la informacion encontrada de la cita
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.pack(padx=10)
@@ -265,22 +272,19 @@ cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
 cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic)
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
+#boton reagendar
 reagendar_hora_ic = Image.open('./imagenes/reagendar.png')
 reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic)
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
-#ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
+#ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
 
-
-# disponibilidad_citas_frame, 
-
-#Además se necesitará propiciar una modalidad
 
 modalidad=StringVar()
 
-escojer_fecha_frame=LabelFrame(agendar_cita_frame, text="Fecha y Modalidad de la Cita")
+escojer_fecha_frame=LabelFrame(ventana_principal, text="Fecha y Modalidad de la Cita")
 escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5)
 escojer_modalidad.pack(anchor=W)
 online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online")
