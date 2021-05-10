@@ -73,8 +73,8 @@ def agregarDatosPaciente():
         messagebox.showwarning(message="El mail ingresado no es válido.", title="Error")
         return
     
-    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
-    email_entry.get(), numero_telefonico_entry.get())
+    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+    email_entry.get(),tel_contacto_entry.get()) 
     clinica_objeto.agregarPaciente(paciente_temporal)
 
 def cancelarDatosPaciente():
