@@ -154,8 +154,8 @@ class Clinica():
 class Cita ():
     
     def __init__(self, fecha_citada, medico, paciente, modalidad):
-        #
-        self.fecha_citada=dt.datetime(1,1,1)
+        
+        self.fecha_citada=fecha_citada
 
         self.fecha_actual=dt.datetime.now()
     #
@@ -172,7 +172,7 @@ class Cita ():
     #esto no creo que sea necesaria
         self.prioridad=""
     #fecha citada menos fecha actual
-        self.tiempo_restante="s"
+        self.tiempo_restante=fecha_actual
         self.confirmada=False
 
     def setFechaCitada(self,fecha_citada): 
@@ -246,10 +246,13 @@ class Cita ():
         fecha_restante=self.fecha_citada-fecha_actual
 
          self.tiempo_restante = fecha_restante
+    def __str__(self):
+        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual" "+self.medico+" "self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)
 
 class Persona():
 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
+       
         self.nombre1=_nombre1
         self.nombre2=_nombre2
         self.apellido1=_apellido1
@@ -371,19 +374,14 @@ class Persona():
  
     def getNombreCompleto(self):
         return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
-  
 
-
-            
-        
-        
-    
     def __str__(self):
         return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+self.rut+" "+str(self.edad)+" "+self.email
 
 class Medico(Persona):
 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico,_especialidad):
+
         super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
         self.pacientes=[]
         self.disponibilidad=[]
@@ -566,4 +564,6 @@ class Receta():
     def isValida(self):
         """if dt.datetime.now()-self.fecha>self.duracion:
             return True"""
-        return "not implemented yet"
+        return "not implemented yet" 
+    def __str__(self):
+        return str(self.paciente+" "+ self.medico+" "+ self.farmaco_y_dosis+" "+self.fecha+" "+self.duracion+" "+self.observaciones+" "+self.dosis)
