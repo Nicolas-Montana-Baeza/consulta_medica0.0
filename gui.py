@@ -25,7 +25,7 @@ def autocompletarPaciente():
     
         return
     paciente=paciente[0]
-    datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    datos_paciente=[paciente.getRut(), paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
 
     prevision_btn.set(paciente.getPrevision())
     
@@ -69,7 +69,11 @@ def agregarDatosPaciente():
     return
 
 def cancelarDatosPaciente():
-    return
+    
+    for i in range(len(lista_entry_datos_paciente)):
+        lista_entry_datos_paciente[i].delete(0,END)
+        prevision_btn.set("Sin Prevision")
+    
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -235,7 +239,7 @@ confirmar_paciente_btn.pack(side=LEFT,padx=30)
 cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
 cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
-cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=cancelarDatosPaciente())
+cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=lambda:cancelarDatosPaciente())
 cancelar_paciente_btn.pack(side=RIGHT,padx=30)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
