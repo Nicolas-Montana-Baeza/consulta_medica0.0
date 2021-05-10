@@ -105,6 +105,9 @@ class Clinica():
 
     
     def agregarPaciente(self, _paciente):
+        for paciente in self.pacientes:
+            if _paciente.getRut()==paciente.getRut():
+                return
         self.pacientes.append(_paciente) 
         
     def agregarMedico(self, _medico):

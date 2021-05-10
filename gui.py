@@ -174,13 +174,14 @@ isapre_btn.pack(side=LEFT)
 fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.pack(side=LEFT)
 
-    #primer nombre
+   
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
-nombre1_entry=Entry(ingresar_paciente, width=10)
-nombre1_entry.grid(row=3,column=1)
-lista_entry_datos_paciente.append(nombre1_entry)
-
+rut_entry=Entry(ingresar_paciente, width=10)
+rut_entry.grid(row=3,column=1)
+lista_entry_datos_paciente.append(rut_entry)
+    
+    #primer nombre
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
