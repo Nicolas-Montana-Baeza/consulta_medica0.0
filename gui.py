@@ -304,7 +304,12 @@ seleccion_hora=Spinbox(escojer_fecha_frame,values=("8","9","10","11","12","13","
 seleccion_minutos=Spinbox(escojer_fecha_frame,values=("00","30"))
 seleccion_hora.pack(pady=20)
 seleccion_minutos.pack(padx=40)
-boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener()).pack()
+
+reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
+boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
+boton_hora.pack()
 escojer_fecha_frame.pack()
 
 actualizarListbox(clinica_objeto.getMedicos())
