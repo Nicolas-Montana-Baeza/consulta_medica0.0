@@ -25,7 +25,7 @@ def autocompletarPaciente():
     
         return
     paciente=paciente[0]
-    datos_paciente=[paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    datos_paciente=[paciente.getRut(), paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
 
     prevision_btn.set(paciente.getPrevision())
     
@@ -66,10 +66,23 @@ def buscar(evento):
     actualizarListbox(datos)
 
 def agregarDatosPaciente():
-    return
+    if clinica.Persona.isRut(rut_entry.get()) :
+        messagebox.showwarning(message="No se ha podido encontrar el rut ingresado...", title="Error")
+        return
+    if clinica.Persona.isMail(email_entry.get()):
+        messagebox.showwarning(message="El mail ingresado no es válido.", title="Error")
+        return
+    
+    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
+    email_entry.get(), numero_telefonico_entry.get())
+    clinica_objeto.agregarPaciente(paciente_temporal)
 
 def cancelarDatosPaciente():
-    return
+    
+    for i in range(len(lista_entry_datos_paciente)):
+        lista_entry_datos_paciente[i].delete(0,END)
+        prevision_btn.set("Sin Prevision")
+    
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -236,7 +249,7 @@ confirmar_paciente_btn.pack(side=LEFT,padx=30)
 cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
 cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
-cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=cancelarDatosPaciente())
+cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=lambda:cancelarDatosPaciente())
 cancelar_paciente_btn.pack(side=RIGHT,padx=30)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
@@ -312,7 +325,12 @@ seleccion_hora=Spinbox(escojer_fecha_frame,values=("8","9","10","11","12","13","
 seleccion_minutos=Spinbox(escojer_fecha_frame,values=("00","30"))
 seleccion_hora.pack(pady=20)
 seleccion_minutos.pack(padx=40)
-boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener()).pack()
+
+reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
+boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
+boton_hora.pack()
 escojer_fecha_frame.pack()
 
 actualizarListbox(clinica_objeto.getMedicos())
