@@ -12,8 +12,7 @@ class Clinica():
         self.horario=_horario
         self.medicos=_medicos
         self.pacientes=_pacientes
-        self.citas=[]
-    
+   
     def setNombre(self,nombre):
         self.nombre=nombre 
 
@@ -31,9 +30,6 @@ class Clinica():
 
     def setPacientes(self,pacientes):
         self.pacientes=pacientes
-
-    def setCitas(self, citas):
-        self.citas=citas
 
     def getNombre(self):
         return self.nombre
@@ -54,7 +50,7 @@ class Clinica():
         return self.pacientes
     
     def getCitas(self):
-        return self.citas
+        return self.medicos.getCitas()
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
@@ -119,7 +115,6 @@ class Clinica():
 
         return coincidencias    
 
-    
     def agregarMedico(self, _medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
@@ -145,11 +140,12 @@ class Clinica():
                 medico.setEdad(_medico.getEdad())
                 medico.setEmail(_medico.getEmail())
                 medico.setNumeroTelefonico(_medico.getNumeroTelefonico())
+                medico.setEspecialidad(_medico.getEspecialidad())
                 return True
         return False
 
     def __str__(self):
-        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.medicos)+" "+str(self.pacientes)
+        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.medicos)+" "+str(self.pacientes)
 
 class Cita ():
     
@@ -323,6 +319,8 @@ class Persona():
             return False
 
     def isRut(_rut):
+        if len(_rut)==0:
+            return False
         rut=_rut.replace("-","")
         verificador=rut[-1]
         verificando=rut[:-1]
@@ -427,7 +425,7 @@ class Medico(Persona):
         _paciente.setDiagnosticos(_diagnostico)
 
     def __str__(self) :
-        return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+" "+str(self.especialidad)
+        return str(self.nombre1)+" "+str(self.nombre2)+" "+str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.especialidad)
 
 class Paciente(Persona): 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
