@@ -116,17 +116,24 @@ class Clinica():
 class Cita ():
     
     def __inti__(self):
+        #
         self.fecha_citada=dt.datetime(1,1,1)
+
         self.fecha_actual=dt.datetime.now()
+    #
         self.medico= Medico()
+    #
         self.paciente=Paciente()
         self.direccion=""
         self.codigo=str(shortuuid.uuid())
+    #esta depende del medico
         self.prestacion=""
-        self.estado=""
         self.pagado=False
+    #
         self.modalidad=""
+    #esto no creo que sea necesaria
         self.prioridad=""
+    #fecha citada menos fecha actual
         self.tiempo_restante="s"
         self.confirmada=False
 
@@ -460,12 +467,19 @@ class Paciente(Persona):
 class Receta():
 
     def __init__(self):
+        #
         self.paciente= Paciente()
+        #
         self.medico= Medico()
+        #
         self.farmaco_y_dosis=[]
+        #
         self.fecha=""
+        #
         self.duracion=""
+        #
         self.observaciones=[]
+        #
         self.dosis=""
     
     def setPaciente(self,paciente):
