@@ -203,33 +203,35 @@ apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
+    
     #numero contacto
-
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade, font=subtitulo4_font)
 tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
-    #email
 
+    #email
 email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade, font=subtitulo4_font)
 email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+
 #Frame de botones
 
+botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT)
 confirmar_paciente_ic = Image.open('./imagenes/confirmar_paciente.png')
 confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
 confirmar_paciente_btn=Button(ingresar_paciente,text="Confirmar", image = confirmar_paciente_ic)
-confirmar_paciente_btn.pack(side=LEFT,padx=15,pady=10)
+confirmar_paciente_btn.grid(column=0,row=10,sticky=W)
 
 cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
 cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
 cancelar_paciente_btn=Button(ingresar_paciente,text="Cancelar", image = cancelar_paciente_ic)
-cancelar_paciente_btn.pack(side=RIGHT,padx=15,pady=10)
+cancelar_paciente_btn.grid(column=2, row=10,sticky=E)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
