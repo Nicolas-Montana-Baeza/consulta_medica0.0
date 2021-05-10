@@ -34,6 +34,17 @@ def autocompletarPaciente():
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
        
 def agregarCita():
+    fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
+    medico= lista_medicos_listbox.get(ACTIVE).split()
+    medico.pop()
+    aux=""
+    for palabra in medico:
+        aux+=palabra
+    medico=clinica_objeto.buscarMedico(aux)
+    paciente=clinica_objeto.buscarPaciente(rut_entry.get())
+    cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+    paciente.agregarCita(cita_auxiliar)
+    medico.agregarCita(cita_auxiliar)
     return
     
 def buscarMedico():
