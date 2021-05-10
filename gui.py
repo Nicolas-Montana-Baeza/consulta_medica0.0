@@ -67,7 +67,7 @@ def buscar(evento):
 
 def agregarDatosPaciente():
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
-    email_entry.get(), tel_contacto_entry.get())
+    email_entry.get(), numero_telefonico_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
     return
 
