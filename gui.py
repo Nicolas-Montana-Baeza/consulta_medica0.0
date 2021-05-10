@@ -81,6 +81,11 @@ fondo.place(x=0,y=0,relheight=1,relwidth=1)
 """
 #FUENTES
 titulo_font = font.Font(family="Arial",weight="bold",size=35)
+subtitulo_font = font.Font(family="Arial Nova", weight="bold",size= 20)
+subtitulo2_font = font.Font(family="Arial Narrow", weight="bold",size=15)
+subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
+subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
+subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
 
 
 #en este frame irán todas las entradas necesarias para una cita
@@ -107,10 +112,9 @@ med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
 odont_btn.pack(anchor=W)"""
 
-#BUSCAR Y/O SELECCIONAR MEDICO
-buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
+buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade, font=subtitulo_font, labelanchor=N)
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
-buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade)
+buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade, font=subtitulo2_font)
 buscar_doctor_label.grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30, highlightthickness=0,relief=FLAT)
 buscar_doctor_entry.grid(row=1,column=0, sticky=W)
@@ -122,7 +126,7 @@ framelistbox.grid(row=2,column=0)
 lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
 lista_medicos_listbox.pack(side=LEFT)
 medico_seleccionado_entry=Entry(buscar_medico_frame,width=45, state=DISABLED, highlightthickness=0,relief=FLAT)
-buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido:", bg=Charade)
+buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido:", bg=Charade, font=subtitulo3_font)
 buscar_doctor_label.grid(row=3,column=0,sticky=W)
 medico_seleccionado_entry.grid(row=4,column=0,sticky=W)
 scrollbar = Scrollbar(framelistbox)
@@ -133,7 +137,7 @@ scrollbar.config(command=lista_medicos_listbox.yview)
 
 #Ingreso de datos del paciente
 
-ingresar_paciente=LabelFrame(agendar_cita_frame,text="Datos del Paciente", bg=Charade )
+ingresar_paciente=LabelFrame(agendar_cita_frame,text="Datos del Paciente", bg=Charade, font=subtitulo_font, labelanchor=N)
 ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
     #rut se podria agregar que al ingresar el rut si el paciente ya existe los datos se autocompleten
@@ -146,61 +150,61 @@ rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
-rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, )
+rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, font=subtitulo4_font)
 rut_autocompletar_label.grid(row=0,column=0)
 
 
     #prevision
 
-prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Charade)
+prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Charade, font=subtitulo4_font)
 prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
-sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=Charade)
+sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="SIN PREVISION", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
 sin_prevision_btn.grid(row=2,column=0)
-isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE")
+isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
 isapre_btn.grid(row=2,column=1)
-fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade)
+fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.grid(row=2,column=2)
 
     #primer nombre
 
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=Charade)
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
     #segundo nombre
 
-nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=Charade)
+nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=Charade, font=subtitulo4_font)
 nombre2_label.grid(row=4,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
     #Primer Apellido
 
-apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=Charade)
+apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=Charade, font=subtitulo4_font)
 apellido1_label.grid(row=5,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
     #Segundo Apellido
 
-apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=Charade)
+apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=Charade, font=subtitulo4_font)
 apellido2_label.grid(row=6,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
     #numero contacto
 
-tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade)
+tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade, font=subtitulo4_font)
 tel_contacto_label.grid(row=7,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
     #email
 
-email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade)
+email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade, font=subtitulo4_font)
 email_label.grid(row=8,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=8,column=1)
@@ -215,11 +219,24 @@ citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Cita
 citas_agendadas_label.pack(fill=X)
 #aca se ingresa el codigo
 
+#Frame de botones
+botones_paciente_frame=LabelFrame(agendar_cita_frame, bg=Charade)
+agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_btn=Button(botones_paciente_frame,text="Confirmar", image = agendar_hora_ic)
+agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
+
+cancelar_hora_ic = Image.open('./imagenes/cancelar(1).png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_hora_ic)
+cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 #una vez encontrada la cita se muestra en este Frame
 
-gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade)
+gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
 gestionar_cita_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
-ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade)
+ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
