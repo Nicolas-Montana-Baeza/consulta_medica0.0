@@ -119,7 +119,6 @@ class Clinica():
 
         return coincidencias    
 
-    
     def agregarMedico(self, _medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
@@ -150,7 +149,7 @@ class Clinica():
         return False
 
     def __str__(self):
-        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.medicos)+" "+str(self.pacientes)
+        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.medicos)+" "+str(self.pacientes)
 
 class Cita ():
     
@@ -321,6 +320,8 @@ class Persona():
             return False
 
     def isRut(_rut):
+        if len(_rut)==0:
+            return False
         rut=_rut.replace("-","")
         verificador=rut[-1]
         verificando=rut[:-1]
