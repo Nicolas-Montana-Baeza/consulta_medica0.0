@@ -56,7 +56,10 @@ def crearEspecialidades(lista):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
 
-def crearDisponibilidad():
+def agregarDisponibilidad(medico,disponibilidad):
+    
+    medico.setDisponibilidad
+
 
     return
 #hay que agregar datos a la clinica
