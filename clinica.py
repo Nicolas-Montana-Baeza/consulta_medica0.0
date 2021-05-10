@@ -73,32 +73,6 @@ class Clinica():
 
         return coincidencias
            
-    def buscarMedico(self,buscar):
-        coincidencias=[]
-        buscar=buscar.lower()
-        for medico in self.medicos:
-
-            if medico.getNombreCompleto().lower().find(buscar)!=-1:
-                coincidencias.append(medico)
-
-            elif Medico.isRut(buscar):
-
-                if medico.getRut().find(buscar)!=-1:
-                    coincidencias.append(medico)
-
-            elif medico.getEspecialidad().lower().find(buscar)!=-1:
-                coincidencias.append(medico)
-
-        return coincidencias    
-    
-    def buscarCita(self,buscar):
-
-        for cita in self.citas:
-
-            if cita.getCodigo()==buscar:
-                return cita
-
-    
     def agregarPaciente(self, _paciente):
         for paciente in self.pacientes:
             if paciente.getRut==_paciente.getRut():
@@ -116,16 +90,66 @@ class Clinica():
     def modificarPaciente(self,_paciente):
         for paciente in self.pacientes:
             if paciente.getRut==_paciente.getRut():
-                paciente
+                paciente.setPrimerNombre(_paciente.getPrimerNombre())
+                paciente.setSegundoNombre(_paciente.getSegundoNombre())
+                paciente.setPrimerApellido(_paciente.getPrimerApellido())
+                paciente.setSegundoApellido(_paciente.getSegundoApellido())
+                paciente.setRut(_paciente.getRut())
+                paciente.setEdad(_paciente.getEdad())
+                paciente.setEmail(_paciente.getEmail())
+                paciente.setNumeroTelefonico(_paciente.getNumeroTelefonico())
                 return True
         return False
 
+    def buscarMedico(self,buscar):
+        coincidencias=[]
+        buscar=buscar.lower()
+        for medico in self.medicos:
 
+            if medico.getNombreCompleto().lower().find(buscar)!=-1:
+                coincidencias.append(medico)
+
+            elif Medico.isRut(buscar):
+
+                if medico.getRut().find(buscar)!=-1:
+                    coincidencias.append(medico)
+
+            elif medico.getEspecialidad().lower().find(buscar)!=-1:
+                coincidencias.append(medico)
+
+        return coincidencias    
+
+    
     def agregarMedico(self, _medico):
+        for medico in self.medicos:
+            if medico.getRut==_medico.getRut():
+                return False
         self.medicos.append(_medico)
+        return True
+
+    def eliminarMedico(self,_rut):
+        for medico in self.medicos:
+            if medico.getRut==_rut:
+                self.medicos.remove(medico)
+                return True
+        return False
+    
+    def modificarMedico(self,_medico):
+        for medico in self.medicos:
+            if medico.getRut==_medico.getRut():
+                medico.setPrimerNombre(_medico.getPrimerNombre())
+                medico.setSegundoNombre(_medico.getSegundoNombre())
+                medico.setPrimerApellido(_medico.getPrimerApellido())
+                medico.setSegundoApellido(_medico.getSegundoApellido())
+                medico.setRut(_medico.getRut())
+                medico.setEdad(_medico.getEdad())
+                medico.setEmail(_medico.getEmail())
+                medico.setNumeroTelefonico(_medico.getNumeroTelefonico())
+                return True
+        return False
 
     def __str__(self):
-        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
+        return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.medicos)+" "+str(self.pacientes)
 
 class Cita ():
     
@@ -327,8 +351,16 @@ class Persona():
             return True
         else:
             return False
+    
+    def buscarCita(self,buscar):
+
+        for cita in self.citas:
+
+            if cita.getCodigo()==buscar:
+                return cita
 
     def agendarCita(self,_cita):
+        
         self.citas.append(_cita)
 
     def reagendarCita(self, _fecha, _codigo_cita):
