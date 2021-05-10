@@ -302,24 +302,6 @@ reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 modalidad=StringVar()
 
-<<<<<<< HEAD
-escoger_fecha_frame=LabelFrame(ventana_principal, text="Fecha y Modalidad de la Cita")
-escoger_modalidad=LabelFrame(escoger_fecha_frame,text="Modalidad",padx=5, pady=5)
-escoger_modalidad.pack(anchor=W)
-online_btn=Radiobutton(escoger_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online")
-online_btn.grid(row=0,column=0)
-presencial_btn=Radiobutton(escoger_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial")
-presencial_btn.grid(row=0,column=1)
-
-disponibilidad_citas_frame=LabelFrame(escoger_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
-disponibilidad_citas_frame=LabelFrame(escoger_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
-seleccion_Dia=Spinbox(escoger_fecha_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
-seleccion_Dia.pack(pady=20)
-seleccion_Mes=Spinbox(escoger_fecha_frame,values=("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"))
-seleccion_Mes.pack(pady=20)
-seleccion_Año=Spinbox(escoger_fecha_frame,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
-seleccion_Año.pack(pady=20)
-=======
 escojer_fecha_frame=LabelFrame(ventana_principal, text="Fecha y Modalidad de la Cita",bg=Charade,font=subtitulo_font)
 escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
 escojer_modalidad.pack(anchor=W)
@@ -329,16 +311,7 @@ presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presenc
 presencial_btn.grid(row=0,column=1)
 
 disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
-<<<<<<< HEAD
-seleccion_Dia=Spinbox(escojer_fecha_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
-seleccion_Dia.pack(pady=20)
-seleccion_Mes=Spinbox(escojer_fecha_frame,values=("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"))
-seleccion_Mes.pack(pady=20)
-seleccion_Año=Spinbox(escojer_fecha_frame,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
-seleccion_Año.pack(pady=20)
-disponibilidad_citas_frame.pack()
-=======
->>>>>>> b72e32aecbec895a8daf49d3a407881462f19a94
+
 disponibilidad_citas_frame.pack()
 seleccion_Dia=Spinbox(disponibilidad_citas_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
 seleccion_Dia.grid(pady=20)
@@ -348,36 +321,24 @@ seleccion_Mes=Spinbox(disponibilidad_citas_frame,values=("Enero","Febrero","Marz
 seleccion_Mes.grid(row=0,column=0)
 seleccion_Año=Spinbox(disponibilidad_citas_frame,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
 seleccion_Año.grid(row=0,column=0)
->>>>>>> fa5ec4727070986dcb96f074de8b319acc20b45d
 
 
 def obtener():
     print(seleccion_hora.get())
 hora = StringVar()
-<<<<<<< HEAD
-seleccion_hora=Spinbox(escoger_fecha_frame,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
-seleccion_minutos=Spinbox(escoger_fecha_frame,values=("00","30"))
-seleccion_hora.pack(pady=20)
-seleccion_minutos.pack(padx=40)
-=======
+
 seleccion_hora=Spinbox(disponibilidad_citas_frame,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
 seleccion_minutos=Spinbox(disponibilidad_citas_frame,values=("00","30"))
 seleccion_hora.grid(row=0,column=0)
 seleccion_minutos.grid(row=0,column=0)
->>>>>>> b72e32aecbec895a8daf49d3a407881462f19a94
 
 reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
-<<<<<<< HEAD
-boton_hora=Button(escoger_fecha_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
-boton_hora.pack()
-escoger_fecha_frame.pack()
-=======
+
 boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
 boton_hora.grid(row=0,column=0)
 escojer_fecha_frame.pack()
->>>>>>> b72e32aecbec895a8daf49d3a407881462f19a94
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
