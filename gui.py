@@ -160,7 +160,7 @@ prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
 sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="SIN PREVISION", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
-sin_prevision_btn.grid(row=2,column=0)
+sin_prevision_btn.grid(row=2,column=0,sticky=E)
 isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
 isapre_btn.grid(row=2,column=1)
 fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
@@ -219,7 +219,7 @@ citas_agendadas_label.pack(fill=X)
 #aca se ingresa el codigo
 
 #Frame de botones
-botones_paciente_frame=LabelFrame(agendar_cita_frame, bg=Charade)
+botones_paciente_frame=LabelFrame(ingresar_paciente, bg=Charade).grid()
 agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
 agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
@@ -234,7 +234,7 @@ cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 #una vez encontrada la cita se muestra en este Frame
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
-gestionar_cita_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
+gestionar_cita_frame.pack(fill=X, expand=True, padx=30, pady=10)
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)

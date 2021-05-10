@@ -26,13 +26,12 @@ def crearEdad(lista):
 
 def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     personas=[]
-    print(str(len(_nombres))+ str(len(_ruts))+str(len(_emails))+str(len(_edades)))
     if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
         
         for i in range (len(_nombres)):
             rut=_ruts[i]
             email=_emails[i]
-            print(clinica.Persona.isRut(rut))
+            
             if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
                 nombre2=""
                 if not(_nombres[i][1::-2]=="."):
