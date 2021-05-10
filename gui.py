@@ -119,8 +119,7 @@ buscar_doctor_label.grid(row=0,column=0,sticky=W)
 buscar_doctor_entry=Entry(buscar_medico_frame, width=30, highlightthickness=0,relief=FLAT)
 buscar_doctor_entry.grid(row=1,column=0, sticky=W)
 
-buscar_medico_btn=Button(buscar_medico_frame,text="Buscar", command=lambda:buscarMedico())
-buscar_medico_btn.grid(row=1,column=0,sticky=E)
+
 framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT)
 framelistbox.grid(row=2,column=0)
 lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
@@ -171,48 +170,48 @@ fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fona
 fonasa_btn.pack(side=LEFT)
 
     #primer nombre
-rut_label=Label(ingresar_paciente, text="Rut (sin puntos)",bg=Charade, font=subtitulo4_font)
+rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
 
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
+nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
     #segundo nombre
 
-nombre2_label=Label(ingresar_paciente, text="Segundo Nombre: ", bg=Charade, font=subtitulo4_font)
+nombre2_label=Label(ingresar_paciente, text="Segundo Nombre:", bg=Charade, font=subtitulo4_font)
 nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
     #Primer Apellido
 
-apellido1_label=Label(ingresar_paciente, text="Primer Apellido: ", bg=Charade, font=subtitulo4_font)
+apellido1_label=Label(ingresar_paciente, text="Primer Apellido:", bg=Charade, font=subtitulo4_font)
 apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
     #Segundo Apellido
 
-apellido2_label=Label(ingresar_paciente, text="Segundo Apellido: ", bg=Charade, font=subtitulo4_font)
+apellido2_label=Label(ingresar_paciente, text="Segundo Apellido:", bg=Charade, font=subtitulo4_font)
 apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
     
     #numero contacto
-tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular: ", bg=Charade, font=subtitulo4_font)
+tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular:", bg=Charade, font=subtitulo4_font)
 tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
 
     #email
-email_label=Label(ingresar_paciente, text="Correo Electronico: ", bg=Charade, font=subtitulo4_font)
+email_label=Label(ingresar_paciente, text="Correo Electronico:", bg=Charade, font=subtitulo4_font)
 email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
@@ -232,7 +231,7 @@ cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
 cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
 cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic)
-cancelar_paciente_btn.pack(side=LEFT,padx=30)
+cancelar_paciente_btn.pack(side=RIGHT,padx=30)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
