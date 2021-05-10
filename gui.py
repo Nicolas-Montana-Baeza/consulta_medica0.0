@@ -209,16 +209,6 @@ email_label.grid(row=8,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(email_entry)
-
-
-#en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
-
-citas_agendadas_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
-citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anchor=N)
-citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
-citas_agendadas_label.pack(fill=X)
-#aca se ingresa el codigo
-
 #Frame de botones
 botones_paciente_frame=LabelFrame(ingresar_paciente, bg=Charade).grid()
 agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
@@ -232,6 +222,16 @@ cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
 cancelar_hora_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_hora_ic)
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
+
+#en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
+
+citas_agendadas_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
+citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anchor=N)
+citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
+citas_agendadas_label.pack(fill=X)
+#aca se ingresa el codigo
+
+
 #una vez encontrada la cita se muestra en este Frame
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
