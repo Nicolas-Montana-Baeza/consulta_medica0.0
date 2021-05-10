@@ -1,4 +1,4 @@
-from tkinter import X,SW,S,SE,ttk,font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT
+from tkinter import X,SW,S,SE,ttk,font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from tkinter.constants import BOTTOM, TOP
 from tkcalendar import Calendar
 from PIL import Image,ImageTk
@@ -6,6 +6,7 @@ import ttkbootstrap
 from datosDeRelleno import *
 from PIL import Image,ImageTk
 from estilo import*
+
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 cita_aux=clinica.Cita()
@@ -111,12 +112,7 @@ med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
 odont_btn.pack(anchor=W)"""
 
-<<<<<<< HEAD
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade, font=subtitulo_font, labelanchor=N)
-=======
-#BUSCAR Y/O SELECCIONAR MEDICO
-buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade)
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
 buscar_doctor_label=Label(buscar_medico_frame, text="Ingrese su Busqueda:", bg=Charade, font=subtitulo2_font)
 buscar_doctor_label.grid(row=0,column=0,sticky=W)
@@ -154,11 +150,7 @@ rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=0,column=1,sticky=W)
 buscar_rut_btn=Button(ingresar_paciente, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic)
 buscar_rut_btn.grid(row=0,column=2)
-<<<<<<< HEAD
 rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, font=subtitulo4_font)
-=======
-rut_autocompletar_label=Label(ingresar_paciente, text="Rut(sin puntos): ", bg=Charade, )
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 rut_autocompletar_label.grid(row=0,column=0)
 
 
@@ -168,20 +160,18 @@ prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Char
 prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
 prevision_btn.set("Sin Prevision")
-sin_prevision_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="SIN PREVISION", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
-sin_prevision_btn.grid(row=2,column=0)
-isapre_btn=Radiobutton(ingresar_paciente,highlightthickness=0,bg=Charade, text="ISAPRE", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
-isapre_btn.grid(row=2,column=1)
-fonasa_btn=Radiobutton(ingresar_paciente,highlightthickness=0, text="FONASA", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
-fonasa_btn.grid(row=2,column=2)
+opciones_prevision_frame=LabelFrame(ingresar_paciente, bg=Charade, relief=FLAT, bd=0)
+opciones_prevision_frame.grid(columnspan=3)
+sin_prevision_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Sin Prevision", variable=prevision_btn,value="Sin Prevision", bg=Charade, font=subtitulo5_font)
+sin_prevision_btn.pack(side=LEFT)
+isapre_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0,bg=Charade, text="Isapre", variable=prevision_btn,value="ISAPRE",  font=subtitulo5_font)
+isapre_btn.pack(side=LEFT)
+fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
+fonasa_btn.pack(side=LEFT)
 
     #primer nombre
 
-<<<<<<< HEAD
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ",bg=Charade, font=subtitulo4_font)
-=======
-nombre1_label=Label(ingresar_paciente, text="Primer Nombre: ", bg=Charade)
->>>>>>> 40e90d99a9abedfb6920efcaad1d0adeeda04f03
 nombre1_label.grid(row=3,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=3,column=1)
@@ -221,20 +211,33 @@ email_label.grid(row=8,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(email_entry)
+#Frame de botones
+botones_paciente_frame=LabelFrame(ingresar_paciente, bg=Charade).grid()
+agendar_hora_ic = Image.open('./imagenes/confirmar(1).png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_btn=Button(botones_paciente_frame,text="Confirmar", image = agendar_hora_ic)
+agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
 
+cancelar_hora_ic = Image.open('./imagenes/cancelar(1).png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_hora_ic)
+cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
 citas_agendadas_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
-citas_agendadas_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
+citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anchor=N)
 citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
 citas_agendadas_label.pack(fill=X)
 #aca se ingresa el codigo
 
+
 #una vez encontrada la cita se muestra en este Frame
 
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
-gestionar_cita_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
+gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
@@ -245,6 +248,7 @@ buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
 buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
 buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic)
 buscar_btn.pack(  pady=10)
+
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 info_cita_txtbox.pack(padx=10)
@@ -268,7 +272,8 @@ reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagend
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 #ACA VA LA ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
-# seleccion_hora = Spinbox(
+
+
 # disponibilidad_citas_frame, 
 
 #Además se necesitará propiciar una modalidad
@@ -288,7 +293,15 @@ calendario = Calendar(disponibilidad_citas_frame)
 calendario.pack(pady=30)
 disponibilidad_citas_frame.pack(anchor=W)
 
-
+def obtener():
+    print(seleccion_hora.get())
+hora = StringVar()
+seleccion_hora=Spinbox(escojer_fecha_frame,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
+seleccion_minutos=Spinbox(escojer_fecha_frame,values=("00","30"))
+seleccion_hora.pack(pady=20)
+seleccion_minutos.pack(padx=40)
+boton_hora=Button(escojer_fecha_frame,text="Reservar Hora",command=lambda:obtener()).pack()
+escojer_fecha_frame.pack()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
