@@ -47,8 +47,13 @@ def actualizarListbox(datos):
     
     return
 
-def seleccionarMedico(evento):   
-    medico_seleccionado_label['text']=lista_medicos_listbox.get(ACTIVE)
+def seleccionarMedico(evento):
+    medico_seleccionado_entry.config(state=NORMAL) 
+    medico_seleccionado_entry.delete(0,END)
+    medico_seleccionado_entry.insert(0,lista_medicos_listbox.get(ACTIVE))
+    medico_seleccionado_entry.config(state=DISABLED)  
+
+    return
 
 def buscar(evento):
     escrito=buscar_doctor_entry.get()
@@ -61,17 +66,10 @@ def buscar(evento):
     actualizarListbox(datos)
 
 def agregarDatosPaciente():
-    if clinica.Persona.isRut(rut_entry.get()) :
-        
-        messagebox.showwarning(message="No se ha podido encontrar el rut ingresado...", title="Error")
-        return
-    if clinica.Persona.isMail(email_entry.get()):
-        messagebox.showwarning(message="El mail ingresado no es válido.", title="Error")
-        return
-    
-    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
-    email_entry.get(),tel_contacto_entry.get()) 
+    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
+    email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
+    return
 
 def cancelarDatosPaciente():
     
@@ -138,11 +136,10 @@ framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT)
 framelistbox.grid(row=2,column=0)
 lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
 lista_medicos_listbox.pack(side=LEFT)
-medico_seleccionado_label=Label(buscar_medico_frame, bg=Charade,bd=0, highlightthickness=0, font=subtitulo5_font,text="")
-medico_seleccionado_label.grid(row=5,column=0, sticky=W)
+medico_seleccionado_entry=Entry(buscar_medico_frame,width=45, state=DISABLED, highlightthickness=0,relief=FLAT)
 buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido:", bg=Charade, font=subtitulo3_font)
 buscar_doctor_label.grid(row=3,column=0,sticky=W)
-medico_seleccionado_label.grid(row=4,column=0,sticky=W)
+medico_seleccionado_entry.grid(row=4,column=0,sticky=W)
 scrollbar = Scrollbar(framelistbox)
 scrollbar.pack(side=RIGHT,fill=Y)
 lista_medicos_listbox.config(yscrollcommand=scrollbar.set)
@@ -184,14 +181,13 @@ isapre_btn.pack(side=LEFT)
 fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.pack(side=LEFT)
 
-   
+    #primer nombre
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
-rut_entry=Entry(ingresar_paciente, width=10)
-rut_entry.grid(row=3,column=1)
-lista_entry_datos_paciente.append(rut_entry)
-    
-    #primer nombre
+nombre1_entry=Entry(ingresar_paciente, width=10)
+nombre1_entry.grid(row=3,column=1)
+lista_entry_datos_paciente.append(nombre1_entry)
+
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
@@ -311,9 +307,14 @@ presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presenc
 presencial_btn.grid(row=0,column=1)
 
 disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
-calendario = Calendar(disponibilidad_citas_frame)
-calendario.pack(pady=30)
-disponibilidad_citas_frame.pack(anchor=W)
+disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccione la fecha para agendar su cita: ")
+seleccion_Dia=Spinbox(escojer_fecha_frame,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
+seleccion_Dia.pack(pady=20)
+seleccion_Mes=Spinbox(escojer_fecha_frame,values=("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"))
+seleccion_Mes.pack(pady=20)
+seleccion_Año=Spinbox(escojer_fecha_frame,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
+seleccion_Año.pack(pady=20)
+disponibilidad_citas_frame.pack()
 
 def obtener():
     print(seleccion_hora.get())
