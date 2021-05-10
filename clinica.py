@@ -95,42 +95,30 @@ class Clinica():
                 coincidencias.append(medico)
 
         return coincidencias    
-    
-    def buscarCita(self,buscar):
-
-        for cita in self.citas:
-
-            if cita.getCodigo()==buscar:
-                return cita
-
-    
-    def agregarPaciente(self, _paciente):
-        for paciente in self.pacientes:
-            if _paciente.getRut()==paciente.getRut():
+      
+    def agregarPersona(self, _persona):
+        for persona in self.pacientes, self.medicos:
+            if _persona.getRut()==persona.getRut():
                 return
-        self.pacientes.append(_paciente) 
-        
-    def agregarMedico(self, _medico):
-        self.medicos.append(_medico)
-
+        self.pacientes.append(_persona)
+    
     def __str__(self):
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.especialidades)+" "+str(self.horario)+" "+str(self.citas)+" "+str(self.doctores)+" "+str(self.pacientes)
 
 class Cita ():
     
-    def __inti__(self):
+    def __init__(self):
         self.fecha_citada=dt.datetime(1,1,1)
         self.fecha_actual=dt.datetime.now()
         self.medico= Medico()
         self.paciente=Paciente()
         self.direccion=""
         self.codigo=str(shortuuid.uuid())
-        self.prestacion=""
-        self.estado=""
+        self.servicio_prestado=self.medico.getEspecialidad()
         self.pagado=False
         self.modalidad=""
         self.prioridad=""
-        self.tiempo_restante="s"
+        self.tiempo_restante=self.fecha_citada-dt.datetime.now()
         self.confirmada=False
 
     def setFecha(self,fecha):
@@ -201,16 +189,7 @@ class Cita ():
 
     def actualizarEstado(self):
         fecha_actual=dt.datetime.now()
-        fecha_restante=self.fecha_citada-fecha_actual
-
-        if fecha_restante==0:
-            self.setEstadoTemporal("Cita en curso...")
-
-        elif fecha_restante>0:
-            self.setEstadoTemporal("Quedan "+str(fecha_restante)+" dias para su cita...")
-
-        elif fecha_restante<0:
-            self.setEstadoTemporal("su cita fue hace "+str(-1*fecha_restante)+" días")
+        self.tiempo_restante=self.fecha_citada-fecha_actual
 
 class Persona():
 
@@ -223,13 +202,14 @@ class Persona():
         self.rut=_rut
         self.email=_email
         self.numero_telefonico=_numero_telefonico
-         
+        self.citas= []
+
     def setPrimerNombre(self,nombre1):
         self.nombre1=nombre1
-        
+
     def setSegundoNombre(self,nombre2):
         self.nombre2=nombre2
-        
+
     def setPrimerApellido(self,apellido1):
         self.apellido1=apellido1
 
@@ -247,6 +227,9 @@ class Persona():
 
     def setEmail(self,email):
         self.email=email
+    
+    def setCitas(self,citas):
+        self.citas=citas
 
     def getPrimerNombre(self):
         return self.nombre1
@@ -274,6 +257,10 @@ class Persona():
     
     def getNumeroTelefonico(self):
         return self.numero_telefonico
+
+    def getNombreCompleto(self):
+        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
+    
     
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
@@ -316,25 +303,41 @@ class Persona():
             return True
         else:
             return False
+    
+    def buscarCita(self,buscar):
 
+        for cita in self.citas:
+
+            if cita.getCodigo()==buscar:
+                return cita
+        return False
+    
     def agendarCita(self,_cita):
+        if self.buscarCita(_cita.getCodigo()):
+            return False
         self.citas.append(_cita)
-
-    def reagendarCita(self, _fecha, _codigo_cita):
-        return "not implemented yet"
     
-    def confirmarCita(self,_cita):
-        _cita.setConfirmada(True)
- 
-    def getNombreCompleto(self):
-        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
-  
+#sin implementar debido a ser redundantes
+    #def reagendarCita():   
+    #def desconfirmarCita():
 
+    def confirmarCita(self,codigo):
+        for cita in self.citas:
+            if self.buscarCita(codigo):
+                cita.setFechaCitada()
+                return True
+        return False
+       
+       
+    def eliminarCita(self,codigo):
+        for cita in self.citas:
+            if self.buscarCita(codigo):
+                self.citas.remove(cita)
+                return True
+        return False
+        
+                
 
-            
-        
-        
-    
     def __str__(self):
         return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+self.rut+" "+str(self.edad)+" "+self.email
 
@@ -398,7 +401,6 @@ class Paciente(Persona):
         self.forma_pago=""
         #billetera
         self.cartera=0
-        self.citas= []
         self.recetas=[]
 
     def setPrevision(self,prevision):
