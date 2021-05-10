@@ -220,18 +220,19 @@ lista_entry_datos_paciente.append(email_entry)
 
 #Frame de botones
 
-botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT)
+botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT,bg=Charade)
+botones_paciente_frame.grid(columnspan=3,row=10,column=0)
 confirmar_paciente_ic = Image.open('./imagenes/confirmar_paciente.png')
 confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
-confirmar_paciente_btn=Button(ingresar_paciente,text="Confirmar", image = confirmar_paciente_ic)
-confirmar_paciente_btn.grid(column=0,row=10,sticky=W)
+confirmar_paciente_btn=Button(botones_paciente_frame,text="Confirmar", image = confirmar_paciente_ic)
+confirmar_paciente_btn.pack(side=LEFT,padx=30)
 
 cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
 cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
-cancelar_paciente_btn=Button(ingresar_paciente,text="Cancelar", image = cancelar_paciente_ic)
-cancelar_paciente_btn.grid(column=2, row=10,sticky=E)
+cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic)
+cancelar_paciente_btn.pack(side=LEFT,padx=30)
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
