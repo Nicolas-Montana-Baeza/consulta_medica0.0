@@ -1,6 +1,6 @@
 from tkinter import X,SW,S,SE,ttk,font,YES,BOTH,NS, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,NE,END,N,Text,ACTIVE,DISABLED,NORMAL,E,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from tkinter.constants import BOTTOM, TOP
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 from PIL import Image,ImageTk
 import ttkbootstrap
 from datosDeRelleno import *
@@ -9,7 +9,7 @@ from estilo import*
 
 
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
-cita_aux=clinica.Cita()
+
 lista_entry_datos_paciente=[]
 
 def autocompletarPaciente():
@@ -108,17 +108,17 @@ agendar_cita_label.pack(fill=X)
 
 """
 #contiene los radio buttons
-escojer_especialidades=LabelFrame(agendar_cita_frame, text="Escoja la Especialidad", padx=5, pady=5")
-escojer_especialidades.pack(anchor=W)
+escoger_especialidades=LabelFrame(agendar_cita_frame, text="Escoja la Especialidad", padx=5, pady=5")
+escoger_especialidades.pack(anchor=W)
 
 especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
 opcion=StringVar()
 opcion.set(especialidades[0])
 
-kine_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[1], variable=opcion, value=especialidades[1]")
-med_gnrl_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[0], variable=opcion, value=especialidades[0]",)
-pedia_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[2], variable=opcion, value=especialidades[2]")
-odont_btn=Radiobutton(escojer_especialidades,highlightthickness=0, text=especialidades[3], variable=opcion, value=especialidades[3]")
+kine_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[1], variable=opcion, value=especialidades[1]")
+med_gnrl_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[0], variable=opcion, value=especialidades[0]",)
+pedia_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[2], variable=opcion, value=especialidades[2]")
+odont_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[3], variable=opcion, value=especialidades[3]")
 kine_btn.pack(anchor=W)
 med_gnrl_btn.pack(anchor=W)
 pedia_btn.pack(anchor=W)
@@ -341,6 +341,7 @@ dia_label.grid(row=5,column=0)
 reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
+
 boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
 boton_hora.grid(row=6,column=0, columnspan=2)
 escojer_fecha_frame.pack()
