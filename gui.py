@@ -76,6 +76,9 @@ def cancelarDatosPaciente():
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         prevision_btn.set("Sin Prevision")
+
+def agendarCita():
+    return
     
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
@@ -325,9 +328,6 @@ seleccion_Año.grid(row=3,column=1)
 dia_label=Label(disponibilidad_citas_frame,text="Año",bg=Charade, font=subtitulo4_font)
 dia_label.grid(row=3,column=0)
 
-
-def obtener():
-    print(seleccion_hora.get())
 hora = StringVar()
 seleccion_hora=Spinbox(disponibilidad_citas_frame,width=10 ,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
 seleccion_minutos=Spinbox(disponibilidad_citas_frame,width=10 ,values=("00","30"))
@@ -342,7 +342,7 @@ reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
-boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:obtener(), image = reservar_hora_ic)
+boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita, image = reservar_hora_ic)
 boton_hora.grid(row=6,column=0, columnspan=2)
 escojer_fecha_frame.pack()
 
