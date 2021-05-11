@@ -104,7 +104,7 @@ def confirmarCita():
 
 #buscar cita por codigo
 def buscarCodigo():
-    info_cita_txtbox.delete(0,END)
+    info_cita_txtbox.delete('0.0',END)
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
         for cita in paciente.getCitas():
@@ -114,7 +114,7 @@ def buscarCodigo():
 
 
 
-                info_cita_txtbox.insert(0,texto)
+                info_cita_txtbox.insert('0.0',texto)
 #función para agregar paciente
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
