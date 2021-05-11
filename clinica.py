@@ -149,25 +149,18 @@ class Clinica():
 
 class Cita ():
     
-    def __init__(self, fecha_citada, medico, paciente, modalidad):
+    def __init__(self, fecha_citada, medico, paciente, modalidad,fecha_actual=dt.datetime.now()):
         
         self.fecha_citada=fecha_citada
-
         self.fecha_actual=dt.datetime.now()
-    #
         self.medico= medico
-    #
         self.paciente= paciente
         self.direccion=""
         self.codigo=str(shortuuid.uuid())
-    #esta depende del medico
-        self.prestacion=""
+        self.prestacion=medico.getEspecialidad()
         self.pagado=False
-    #
         self.modalidad=""
-    #esto no creo que sea necesaria
         self.prioridad=""
-    #fecha citada menos fecha actual
         self.tiempo_restante=self.fecha_citada-self.fecha_actual
         self.confirmada=False
 
@@ -354,21 +347,35 @@ class Persona():
             return False
     
     def buscarCita(self,buscar):
-
         for cita in self.citas:
-
             if cita.getCodigo()==buscar:
                 return cita
 
-    def agendarCita(self,_cita):
-        
-        self.citas.append(_cita)
+    def agendarCita(self, _agendar):
+        for cita in self.citas:
+            if cita.getCodigo()==_agendar.getCodigo():
+                return False
+        self.citas.append(_agendar)
+        return True
 
-    def reagendarCita(self, _fecha, _codigo_cita):
-        return "not implemented yet"
+    def eliminarCita(self,_codigo):
+        for cita in self.citas:
+            if cita.getCodigo==_codigo:
+                self.citas.remove(cita)
+                return True
+        return False
     
-    def confirmarCita(self,_cita):
-        _cita.setConfirmada(True)
+    def modificarCita(self,fecha_citada,codigo):
+        for cita in self.citas:
+            if cita.getCodigo==codigo:
+                cita.setfechaCitada(fecha_citada)
+                return True
+        return False
+    
+    def confirmarCita(self,codigo):
+        for cita in self.citas:
+            if cita.getCodigo()==codigo:
+                cita.setConfirmada(True)
  
     def getNombreCompleto(self):
         return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()

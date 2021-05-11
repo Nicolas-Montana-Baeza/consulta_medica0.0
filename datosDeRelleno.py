@@ -1,5 +1,7 @@
 import clinica
 from random import randint
+import datetime
+import calendar
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -48,6 +50,7 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     else:
         return False
 
+
 def crearEspecialidades(lista):
     especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
     lista_creada=[]
@@ -57,9 +60,18 @@ def crearEspecialidades(lista):
     return lista_creada
 
 def crearDisponibilidad():
+    disponibilidad=[]
+    for year in range(2021,2023):
+        for month in range(1,13):
+            for day in range (1,calendar.monthrange(year,month)+1):
+                for hour in range(8,22):
+                    for minute in [0,30]:
+                        fecha=datetime.datetime(year,month,day,hour,minute)
+                        if fecha.isweekday()in range(0,5):
+                            disponibilidad.append()
+    return disponibilidad
 
 
-    return
 
 #hay que agregar datos a la clinica
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
