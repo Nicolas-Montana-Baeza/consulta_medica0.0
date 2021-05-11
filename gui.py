@@ -148,7 +148,9 @@ def agregarDatosPaciente():
             
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
-    clinica_objeto.agregarPaciente(paciente_temporal)
+    if clinica_objeto.agregarPaciente(paciente_temporal):
+        
+        messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
     elegirFecha()
     return
 
@@ -198,9 +200,10 @@ def elegirFecha():
         paciente.agregarCita(cita_auxiliar)
         medico.agregarCita(cita_auxiliar)
         return
-        
+
     if medico_seleccionado_label["text"]=="":
         messagebox.showwarning(message="Recuerde escojer al Medico", title="Error")
+        return
 
     elegir_fecha=Toplevel()
     escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
