@@ -210,6 +210,7 @@ def elegirFecha():
     #escoger modalidad
     
     elegir_fecha=Toplevel()
+    modalidad.set("Online")
     escoger_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
     temp=LabelFrame(elegir_fecha)
     escoger_modalidad=LabelFrame(escoger_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
