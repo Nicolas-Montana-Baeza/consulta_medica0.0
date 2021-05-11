@@ -157,7 +157,7 @@ class Clinica():
 
 class Cita ():
     
-    def __init__(self, fecha_citada, medico, paciente, modalidad,fecha_actual=dt.datetime.now()):
+    def __init__(self, fecha_citada, medico, paciente, modalidad):
         
         self.fecha_citada=fecha_citada
         self.fecha_actual=dt.datetime.now()
@@ -167,7 +167,7 @@ class Cita ():
         self.codigo=str(shortuuid.uuid())
         self.prestacion=medico.getEspecialidad()
         self.pagado=False
-        self.modalidad=""
+        self.modalidad=modalidad
         self.prioridad=""
         self.tiempo_restante=self.fecha_citada-self.fecha_actual
         self.confirmada=False
