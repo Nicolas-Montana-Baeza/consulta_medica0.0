@@ -3,6 +3,7 @@ from random import randint
 import datetime
 import calendar
 from math import floor
+
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -51,9 +52,8 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
     else:
         return False
 
-
 def crearEspecialidades(lista):
-    especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
+    especialidades=["MedicinaGeneral","Kinesiologia","Pediatria", "Odontologia"]
     lista_creada=[]
     
     for i in range(len(lista)):

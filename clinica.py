@@ -48,9 +48,6 @@ class Clinica():
 
     def getPacientes(self):
         return self.pacientes
-    
-    def getCitas(self):
-        return self.medicos.getCitas()
 
     #funcion para buscar un paciente dentro de los ya ingresados
     def buscarPaciente(self,buscar):
@@ -280,9 +277,6 @@ class Persona():
     def setSegundoApellido(self,apellido2):
         self.apellido2=apellido2
         
-    def setNumeroTelefonico(self,numero_telefonico):
-        self.numero_telefonico=numero_telefonico
-        
     def setEdad(self,edad):
         self.edad=edad
 
@@ -292,8 +286,9 @@ class Persona():
     def setEmail(self,email):
         self.email=email
 
-    def setNumero(self,numero):
-        self.numero=numero
+    def setNumeroTelefonico(self,numero_telefonico):
+        self.numero_telefonico=numero_telefonico
+        
 
     def getPrimerNombre(self):
         return self.nombre1
@@ -307,8 +302,6 @@ class Persona():
     def getSegundoApellido(self):
         return self.apellido2
 
-    def getNumeroTelefonico(self):
-        return self.numero_telefonico
     
     def getEdad(self):
         return self.edad
@@ -319,9 +312,8 @@ class Persona():
     def getEmail(self):
         return self.email
     
-    def getNumero(self):
-        return self.numero
-    
+    def getNumeroTelefonico(self):
+        return self.numero_telefonico
 
     
     #funcion para verificar si un correo es valido o no
