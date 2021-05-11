@@ -32,7 +32,7 @@ def autocompletarPaciente():
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
+        lista_medicos_listbox.insert(END, medico.getNombreCompleto()+" "+medico.getEspecialidad())
     
     return
 
@@ -82,11 +82,6 @@ def actualizarListboxCita(datos):
     for medico in datos:
         lista_medicos_listbox.insert(END, medico)
     
-    return
-
-def seleccionarCita(evento):
-    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
     return
 
 def buscarCita(evento):
