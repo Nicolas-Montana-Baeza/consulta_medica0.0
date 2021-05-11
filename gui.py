@@ -164,7 +164,6 @@ reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
-
 """
 image = Image.open('imagenes/fondoPrincipal.png')
 
