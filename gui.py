@@ -36,6 +36,15 @@ def actualizarListbox(datos):
 def seleccionarMedico(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
 
+    medico_seleccionado=lista_medicos_listbox.get(ACTIVE).split()
+    medico_seleccionado.pop()
+    aux=""
+    for palabra in medico_seleccionado:
+        aux+=palabra+" "
+    medico_seleccionado=aux[:-1]
+    print(medico_seleccionado)
+
+
     return
 
 def buscarMedico(evento):
@@ -47,10 +56,6 @@ def buscarMedico(evento):
         datos=clinica_objeto.buscarMedico(escrito)
     
     actualizarListbox(datos)
-
-def buscarCita():
-    
-    return
 
 def actualizarListboxCita(datos):
     lista_medicos_listbox.delete(0,END)
@@ -112,6 +117,9 @@ def agendarCita():
     return
 
 def buscarCodigo():
+    busqueda= ingresar_codigo_entry.get()
+
+    
     return
 
 def elegirFecha():
@@ -175,7 +183,8 @@ ventana_principal.resizable(0,0)
 lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
-
+paciente_aux=clinica.Paciente("","","","","","","","")
+medico_seleccionado=""
 reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
