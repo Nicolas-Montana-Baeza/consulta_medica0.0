@@ -409,7 +409,7 @@ class Persona():
     #funcion para eliminar una cita agendada
     def eliminarCita(self,_codigo):
         for cita in self.citas:
-            if cita.getCodigo==_codigo:
+            if cita.getCodigo()==_codigo:
                 self.citas.remove(cita)
                 return True
         return False
@@ -419,7 +419,7 @@ class Persona():
         for cita in self.citas:
             if cita.getFechaCitada()==fecha_citada:
                 return False
-            if cita.getCodigo==codigo:
+            if cita.getCodigo()==codigo:
                 cita.setfechaCitada(fecha_citada)
                 return True
         return False

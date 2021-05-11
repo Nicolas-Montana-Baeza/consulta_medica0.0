@@ -85,18 +85,6 @@ def cancelarCita():
             
             return True
     return False
-#función para reagendar la cita
-def reagendarCita():
-    busqueda= ingresar_codigo_entry.get()
-    for paciente in clinica_objeto.getPacientes():
-        for cita in paciente.getCitas():
-            if cita.getCodigo()==busqueda:
-                info_cita_txtbox.delete('0.0',END)
-                cita.setConfirmada(True)
-                texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
-                info_cita_txtbox.insert('0.0',texto)
-                return True
-    return False
 
 #función para confirmar la cita
 def confirmarCita():
@@ -116,18 +104,14 @@ def buscarCodigo():
     info_cita_txtbox.delete('0.0',END)
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
-        print("entro aca")
         for cita in paciente.getCitas():
-            print("entro aca1")
             if cita.getCodigo()==busqueda:
-                print("entro aca2")
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
-
-
-
 
                 info_cita_txtbox.insert('0.0',texto)
     info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
+
+#agrega un paciente
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
@@ -265,8 +249,62 @@ def elegirFecha():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
     
-    
+#reagenda un cita  
+def reagendarCita():
+    paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
+    medico= lista_medicos_listbox.get(ACTIVE).split()
 
+    medico.pop()
+    aux=""
+    for palabra in medico:
+        aux+=palabra+" "
+    aux=aux[:-1]
+    print(aux)
+    medico=clinica_objeto.buscarMedico(aux)[0]
+
+    busqueda= ingresar_codigo_entry.get()
+    def reagendarCita():
+        fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
+        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+        for paciente in clinica_objeto.getPacientes():
+            if paciente.modificarCita(fecha,busqueda):
+                buscarCodigo()
+
+
+    elegir_fecha=Toplevel()
+    escoger_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
+    temp=LabelFrame(elegir_fecha)
+
+    #seleccionar fecha cita
+    disponibilidad_citas_frame=LabelFrame(escoger_fecha_frame, text="Seleccionar fecha:", bg=Charade, font=subtitulo2_font, labelanchor=N)
+    disponibilidad_citas_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
+    seleccion_Dia=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
+    seleccion_Dia.grid(row=1, column=1)
+    dia_label=Label(disponibilidad_citas_frame,text="Día",bg=Charade, font=subtitulo4_font)
+    dia_label.grid(row=1,column=0)
+    seleccion_Mes=Spinbox(disponibilidad_citas_frame,width=10 ,values=("01","01","03","04","05","06","07","08","09","10","11","12"),state="readonly" )
+    seleccion_Mes.grid(row=2,column=1)
+    dia_label=Label(disponibilidad_citas_frame,text="Mes",bg=Charade, font=subtitulo4_font)
+    dia_label.grid(row=2,column=0)
+    seleccion_Año=Spinbox(disponibilidad_citas_frame,width=10,state="readonly"  ,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
+    seleccion_Año.grid(row=3,column=1)
+    dia_label=Label(disponibilidad_citas_frame,text="Año",bg=Charade, font=subtitulo4_font)
+    dia_label.grid(row=3,column=0)
+    #seleccionar hora cita
+    seleccion_hora=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
+    seleccion_minutos=Spinbox(disponibilidad_citas_frame,width=10 ,values=("00","30"))
+    seleccion_hora.grid(row=4,column=1)
+    seleccion_minutos.grid(row=5,column=1)
+    dia_label=Label(disponibilidad_citas_frame,text="Hora",bg=Charade, font=subtitulo4_font)
+    dia_label.grid(row=4,column=0)
+    dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
+    dia_label.grid(row=5,column=0)
+    
+   
+    boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:reagendarCita(), image = reservar_hora_ic)
+    boton_hora.grid(row=6,column=0, columnspan=2)
+    escoger_fecha_frame.pack()
+   
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
