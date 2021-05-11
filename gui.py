@@ -102,7 +102,7 @@ def confirmarCita():
         for cita in paciente.getCitas():
             if cita.getCodigo()==busqueda:
                 info_cita_txtbox.delete('0.0',END)
-                cita.setConfirmar(True)
+                cita.setConfirmada(True)
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
                 info_cita_txtbox.insert('0.0',texto)
                 return True
