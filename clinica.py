@@ -168,7 +168,7 @@ class Cita ():
     #esto no creo que sea necesaria
         self.prioridad=""
     #fecha citada menos fecha actual
-        self.tiempo_restante=fecha_actual
+        self.tiempo_restante=self.fecha_citada-self.fecha_actual
         self.confirmada=False
 
     def setFechaCitada(self,fecha_citada): 
@@ -241,9 +241,9 @@ class Cita ():
         fecha_actual=dt.datetime.now()       
         fecha_restante=self.fecha_citada-fecha_actual
 
-         self.tiempo_restante = fecha_restante
+        self.tiempo_restante = fecha_restante
     def __str__(self):
-        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual" "+self.medico+" "self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)
+        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)
 
 class Persona():
 
