@@ -163,6 +163,7 @@ def cancelarDatosPaciente():
         prevision_btn.set("Sin Prevision")
 
 def modificarDatosPaciente():
+    print("entre")
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
 
@@ -177,9 +178,14 @@ def modificarDatosPaciente():
         if entrada.get()=="":
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
+    
+    if medico_seleccionado_label["text"]=="":
+        messagebox.showwarning(message="Recuerde escojer al Medico", title="Error")
+
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
+    print(paciente_temporal)
     clinica_objeto.modificarPaciente(paciente_temporal)
 
 def elegirFecha():
