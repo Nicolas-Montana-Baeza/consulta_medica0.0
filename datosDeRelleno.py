@@ -63,15 +63,19 @@ def crearDisponibilidad():
     disponibilidad=[]
     for year in range(2021,2023):
         for month in range(1,13):
-            for day in range (1,calendar.monthrange(year,month)+1):
+            rango=calendar.monthrange(year,month)
+            rango=str(rango)
+            rango=rango[:-1]
+            rango=rango[4:]
+            rango=int(str(rango))
+
+            for day in range(1,rango+1) :
                 for hour in range(8,22):
                     for minute in [0,30]:
                         fecha=datetime.datetime(year,month,day,hour,minute)
-                        if fecha.isweekday()in range(0,5):
-                            disponibilidad.append()
+                        if fecha.weekday()in range(0,5):
+                            disponibilidad.append(fecha)
     return disponibilidad
-
-
 
 #hay que agregar datos a la clinica
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
@@ -80,9 +84,12 @@ lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","178
 lista_emails=crearEmails(lista_nombres)
 lista_edades=crearEdad(lista_nombres)
 lista_especialidades=crearEspecialidades(lista_nombres)
+disponibilidad=crearDisponibilidad()
 lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
+for medico in lista_medicos:
+    medico.setDisponibilidad(disponibilidad)
 lista_citas=[]
 lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","")]
 lista_pacientes[0].setPrevision("FONASA")
 clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+clinica_objeto= clinica.Clinica("Cl9inica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)

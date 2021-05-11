@@ -350,6 +350,7 @@ class Persona():
         for cita in self.citas:
             if cita.getCodigo()==buscar:
                 return cita
+        return False
 
     def agendarCita(self, _agendar):
         for cita in self.citas:
@@ -376,7 +377,9 @@ class Persona():
         for cita in self.citas:
             if cita.getCodigo()==codigo:
                 cita.setConfirmada(True)
- 
+                return True
+        return False
+
     def getNombreCompleto(self):
         return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
 
