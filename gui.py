@@ -195,7 +195,7 @@ def elegirFecha():
             aux+=palabra+" "
         aux=aux[:-1]
         medico=clinica_objeto.buscarMedico(aux)[0]
-        paciente=clinica_objeto.buscarPaciente(rut_entry.get())
+        paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
         paciente.agregarCita(cita_auxiliar)
         medico.agregarCita(cita_auxiliar)
