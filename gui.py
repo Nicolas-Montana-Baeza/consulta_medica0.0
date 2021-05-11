@@ -146,10 +146,6 @@ def agregarDatosPaciente():
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
             
-    if lista_medicos_listbox.get(ACTIVE)=="":
-        messagebox.showwarning(message="Seleccione un medico", title="Error")
-        return False
-
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
@@ -179,10 +175,6 @@ def modificarDatosPaciente():
         if entrada.get()=="":
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
-    
-    if medico_seleccionado_label["text"]=="":
-        messagebox.showwarning(message="Recuerde escojer al Medico", title="Error")
-
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
@@ -206,7 +198,10 @@ def elegirFecha():
         paciente.agregarCita(cita_auxiliar)
         medico.agregarCita(cita_auxiliar)
         return
- 
+        
+    if medico_seleccionado_label["text"]=="":
+        messagebox.showwarning(message="Recuerde escojer al Medico", title="Error")
+
     elegir_fecha=Toplevel()
     escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
     escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
