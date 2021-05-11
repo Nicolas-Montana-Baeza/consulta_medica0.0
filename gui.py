@@ -196,12 +196,14 @@ def elegirFecha():
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
         temp=LabelFrame(elegir_fecha)
+        temp.pack_forget()
         label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
         entry=Entry(temp)
         entry.pack(fill=Y, expand=True)
-        entry.config(state="readonly")
+       
         label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
         entry.insert(0,cita_auxiliar.getCodigo())
+        entry.config(state="readonly")
         temp.pack()
         return True
 
