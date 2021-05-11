@@ -193,7 +193,7 @@ def elegirFecha():
         aux=""
         for palabra in medico:
             aux+=palabra
-        medico=clinica_objeto.buscarMedico(aux)
+        medico=clinica_objeto.buscarMedico(aux)[0]
         paciente=clinica_objeto.buscarPaciente(rut_entry.get())
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
         paciente.agregarCita(cita_auxiliar)
