@@ -1,4 +1,4 @@
-import clinica
+import clases
 from random import randint
 import datetime
 import calendar
