@@ -171,7 +171,7 @@ def modificarDatosPaciente():
         messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
 
     cancelarDatosPaciente()
-def pantallaCodigo():
+
     
 #función para agendar la cita
 def elegirFecha():
