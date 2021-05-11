@@ -96,6 +96,8 @@ def confirmarCita():
                 cita.setConfirmada(True)
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
                 info_cita_txtbox.insert('0.0',texto)
+                messagebox.showinfo(message="Cita confirmada")
+
                 return True
     return False
 
