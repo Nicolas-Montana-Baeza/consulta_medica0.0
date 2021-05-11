@@ -382,6 +382,7 @@ class Persona():
 
             if _codigo_cita==self.citas[i].codigo:
                 self.citas.pop(i)
+                return True
 
     #funcion realizada para pagar una cita
     def pagarCita(self,_cita,_monto_a_pagar):

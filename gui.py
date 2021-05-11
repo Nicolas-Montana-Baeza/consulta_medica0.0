@@ -80,7 +80,9 @@ def buscarCita(evento):
 def cancelarCita():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
-            paciente.cancelarCita(busqueda)
+            if paciente.cancelarCita(busqueda):
+                info_cita_txtbox.delete('0.0',END)
+            
             return True
     return False
 #función para reagendar la cita
