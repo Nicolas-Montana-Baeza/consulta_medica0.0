@@ -232,11 +232,7 @@ def elegirFecha():
     dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
     dia_label.grid(row=5,column=0)
     
-    #boton para guardar fecha y hora
-    reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
-    reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-    reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
-
+   
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
@@ -248,6 +244,10 @@ lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
 
+#boton para guardar fecha y hora
+reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
 
 #FUENTES
