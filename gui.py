@@ -166,6 +166,7 @@ def modificarDatosPaciente():
     print("entre")
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
+    
 
         return False
     
@@ -185,9 +186,11 @@ def modificarDatosPaciente():
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
-    print(paciente_temporal)
-    clinica_objeto.modificarPaciente(paciente_temporal)
+    if clinica_objeto.modificarPaciente(paciente_temporal):
+        messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
 
+    cancelarDatosPaciente()
+    
 def elegirFecha():
 
     def agregarCita():
