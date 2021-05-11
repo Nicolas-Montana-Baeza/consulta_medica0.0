@@ -149,7 +149,6 @@ def agregarDatosPaciente():
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     if clinica_objeto.agregarPaciente(paciente_temporal):
-        
         messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
     elegirFecha()
     return
