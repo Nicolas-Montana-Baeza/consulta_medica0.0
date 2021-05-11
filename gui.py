@@ -6,7 +6,7 @@ from PIL import Image,ImageTk
 from estilo import *
 import datetime as dt
 
-
+#Esta función permite rellenar los datos del paciente al buscarlo por rut
 def autocompletarPaciente():
     _busqueda=buscar_rut_entry.get()
     paciente=clinica_objeto.buscarPaciente(_busqueda)
@@ -28,19 +28,19 @@ def autocompletarPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
 
-
+#Permite la actualización de los datos
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
         lista_medicos_listbox.insert(END, medico.getNombreCompleto()+" "+medico.getEspecialidad())
     
     return
-
+#función para seleccionar médicos
 def seleccionarMedico(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
     return
 
+#función para buscar nombre de médico
 def buscarMedico(evento):
     escrito=buscar_doctor_entry.get()
     
@@ -51,22 +51,21 @@ def buscarMedico(evento):
     
     actualizarListbox(datos)
 
-def buscarCita():
-    
-    return
-
+#Actualiza medicos disponibles
 def actualizarListboxCita(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
         lista_medicos_listbox.insert(END, medico)
     
     return
+
 
 def seleccionarCita(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
 
     return
 
+#función para buscar cita
 def buscarCita(evento):
     escrito=buscar_doctor_entry.get()
     
@@ -77,23 +76,7 @@ def buscarCita(evento):
     
     actualizarListbox(datos)
 
-def actualizarListboxCita(datos):
-    lista_medicos_listbox.delete(0,END)
-    for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
-    
-    return
-
-def buscarCita(evento):
-    escrito=buscar_doctor_entry.get()
-    
-    if escrito == "":
-        datos=clinica_objeto.getMedicos()
-    else:
-        datos=clinica_objeto.buscarMedico(escrito)
-    
-    actualizarListbox(datos)
-
+#función para cancelar la cita
 def cancelarCita():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
@@ -102,6 +85,7 @@ def cancelarCita():
 
     return
 
+#función para reagendar la cita
 def reagendarCita():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
@@ -110,6 +94,7 @@ def reagendarCita():
 
     return
 
+#función para confirmar la cita
 def confirmarCita():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
@@ -117,6 +102,7 @@ def confirmarCita():
             return paciente.buscarCita(busqueda)
     return
 
+#buscar cita por codigo
 def buscarCodigo():
     info_cita_txtbox.delete(0,END)
     busqueda= ingresar_codigo_entry.get()
@@ -129,7 +115,7 @@ def buscarCodigo():
 
 
                 info_cita_txtbox.insert(0,texto)
-
+#función para agregar paciente
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
@@ -153,12 +139,14 @@ def agregarDatosPaciente():
     elegirFecha()
     return
 
+#función para cancelar los datos del paciente
 def cancelarDatosPaciente():
     
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         prevision_btn.set("Sin Prevision")
 
+#función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
     print("entre")
     if not(clinica.Persona.isRut(rut_entry.get())) :
@@ -184,6 +172,7 @@ def modificarDatosPaciente():
 
     cancelarDatosPaciente()
     
+#función para agendar la cita
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
     medico= lista_medicos_listbox.get(ACTIVE).split()
@@ -208,17 +197,18 @@ def elegirFecha():
     if medico_seleccionado_label["text"]=="":
         messagebox.showwarning(message="Recuerde escoger al Medico", title="Error")
         return
-
+    #escoger modalidad
     elegir_fecha=Toplevel()
-    escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
-    escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
-    escojer_modalidad.pack(fill=BOTH, expand=True, padx=30, pady=10)
-    online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=Charade,font=subtitulo5_font)
+    escoger_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
+    escoger_modalidad=LabelFrame(escoger_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
+    escoger_modalidad.pack(fill=BOTH, expand=True, padx=30, pady=10)
+    online_btn=Radiobutton(escoger_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=Charade,font=subtitulo5_font)
     online_btn.grid(row=0,column=0)
-    presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=Charade, font=subtitulo5_font)
+    presencial_btn=Radiobutton(escoger_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=Charade, font=subtitulo5_font)
     presencial_btn.grid(row=0,column=1)
 
-    disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccionar fecha:", bg=Charade, font=subtitulo2_font, labelanchor=N)
+    #seleccionar fecha cita
+    disponibilidad_citas_frame=LabelFrame(escoger_fecha_frame, text="Seleccionar fecha:", bg=Charade, font=subtitulo2_font, labelanchor=N)
     disponibilidad_citas_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
     seleccion_Dia=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
     seleccion_Dia.grid(row=1, column=1)
@@ -232,6 +222,7 @@ def elegirFecha():
     seleccion_Año.grid(row=3,column=1)
     dia_label=Label(disponibilidad_citas_frame,text="Año",bg=Charade, font=subtitulo4_font)
     dia_label.grid(row=3,column=0)
+    #seleccionar hora cita
     seleccion_hora=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
     seleccion_minutos=Spinbox(disponibilidad_citas_frame,width=10 ,values=("00","30"))
     seleccion_hora.grid(row=4,column=1)
@@ -240,10 +231,15 @@ def elegirFecha():
     dia_label.grid(row=4,column=0)
     dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
     dia_label.grid(row=5,column=0)
+    
+    #boton para guardar fecha y hora
+    reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
+    reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+    reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
-    escojer_fecha_frame.pack()
+    escoger_fecha_frame.pack()
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
@@ -252,17 +248,8 @@ lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
 
-reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
-reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
-"""
-image = Image.open('imagenes/fondoPrincipal.png')
 
-photo = ImageTk.PhotoImage(image)
-fondo = Label(ventana_principal, image = photo)
-fondo.place(x=0,y=0,relheight=1,relwidth=1)
-"""
 #FUENTES
 titulo_font = font.Font(family="Arial",weight="bold",size=35)
 subtitulo_font = font.Font(family="Arial Nova", weight="bold",size= 20)
@@ -272,7 +259,7 @@ subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
 
 
-#en este frame irán todas las entradas necesarias para una cita
+#Todas las entradas necesarias para una cita
 agendar_cita_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
 agendar_cita_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
 agendar_cita_label=Label(agendar_cita_frame, text="Agendar Cita",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
@@ -300,12 +287,12 @@ lista_medicos_listbox.config(yscrollcommand=scrollbar.set)
  
 scrollbar.config(command=lista_medicos_listbox.yview)
 
-#Ingreso de datos del paciente
+    #Ingreso de datos del paciente
 
 ingresar_paciente=LabelFrame(agendar_cita_frame,text="Datos del Paciente", bg=Charade, font=subtitulo_font, labelanchor=N)
 ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
-#autocompletar con rut
+    #autocompletar con rut
 
 buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
 buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
@@ -382,7 +369,7 @@ email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
 
-#Frame de botones para agregar el paciente o borrar todas las entradas de datos de paciente
+#Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 
 botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT,bg=Charade)
 botones_paciente_frame.grid(columnspan=3,row=10,column=0)
@@ -461,7 +448,7 @@ reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
-#ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
+
 
 modalidad=StringVar()
 
@@ -469,8 +456,4 @@ modalidad=StringVar()
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
 buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)
-"""
-actualizarListbox(clinica_objeto.getMedicos())
-lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)"""
 ventana_principal.mainloop()
