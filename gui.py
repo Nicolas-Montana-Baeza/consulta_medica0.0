@@ -35,15 +35,14 @@ def actualizarListbox(datos):
 
 def seleccionarMedico(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
     medico_seleccionado=lista_medicos_listbox.get(ACTIVE).split()
     medico_seleccionado.pop()
     aux=""
+
     for palabra in medico_seleccionado:
         aux+=palabra+" "
-    medico_seleccionado=aux[:-1]
-    print(medico_seleccionado)
 
+    medico_seleccionado=aux[:-1]
 
     return
 
@@ -56,37 +55,6 @@ def buscarMedico(evento):
         datos=clinica_objeto.buscarMedico(escrito)
     
     actualizarListbox(datos)
-
-def actualizarListboxCita(datos):
-    lista_medicos_listbox.delete(0,END)
-    for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
-    
-    return
-
-def seleccionarCita(evento):
-    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
-    return
-
-def buscarCita(evento):
-    escrito=buscar_doctor_entry.get()
-    
-    if escrito == "":
-        datos=clinica_objeto.getMedicos()
-    else:
-        datos=clinica_objeto.buscarMedico(escrito)
-    
-    actualizarListbox(datos)
-
-def cancelarCita():
-    return
-
-def reagendarCita():
-    return
-
-def confirmarCita():
-    return
 
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
@@ -112,15 +80,51 @@ def cancelarDatosPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         prevision_btn.set("Sin Prevision")
 
+def actualizarListboxCita(datos):
+    lista_medicos_listbox.delete(0,END)
+    for medico in datos:
+        lista_medicos_listbox.insert(END, medico)
+    
+    return
+
+def seleccionarCita(evento):
+    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
+
+    return
+
 def agendarCita():
 
     return
 
+def buscarCita(evento):
+    escrito=buscar_doctor_entry.get()
+    
+    if escrito == "":
+        datos=clinica_objeto.getMedicos()
+    else:
+        datos=clinica_objeto.buscarMedico(escrito)
+    
+    actualizarListbox(datos)
+
+def cancelarCita():
+    return
+
+def reagendarCita():
+    return
+
+def confirmarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
+    return
+
 def buscarCodigo():
     busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
 
-    
-    return
 
 def elegirFecha():
 
@@ -185,6 +189,8 @@ s=Style()
 s.theme_use("darkly")
 paciente_aux=clinica.Paciente("","","","","","","","")
 medico_seleccionado=""
+
+#icono de boton para agendar cita que esta dentro de la ventana que se despliega luego de agregar el paciente
 reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
@@ -363,15 +369,6 @@ citas_agendadas_label.pack(fill=X)
 #ingresa el codigo
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
 gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
-buscar_rut_ic1 = Image.open('./imagenes/buscapaciente.png')
-buscar_rut_ic1 = buscar_rut_ic1.resize((30, 30), Image.ANTIALIAS)
-buscar_rut_ic1 = ImageTk.PhotoImage(buscar_rut_ic1)
-rut_autocompletar_label1=Label(gestionar_cita_frame, text="Buscar citas por rut:", bg=Charade, font=subtitulo2_font)
-rut_autocompletar_label1.pack()
-buscar_rut_entry1=Entry(gestionar_cita_frame, width=10)
-buscar_rut_entry1.pack()
-buscar_rut_btn1=Button(gestionar_cita_frame, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic1)
-buscar_rut_btn1.pack()
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
