@@ -335,17 +335,19 @@ class Persona():
                 recorre_serie=0 
 
             verificar+=(int(i)*int(serie[recorre_serie]))
+
             recorre_serie+=1
 
         verificaraux=floor(verificar/11)
         verificar=verificar-(verificaraux*11)
         verificar=11-verificar
-
+        if verificar==11:
+            verificar=0
         if verificar==int(verificador):
             return True
         else:
             return False
-    
+
     def buscarCita(self,buscar):
         for cita in self.citas:
             if cita.getCodigo()==buscar:
