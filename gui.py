@@ -109,7 +109,9 @@ def buscarCodigo():
     for paciente in clinica_objeto.getPacientes():
         print("entro aca")
         for cita in paciente.getCitas():
+            print("entro aca1")
             if cita.getCodigo==busqueda:
+                print("entro aca2")
                 texto= "Fecha Citada: "+cita.getFechaCitada()+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+cita.getConfirmada()
 
 
