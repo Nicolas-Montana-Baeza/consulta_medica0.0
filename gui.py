@@ -92,10 +92,6 @@ def seleccionarCita(evento):
 
     return
 
-def agendarCita():
-
-    return
-
 def buscarCita(evento):
     escrito=buscar_doctor_entry.get()
     
@@ -107,9 +103,19 @@ def buscarCita(evento):
     actualizarListbox(datos)
 
 def cancelarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
+
     return
 
 def reagendarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
+
     return
 
 def confirmarCita():
@@ -123,61 +129,35 @@ def buscarCodigo():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
         for cita in paciente.getCitas():
-            return paciente.buscarCita(busqueda)
+            if cita.getCodigo==busqueda:
+                texto= "Fecha Citada: "+cita.getFechaCitada()+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+cita.getConfirmada()
+
+
+
+
+                info_cita_txtbox.insert()
+
+            
+
+def agendarCita():
+    fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
+    medico= lista_medicos_listbox.get(ACTIVE).split()
+    medico.pop()
+    aux=""
+    for palabra in medico:
+        aux+=palabra
+    medico=clinica_objeto.buscarMedico(aux)
+    paciente=clinica_objeto.buscarPaciente(rut_entry.get())
+    cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+    paciente.agregarCita(cita_auxiliar)
+    medico.agregarCita(cita_auxiliar)
+    return
 
 
 def elegirFecha():
 
-    def agregarCita():
-        fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-        medico= lista_medicos_listbox.get(ACTIVE).split()
-        medico.pop()
-        aux=""
-        for palabra in medico:
-            aux+=palabra
-        medico=clinica_objeto.buscarMedico(aux)
-        paciente=clinica_objeto.buscarPaciente(rut_entry.get())
-        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
-        paciente.agregarCita(cita_auxiliar)
-        medico.agregarCita(cita_auxiliar)
-        return
- 
     elegir_fecha=Toplevel()
-    escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
-    escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
-    escojer_modalidad.pack(fill=BOTH, expand=True, padx=30, pady=10)
-    online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=Charade,font=subtitulo5_font)
-    online_btn.grid(row=0,column=0)
-    presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=Charade, font=subtitulo5_font)
-    presencial_btn.grid(row=0,column=1)
-
-    disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccionar fecha:", bg=Charade, font=subtitulo2_font, labelanchor=N)
-    disponibilidad_citas_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
-    seleccion_Dia=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
-    seleccion_Dia.grid(row=1, column=1)
-    dia_label=Label(disponibilidad_citas_frame,text="Día",bg=Charade, font=subtitulo4_font)
-    dia_label.grid(row=1,column=0)
-    seleccion_Mes=Spinbox(disponibilidad_citas_frame,width=10 ,values=("01","01","03","04","05","06","07","08","09","10","11","12"),state="readonly" )
-    seleccion_Mes.grid(row=2,column=1)
-    dia_label=Label(disponibilidad_citas_frame,text="Mes",bg=Charade, font=subtitulo4_font)
-    dia_label.grid(row=2,column=0)
-    seleccion_Año=Spinbox(disponibilidad_citas_frame,width=10,state="readonly"  ,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
-    seleccion_Año.grid(row=3,column=1)
-    dia_label=Label(disponibilidad_citas_frame,text="Año",bg=Charade, font=subtitulo4_font)
-    dia_label.grid(row=3,column=0)
-    seleccion_hora=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
-    seleccion_minutos=Spinbox(disponibilidad_citas_frame,width=10 ,values=("00","30"))
-    seleccion_hora.grid(row=4,column=1)
-    seleccion_minutos.grid(row=5,column=1)
-    dia_label=Label(disponibilidad_citas_frame,text="Hora",bg=Charade, font=subtitulo4_font)
-    dia_label.grid(row=4,column=0)
-    dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
-    dia_label.grid(row=5,column=0)
-
-    boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita(), image = reservar_hora_ic)
-    boton_hora.grid(row=6,column=0, columnspan=2)
-    escojer_fecha_frame.pack()
-
+    
 
     return
 
@@ -417,4 +397,39 @@ buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
 buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)"""
+escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
+escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
+escojer_modalidad.pack(fill=BOTH, expand=True, padx=30, pady=10)
+online_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=Charade,font=subtitulo5_font)
+online_btn.grid(row=0,column=0)
+presencial_btn=Radiobutton(escojer_modalidad,highlightthickness=0, text="Presencial", variable=modalidad,value="Presencial", bg=Charade, font=subtitulo5_font)
+presencial_btn.grid(row=0,column=1)
+
+disponibilidad_citas_frame=LabelFrame(escojer_fecha_frame, text="Seleccionar fecha:", bg=Charade, font=subtitulo2_font, labelanchor=N)
+disponibilidad_citas_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
+seleccion_Dia=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"))
+seleccion_Dia.grid(row=1, column=1)
+dia_label=Label(disponibilidad_citas_frame,text="Día",bg=Charade, font=subtitulo4_font)
+dia_label.grid(row=1,column=0)
+seleccion_Mes=Spinbox(disponibilidad_citas_frame,width=10 ,values=("01","01","03","04","05","06","07","08","09","10","11","12"),state="readonly" )
+seleccion_Mes.grid(row=2,column=1)
+dia_label=Label(disponibilidad_citas_frame,text="Mes",bg=Charade, font=subtitulo4_font)
+dia_label.grid(row=2,column=0)
+seleccion_Año=Spinbox(disponibilidad_citas_frame,width=10,state="readonly"  ,values=("2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031"))
+seleccion_Año.grid(row=3,column=1)
+dia_label=Label(disponibilidad_citas_frame,text="Año",bg=Charade, font=subtitulo4_font)
+dia_label.grid(row=3,column=0)
+seleccion_hora=Spinbox(disponibilidad_citas_frame,width=10,state="readonly" ,values=("8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"))
+seleccion_minutos=Spinbox(disponibilidad_citas_frame,width=10 ,values=("00","30"))
+seleccion_hora.grid(row=4,column=1)
+seleccion_minutos.grid(row=5,column=1)
+dia_label=Label(disponibilidad_citas_frame,text="Hora",bg=Charade, font=subtitulo4_font)
+dia_label.grid(row=4,column=0)
+dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
+dia_label.grid(row=5,column=0)
+
+boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita(), image = reservar_hora_ic)
+boton_hora.grid(row=6,column=0, columnspan=2)
+
+
 ventana_principal.mainloop()

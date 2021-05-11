@@ -250,7 +250,7 @@ class Cita ():
     
     #funcion para mostrar los datos ya recopilados
     def __str__(self):
-        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)
+        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)+" "+self.direccion+" "+self.prioridad+" "+self.tiempo_restante+" "+self.confirmada
 
 class Persona():
 
