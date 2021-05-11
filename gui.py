@@ -185,24 +185,28 @@ def modificarDatosPaciente():
     cancelarDatosPaciente()
     
 def elegirFecha():
+    paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
+    medico= lista_medicos_listbox.get(ACTIVE).split()
+    medico.pop()
+    aux=""
+    for palabra in medico:
+        aux+=palabra+" "
+    aux=aux[:-1]
+    medico=clinica_objeto.buscarMedico(aux)[0]
 
+    
+
+    
     def agregarCita():
         fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-        medico= lista_medicos_listbox.get(ACTIVE).split()
-        medico.pop()
-        aux=""
-        for palabra in medico:
-            aux+=palabra+" "
-        aux=aux[:-1]
-        medico=clinica_objeto.buscarMedico(aux)[0]
-        paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
-        paciente.agregarCita(cita_auxiliar)
-        medico.agregarCita(cita_auxiliar)
-        return
+        if paciente.agregarCita(cita_auxiliar) and medico.agregarCita(cita_auxiliar):
+            messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
+            return True
+        return False
 
     if medico_seleccionado_label["text"]=="":
-        messagebox.showwarning(message="Recuerde escojer al Medico", title="Error")
+        messagebox.showwarning(message="Recuerde escoger al Medico", title="Error")
         return
 
     elegir_fecha=Toplevel()
