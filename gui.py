@@ -30,8 +30,7 @@ def autocompletarPaciente():
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
-    
+        lista_medicos_listbox.insert(END, medico.getNombreCompleto()+" "+medico.getEspecialidad())
     return
 
 def seleccionarMedico(evento):
@@ -195,7 +194,7 @@ subtitulo2_font = font.Font(family="Arial Narrow", weight="bold",size=15)
 subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
-
+subtitulo6_font = font.Font (family= "Arial Narrow", size= 14)
 
 #en este frame irán todas las entradas necesarias para una cita
 agendar_cita_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
@@ -231,7 +230,7 @@ buscar_doctor_entry.grid(row=1,column=0, sticky=W)
 
 framelistbox=LabelFrame(buscar_medico_frame, relief=FLAT)
 framelistbox.grid(row=2,column=0)
-lista_medicos_listbox=Listbox(framelistbox,width=45,height=4)
+lista_medicos_listbox=Listbox(framelistbox,width=45,height=4,font=subtitulo6_font)
 lista_medicos_listbox.pack(side=LEFT)
 medico_seleccionado_label=Label(buscar_medico_frame, bg=Charade, font=subtitulo5_font)
 buscar_doctor_label=Label(buscar_medico_frame, text="Medico escogido:", bg=Charade, font=subtitulo2_font)
