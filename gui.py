@@ -118,6 +118,7 @@ def confirmarCita():
     return
 
 def buscarCodigo():
+    info_cita_txtbox.delete(0,END)
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
         for cita in paciente.getCitas():
@@ -127,7 +128,7 @@ def buscarCodigo():
 
 
 
-                info_cita_txtbox.insert()
+                info_cita_txtbox.insert(0,texto)
 
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
@@ -140,6 +141,9 @@ def agregarDatosPaciente():
 
         return False
 
+    for entrada in lista_entry_datos_paciente:
+        if entrada.get()=="":
+            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
@@ -152,13 +156,6 @@ def cancelarDatosPaciente():
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         prevision_btn.set("Sin Prevision")
-
-def agendarCita():
-
-    return
-
-def buscarCodigo():
-    return
 
 def elegirFecha():
 
