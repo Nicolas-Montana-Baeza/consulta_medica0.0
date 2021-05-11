@@ -370,7 +370,10 @@ class Persona():
             
     #funcion para retornar el nombre completo de una persona
     def getNombreCompleto(self):
-        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
+        if self.nombre2=="":
+            return str(self.nombre1).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
+        else:
+            return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
 
  #funcion desarrollada para cancelar una cita  
     def cancelarCita(self, _codigo_cita):
