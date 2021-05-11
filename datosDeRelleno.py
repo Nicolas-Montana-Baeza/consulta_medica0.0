@@ -2,6 +2,7 @@ import clinica
 from random import randint
 import datetime
 import calendar
+from math import floor
 def formatoNombres(_nombres):
     nombres_aux=[]
    

@@ -46,7 +46,6 @@ def agregarCita():
     medico.agregarCita(cita_auxiliar)
     return
     
-
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
@@ -82,8 +81,17 @@ def confirmarCita():
     return
 
 def agregarDatosPaciente():
-    if not(clinica.Persona.isRut(rut_entry.get())) or len(clinica_objeto.buscarPaciente(rut_entry.get()))!=0:
+    if not(clinica.Persona.isRut(rut_entry.get())) :
+        messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
+
         return False
+    
+    if not(clinica.Persona.isMail(email_entry.get())):
+        messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
+
+        return False
+
+
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
