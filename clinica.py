@@ -88,7 +88,7 @@ class Clinica():
         print("entre1")
         for paciente in self.pacientes:
             print("entre2")
-            if paciente.getRut==_paciente.getRut():
+            if paciente.getRut()==_paciente.getRut():
                 print("entre3")
                 paciente.setPrimerNombre(_paciente.getPrimerNombre())
                 paciente.setSegundoNombre(_paciente.getSegundoNombre())
