@@ -107,6 +107,7 @@ def buscarCodigo():
     info_cita_txtbox.delete('0.0',END)
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
+        print("entro aca")
         for cita in paciente.getCitas():
             if cita.getCodigo==busqueda:
                 texto= "Fecha Citada: "+cita.getFechaCitada()+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+cita.getConfirmada()
