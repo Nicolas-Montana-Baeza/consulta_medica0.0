@@ -2,7 +2,7 @@ import datetime as dt
 from math import floor
 import re
 import shortuuid
-
+#clases necesarias para nuestro despacho
 class Clinica():
 
     def __init__(self,_nombre,_tipo,_direccion,_horario,_medicos,_pacientes):
@@ -51,7 +51,8 @@ class Clinica():
     
     def getCitas(self):
         return self.medicos.getCitas()
-    
+
+    #funcion para buscar un paciente dentro de los ya ingresados
     def buscarPaciente(self,buscar):
         coincidencias=[]
         buscar=buscar.lower()
@@ -68,7 +69,8 @@ class Clinica():
                     coincidencias.append(paciente)
 
         return coincidencias
-           
+
+    #funcion para agregar un nuevo paciente      
     def agregarPaciente(self, _paciente):
         for paciente in self.pacientes:
             if paciente.getRut==_paciente.getRut():
@@ -76,6 +78,7 @@ class Clinica():
         self.pacientes.append(_paciente)
         return True
 
+    #funcion para eliminar un paciente ya ingresado
     def eliminarPaciente(self,_rut):
         for paciente in self.pacientes:
             if paciente.getRut==_rut:
@@ -83,6 +86,7 @@ class Clinica():
                 return True
         return False
     
+    #funcion para modificar datos del paciente ya ingresado
     def modificarPaciente(self,_paciente):
         for paciente in self.pacientes:
             if paciente.getRut==_paciente.getRut():
@@ -97,6 +101,7 @@ class Clinica():
                 return True
         return False
 
+    #funcion para buscar un medico existente
     def buscarMedico(self,buscar):
         coincidencias=[]
         buscar=buscar.lower()
@@ -115,20 +120,22 @@ class Clinica():
 
         return coincidencias    
 
+    #funcion para agregar un nuevo medico
     def agregarMedico(self, _medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
                 return False
         self.medicos.append(_medico)
         return True
-
+    #funcion para eliminar un medico existente
     def eliminarMedico(self,_rut):
         for medico in self.medicos:
             if medico.getRut==_rut:
                 self.medicos.remove(medico)
                 return True
         return False
-    
+
+    #funcion para modificar datos de un medico ya ingresado
     def modificarMedico(self,_medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
@@ -144,6 +151,7 @@ class Clinica():
                 return True
         return False
 
+    #funcion para mostrar los datos ya recopilados
     def __str__(self):
         return self.nombre+" "+self.direccion+" "+self.tipo+" "+str(self.horario)+" "+str(self.medicos)+" "+str(self.pacientes)
 
@@ -191,6 +199,9 @@ class Cita ():
     def setModalidad(self,modalidad): 
         self.modalidad=modalidad
     
+    def setPrioridad(self,prioridad):
+        self.prioridad=prioridad
+    
     def setTiempoRestante(self,tiempo_restante):
         self.tiempo_restante=tiempo_restante
 
@@ -223,6 +234,9 @@ class Cita ():
 
     def getModalidad(self):
         return self.modalidad
+
+    def getPrioridad(self):
+        return self.prioridad
     
     def getTiempoRestante(self):
         return self.tiempo_restante
@@ -230,11 +244,14 @@ class Cita ():
     def getConfirmada(self):
         return self.confirmada
 
+    #funcion para actualizar el estado de una cita segun en cual se encuentre
     def actualizarEstado(self):
         fecha_actual=dt.datetime.now()       
         fecha_restante=self.fecha_citada-fecha_actual
 
         self.tiempo_restante = fecha_restante
+    
+    #funcion para mostrar los datos ya recopilados
     def __str__(self):
         return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)
 
@@ -275,6 +292,9 @@ class Persona():
     def setEmail(self,email):
         self.email=email
 
+    def setNumero(self,numero):
+        self.numero=numero
+
     def getPrimerNombre(self):
         return self.nombre1
 
@@ -289,19 +309,22 @@ class Persona():
 
     def getNumeroTelefonico(self):
         return self.numero_telefonico
-
-    def getEmail(self):
-        return self.email
-
+    
     def getEdad(self):
         return self.edad
 
     def getRut(self):
         return self.rut
     
-    def getNumeroTelefonico(self):
-        return self.numero_telefonico
+    def getEmail(self):
+        return self.email
     
+    def getNumero(self):
+        return self.numero
+    
+
+    
+    #funcion para verificar si un correo es valido o no
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
         
@@ -311,6 +334,7 @@ class Persona():
         else:
             return False
 
+    #funcion para verificar si un rut es valido o no
     def isRut(_rut):
         if len(_rut)==0:
             return False
@@ -347,13 +371,15 @@ class Persona():
             return True
         else:
             return False
-
+            
+    #funcion para buscar una cita agendada
     def buscarCita(self,buscar):
         for cita in self.citas:
             if cita.getCodigo()==buscar:
                 return cita
         return False
 
+    #funcion para agendar una cita
     def agendarCita(self, _agendar):
         for cita in self.citas:
             if cita.getCodigo()==_agendar.getCodigo() or cita.getFechaCitada()==_agendar.getFechaCitada():
@@ -361,13 +387,15 @@ class Persona():
         self.citas.append(_agendar)
         return True
 
+    #funcion para eliminar una cita agendada
     def eliminarCita(self,_codigo):
         for cita in self.citas:
             if cita.getCodigo==_codigo:
                 self.citas.remove(cita)
                 return True
         return False
-    
+
+    #funcion para modificar una cita agendada
     def modificarCita(self,fecha_citada,codigo):
         for cita in self.citas:
             if cita.getFechaCitada()==fecha_citada:
@@ -376,7 +404,8 @@ class Persona():
                 cita.setfechaCitada(fecha_citada)
                 return True
         return False
-    
+
+    #funcion para confirmar una cita
     def confirmarCita(self,codigo):
         for cita in self.citas:
             if cita.getCodigo()==codigo:
@@ -384,9 +413,11 @@ class Persona():
                 return True
         return False
 
+    #funcion para retornar el nombre completo de una persona
     def getNombreCompleto(self):
         return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
 
+    #funcion para retornar una representacion de todos los atributos del objeto
     def __str__(self):
         return str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.nombre1)+" "+str(self.nombre2)+" "+self.rut+" "+str(self.edad)+" "+self.email
 
@@ -417,27 +448,30 @@ class Medico(Persona):
     def getPacientes(self):
         return self.pacientes
     
-    def getPacientes(self):
-        return self.pacientes
 
+    #funcion para entregarle una receta al paciente
     def recetarPaciente(self, _receta,_paciente):
         _receta=_paciente.getRecetas.append(_receta)
         _paciente.set(_receta)
 
+    #funcion para solicitar examen a un paciente
     def requerirExamen(self, _examen, _paciente):
         _examen=_paciente.getRequerimientos().append(_examen)
         _paciente.setRequerimientos(_examen)
 
+    #funcion para verificar la fecha de cita esta disponible
     def isDisponible(self, _fecha):
         for disponible in self.disponibilidad:
             if _fecha==disponible: 
                 return True
         return False
 
+    #funcion para diagnosticar a un paciente
     def diagnosticarPaciente(self, _diagnostico, _paciente):
         _diagnostico=_paciente.getDiagnosticos().append(_diagnostico)
         _paciente.setDiagnosticos(_diagnostico)
 
+    #funcion que retorna el nombre completo de un medico junto a su especialidad
     def __str__(self) :
         return str(self.nombre1)+" "+str(self.nombre2)+" "+str(self.apellido1)+" "+str(self.apellido2)+" "+str(self.especialidad)
 
@@ -468,7 +502,10 @@ class Paciente(Persona):
 
     def setFormapago(self,forma_pago):
         self.forma_pago=forma_pago
-    
+
+    def setCartera(self,cartera):
+        self.cartera=cartera
+
     def setCitas(self,citas):
         self.citas=citas
 
@@ -490,13 +527,16 @@ class Paciente(Persona):
     def getFormapago(self):
         return self.forma_pago
     
+    def getCartera(self):
+        return self.cartera
+    
     def getCitas(self):
         return self.citas
 
     def getRecetas(self):
         return self.citas
 
-      
+    #funcion desarrollada para cancelar una cita  
     def cancelarCita(self, _codigo_cita):
 
         for i in range (len(self.citas)):
@@ -504,31 +544,27 @@ class Paciente(Persona):
             if _codigo_cita==self.citas[i].codigo:
                 self.citas.pop(i)
 
+    #funcion realizada para pagar una cita
     def pagarCita(self,_cita,_monto_a_pagar):
         if _monto_a_pagar>self.cartera:
             return 
         else:
             _cita.setPagado(True)
 
+    #funcion para retornar los antecedentes entregados del pacientes
     def __str__(self):
         return super().__str__()+" "+str(self.prevision)+" "+str(self.ultima_prestacion)+" "+str(self.requerimientos)+" "+str(self.diagnosticos)+" "+str(self.forma_pago)
 
 class Receta():
 
-    def __init__(self):
-        #
+    def __init__(self, paciente, medico, farmaco_y_dosis, fecha, duracion, observaciones, dosis):
+        
         self.paciente= Paciente()
-        #
         self.medico= Medico()
-        #
         self.farmaco_y_dosis=[]
-        #
         self.fecha=""
-        #
         self.duracion=""
-        #
         self.observaciones=[]
-        #
         self.dosis=""
     
     def setPaciente(self,paciente):
@@ -572,6 +608,7 @@ class Receta():
 
     def getDosis(self):
         return self.dosis
-        
+
+    #funcion que retorna lo recetado por el medico al paciente, junto a sus indicaciones
     def __str__(self):
         return str(self.paciente+" "+ self.medico+" "+ self.farmaco_y_dosis+" "+self.fecha+" "+self.duracion+" "+self.observaciones+" "+self.dosis)
