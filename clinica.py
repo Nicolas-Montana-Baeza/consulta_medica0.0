@@ -49,8 +49,6 @@ class Clinica():
     def getPacientes(self):
         return self.pacientes
     
-    def getCitas(self):
-        return self.medicos.getCitas()
     
     def buscarPaciente(self,buscar):
         coincidencias=[]
@@ -191,6 +189,9 @@ class Cita ():
     def setModalidad(self,modalidad): 
         self.modalidad=modalidad
     
+    def setPrioridad(self,prioridad):
+        self.prioridad=prioridad
+    
     def setTiempoRestante(self,tiempo_restante):
         self.tiempo_restante=tiempo_restante
 
@@ -223,6 +224,9 @@ class Cita ():
 
     def getModalidad(self):
         return self.modalidad
+
+    def getPrioridad(self):
+        return self.prioridad
     
     def getTiempoRestante(self):
         return self.tiempo_restante
@@ -275,6 +279,9 @@ class Persona():
     def setEmail(self,email):
         self.email=email
 
+    def setNumero(self,numero):
+        self.numero=numero
+
     def getPrimerNombre(self):
         return self.nombre1
 
@@ -289,18 +296,20 @@ class Persona():
 
     def getNumeroTelefonico(self):
         return self.numero_telefonico
-
-    def getEmail(self):
-        return self.email
-
+    
     def getEdad(self):
         return self.edad
 
     def getRut(self):
         return self.rut
     
-    def getNumeroTelefonico(self):
-        return self.numero_telefonico
+    def getEmail(self):
+        return self.email
+    
+    def getNumero(self):
+        return self.numero
+    
+
     
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
@@ -417,8 +426,6 @@ class Medico(Persona):
     def getPacientes(self):
         return self.pacientes
     
-    def getPacientes(self):
-        return self.pacientes
 
     def recetarPaciente(self, _receta,_paciente):
         _receta=_paciente.getRecetas.append(_receta)
@@ -468,7 +475,10 @@ class Paciente(Persona):
 
     def setFormapago(self,forma_pago):
         self.forma_pago=forma_pago
-    
+
+     def setCartera(self,cartera):
+        self.cartera=cartera
+
     def setCitas(self,citas):
         self.citas=citas
 
@@ -489,6 +499,9 @@ class Paciente(Persona):
 
     def getFormapago(self):
         return self.forma_pago
+    
+    def getCartera(self):
+        return self.cartera
     
     def getCitas(self):
         return self.citas
@@ -515,20 +528,14 @@ class Paciente(Persona):
 
 class Receta():
 
-    def __init__(self):
-        #
+    def __init__(self, paciente, medico, farmaco_y_dosis, fecha, duracion, observaciones, dosis):
+        
         self.paciente= Paciente()
-        #
         self.medico= Medico()
-        #
         self.farmaco_y_dosis=[]
-        #
         self.fecha=""
-        #
         self.duracion=""
-        #
         self.observaciones=[]
-        #
         self.dosis=""
     
     def setPaciente(self,paciente):
