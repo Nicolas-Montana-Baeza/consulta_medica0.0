@@ -127,7 +127,7 @@ def buscarCodigo():
 
 
                 info_cita_txtbox.insert('0.0',texto)
-#función para agregar paciente
+    info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
@@ -448,7 +448,7 @@ buscar_btn.pack(pady=10)
 
 #muestra la informacion encontrada de la cita
 info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
-info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
+
 info_cita_txtbox.pack(padx=10)
 
 agendar_hora_ic = Image.open('./imagenes/confirmar.png')
