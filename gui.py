@@ -270,6 +270,10 @@ def reagendarCita():
             if paciente.modificarCita(fecha,busqueda):
                 buscarCodigo()
 
+                elegir_fecha.destroy()
+                messagebox.showinfo(message="La cita ha sido reagendada con exito", title="Éxito")
+
+
 
     elegir_fecha=Toplevel()
     escoger_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
