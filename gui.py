@@ -195,6 +195,12 @@ def elegirFecha():
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
+        temp=LabelFrame(elegir_fecha)
+        label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
+        entry=Entry(temp)
+        entry.pack(fill=Y, expand=True)
+        entry.config(state="readonly")
+        label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
         entry.insert(0,cita_auxiliar.getCodigo())
         temp.pack()
         return True
@@ -241,12 +247,7 @@ def elegirFecha():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
-    temp=LabelFrame(elegir_fecha)
-    label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
-    entry=Entry(temp)
-    entry.pack(fill=Y, expand=True)
-    entry.config(state="readonly")
-    label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
+    
     
 
 
