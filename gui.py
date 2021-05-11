@@ -182,7 +182,7 @@ def elegirFecha():
     for palabra in medico:
         aux+=palabra+" "
     aux=aux[:-1]
-    print(medico.getNombreCompleto())
+    print(medico)
     medico=clinica_objeto.buscarMedico(aux)[0]
 
     
