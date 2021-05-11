@@ -191,8 +191,8 @@ def elegirFecha():
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
-            return True
-        return False
+            return False
+        return True
 
     if medico_seleccionado_label["text"]=="":
         messagebox.showwarning(message="Recuerde escoger al Medico", title="Error")

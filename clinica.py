@@ -398,7 +398,9 @@ class Persona():
     def agregarCita(self, _agendar):
         for cita in self.citas:
             if cita.getCodigo()==_agendar.getCodigo() or cita.getFechaCitada()==_agendar.getFechaCitada():
+                print("Si la agendo")
                 return False
+        print("Si la agendo")
         self.citas.append(_agendar)
         return True
 
