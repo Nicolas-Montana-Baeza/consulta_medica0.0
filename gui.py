@@ -31,21 +31,7 @@ def autocompletarPaciente():
     for i in range(len(datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
-       
-def agregarCita():
-    fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-    medico= lista_medicos_listbox.get(ACTIVE).split()
-    medico.pop()
-    aux=""
-    for palabra in medico:
-        aux+=palabra
-    medico=clinica_objeto.buscarMedico(aux)
-    paciente=clinica_objeto.buscarPaciente(rut_entry.get())
-    cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
-    paciente.agregarCita(cita_auxiliar)
-    medico.agregarCita(cita_auxiliar)
-    return
-    
+          
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
@@ -112,6 +98,21 @@ def buscarCodigo():
     return
 
 def elegirFecha():
+
+    def agregarCita():
+        fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
+        medico= lista_medicos_listbox.get(ACTIVE).split()
+        medico.pop()
+        aux=""
+        for palabra in medico:
+            aux+=palabra
+        medico=clinica_objeto.buscarMedico(aux)
+        paciente=clinica_objeto.buscarPaciente(rut_entry.get())
+        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+        paciente.agregarCita(cita_auxiliar)
+        medico.agregarCita(cita_auxiliar)
+        return
+ 
     elegir_fecha=Toplevel()
     escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
     escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
@@ -146,10 +147,6 @@ def elegirFecha():
     dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
     dia_label.grid(row=5,column=0)
 
-    reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
-    reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-    reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
-
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escojer_fecha_frame.pack()
@@ -163,6 +160,9 @@ ventana_principal.resizable(0,0)
 s=ttkbootstrap.Style()
 s.theme_use("darkly")
 
+reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
+reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
 """
 image = Image.open('imagenes/fondoPrincipal.png')
