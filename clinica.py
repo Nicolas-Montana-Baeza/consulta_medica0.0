@@ -354,7 +354,7 @@ class Persona():
 
     def agendarCita(self, _agendar):
         for cita in self.citas:
-            if cita.getCodigo()==_agendar.getCodigo():
+            if cita.getCodigo()==_agendar.getCodigo() or cita.getFechaCitada()==_agendar.getFechaCitada():
                 return False
         self.citas.append(_agendar)
         return True
@@ -368,6 +368,8 @@ class Persona():
     
     def modificarCita(self,fecha_citada,codigo):
         for cita in self.citas:
+            if cita.getFechaCitada()==fecha_citada:
+                return False
             if cita.getCodigo==codigo:
                 cita.setfechaCitada(fecha_citada)
                 return True

@@ -87,7 +87,10 @@ def cancelarDatosPaciente():
 def agendarCita():
 
     return
-    
+
+def buscarCodigo():
+
+    return
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -270,8 +273,6 @@ citas_agendadas_frame.pack(side=LEFT,fill=X, expand=True, padx=40, pady=40, anch
 citas_agendadas_label=Label(citas_agendadas_frame,bg=CuriousBlue, text="Mis Citas",font=titulo_font, highlightthickness=0)
 citas_agendadas_label.pack(fill=X)
 
-
-
 #ingresa el codigo
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
 gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
@@ -284,7 +285,7 @@ ingresar_codigo_entry.pack()
 buscar_cita_ic = Image.open('./imagenes/buscacita.png')
 buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
 buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
-buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic)
+buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic, command=lambda:buscarCodigo())
 buscar_btn.pack(  pady=10)
 
 #muestra la informacion encontrada de la cita
