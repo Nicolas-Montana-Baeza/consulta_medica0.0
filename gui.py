@@ -1,4 +1,4 @@
-from tkinter import True,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
@@ -53,9 +53,9 @@ def buscarMedico(evento):
 
 #Actualiza medicos disponibles
 def actualizarListboxCita(datos):
-    lista_medicos_listbox.delete(0,END)
+    lista_medicos_listbox.delete('0.0',END)
     for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
+        lista_medicos_listbox.insert('0.0', )
     
     return
 
@@ -171,15 +171,8 @@ def modificarDatosPaciente():
         messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
 
     cancelarDatosPaciente()
-def pantallaCodigo(cita_auxiliar):
-    temp=Tk()
-    label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
-    entry=Entry(temp)
-    entry.pack(fill=Y, expand=TRUE)
-    entry.insert(0,cita_auxiliar.getCodigo())
-    entry.config(state="readonly")
-    label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
-    temp.mainloop()
+def pantallaCodigo():
+    temp.pack()
 #función para agendar la cita
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
@@ -202,7 +195,8 @@ def elegirFecha():
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
-        pantallaCodigo(cita_auxiliar)
+        entry.insert(0,cita_auxiliar.getCodigo())
+        pantallaCodigo()
         return True
 
     if medico_seleccionado_label["text"]=="":
@@ -247,6 +241,14 @@ def elegirFecha():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
+    temp=LabelFrame(elegir_fecha)
+    label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
+    entry=Entry(temp)
+    entry.pack(fill=Y, expand=True)
+    entry.config(state="readonly")
+    label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
+    
+
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
@@ -414,15 +416,6 @@ citas_agendadas_label.pack(fill=X)
 #ingresa el codigo
 gestionar_cita_frame=LabelFrame(citas_agendadas_frame,text="Información de la Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
 gestionar_cita_frame.pack(fill=Y, expand=True, padx=30, pady=10)
-buscar_rut_ic1 = Image.open('./imagenes/buscapaciente.png')
-buscar_rut_ic1 = buscar_rut_ic1.resize((30, 30), Image.ANTIALIAS)
-buscar_rut_ic1 = ImageTk.PhotoImage(buscar_rut_ic1)
-rut_autocompletar_label1=Label(gestionar_cita_frame, text="Buscar citas por rut:", bg=Charade, font=subtitulo2_font)
-rut_autocompletar_label1.pack()
-buscar_rut_entry1=Entry(gestionar_cita_frame, width=10)
-buscar_rut_entry1.pack()
-buscar_rut_btn1=Button(gestionar_cita_frame, text="Buscar" ,command=lambda:autocompletarPaciente(),  image=buscar_rut_ic1)
-buscar_rut_btn1.pack()
 ingresar_codigo_label=Label(gestionar_cita_frame, text="Ingrese el código de su cita",bg=Charade,font=subtitulo2_font)
 ingresar_codigo_label.pack()
 ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
