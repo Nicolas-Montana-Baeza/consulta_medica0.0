@@ -145,6 +145,9 @@ def agregarDatosPaciente():
         if entrada.get()=="":
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
+    if not(lista_medicos_listbox.get(ACTIVE)):
+        messagebox.showwarning(message="Seleccione un medico", title="Error")
+        return False
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
@@ -159,6 +162,21 @@ def cancelarDatosPaciente():
         prevision_btn.set("Sin Prevision")
 
 def modificarDatosPaciente():
+    if not(clinica.Persona.isRut(rut_entry.get())) :
+        messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
+
+        return False
+    
+    if not(clinica.Persona.isMail(email_entry.get())):
+        messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
+
+        return False
+
+    for entrada in lista_entry_datos_paciente:
+        if entrada.get()=="":
+            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
+            return False
+
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.modificarPaciente(paciente_temporal)
