@@ -162,13 +162,6 @@ def modificarDatosPaciente():
     email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.modificarPaciente(paciente_temporal)
 
-
-def agendarCita():
-    return
-
-def buscarCodigo():
-    return
-
 def elegirFecha():
 
     def agregarCita():
@@ -220,7 +213,6 @@ def elegirFecha():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escojer_fecha_frame.pack()
-    return
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
@@ -254,24 +246,6 @@ agendar_cita_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
 agendar_cita_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
 agendar_cita_label=Label(agendar_cita_frame, text="Agendar Cita",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
 agendar_cita_label.pack(fill=X)
-
-"""
-#contiene los radio buttons
-escoger_especialidades=LabelFrame(agendar_cita_frame, text="Escoja la Especialidad", padx=5, pady=5")
-escoger_especialidades.pack(anchor=W)
-
-especialidades=["Medicina General","Kinesiologia","Pediatria", "Odontologia"]
-opcion=StringVar()
-opcion.set(especialidades[0])
-
-kine_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[1], variable=opcion, value=especialidades[1]")
-med_gnrl_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[0], variable=opcion, value=especialidades[0]",)
-pedia_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[2], variable=opcion, value=especialidades[2]")
-odont_btn=Radiobutton(escoger_especialidades,highlightthickness=0, text=especialidades[3], variable=opcion, value=especialidades[3]")
-kine_btn.pack(anchor=W)
-med_gnrl_btn.pack(anchor=W)
-pedia_btn.pack(anchor=W)
-odont_btn.pack(anchor=W)"""
 
 buscar_medico_frame=LabelFrame(agendar_cita_frame,text="Buscar Medico",width=30, bg=Charade, font=subtitulo_font, labelanchor=N)
 buscar_medico_frame.pack(fill=BOTH, expand=True, padx=30, pady=10)
@@ -314,9 +288,7 @@ buscar_rut_btn.grid(row=0,column=2)
 rut_autocompletar_label=Label(ingresar_paciente, text="Buscar paciente por Rut: ", bg=Charade, font=subtitulo4_font)
 rut_autocompletar_label.grid(row=0,column=0)
 
-
     #prevision
-
 prevision_label=Label(ingresar_paciente, text="Prevision del Paciente:", bg=Charade, font=subtitulo4_font)
 prevision_label.grid(row=1,column=0)
 prevision_btn=StringVar()
@@ -331,7 +303,6 @@ fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fona
 fonasa_btn.pack(side=LEFT)
 
     #rut
-
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
