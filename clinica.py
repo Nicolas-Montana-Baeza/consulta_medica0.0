@@ -558,10 +558,6 @@ class Receta():
 
     def getDosis(self):
         return self.dosis
-
-    def isValida(self):
-        """if dt.datetime.now()-self.fecha>self.duracion:
-            return True"""
-        return "not implemented yet" 
+        
     def __str__(self):
         return str(self.paciente+" "+ self.medico+" "+ self.farmaco_y_dosis+" "+self.fecha+" "+self.duracion+" "+self.observaciones+" "+self.dosis)
