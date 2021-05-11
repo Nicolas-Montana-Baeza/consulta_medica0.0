@@ -31,21 +31,7 @@ def autocompletarPaciente():
     for i in range(len(datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
-       
-def agregarCita():
-    fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-    medico= lista_medicos_listbox.get(ACTIVE).split()
-    medico.pop()
-    aux=""
-    for palabra in medico:
-        aux+=palabra
-    medico=clinica_objeto.buscarMedico(aux)
-    paciente=clinica_objeto.buscarPaciente(rut_entry.get())
-    cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
-    paciente.agregarCita(cita_auxiliar)
-    medico.agregarCita(cita_auxiliar)
-    return
-    
+          
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
@@ -112,6 +98,21 @@ def buscarCodigo():
     return
 
 def elegirFecha():
+
+    def agregarCita():
+        fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
+        medico= lista_medicos_listbox.get(ACTIVE).split()
+        medico.pop()
+        aux=""
+        for palabra in medico:
+            aux+=palabra
+        medico=clinica_objeto.buscarMedico(aux)
+        paciente=clinica_objeto.buscarPaciente(rut_entry.get())
+        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+        paciente.agregarCita(cita_auxiliar)
+        medico.agregarCita(cita_auxiliar)
+        return
+ 
     elegir_fecha=Toplevel()
     escojer_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
     escojer_modalidad=LabelFrame(escojer_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
