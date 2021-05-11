@@ -145,7 +145,8 @@ def agregarDatosPaciente():
         if entrada.get()=="":
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
-    if lista_medicos_listbox.get()=="":
+            
+    if lista_medicos_listbox.get(ACTIVE)=="":
         messagebox.showwarning(message="Seleccione un medico", title="Error")
         return False
 
