@@ -315,7 +315,9 @@ class Persona():
         if len(_rut)==0:
             return False
         rut=_rut.replace("-","")
+        
         verificador=rut[-1]
+        print(verificador)
         verificando=rut[:-1]
         verificando=verificando[::-1]
         if len(verificador) ==0 or not(rut.isdigit()):
@@ -335,17 +337,20 @@ class Persona():
                 recorre_serie=0 
 
             verificar+=(int(i)*int(serie[recorre_serie]))
+
             recorre_serie+=1
 
         verificaraux=floor(verificar/11)
         verificar=verificar-(verificaraux*11)
         verificar=11-verificar
-
+        if verificar==11:
+            verificar=0
+        print(verificar)
         if verificar==int(verificador):
             return True
         else:
             return False
-    
+            
     def buscarCita(self,buscar):
         for cita in self.citas:
             if cita.getCodigo()==buscar:
