@@ -32,7 +32,7 @@ def autocompletarPaciente():
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
     for medico in datos:
-        lista_medicos_listbox.insert(END, medico)
+        lista_medicos_listbox.insert(END, medico.getNombreCompleto()+" "+medico.getEspecialidad())
     
     return
 
@@ -84,11 +84,6 @@ def actualizarListboxCita(datos):
     
     return
 
-def seleccionarCita(evento):
-    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
-    return
-
 def buscarCita(evento):
     escrito=buscar_doctor_entry.get()
     
@@ -123,6 +118,7 @@ def confirmarCita():
     return
 
 def buscarCodigo():
+    info_cita_txtbox.delete(0,END)
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
         for cita in paciente.getCitas():
@@ -132,7 +128,7 @@ def buscarCodigo():
 
 
 
-                info_cita_txtbox.insert()
+                info_cita_txtbox.insert(0,texto)
 
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
@@ -145,6 +141,9 @@ def agregarDatosPaciente():
 
         return False
 
+    for entrada in lista_entry_datos_paciente:
+        if entrada.get()=="":
+            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
 
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
