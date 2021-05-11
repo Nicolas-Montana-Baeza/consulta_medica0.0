@@ -77,14 +77,62 @@ def buscarCita(evento):
     
     actualizarListbox(datos)
 
+def actualizarListboxCita(datos):
+    lista_medicos_listbox.delete(0,END)
+    for medico in datos:
+        lista_medicos_listbox.insert(END, medico)
+    
+    return
+
+def seleccionarCita(evento):
+    medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
+
+    return
+
+def buscarCita(evento):
+    escrito=buscar_doctor_entry.get()
+    
+    if escrito == "":
+        datos=clinica_objeto.getMedicos()
+    else:
+        datos=clinica_objeto.buscarMedico(escrito)
+    
+    actualizarListbox(datos)
+
 def cancelarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
+
     return
 
 def reagendarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
+
     return
 
 def confirmarCita():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            return paciente.buscarCita(busqueda)
     return
+
+def buscarCodigo():
+    busqueda= ingresar_codigo_entry.get()
+    for paciente in clinica_objeto.getPacientes():
+        for cita in paciente.getCitas():
+            if cita.getCodigo==busqueda:
+                texto= "Fecha Citada: "+cita.getFechaCitada()+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+cita.getConfirmada()
+
+
+
+
+                info_cita_txtbox.insert()
 
 def agregarDatosPaciente():
     if not(clinica.Persona.isRut(rut_entry.get())) :
