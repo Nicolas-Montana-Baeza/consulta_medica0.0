@@ -85,8 +85,11 @@ class Clinica():
     
     #funcion para modificar datos del paciente ya ingresado
     def modificarPaciente(self,_paciente):
+        print("entre1")
         for paciente in self.pacientes:
+            print("entre2")
             if paciente.getRut==_paciente.getRut():
+                print("entre3")
                 paciente.setPrimerNombre(_paciente.getPrimerNombre())
                 paciente.setSegundoNombre(_paciente.getSegundoNombre())
                 paciente.setPrimerApellido(_paciente.getPrimerApellido())
