@@ -174,9 +174,10 @@ def modificarDatosPaciente():
 def pantallaCodigo(cita_auxiliar):
     temp=Tk()
     label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
-    entry=Entry(temp,state="readonly")
+    entry=Entry(temp)
     entry.pack()
     entry.insert(0,cita_auxiliar.getCodigo())
+    entry.config(state="readonly")
     label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
     temp.mainloop()
 #función para agendar la cita
