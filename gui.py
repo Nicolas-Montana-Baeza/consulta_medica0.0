@@ -112,7 +112,7 @@ def buscarCodigo():
             print("entro aca1")
             if cita.getCodigo()==busqueda:
                 print("entro aca2")
-                texto= "Fecha Citada: "+cita.getFechaCitada()+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+cita.getConfirmada()
+                texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
 
 
 
