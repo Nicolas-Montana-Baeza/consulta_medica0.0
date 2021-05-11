@@ -137,9 +137,6 @@ def buscarCodigo():
 
                 info_cita_txtbox.insert()
 
-            
-
-
 def elegirFecha():
 
     def agregarCita():
@@ -188,11 +185,9 @@ def elegirFecha():
     dia_label=Label(disponibilidad_citas_frame,text="Minutos",bg=Charade, font=subtitulo4_font)
     dia_label.grid(row=5,column=0)
 
-    boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita(), image = reservar_hora_ic)
+    boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agregarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escojer_fecha_frame.pack()
-
-
     return
 
 ventana_principal=Tk()
