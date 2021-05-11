@@ -176,11 +176,13 @@ def modificarDatosPaciente():
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
     medico= lista_medicos_listbox.get(ACTIVE).split()
+
     medico.pop()
     aux=""
     for palabra in medico:
         aux+=palabra+" "
     aux=aux[:-1]
+    print(medico.getNombreCompleto())
     medico=clinica_objeto.buscarMedico(aux)[0]
 
     
