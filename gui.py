@@ -80,8 +80,7 @@ def buscarCita(evento):
 def cancelarCita():
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
-        for cita in paciente.getCitas():
-            cita.cancelarCita(busqueda)
+            paciente.cancelarCita(busqueda)
             return True
     return False
 #función para reagendar la cita
