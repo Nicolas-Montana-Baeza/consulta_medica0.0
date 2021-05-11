@@ -109,6 +109,7 @@ def buscarCodigo():
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
 
                 info_cita_txtbox.insert('0.0',texto)
+                return
     info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 
 #agrega un paciente
@@ -144,7 +145,6 @@ def cancelarDatosPaciente():
 
 #función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
-    print("entre")
     if not(clinica.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
     
@@ -265,7 +265,7 @@ def reagendarCita():
     busqueda= ingresar_codigo_entry.get()
     def reagendarCita():
         fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+ 
         for paciente in clinica_objeto.getPacientes():
             if paciente.modificarCita(fecha,busqueda):
                 buscarCodigo()
