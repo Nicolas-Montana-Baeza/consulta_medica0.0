@@ -116,12 +116,12 @@ def buscarCodigo():
 
 #agrega un paciente
 def agregarDatosPaciente():
-    if not(clinica.Persona.isRut(rut_entry.get())) :
+    if not(clases.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
 
         return False
     
-    if not(clinica.Persona.isMail(email_entry.get())):
+    if not(clases.Persona.isMail(email_entry.get())):
         messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
 
         return False
@@ -131,7 +131,7 @@ def agregarDatosPaciente():
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
             
-    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+    paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     if clinica_objeto.agregarPaciente(paciente_temporal):
         messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
@@ -147,13 +147,13 @@ def cancelarDatosPaciente():
 
 #función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
-    if not(clinica.Persona.isRut(rut_entry.get())) :
+    if not(clases.Persona.isRut(rut_entry.get())) :
         messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
     
 
         return False
     
-    if not(clinica.Persona.isMail(email_entry.get())):
+    if not(clases.Persona.isMail(email_entry.get())):
         messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
 
         return False
@@ -163,7 +163,7 @@ def modificarDatosPaciente():
             messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
             return False
 
-    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+    paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     if clinica_objeto.modificarPaciente(paciente_temporal):
         messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
@@ -190,7 +190,7 @@ def elegirFecha():
     def agregarCita():
         temp.pack_forget()
         fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
-        cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
+        cita_auxiliar=clases.Cita(fecha, medico, paciente, modalidad.get())
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
