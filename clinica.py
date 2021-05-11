@@ -267,6 +267,7 @@ class Persona():
         self.rut=_rut
         self.email=_email
         self.numero_telefonico=_numero_telefonico
+        self.citas= []
          
     def setPrimerNombre(self,nombre1):
         self.nombre1=nombre1
@@ -367,7 +368,26 @@ class Persona():
         else:
             return False
             
-    #funcion para buscar una cita agendada
+    #funcion para retornar el nombre completo de una persona
+    def getNombreCompleto(self):
+        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
+
+ #funcion desarrollada para cancelar una cita  
+    def cancelarCita(self, _codigo_cita):
+
+        for i in range (len(self.citas)):
+
+            if _codigo_cita==self.citas[i].codigo:
+                self.citas.pop(i)
+
+    #funcion realizada para pagar una cita
+    def pagarCita(self,_cita,_monto_a_pagar):
+        if _monto_a_pagar>self.cartera:
+            return 
+        else:
+            _cita.setPagado(True)
+    
+        #funcion para buscar una cita agendada
     def buscarCita(self,buscar):
         for cita in self.citas:
             if cita.getCodigo()==buscar:
@@ -407,10 +427,6 @@ class Persona():
                 cita.setConfirmada(True)
                 return True
         return False
-
-    #funcion para retornar el nombre completo de una persona
-    def getNombreCompleto(self):
-        return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
 
     #funcion para retornar una representacion de todos los atributos del objeto
     def __str__(self):
@@ -480,7 +496,6 @@ class Paciente(Persona):
         self.forma_pago=""
         #billetera
         self.cartera=0
-        self.citas= []
         self.recetas=[]
 
     def setPrevision(self,prevision):
@@ -530,21 +545,6 @@ class Paciente(Persona):
 
     def getRecetas(self):
         return self.citas
-
-    #funcion desarrollada para cancelar una cita  
-    def cancelarCita(self, _codigo_cita):
-
-        for i in range (len(self.citas)):
-
-            if _codigo_cita==self.citas[i].codigo:
-                self.citas.pop(i)
-
-    #funcion realizada para pagar una cita
-    def pagarCita(self,_cita,_monto_a_pagar):
-        if _monto_a_pagar>self.cartera:
-            return 
-        else:
-            _cita.setPagado(True)
 
     #funcion para retornar los antecedentes entregados del pacientes
     def __str__(self):
