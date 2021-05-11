@@ -36,7 +36,7 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
             rut=_ruts[i]
             email=_emails[i]
             
-            if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
+            if len(_nombres[i])>=3 and clases.Persona.isRut(rut) and clases.Persona.isMail(email):
                 nombre2=""
                 if not(_nombres[i][1::-2]=="."):
                 
@@ -45,7 +45,7 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
                     
                     nombre2=nombre2[:-1]
                     nombre2=nombre2.replace(".","")
-                persona_aux=clinica.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
+                persona_aux=clases.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
