@@ -420,7 +420,7 @@ class Persona():
             if cita.getFechaCitada()==fecha_citada:
                 return False
             if cita.getCodigo()==codigo:
-                cita.setfechaCitada(fecha_citada)
+                cita.setFechaCitada(fecha_citada)
                 return True
         return False
 
