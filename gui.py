@@ -158,8 +158,13 @@ def cancelarDatosPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         prevision_btn.set("Sin Prevision")
 
-def agendarCita():
+def modificarDatosPaciente():
+    paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+    email_entry.get(), tel_contacto_entry.get())
+    clinica_objeto.modificarPaciente(paciente_temporal)
 
+
+def agendarCita():
     return
 
 def buscarCodigo():
@@ -392,6 +397,13 @@ cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
 cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=lambda:cancelarDatosPaciente())
 cancelar_paciente_btn.pack(side=RIGHT,padx=30)
+
+modificar_paciente_ic = Image.open('./imagenes/modificarpaciente.png')
+modificar_paciente_ic = modificar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
+modificar_paciente_ic = ImageTk.PhotoImage(modificar_paciente_ic)
+modificar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = modificar_paciente_ic, command=lambda:modificarDatosPaciente())
+modificar_paciente_btn.pack(side=RIGHT,padx=30)
+
 
 #en este se mostraran las citas por paciente, o por codigo de cita y debe confirmar, cancelar o reagendar la cita necesaria
 
