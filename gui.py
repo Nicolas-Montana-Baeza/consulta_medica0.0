@@ -6,8 +6,7 @@ import ttkbootstrap
 from datosDeRelleno import *
 from PIL import Image,ImageTk
 from estilo import*
-from datetime import dt
-
+import datetime as dt
 #Creacion de algunas listas para darle datos a nuestro objeto Clinica
 
 lista_entry_datos_paciente=[]
@@ -193,34 +192,36 @@ isapre_btn.pack(side=LEFT)
 fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.pack(side=LEFT)
 
-    #primer nombre
+    #rut
+
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(rut_entry)
 
+    #primer nombre
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
-    #segundo nombre
 
+    #segundo nombre
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre:", bg=Charade, font=subtitulo4_font)
 nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
-    #Primer Apellido
 
+    #Primer Apellido
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido:", bg=Charade, font=subtitulo4_font)
 apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
-    #Segundo Apellido
 
+    #Segundo Apellido
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido:", bg=Charade, font=subtitulo4_font)
 apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
@@ -240,6 +241,7 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+
     # edad
 edad_label=Label(ingresar_paciente,text="Edad:",bg=Charade, font=subtitulo4_font)
 edad_label.grid(row=10,column=0)
