@@ -375,7 +375,7 @@ class Persona():
         return False
 
     #funcion para agendar una cita
-    def agendarCita(self, _agendar):
+    def agregarCita(self, _agendar):
         for cita in self.citas:
             if cita.getCodigo()==_agendar.getCodigo() or cita.getFechaCitada()==_agendar.getFechaCitada():
                 return False
