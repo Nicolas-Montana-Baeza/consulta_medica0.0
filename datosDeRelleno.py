@@ -90,6 +90,6 @@ lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades 
 for medico in lista_medicos:
     medico.setDisponibilidad(disponibilidad)
 lista_citas=[]
-lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","")]
+lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","950183162")]
 lista_pacientes[0].setPrevision("FONASA")
 clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
