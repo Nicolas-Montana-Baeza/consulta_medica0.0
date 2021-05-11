@@ -46,9 +46,6 @@ def agregarCita():
     medico.agregarCita(cita_auxiliar)
     return
     
-def buscarMedico():
-    _busqueda=buscar_doctor_entry.get()
-    return clinica_objeto.buscarMedico(_busqueda)
 
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
@@ -62,7 +59,7 @@ def seleccionarMedico(evento):
 
     return
 
-def buscar(evento):
+def buscarMedico(evento):
     escrito=buscar_doctor_entry.get()
     
     if escrito == "":
@@ -72,7 +69,21 @@ def buscar(evento):
     
     actualizarListbox(datos)
 
+def buscarCita():
+    return
+
+def cancelarCita():
+    return
+
+def reagendarCita():
+    return
+
+def confirmarCita():
+    return
+
 def agregarDatosPaciente():
+    if not(clinica.Persona.isRut(rut_entry.get())) or len(clinica_objeto.buscarPaciente(rut_entry.get()))!=0:
+        return False
     paciente_temporal=clinica.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
     email_entry.get(), tel_contacto_entry.get())
     clinica_objeto.agregarPaciente(paciente_temporal)
@@ -296,24 +307,23 @@ info_cita_txtbox.pack(padx=10)
 agendar_hora_ic = Image.open('./imagenes/confirmar.png')
 agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
-agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar", image = agendar_hora_ic)
+agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar", image = agendar_hora_ic,command=lambda:confirmarCita())
 agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
 
 cancelar_hora_ic = Image.open('./imagenes/cancelar.png')
 cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
-cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic)
+cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic, command=lambda:cancelarCita())
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
 #boton reagendar
 reagendar_hora_ic = Image.open('./imagenes/reagendar.png')
 reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
-reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic)
+reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 #ELECCION DE FECHA Y HORA PARA LA CITA, DEBERIA CAMBIAR DE ACUERDO A LA DISPONIBILIDAD PERO DPS VEMOS ESO
-
 
 modalidad=StringVar()
 
@@ -354,11 +364,11 @@ reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
 
-boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita, image = reservar_hora_ic)
+boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:agendarCita(), image = reservar_hora_ic)
 boton_hora.grid(row=6,column=0, columnspan=2)
 escojer_fecha_frame.pack()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-buscar_doctor_entry.bind("<KeyRelease>", buscar)
+buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)
 ventana_principal.mainloop()

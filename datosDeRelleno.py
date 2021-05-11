@@ -92,4 +92,3 @@ lista_citas=[]
 lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","")]
 lista_pacientes[0].setPrevision("FONASA")
 clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
-clinica_objeto= clinica.Clinica("Cl9inica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
