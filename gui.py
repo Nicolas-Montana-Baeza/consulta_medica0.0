@@ -1,4 +1,4 @@
-from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+from tkinter import True,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
@@ -175,7 +175,7 @@ def pantallaCodigo(cita_auxiliar):
     temp=Tk()
     label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
     entry=Entry(temp)
-    entry.pack()
+    entry.pack(fill=Y, expand=TRUE)
     entry.insert(0,cita_auxiliar.getCodigo())
     entry.config(state="readonly")
     label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
