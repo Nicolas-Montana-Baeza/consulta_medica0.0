@@ -190,7 +190,7 @@ def elegirFecha():
 
     
     def agregarCita():
-        temp.pack()
+        temp.pack_forget()
         fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
