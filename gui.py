@@ -190,13 +190,14 @@ def elegirFecha():
 
     
     def agregarCita():
+        temp.pack()
         fecha= dt.datetime(int(seleccion_Año.get()), int(seleccion_Mes.get()), int(seleccion_Dia.get()),int(seleccion_hora.get()),int(seleccion_minutos.get()))
         cita_auxiliar=clinica.Cita(fecha, medico, paciente, modalidad.get())
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
-        temp=LabelFrame(elegir_fecha)
-        temp.pack_forget()
+        
+        
         label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
         entry=Entry(temp)
         entry.pack(fill=Y, expand=True)
@@ -211,8 +212,10 @@ def elegirFecha():
         messagebox.showwarning(message="Recuerde escoger al Medico", title="Error")
         return
     #escoger modalidad
+    
     elegir_fecha=Toplevel()
     escoger_fecha_frame=LabelFrame(elegir_fecha, text="Datos Cita",bg=Charade,font=subtitulo_font, labelanchor=N)
+    temp=LabelFrame(elegir_fecha)
     escoger_modalidad=LabelFrame(escoger_fecha_frame,text="Modalidad",padx=5, pady=5,bg=Charade,font=subtitulo2_font, labelanchor=N)
     escoger_modalidad.pack(fill=BOTH, expand=True, padx=30, pady=10)
     online_btn=Radiobutton(escoger_modalidad,highlightthickness=0, text="Online", variable=modalidad,value="Online", bg=Charade,font=subtitulo5_font)
