@@ -172,7 +172,7 @@ def modificarDatosPaciente():
 
     cancelarDatosPaciente()
 def pantallaCodigo():
-    temp.pack()
+    
 #función para agendar la cita
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
@@ -196,7 +196,7 @@ def elegirFecha():
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
         entry.insert(0,cita_auxiliar.getCodigo())
-        pantallaCodigo()
+        temp.pack()
         return True
 
     if medico_seleccionado_label["text"]=="":
