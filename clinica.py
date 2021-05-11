@@ -138,7 +138,7 @@ class Clinica():
     #funcion para modificar datos de un medico ya ingresado
     def modificarMedico(self,_medico):
         for medico in self.medicos:
-            if medico.getRut==_medico.getRut():
+            if medico.getRut()==_medico.getRut():
                 medico.setPrimerNombre(_medico.getPrimerNombre())
                 medico.setSegundoNombre(_medico.getSegundoNombre())
                 medico.setPrimerApellido(_medico.getPrimerApellido())
