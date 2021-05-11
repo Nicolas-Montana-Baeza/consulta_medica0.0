@@ -171,7 +171,14 @@ def modificarDatosPaciente():
         messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
 
     cancelarDatosPaciente()
-    
+def pantallaCodigo(cita_auxiliar):
+    temp=Tk()
+    Label(temp,text="La cita a sido agendada con exito, guarde el siguiente codigo para administrar su cita, RECUERDE CONFIRMARLA O PODRIA PERDERLA\n", title="Éxito").pack()
+    entry=Entry(temp,state="readonly")
+    entry["text"]=cita_auxiliar.getCodigo()
+    entry.pack()
+
+    temp.mainloop()
 #función para agendar la cita
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
@@ -194,13 +201,7 @@ def elegirFecha():
         if not(paciente.agregarCita(cita_auxiliar)) and not(medico.agregarCita(cita_auxiliar)):
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
-        temp=Tk()
-        Label(temp,text="La cita a sido agendada con exito, guarde el siguiente codigo para administrar su cita, RECUERDE CONFIRMARLA O PODRIA PERDERLA\n", title="Éxito").pack()
-        entry=Entry(temp,state="readonly")
-        entry["text"]=cita_auxiliar.getCodigo()
-        entry.pack()
-
-        temp.mainloop()
+        pantallaCodigo(cita_auxiliar)
         return True
 
     if medico_seleccionado_label["text"]=="":
