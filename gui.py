@@ -56,14 +56,9 @@ def actualizarListboxCita(datos):
     lista_medicos_listbox.delete('0.0',END)
     for medico in datos:
         lista_medicos_listbox.insert('0.0', )
-    
-    return
-
 
 def seleccionarCita(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
-
-    return
 
 #función para buscar cita
 def buscarCita(evento):
@@ -79,11 +74,12 @@ def buscarCita(evento):
 #función para cancelar la cita
 def cancelarCita():
     busqueda= ingresar_codigo_entry.get()
+    print("entre")
     for paciente in clinica_objeto.getPacientes():
-            if paciente.cancelarCita(busqueda):
-                info_cita_txtbox.delete('0.0',END)
+            paciente.eliminarCita(busqueda)
+            print("entre1")
+            info_cita_txtbox.delete('0.0',END)
             
-            return True
     return False
 
 #función para confirmar la cita
@@ -181,11 +177,7 @@ def elegirFecha():
     for palabra in medico:
         aux+=palabra+" "
     aux=aux[:-1]
-    print(aux)
     medico=clinica_objeto.buscarMedico(aux)[0]
-
-    
-
     
     def agregarCita():
         temp.pack_forget()
@@ -262,7 +254,6 @@ def reagendarCita():
     for palabra in medico:
         aux+=palabra+" "
     aux=aux[:-1]
-    print(aux)
     medico=clinica_objeto.buscarMedico(aux)[0]
 
     busqueda= ingresar_codigo_entry.get()

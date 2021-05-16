@@ -85,11 +85,8 @@ class Clinica():
     
     #funcion para modificar datos del paciente ya ingresado
     def modificarPaciente(self,_paciente):
-        print("entre1")
         for paciente in self.pacientes:
-            print("entre2")
             if paciente.getRut()==_paciente.getRut():
-                print("entre3")
                 paciente.setPrimerNombre(_paciente.getPrimerNombre())
                 paciente.setSegundoNombre(_paciente.getSegundoNombre())
                 paciente.setPrimerApellido(_paciente.getPrimerApellido())
@@ -127,6 +124,7 @@ class Clinica():
                 return False
         self.medicos.append(_medico)
         return True
+
     #funcion para eliminar un medico existente
     def eliminarMedico(self,_rut):
         for medico in self.medicos:
@@ -408,8 +406,10 @@ class Persona():
 
     #funcion para eliminar una cita agendada
     def eliminarCita(self,_codigo):
+        print("entre2")
         for cita in self.citas:
             if cita.getCodigo()==_codigo:
+                print("entre3")
                 self.citas.remove(cita)
                 return True
         return False
