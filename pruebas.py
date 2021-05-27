@@ -1,7 +1,8 @@
-import clinica
+import clases
 from random import randint
 import datetime as dt
 from math import floor
+import csv
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -35,8 +36,10 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
             rut=_ruts[i]
             email=_emails[i]
     
-            if len(_nombres[i])>=3 and clinica.Persona.isRut(rut) and clinica.Persona.isMail(email):
-                persona_aux=clinica.Medico(_nombres[i][0],_nombres[i][1::-2],_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
+            if len(_nombres[i])>=3 and clases.Persona.isRut(rut) and clases.Persona.isMail(email):
+                nombre2=_nombres[i][1::-2]
+                nombre2=nombre2[0]
+                persona_aux=clases.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
@@ -63,8 +66,8 @@ lista_especialidades=crearEspecialidades(lista_nombres)
 #print(lista_especialidades)
 lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
 lista_citas=[]
-lista_pacientes=[clinica.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
-clinica_objeto= clinica.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
+clases_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
 
 lista_entry_datos_paciente=[]
 color1="#788890"
@@ -74,7 +77,9 @@ color4="#6d6e72"
 ruts=[]
 fecha_actual=dt.datetime.now()
 fecha_citada=dt.datetime(2021,6,9,14,30)
-
+cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "Online")
+lista_pacientes[0].agregarCita(cita_auxiliar)
+lista_medicos[0].agregarCita(cita_auxiliar)
 def isRut(_rut):
         if len(_rut)==0:
             return False
@@ -115,4 +120,41 @@ def isRut(_rut):
         else:
             return False
 
-print(isRut("20595491-0"))
+medicos_csv = open('./datos/Medicos.csv','w')
+medicos_writer = csv.writer(medicos_csv)
+
+medico_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','especialidad']
+medicos_writer.writerow(medico_atributos)
+
+for medico in clases_objeto.getMedicos():
+    medico_info= [medico.getNombreCompleto(), medico.getRut(), medico.getEdad(), medico.getEmail(),medico.getNumeroTelefonico(),medico.getEspecialidad()]
+    medicos_writer.writerow(medico_info)
+
+pacientes_csv = open('./datos/Pacientes.csv', 'w')
+pacientes_writer = csv.writer(pacientes_csv)
+pacientes_reader= csv.DictReader(pacientes_csv)
+pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
+pacientes_writer.writerow(pacientes_atributos)
+
+for paciente in clases_objeto.getPacientes():
+    paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
+    pacientes_writer.writerow(paciente_info)
+
+citas_csv = open('./datos/Citas.csv', 'w')
+citas_writer = csv.writer(citas_csv)
+citas_reader= csv.DictReader(citas_csv)
+citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
+citas_writer.writerow(citas_atributos)
+
+for paciente in clases_objeto.getPacientes():
+    cod_citas=[]
+    for cita in paciente.getCitas():
+        cod_citas.append(cita.getCodigo())
+    for codigo in cod_citas:
+        cita = paciente.buscarCita(codigo)
+        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
+        citas_writer.writerow(cita_info)
+medicos_csv = open('./datos/Medicos.csv','r')
+medicos_reader = csv.DictReader(medicos_csv)
+for linea in medicos_reader:
+    print(linea)

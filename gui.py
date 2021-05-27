@@ -74,10 +74,8 @@ def buscarCita(evento):
 #función para cancelar la cita
 def cancelarCita():
     busqueda= ingresar_codigo_entry.get()
-    print("entre")
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
-            print("entre1")
             info_cita_txtbox.delete('0.0',END)
             
     return False

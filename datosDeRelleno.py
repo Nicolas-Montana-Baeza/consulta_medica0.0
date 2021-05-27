@@ -3,7 +3,7 @@ from random import randint
 import datetime
 import calendar
 from math import floor
-
+import csv
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -78,6 +78,21 @@ def crearDisponibilidad():
                             disponibilidad.append(fecha)
     return disponibilidad
 
+#se abren los archivos csv que contienen los datos
+medicos_csv = open('./datos/Medicos.csv','r', newline="")
+medicos_reader = csv.DictReader(medicos_csv)
+
+pacientes_csv = open('./datos/Pacientes.csv','r',newline="")
+pacientes_reader = csv.DictReader(pacientes_csv)
+
+citas_csv = open('./datos/Citas.csv','r',newline="")
+citas_reader = csv.DictReader(citas_csv)
+"""
+for linea in medicos_reader:
+    for atributo in medicos_reader.fieldnames:
+        print(linea[atributo])
+    print("##############")
+"""
 #hay que agregar datos a la clinica
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_nombres=formatoNombres(lista_nombres)

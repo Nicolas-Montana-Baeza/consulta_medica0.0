@@ -254,11 +254,15 @@ class Cita ():
         return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)+" "+self.direccion+" "+self.prioridad+" "+self.tiempo_restante+" "+self.confirmada
 
 class Persona():
-
+    #agregar fecha de nacimiento
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
        
         self.nombre1=_nombre1
-        self.nombre2=_nombre2
+        if _nombre2==".":
+
+            self.nombre2=""
+        else:
+            self.nombre2=_nombre2
         self.apellido1=_apellido1
         self.apellido2=_apellido2
         self.edad=_edad
@@ -368,7 +372,8 @@ class Persona():
             
     #funcion para retornar el nombre completo de una persona
     def getNombreCompleto(self):
-        if self.nombre2=="":
+       
+        if self.nombre2=="" or self.nombre2==".":
             return str(self.nombre1).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
         else:
             return str(self.nombre1).title()+" "+str(self.nombre2).title()+" "+str(self.apellido1).title()+" "+str(self.apellido2).title()
@@ -439,7 +444,7 @@ class Persona():
 class Medico(Persona):
 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico,_especialidad):
-
+        #agregar fecha de nacimiento
         super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
         self.pacientes=[]
         self.disponibilidad=[]
@@ -490,7 +495,8 @@ class Medico(Persona):
     def __str__(self) :
         return super().__str__()+" "+str(self.especialidad)+" "+str(self.pacientes)+" "+str(self.disponibilidad)
 
-class Paciente(Persona): 
+class Paciente(Persona):
+    #agregar fecha de nacimiento 
     def __init__(self,_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico):
         super().__init__(_nombre1,_nombre2,_apellido1,_apellido2,_rut,_edad,_email,_numero_telefonico)
         self.prevision="Sin Prevision"
