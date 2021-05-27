@@ -120,6 +120,8 @@ def isRut(_rut):
         else:
             return False
 
+#esto lo use para crear los archivos
+"""
 medicos_csv = open('./datos/Medicos.csv','w')
 medicos_writer = csv.writer(medicos_csv)
 
@@ -158,3 +160,16 @@ medicos_csv = open('./datos/Medicos.csv','r')
 medicos_reader = csv.DictReader(medicos_csv)
 for linea in medicos_reader:
     print(linea)
+"""
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+datos_medicos = pd.read_csv('./datos/Medicos.csv')
+esp=datos_medicos["especialidad"]
+cantidad_especialidad= esp.value_counts()
+colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
+
+plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
+plt.title("cantidad de especialistas")
+plt.show()
