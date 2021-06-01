@@ -173,3 +173,21 @@ print(cantidad_especialidad)
 plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
 plt.title("cantidad de especialistas")
 plt.show()
+
+
+datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+pre=datos_prevision["prevision"]
+cantidad_prevision= pre.value_counts()
+
+plt.pie(cantidad_prevision.array, labels=cantidad_prevision.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_prevision.array.sum()))
+plt.title("Previsión de los pacientes")
+plt.show()
+
+
+confirmados = pd.read_csv('./datos/Citas.csv')
+conf=confirmados["confirmada"]
+cantidad_confirmado= conf.value_counts()
+
+plt.pie(cantidad_prevision.array, labels=cantidad_confirmado.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_confirmado.array.sum()))
+plt.title("Estado de confirmación de citas")
+plt.show()
