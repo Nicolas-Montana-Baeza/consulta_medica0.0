@@ -165,6 +165,60 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+#funcion para ordenar edades
+def merge_sort(m):
+    if len(m) <= 1:
+        return m
+ 
+    middle = len(m) // 2
+    left = m[:middle]
+    right = m[middle:]
+ 
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return list(merge(left, right))
+
+edad_pacientes = pd.read_csv('datos/Pacientes.csv')
+edad=edad_pacientes["edad"].values
+colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
+aux = edad.tolist()
+aux = merge_sort(aux)
+#print(aux)
+print(list(dict.fromkeys(aux)))
+
+def grafica_edades(_edad):
+    auxOrdenado = list(dict.fromkeys(_edad))
+    count = 0
+    cantidad = []
+    for a in range (len(auxOrdenado)):
+        cantidad.append(_edad.count(auxOrdenado[a]))
+    print(cantidad)
+
+    porcentajes = []
+    for a in range (len(cantidad)):
+        porcentajes.append((cantidad[a]/(len(_edad)))*100)
+        
+    print(porcentajes)
+    porAproximados =np.around(porcentajes).tolist()
+    porAproximadosFinal = []
+
+    for a in range (len(cantidad)):
+        porAproximadosFinal.append(str(porAproximados[a])+"%")
+    edadConAnos=[]       
+    for a in range (len(cantidad)):
+        edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
+    print(porAproximados)
+    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+    plt.legend(edadConAnos, title= "edades segun color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+    plt.title("Edad de pacientes y sus porcentajes")
+    plt.show()
+
+grafica_edades(aux)
+
+
+
+
+
 datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"]
 cantidad_especialidad= esp.value_counts()
@@ -191,3 +245,4 @@ cantidad_confirmado= conf.value_counts()
 plt.pie(cantidad_prevision.array, labels=cantidad_confirmado.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_confirmado.array.sum()))
 plt.title("Estado de confirmación de citas")
 plt.show()
+
