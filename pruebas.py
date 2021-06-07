@@ -33,10 +33,10 @@ def crearEdad(lista):
         edades.append(edad)
     return edades
 
-def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
+def crearMedicos(_nombres,_ruts, _emails,_datoses,_especialidades):
     personas=[]
     
-    if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_edades):
+    if len(_nombres)==len(_ruts) and len(_ruts) == len(_emails) and len(_emails)==len(_datoses):
         
         for i in range (len(_nombres)):
             rut=_ruts[i]
@@ -45,7 +45,7 @@ def crearMedicos(_nombres,_ruts, _emails,_edades,_especialidades):
             if len(_nombres[i])>=3 and clases.Persona.isRut(rut) and clases.Persona.isMail(email):
                 nombre2=_nombres[i][1::-2]
                 nombre2=nombre2[0]
-                persona_aux=clases.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_edades[i],_emails[i], "",_especialidades[i])
+                persona_aux=clases.Medico(_nombres[i][0],nombre2,_nombres[i][-2],_nombres[i][-1],_ruts[i],_datoses[i],_emails[i], "",_especialidades[i])
                 personas.append(persona_aux)
     
         return personas
@@ -100,45 +100,6 @@ def isRut(_rut):
         else:
             return False
 
-def merge_sort(m):
-    if len(m) <= 1:
-        return m
- 
-    middle = len(m) // 2
-    left = m[:middle]
-    right = m[middle:]
- 
-    left = merge_sort(left)
-    right = merge_sort(right)
-    return list(merge(left, right))
-
-def grafica_edades(_edad):
-    auxOrdenado = list(dict.fromkeys(_edad))
-    count = 0
-    cantidad = []
-    for a in range (len(auxOrdenado)):
-        cantidad.append(_edad.count(auxOrdenado[a]))
-  
-
-    porcentajes = []
-    for a in range (len(cantidad)):
-        porcentajes.append((cantidad[a]/(len(_edad)))*100)
-        
-   
-    porAproximados =np.around(porcentajes).tolist()
-    porAproximadosFinal = []
-
-    for a in range (len(cantidad)):
-        porAproximadosFinal.append(str(porAproximados[a])+"%")
-    edadConAnos=[]       
-    for a in range (len(cantidad)):
-        edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
-   
-    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
-    plt.legend(edadConAnos, title= "edades segun color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
-    plt.title("Edad de pacientes y sus porcentajes")
-    plt.show()
-
 """
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_nombres=formatoNombres(lista_nombres)
@@ -146,11 +107,11 @@ lista_nombres=formatoNombres(lista_nombres)
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
 lista_emails=crearEmails(lista_nombres)
 #print(lista_emails)
-lista_edades=crearEdad(lista_nombres)
-#print(lista_edades)
+lista_datoses=crearEdad(lista_nombres)
+#print(lista_datoses)
 lista_especialidades=crearEspecialidades(lista_nombres)
 #print(lista_especialidades)
-lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
+lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_datoses , lista_especialidades)
 lista_citas=[]
 lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
 clases_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
@@ -168,22 +129,107 @@ lista_pacientes[0].agregarCita(cita_auxiliar)
 lista_medicos[0].agregarCita(cita_auxiliar)
 """
 
-#funcion para ordenar edades
-edad_pacientes = pd.read_csv('datos/Pacientes.csv')
+def merge_sort(m):
+    if len(m) <= 1:
+        return m
+ 
+    middle = len(m) // 2
+    left = m[:middle]
+    right = m[middle:]
+ 
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return list(merge(left, right))
 
+#funcion para graficar datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
+def graficarDatosPie(_datos,_titulo,_pos):
+    auxOrdenado = list(dict.fromkeys(_datos))
+    count = 0
+    cantidad = []
+    for a in range (len(auxOrdenado)):
+        cantidad.append(_datos.count(auxOrdenado[a]))
+  
+
+    porcentajes = []
+    for a in range (len(cantidad)):
+        porcentajes.append((cantidad[a]/(len(_datos)))*100)
+        
+   
+    porAproximados =np.around(porcentajes).tolist()
+    porAproximadosFinal = []
+
+    for a in range (len(cantidad)):
+        porAproximadosFinal.append(str(porAproximados[a])+"%")
+   #edad
+    datos=[]
+    if _pos==0:
+        edad_string=[]
+        for a in range (len(cantidad)):
+            edad_string.append(str(auxOrdenado[a])+' Año(s)')
+        datos=edad_string
+   #prevision
+    elif _pos==1:
+        prevision=[]
+        for a in range (len(cantidad)):
+            datos.append(str(auxOrdenado[a]))
+        datos=prevision
+   #especialidad
+    elif _pos==2:
+        especialidad=[]
+        for a in range (len(cantidad)):
+            especialidad.append(str(auxOrdenado[a]))
+   #fecha citada
+    elif _pos==3:
+        edadConAnos=[]
+        for a in range (len(cantidad)):
+            edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
+   #modalidad
+    elif _pos==4:
+        modalidad=[]
+        for a in range (len(cantidad)):
+            modalidad.append(str(auxOrdenado[a]))
+        datos=modalidad
+   #prestacion
+    elif _pos==5:
+        prestacion=[]
+        for a in range (len(cantidad)):
+            prestacion.append(str(auxOrdenado[a]))
+        prestacion
+    #confirmada
+    elif _pos==6:
+        confirmada=[]
+        for a in range (len(cantidad)):
+            confirmada.append(str(auxOrdenado[a]))
+        datos=confirmada
+    #fecha de creacion
+    elif _pos==7:
+        edadConAnos=[]
+        for a in range (len(cantidad)):
+            edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
+    
+    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+    plt.legend(edadConAnos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+    plt.title(_titulo)
+    plt.show()
+
+edad_pacientes = pd.read_csv('datos/Pacientes.csv')
 edad=edad_pacientes["edad"].values
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
 aux = edad.tolist()
 aux = merge_sort(aux)
-grafica_edades(aux)
+graficarDatosPie(aux)
 
 datos_medicos = pd.read_csv('./datos/Medicos.csv')
-esp=datos_medicos["especialidad"]
-cantidad_especialidad= esp.value_counts()
+esp=datos_medicos["especialidad"].values
+#cantidad_especialidad= esp.value_counts()
 
-plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.1f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
-plt.title("cantidad de especialistas")
-plt.show()
+#plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.1f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
+#plt.title("cantidad de especialistas")
+#plt.show()
+
+aux = esp.tolist()
+aux = merge_sort(aux)
+graficarDatosPie(aux)
 
 #Grafico porcentaje de previsiones (isapre,fonasa,sin prevision)
 datos_prevision = pd.read_csv('./datos/Pacientes.csv')
