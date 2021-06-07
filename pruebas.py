@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from heapq import merge
 from collections import OrderedDict
+import pandas as pd
 
 def formatoNombres(_nombres):
     nombres_aux=[]
@@ -59,32 +60,6 @@ def crearEspecialidades(lista):
         lista_creada.append(especialidades[randint(0,3)])
     return lista_creada
 
-lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
-lista_nombres=formatoNombres(lista_nombres)
-#print(lista_nombres)
-lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
-lista_emails=crearEmails(lista_nombres)
-#print(lista_emails)
-lista_edades=crearEdad(lista_nombres)
-#print(lista_edades)
-lista_especialidades=crearEspecialidades(lista_nombres)
-#print(lista_especialidades)
-lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
-lista_citas=[]
-lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
-clases_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
-
-lista_entry_datos_paciente=[]
-color1="#788890"
-color2="#28388f"
-color3="#accdec"
-color4="#6d6e72"
-ruts=[]
-fecha_actual=dt.datetime.now()
-fecha_citada=dt.datetime(2021,6,9,14,30)
-cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "Online")
-lista_pacientes[0].agregarCita(cita_auxiliar)
-lista_medicos[0].agregarCita(cita_auxiliar)
 def isRut(_rut):
         if len(_rut)==0:
             return False
@@ -125,8 +100,75 @@ def isRut(_rut):
         else:
             return False
 
-#esto lo use para crear los archivos
+def merge_sort(m):
+    if len(m) <= 1:
+        return m
+ 
+    middle = len(m) // 2
+    left = m[:middle]
+    right = m[middle:]
+ 
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return list(merge(left, right))
+
+def grafica_edades(_edad):
+    auxOrdenado = list(dict.fromkeys(_edad))
+    count = 0
+    cantidad = []
+    for a in range (len(auxOrdenado)):
+        cantidad.append(_edad.count(auxOrdenado[a]))
+    print(cantidad)
+
+    porcentajes = []
+    for a in range (len(cantidad)):
+        porcentajes.append((cantidad[a]/(len(_edad)))*100)
+        
+    print(porcentajes)
+    porAproximados =np.around(porcentajes).tolist()
+    porAproximadosFinal = []
+
+    for a in range (len(cantidad)):
+        porAproximadosFinal.append(str(porAproximados[a])+"%")
+    edadConAnos=[]       
+    for a in range (len(cantidad)):
+        edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
+    print(porAproximados)
+    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+    plt.legend(edadConAnos, title= "edades segun color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+    plt.title("Edad de pacientes y sus porcentajes")
+    plt.show()
+
 """
+lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
+lista_nombres=formatoNombres(lista_nombres)
+#print(lista_nombres)
+lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
+lista_emails=crearEmails(lista_nombres)
+#print(lista_emails)
+lista_edades=crearEdad(lista_nombres)
+#print(lista_edades)
+lista_especialidades=crearEspecialidades(lista_nombres)
+#print(lista_especialidades)
+lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
+lista_citas=[]
+lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzales","14077811-7","23","juanito.perez@gmail.com","")]
+clases_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+
+lista_entry_datos_paciente=[]
+color1="#788890"
+color2="#28388f"
+color3="#accdec"
+color4="#6d6e72"
+ruts=[]
+fecha_actual=dt.datetime.now()
+fecha_citada=dt.datetime(2021,6,9,14,30)
+cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "Online")
+lista_pacientes[0].agregarCita(cita_auxiliar)
+lista_medicos[0].agregarCita(cita_auxiliar)
+
+#esto lo use para crear los archivos
+
 medicos_csv = open('./datos/Medicos.csv','w')
 medicos_writer = csv.writer(medicos_csv)
 
@@ -163,25 +205,10 @@ for paciente in clases_objeto.getPacientes():
         citas_writer.writerow(cita_info)
 medicos_csv = open('./datos/Medicos.csv','r')
 medicos_reader = csv.DictReader(medicos_csv)
-for linea in medicos_reader:
-    print(linea)
-}"""
-import pandas as pd
-import matplotlib.pyplot as plt
+"""
 
 
 #funcion para ordenar edades
-def merge_sort(m):
-    if len(m) <= 1:
-        return m
- 
-    middle = len(m) // 2
-    left = m[:middle]
-    right = m[middle:]
- 
-    left = merge_sort(left)
-    right = merge_sort(right)
-    return list(merge(left, right))
 
 edad_pacientes = pd.read_csv('datos/Pacientes.csv')
 edad=edad_pacientes["edad"].values
@@ -191,38 +218,7 @@ aux = merge_sort(aux)
 #print(aux)
 print(list(dict.fromkeys(aux)))
 
-def grafica_edades(_edad):
-    auxOrdenado = list(dict.fromkeys(_edad))
-    count = 0
-    cantidad = []
-    for a in range (len(auxOrdenado)):
-        cantidad.append(_edad.count(auxOrdenado[a]))
-    print(cantidad)
-
-    porcentajes = []
-    for a in range (len(cantidad)):
-        porcentajes.append((cantidad[a]/(len(_edad)))*100)
-        
-    print(porcentajes)
-    porAproximados =np.around(porcentajes).tolist()
-    porAproximadosFinal = []
-
-    for a in range (len(cantidad)):
-        porAproximadosFinal.append(str(porAproximados[a])+"%")
-    edadConAnos=[]       
-    for a in range (len(cantidad)):
-        edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
-    print(porAproximados)
-    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
-    plt.legend(edadConAnos, title= "edades segun color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
-    plt.title("Edad de pacientes y sus porcentajes")
-    plt.show()
-
 grafica_edades(aux)
-
-
-
-
 
 datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"]
