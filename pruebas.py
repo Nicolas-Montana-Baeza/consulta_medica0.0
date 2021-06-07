@@ -3,6 +3,11 @@ from random import randint
 import datetime as dt
 from math import floor
 import csv
+import matplotlib.pyplot as plt
+import numpy as np
+from heapq import merge
+from collections import OrderedDict
+
 def formatoNombres(_nombres):
     nombres_aux=[]
    

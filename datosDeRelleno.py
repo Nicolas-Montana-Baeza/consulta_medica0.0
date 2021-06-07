@@ -4,6 +4,7 @@ import datetime
 import calendar
 from math import floor
 import csv
+
 def formatoNombres(_nombres):
     nombres_aux=[]
    
