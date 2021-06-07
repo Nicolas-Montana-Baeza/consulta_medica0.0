@@ -35,6 +35,7 @@ def actualizarListbox(datos):
         lista_medicos_listbox.insert(END, medico.getNombreCompleto()+" "+medico.getEspecialidad())
     
     return
+
 #función para seleccionar médicos
 def seleccionarMedico(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
@@ -57,6 +58,7 @@ def actualizarListboxCita(datos):
     for medico in datos:
         lista_medicos_listbox.insert('0.0', )
 
+#
 def seleccionarCita(evento):
     medico_seleccionado_label["text"]=lista_medicos_listbox.get(ACTIVE)
 
@@ -163,8 +165,7 @@ def modificarDatosPaciente():
         messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
 
     cancelarDatosPaciente()
-
-    
+   
 #función para agendar la cita
 def elegirFecha():
     paciente=clinica_objeto.buscarPaciente(rut_entry.get())[0]
