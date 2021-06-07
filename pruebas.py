@@ -118,13 +118,13 @@ def grafica_edades(_edad):
     cantidad = []
     for a in range (len(auxOrdenado)):
         cantidad.append(_edad.count(auxOrdenado[a]))
-    print(cantidad)
+  
 
     porcentajes = []
     for a in range (len(cantidad)):
         porcentajes.append((cantidad[a]/(len(_edad)))*100)
         
-    print(porcentajes)
+   
     porAproximados =np.around(porcentajes).tolist()
     porAproximadosFinal = []
 
@@ -133,7 +133,7 @@ def grafica_edades(_edad):
     edadConAnos=[]       
     for a in range (len(cantidad)):
         edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
-    print(porAproximados)
+   
     plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
     plt.legend(edadConAnos, title= "edades segun color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
     plt.title("Edad de pacientes y sus porcentajes")
@@ -167,44 +167,6 @@ cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "On
 lista_pacientes[0].agregarCita(cita_auxiliar)
 lista_medicos[0].agregarCita(cita_auxiliar)
 
-#esto lo use para crear los archivos
-
-medicos_csv = open('./datos/Medicos.csv','w')
-medicos_writer = csv.writer(medicos_csv)
-
-medico_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','especialidad']
-medicos_writer.writerow(medico_atributos)
-
-for medico in clases_objeto.getMedicos():
-    medico_info= [medico.getNombreCompleto(), medico.getRut(), medico.getEdad(), medico.getEmail(),medico.getNumeroTelefonico(),medico.getEspecialidad()]
-    medicos_writer.writerow(medico_info)
-
-pacientes_csv = open('./datos/Pacientes.csv', 'w')
-pacientes_writer = csv.writer(pacientes_csv)
-pacientes_reader= csv.DictReader(pacientes_csv)
-pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
-pacientes_writer.writerow(pacientes_atributos)
-
-for paciente in clases_objeto.getPacientes():
-    paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
-    pacientes_writer.writerow(paciente_info)
-
-citas_csv = open('./datos/Citas.csv', 'w')
-citas_writer = csv.writer(citas_csv)
-citas_reader= csv.DictReader(citas_csv)
-citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
-citas_writer.writerow(citas_atributos)
-
-for paciente in clases_objeto.getPacientes():
-    cod_citas=[]
-    for cita in paciente.getCitas():
-        cod_citas.append(cita.getCodigo())
-    for codigo in cod_citas:
-        cita = paciente.buscarCita(codigo)
-        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
-        citas_writer.writerow(cita_info)
-medicos_csv = open('./datos/Medicos.csv','r')
-medicos_reader = csv.DictReader(medicos_csv)
 """
 
 
@@ -215,8 +177,6 @@ edad=edad_pacientes["edad"].values
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
 aux = edad.tolist()
 aux = merge_sort(aux)
-#print(aux)
-print(list(dict.fromkeys(aux)))
 
 grafica_edades(aux)
 

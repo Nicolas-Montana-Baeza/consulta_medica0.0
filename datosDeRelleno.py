@@ -79,6 +79,7 @@ def crearDisponibilidad():
                             disponibilidad.append(fecha)
     return disponibilidad
 
+
 #se abren los archivos csv que contienen los datos
 medicos_csv = open('./datos/Medicos.csv','r', newline="")
 medicos_reader = csv.DictReader(medicos_csv)
@@ -111,3 +112,43 @@ lista_citas=[]
 lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","950183162")]
 lista_pacientes[0].setPrevision("FONASA")
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+
+#esto lo use para crear los archivos
+"""
+medicos_csv = open('./datos/Medicos.csv','w')
+medicos_writer = csv.writer(medicos_csv)
+
+medico_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','especialidad']
+medicos_writer.writerow(medico_atributos)
+
+for medico in clinica_objeto.getMedicos():
+    medico_info= [medico.getNombreCompleto(), medico.getRut(), medico.getEdad(), medico.getEmail(),medico.getNumeroTelefonico(),medico.getEspecialidad()]
+    medicos_writer.writerow(medico_info)
+
+pacientes_csv = open('./datos/Pacientes.csv', 'w')
+pacientes_writer = csv.writer(pacientes_csv)
+pacientes_reader= csv.DictReader(pacientes_csv)
+pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
+pacientes_writer.writerow(pacientes_atributos)
+
+for paciente in clinica_objeto.getPacientes():
+    paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
+    pacientes_writer.writerow(paciente_info)
+
+citas_csv = open('./datos/Citas.csv', 'w')
+citas_writer = csv.writer(citas_csv)
+citas_reader= csv.DictReader(citas_csv)
+citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
+citas_writer.writerow(citas_atributos)
+
+for paciente in clinica_objeto.getPacientes():
+    cod_citas=[]
+    for cita in paciente.getCitas():
+        cod_citas.append(cita.getCodigo())
+    for codigo in cod_citas:
+        cita = paciente.buscarCita(codigo)
+        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
+        citas_writer.writerow(cita_info)
+medicos_csv = open('./datos/Medicos.csv','r')
+medicos_reader = csv.DictReader(medicos_csv)
+"""
