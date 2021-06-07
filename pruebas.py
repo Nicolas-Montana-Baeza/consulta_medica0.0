@@ -243,7 +243,7 @@ confirmados = pd.read_csv('./datos/Citas.csv')
 conf=confirmados["confirmada"]
 cantidad_confirmado= conf.value_counts()
 
-plt.pie(cantidad_prevision.array, labels=cantidad_confirmado.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_confirmado.array.sum()))
+plt.pie(cantidad_confirmado.array, labels=cantidad_confirmado.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_confirmado.array.sum()))
 plt.title("Estado de confirmación de citas")
 plt.show()
 
