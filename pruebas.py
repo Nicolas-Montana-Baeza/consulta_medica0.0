@@ -166,24 +166,20 @@ fecha_citada=dt.datetime(2021,6,9,14,30)
 cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "Online")
 lista_pacientes[0].agregarCita(cita_auxiliar)
 lista_medicos[0].agregarCita(cita_auxiliar)
-
 """
 
-
 #funcion para ordenar edades
-
 edad_pacientes = pd.read_csv('datos/Pacientes.csv')
+
 edad=edad_pacientes["edad"].values
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
 aux = edad.tolist()
 aux = merge_sort(aux)
-
 grafica_edades(aux)
 
 datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"]
 cantidad_especialidad= esp.value_counts()
-colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
 
 plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.1f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
 plt.title("cantidad de especialistas")
