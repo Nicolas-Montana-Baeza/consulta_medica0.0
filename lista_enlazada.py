@@ -1,9 +1,3 @@
-[martes 10:19] Rodolfo Canelón Osal
-    from Nodo import *
-#___________________________________
-# Creamos la clase listaEncadenada
-#___________________________________
-
 class listaEncadenada:
     def __init__(self):
         self.cabeza = None
@@ -39,29 +33,29 @@ class listaEncadenada:
             prev.proximo = curr.proximo
         curr.proximo = None
 # __________________________________________
-def estaEnLista(self,keyBuscar):
-    esta = False
-    curr=self.cabeza
-    while curr and not esta :
-        if curr.clave==keyBuscar :
-            esta=True
-        break
-    curr = curr.proximo
-    return esta
+    def estaEnLista(self,keyBuscar):
+        esta = False
+        curr=self.cabeza
+        while curr and not esta :
+            if curr.clave==keyBuscar :
+                esta=True
+            break
+        curr = curr.proximo
+        return esta
 #___________________________________________________
 # Método para obtener el ultimo Nodo
-def ultimoNodo(self):
-    temp = self.cabeza
-    while(temp.proximo is not None):
-        temp = temp.proximo
-    return temp.data
+    def ultimoNodo(self):
+        temp = self.cabeza
+        while(temp.proximo is not None):
+            temp = temp.proximo
+        return temp.data
 #___________________________________________________
 # Método para imprimir la lista de Nodos
-def imprimirLista( self ):  
-    Nodo = self.cabeza
-    while Nodo != None:
-        print(Nodo.data, end =" ---& ")
-        Nodo = Nodo.proximo
+    def imprimirLista( self ):  
+        Nodo = self.cabeza
+        while Nodo != None:
+            print(Nodo.data, end =" ---& ")
+            Nodo = Nodo.proximo
 # ________________________________________________
 # Creamos clase nodo
 # ________________________________________________
