@@ -127,6 +127,18 @@ fecha_citada=dt.datetime(2021,6,9,14,30)
 cita_auxiliar=clases.Cita(fecha_citada,lista_medicos[0], lista_pacientes[0], "Online")
 lista_pacientes[0].agregarCita(cita_auxiliar)
 lista_medicos[0].agregarCita(cita_auxiliar)
+
+
+
+
+#Grafico porcentaje de previsiones (isapre,fonasa,sin prevision)
+datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+pre=datos_prevision["prevision"]
+cantidad_prevision= pre.value_counts()
+
+plt.pie(cantidad_prevision.array, labels=cantidad_prevision.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_prevision.array.sum()))
+plt.title("Previsión de los pacientes")
+plt.show()
 """
 
 def merge_sort(m):
@@ -141,8 +153,8 @@ def merge_sort(m):
     right = merge_sort(right)
     return list(merge(left, right))
 
-#funcion para graficar datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
-def graficarDatosPie(_datos,_titulo,_pos):
+#funcion para graficar f=pie o bar, datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
+def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
     auxOrdenado = list(dict.fromkeys(_datos))
     count = 0
     cantidad = []
@@ -160,92 +172,36 @@ def graficarDatosPie(_datos,_titulo,_pos):
 
     for a in range (len(cantidad)):
         porAproximadosFinal.append(str(porAproximados[a])+"%")
-   #edad
+
+   #datos
     datos=[]
-    if _pos==0:
-        edad_string=[]
-        for a in range (len(cantidad)):
-            edad_string.append(str(auxOrdenado[a])+' Año(s)')
-        datos=edad_string
-   #prevision
-    elif _pos==1:
-        prevision=[]
-        for a in range (len(cantidad)):
-            datos.append(str(auxOrdenado[a]))
-        datos=prevision
-   #especialidad
-    elif _pos==2:
-        especialidad=[]
-        for a in range (len(cantidad)):
-            especialidad.append(str(auxOrdenado[a]))
-   #fecha citada
-    elif _pos==3:
-        edadConAnos=[]
-        for a in range (len(cantidad)):
-            edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
-   #modalidad
-    elif _pos==4:
-        modalidad=[]
-        for a in range (len(cantidad)):
-            modalidad.append(str(auxOrdenado[a]))
-        datos=modalidad
-   #prestacion
-    elif _pos==5:
-        prestacion=[]
-        for a in range (len(cantidad)):
-            prestacion.append(str(auxOrdenado[a]))
-        prestacion
-    #confirmada
-    elif _pos==6:
-        confirmada=[]
-        for a in range (len(cantidad)):
-            confirmada.append(str(auxOrdenado[a]))
-        datos=confirmada
-    #fecha de creacion
-    elif _pos==7:
-        edadConAnos=[]
-        for a in range (len(cantidad)):
-            edadConAnos.append(str(auxOrdenado[a])+' Año(s)')
-    
-    plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
-    plt.legend(edadConAnos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
-    plt.title(_titulo)
-    plt.show()
+    for a in range (len(cantidad)):
+        datos.append(str(auxOrdenado[a]))
+
+    if _f=="pie":
+        plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+        print(datos)
+        plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+        plt.title("Porcentaje de "+_titulo)
+        plt.show()
+    elif _f=="bar":
+        plt.bar(datos, cantidad, align="center")
+        plt.title("")
+        plt.ylabel(_titulo_y)
+        plt.xlabel(_titulo_x)
+        plt.grid(axis="y")
+        plt.show()
 
 edad_pacientes = pd.read_csv('datos/Pacientes.csv')
 edad=edad_pacientes["edad"].values
-colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#8c564b"]
 aux = edad.tolist()
 aux = merge_sort(aux)
-graficarDatosPie(aux)
+graficarDatos(aux,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
 datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"].values
-#cantidad_especialidad= esp.value_counts()
-
-#plt.pie(cantidad_especialidad.array, labels=cantidad_especialidad.index, colors=colors, autopct=lambda p: '{:.1f}%({:.0f})'.format(p,(p/100)*cantidad_especialidad.array.sum()))
-#plt.title("cantidad de especialistas")
-#plt.show()
-
 aux = esp.tolist()
 aux = merge_sort(aux)
-graficarDatosPie(aux)
+graficarDatos(aux,"Especialidades","pie")
 
-#Grafico porcentaje de previsiones (isapre,fonasa,sin prevision)
-datos_prevision = pd.read_csv('./datos/Pacientes.csv')
-pre=datos_prevision["prevision"]
-cantidad_prevision= pre.value_counts()
-
-plt.pie(cantidad_prevision.array, labels=cantidad_prevision.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_prevision.array.sum()))
-plt.title("Previsión de los pacientes")
-plt.show()
-
-#Porcentaje de citas confiramadas y no
-confirmados = pd.read_csv('./datos/Citas.csv')
-conf=confirmados["confirmada"]
-cantidad_confirmado= conf.value_counts()
-
-plt.pie(cantidad_confirmado.array, labels=cantidad_confirmado.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_confirmado.array.sum()))
-plt.title("Estado de confirmación de citas")
-plt.show()
 
