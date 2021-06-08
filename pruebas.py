@@ -204,4 +204,9 @@ aux = esp.tolist()
 aux = merge_sort(aux)
 graficarDatos(aux,"Especialidades","pie")
 
+import lista_enlazada
 
+lista = lista_enlazada.listaEncadenada()
+lista.imprimirLista()
+lista.adicionarFrente("caca")
+lista.imprimirLista()
