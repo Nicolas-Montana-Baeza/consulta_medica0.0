@@ -512,4 +512,4 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-z
+
