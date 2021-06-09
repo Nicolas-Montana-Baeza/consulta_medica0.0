@@ -169,7 +169,11 @@ class Cita ():
         self.prioridad=""
         self.tiempo_restante=self.fecha_citada-self.fecha_actual
         self.confirmada=False
-
+        self.terminada=False
+    
+    def setTerminada(self,_terminada):
+        self.terminada=_terminada
+        
     def setFechaCitada(self,fecha_citada): 
         self.fecha_citada = fecha_citada
     
@@ -206,6 +210,9 @@ class Cita ():
     def setConfirmada(self,confirmada):
         self.confirmada=confirmada
 
+    def getTerminada(self):
+        return self.terminada
+    
     def getFechaCitada(self):
         return self.fecha_citada
 

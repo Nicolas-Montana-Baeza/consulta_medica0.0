@@ -9,6 +9,13 @@ from heapq import merge
 from collections import OrderedDict
 import pandas as pd
 
+from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+from PIL import Image,ImageTk
+from ttkbootstrap import Style
+from datosDeRelleno import *
+from PIL import Image,ImageTk
+from estilo import *
+import datetime as dt
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -183,14 +190,17 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         print(datos)
         plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
         plt.title("Porcentaje de "+_titulo)
-        plt.show()
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+
     elif _f=="bar":
         plt.bar(datos, cantidad, align="center")
-        plt.title("")
+        plt.title(_titulo)
         plt.ylabel(_titulo_y)
         plt.xlabel(_titulo_x)
         plt.grid(axis="y")
-        plt.show()
+      #  plt.show()
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+    plt.show()
 
 edad_pacientes = pd.read_csv('datos/Pacientes.csv')
 edad=edad_pacientes["edad"].values
@@ -202,7 +212,7 @@ datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"].values
 aux = esp.tolist()
 aux = merge_sort(aux)
-graficarDatos(aux,"Especialidades","pie")
+
 
 import lista_enlazada
 from tkinter import *
@@ -214,7 +224,8 @@ lista.imprimirLista()
 ventana_principal=Tk()
 ventana_principal.title("caquita") 
 ventana_principal.resizable(0,0)
-
-
+ventana_principal.geometry("400x200")
+dashboard_btn= Button(ventana_principal, text="Dashboard", command= lambda: graficarDatos(aux,"Especialidades","pie"))
+dashboard_btn.pack()
 
 ventana_principal.mainloop()
