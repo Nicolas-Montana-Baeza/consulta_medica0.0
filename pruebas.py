@@ -205,8 +205,16 @@ aux = merge_sort(aux)
 graficarDatos(aux,"Especialidades","pie")
 
 import lista_enlazada
-
+from tkinter import *
 lista = lista_enlazada.listaEncadenada()
 lista.imprimirLista()
 lista.adicionarFrente("caca")
 lista.imprimirLista()
+
+ventana_principal=Tk()
+ventana_principal.title("caquita") 
+ventana_principal.resizable(0,0)
+
+
+
+ventana_principal.mainloop()
