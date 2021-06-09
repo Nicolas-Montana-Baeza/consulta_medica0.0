@@ -512,5 +512,4 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)
-ventana_principal.mainloop()
+z
