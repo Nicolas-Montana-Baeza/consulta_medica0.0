@@ -13,7 +13,8 @@ from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
-from PIL import Image,ImageTk
+from PIL import ImageTk
+import PIL
 from estilo import *
 import datetime as dt
 def formatoNombres(_nombres):
@@ -228,15 +229,15 @@ ventana_principal.geometry("400x200")
 dashboard_btn= Button(ventana_principal, text="Dashboard")
 aux_list_btn=[]
 
-for i in range (9):
-    confirmar_paciente_ic = Image.open('./graficos/Edades de los Pacientes.png')
-    confirmar_paciente_ic = confirmar_paciente_ic.resize((100, 100), Image.ANTIALIAS)
-    confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
-    confirmar_paciente_btn=Button(ventana_principal, image = confirmar_paciente_ic)
-    #confirmar_paciente_btn.pack(side=LEFT,padx=30)
 
-    
-    aux_list_btn.append(confirmar_paciente_btn)
+confirmar_paciente_ic = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+confirmar_paciente_ic = confirmar_paciente_ic.resize((200, 100), PIL.Image.ANTIALIAS)
+confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
+confirmar_paciente_btn=Button(ventana_principal, image = confirmar_paciente_ic)
+#confirmar_paciente_btn.pack(side=LEFT,padx=30)
+
+
+aux_list_btn.append(confirmar_paciente_btn)
 
 for btn in aux_list_btn:
     btn.pack()
