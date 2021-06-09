@@ -212,7 +212,7 @@ datos_medicos = pd.read_csv('./datos/Medicos.csv')
 esp=datos_medicos["especialidad"].values
 aux = esp.tolist()
 aux = merge_sort(aux)
-
+graficarDatos(aux,"Especialidades","pie")
 
 import lista_enlazada
 from tkinter import *
@@ -225,7 +225,19 @@ ventana_principal=Tk()
 ventana_principal.title("caquita") 
 ventana_principal.resizable(0,0)
 ventana_principal.geometry("400x200")
-dashboard_btn= Button(ventana_principal, text="Dashboard", command= lambda: graficarDatos(aux,"Especialidades","pie"))
-dashboard_btn.pack()
+dashboard_btn= Button(ventana_principal, text="Dashboard")
+aux_list_btn=[]
 
+for i in range (9):
+    confirmar_paciente_ic = Image.open('./graficos/Edades de los Pacientes.png')
+    confirmar_paciente_ic = confirmar_paciente_ic.resize((100, 100), Image.ANTIALIAS)
+    confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
+    confirmar_paciente_btn=Button(ventana_principal, image = confirmar_paciente_ic)
+    #confirmar_paciente_btn.pack(side=LEFT,padx=30)
+
+    
+    aux_list_btn.append(confirmar_paciente_btn)
+
+for btn in aux_list_btn:
+    btn.pack()
 ventana_principal.mainloop()
