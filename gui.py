@@ -2,7 +2,7 @@ from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
-from PIL import Image,ImageTk
+import PIL
 from estilo import *
 import datetime as dt
 
@@ -117,6 +117,14 @@ def buscarCodigo():
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
 def verificarDatosPaciente():
+    check_img = PIL.Image.open('./imagenes/confirmar.png')
+    check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
+    check_img = ImageTk.PhotoImage(check_img)
+    
+    equis_img = PIL.Image.open('./imagenes/cancelar.png')
+    equis_img =equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
+    equis_img = ImageTk.PhotoImage(check_img)
+    
     cant_error=0
     for i in range(len(lista_entry_datos_paciente)):
         
@@ -124,6 +132,7 @@ def verificarDatosPaciente():
             if not(clases.Persona.isRut(rut_entry.get())) :
                 #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
+               
                 cant_error+=1
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
@@ -131,6 +140,10 @@ def verificarDatosPaciente():
             if not(lista_entry_datos_paciente[i].get().isalpha()):
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
                 cant_error+=1
+            elif i==2:
+                if lista_entry_datos_paciente[i].get()=="":
+                    lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
         elif i==5:
@@ -347,7 +360,7 @@ ventana_principal.resizable(0,0)
 lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
-
+posicion_img=[]
 #boton para guardar fecha y hora
 reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
@@ -424,19 +437,27 @@ isapre_btn.pack(side=LEFT)
 fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.pack(side=LEFT)
 
+
+#
+check_list=[]
     #rut
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(rut_entry)
+rut_img=Label(ingresar_paciente)
+check_list.append(rut_img)
+posicion_img.append([3,2])
 
     #primer nombre
+
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
+posicion_img.append([4,2])
 
     #segundo nombre
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre:", bg=Charade, font=subtitulo4_font)
@@ -444,6 +465,7 @@ nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
+posicion_img.append([5,2])
 
     #Primer Apellido
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido:", bg=Charade, font=subtitulo4_font)
@@ -451,6 +473,7 @@ apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
+posicion_img.append([6,2])
 
     #Segundo Apellido
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido:", bg=Charade, font=subtitulo4_font)
@@ -458,6 +481,7 @@ apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=7,column=1)
 lista_entry_datos_paciente.append(apellido2_entry)
+posicion_img.append([7,2])
     
     #numero contacto
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular:", bg=Charade, font=subtitulo4_font)
@@ -465,6 +489,7 @@ tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
+posicion_img.append([8,2])
 
     #email
 email_label=Label(ingresar_paciente, text="Correo Electronico:", bg=Charade, font=subtitulo4_font)
@@ -472,6 +497,7 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+posicion_img.append([3,2])
 
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 

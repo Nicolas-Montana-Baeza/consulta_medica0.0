@@ -163,6 +163,9 @@ def merge_sort(m):
 
 #funcion para graficar f=pie o bar, datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
 def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
+    aux = esp.tolist()
+    aux = merge_sort(aux)
+    _datos=aux
     auxOrdenado = list(dict.fromkeys(_datos))
     count = 0
     cantidad = []
@@ -204,46 +207,42 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
     plt.show()
 
 edad_pacientes = pd.read_csv('datos/Pacientes.csv')
-edad=edad_pacientes["edad"].values
-aux = edad.tolist()
-aux = merge_sort(aux)
-graficarDatos(aux,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
+edad_pacientes=edad_pacientes["edad"].values
+#graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
-datos_medicos = pd.read_csv('./datos/Medicos.csv')
-esp=datos_medicos["especialidad"].values
-aux = esp.tolist()
-aux = merge_sort(aux)
-graficarDatos(aux,"Especialidades","pie")
+especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
+especialidad_medicos=especialidad_medicos["especialidad"].values
+#graficarDatos(especialidad_medicos,"Especialidades","pie")
 
 
 ventana_principal=Tk()
-ventana_principal.title("caquita") 
+ventana_principal.title("Dashboard") 
 ventana_principal.resizable(0,0)
 ventana_principal.geometry("400x200")
 dashboard_btn= Button(ventana_principal, text="Dashboard")
-aux_list_btn=[]
-
-
-confirmar_paciente_ic = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
-confirmar_paciente_ic = confirmar_paciente_ic.resize((200, 100), PIL.Image.ANTIALIAS)
-confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
-confirmar_paciente_btn=Button(ventana_principal, image = confirmar_paciente_ic)
+edades_grafico_list_btn=[]
+for i in range(9):
+    
+    edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+    edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    edades_grafico_img = ImageTk.PhotoImage(edades_grafico_img)
+    edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
 #confirmar_paciente_btn.pack(side=LEFT,padx=30)
 
 
-aux_list_btn.append(confirmar_paciente_btn)
+edades_grafico_list_btn.append(edades_grafico_btn)
 
-for btn in aux_list_btn:
+for btn in edades_grafico_list_btn:
     btn.pack()
 ventana_principal.mainloop()
 
+"""
 root = Tk()
 label = Label(root,text="Enter a digit that you guessed:").pack()
 entry= Entry(root,bd=4)
 entry.pack()
-entry.focus_set()
-print(entry.focus_get())
 button1=Button(root,width=4,height=1,text='ok')
 button1.pack()
 
 root.mainloop()
+"""
