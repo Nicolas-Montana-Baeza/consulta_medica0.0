@@ -28,6 +28,10 @@ def autocompletarPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
 
+#cambia el color a rojo o verde
+def cambiarColorIn():
+    return
+
 #Permite la actualización de los datos
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
@@ -79,7 +83,7 @@ def cancelarCita():
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
-            
+             
     return False
 
 #función para confirmar la cita
@@ -110,36 +114,70 @@ def buscarCodigo():
                 return
     info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 
+#verifica los datos ingresados para el paciente
+# y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
+def verificarDatosPaciente():
+    cant_error=0
+    for i in range(len(lista_entry_datos_paciente)):
+        
+        if i==0:
+            if not(clases.Persona.isRut(rut_entry.get())) :
+                #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                cant_error+=1
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+        elif i in [1,2,3,4]:       
+            if not(lista_entry_datos_paciente[i].get().isalpha()):
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                cant_error+=1
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+        elif i==5:
+            if not(lista_entry_datos_paciente[i].get().isdigit()):
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                cant_error+=1
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                          
+        elif i==6:
+            if not(clases.Persona.isMail(email_entry.get())):
+                #messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
+                email_entry.config(bg=Cinnabar)
+                cant_error+=1
+            else:
+                email_entry.config(bg=JungleGreen)
+    
+    if cant_error!=0:
+        messagebox.showwarning(message="Los datos ingresados son INCORRECTOS, reviselos y vuelva a intentarlo", title="Error")
+        return False    
+    else:
+        return True
+       
+        
+    return 
 #agrega un paciente
 def agregarDatosPaciente():
-    if not(clases.Persona.isRut(rut_entry.get())) :
-        messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
-
+     
+    if not(verificarDatosPaciente()):
         return False
-    
-    if not(clases.Persona.isMail(email_entry.get())):
-        messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
-
-        return False
-
-    for entrada in lista_entry_datos_paciente:
-        if entrada.get()=="":
-            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
-            return False
+    else:
+        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+        email_entry.get(), tel_contacto_entry.get())
+        if clinica_objeto.agregarPaciente(paciente_temporal):
+            messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
             
-    paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
-    email_entry.get(), tel_contacto_entry.get())
-    if clinica_objeto.agregarPaciente(paciente_temporal):
-        messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
-    elegirFecha()
-    return
+        elegirFecha()
+        return True
 
 #función para cancelar los datos del paciente
 def cancelarDatosPaciente():
     
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
+        lista_entry_datos_paciente[i].config(bg="#9ca2a9")
         prevision_btn.set("Sin Prevision")
+        
 
 #función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
@@ -512,4 +550,4 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-
+ventana_principal.mainloop()

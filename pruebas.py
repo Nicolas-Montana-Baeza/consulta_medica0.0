@@ -215,12 +215,6 @@ aux = esp.tolist()
 aux = merge_sort(aux)
 graficarDatos(aux,"Especialidades","pie")
 
-import lista_enlazada
-from tkinter import *
-lista = lista_enlazada.listaEncadenada()
-lista.imprimirLista()
-lista.adicionarFrente("caca")
-lista.imprimirLista()
 
 ventana_principal=Tk()
 ventana_principal.title("caquita") 
@@ -242,3 +236,14 @@ aux_list_btn.append(confirmar_paciente_btn)
 for btn in aux_list_btn:
     btn.pack()
 ventana_principal.mainloop()
+
+root = Tk()
+label = Label(root,text="Enter a digit that you guessed:").pack()
+entry= Entry(root,bd=4)
+entry.pack()
+entry.focus_set()
+print(entry.focus_get())
+button1=Button(root,width=4,height=1,text='ok')
+button1.pack()
+
+root.mainloop()
