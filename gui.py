@@ -124,6 +124,8 @@ def verificarDatosPaciente():
     equis_img = PIL.Image.open('./imagenes/cancelar.png')
     equis_img =equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
     equis_img = ImageTk.PhotoImage(check_img)
+    for img in check_list:
+        img.configure(image=nada_img)
     
     
     cant_error=0
@@ -453,7 +455,7 @@ fonasa_btn.pack(side=LEFT)
 check_list=[]
     #rut
 nada_img = PIL.Image.open('./imagenes/nada.png')
-nada_img =nada_img.resize((200, 100), PIL.Image.ANTIALIAS)
+nada_img =nada_img.resize((50, 50), PIL.Image.ANTIALIAS)
 nada_img = ImageTk.PhotoImage(nada_img)
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
