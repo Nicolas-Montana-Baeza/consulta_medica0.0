@@ -314,7 +314,6 @@ class Persona():
 
     def getSegundoApellido(self):
         return self.apellido2
-
     
     def getEdad(self):
         return self.edad
@@ -327,7 +326,6 @@ class Persona():
     
     def getNumeroTelefonico(self):
         return self.numero_telefonico
-
     
     #funcion para verificar si un correo es valido o no
     def isMail(email):
