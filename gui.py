@@ -125,41 +125,52 @@ def verificarDatosPaciente():
     equis_img =equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
     equis_img = ImageTk.PhotoImage(check_img)
     
+    
     cant_error=0
     for i in range(len(lista_entry_datos_paciente)):
-        
+        fila=posicion_img[i][0]
+        columna=posicion_img[i][1]
+        check_list[i].grid(row=fila, column=columna)
         if i==0:
             if not(clases.Persona.isRut(rut_entry.get())) :
                 #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
-               
+                check_list[i].configure(image=equis_img)
+                
                 cant_error+=1
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
         elif i in [1,2,3,4]:       
             if not(lista_entry_datos_paciente[i].get().isalpha()):
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
                 cant_error+=1
             elif i==2:
                 if lista_entry_datos_paciente[i].get()=="":
                     lista_entry_datos_paciente[i].config(bg=JungleGreen)
-                
+                    check_list[i].configure(image=check_img)                
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
         elif i==5:
             if not(lista_entry_datos_paciente[i].get().isdigit()):
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
                 cant_error+=1
+                check_list[i].configure(image=equis_img)
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
                           
         elif i==6:
             if not(clases.Persona.isMail(email_entry.get())):
                 #messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
                 email_entry.config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
                 cant_error+=1
             else:
                 email_entry.config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)        
     
     if cant_error!=0:
         messagebox.showwarning(message="Los datos ingresados son INCORRECTOS, reviselos y vuelva a intentarlo", title="Error")

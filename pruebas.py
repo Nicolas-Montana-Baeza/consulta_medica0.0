@@ -163,7 +163,7 @@ def merge_sort(m):
 
 #funcion para graficar f=pie o bar, datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
 def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
-    aux = esp.tolist()
+    aux = _datos.tolist()
     aux = merge_sort(aux)
     _datos=aux
     auxOrdenado = list(dict.fromkeys(_datos))
