@@ -452,12 +452,15 @@ fonasa_btn.pack(side=LEFT)
 #
 check_list=[]
     #rut
+nada_img = PIL.Image.open('./imagenes/nada.png')
+nada_img =nada_img.resize((200, 100), PIL.Image.ANTIALIAS)
+nada_img = ImageTk.PhotoImage(nada_img)
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(rut_entry)
-rut_img=Label(ingresar_paciente)
+rut_img=Label(ingresar_paciente,image=nada_img)
 check_list.append(rut_img)
 posicion_img.append([3,2])
 
