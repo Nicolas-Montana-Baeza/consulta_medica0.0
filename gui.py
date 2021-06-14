@@ -29,7 +29,7 @@ def autocompletarPaciente():
     
         return
     paciente=paciente[0]
-    datos_paciente=[paciente.getRut(), paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail()]
+    datos_paciente=[paciente.getRut(), paciente.getPrimerNombre(), paciente.getSegundoNombre(),paciente.getPrimerApellido(), paciente.getSegundoApellido(), paciente.getNumeroTelefonico(),paciente.getEmail(),paciente.getEdad()]
 
     prevision_btn.set(paciente.getPrevision())
     
