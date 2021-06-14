@@ -144,15 +144,12 @@ def verificarDatosPaciente():
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
                 check_list[i].configure(image=check_img)
-        elif i in [1,2,3,4]:       
+        elif i in [1,3,4]:       
             if not(lista_entry_datos_paciente[i].get().isalpha()):
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
                 check_list[i].configure(image=equis_img)
                 cant_error+=1
-            elif i==2:
-                if lista_entry_datos_paciente[i].get()=="":
-                    lista_entry_datos_paciente[i].config(bg=JungleGreen)
-                    check_list[i].configure(image=check_img)                
+                    
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
                 check_list[i].configure(image=check_img)
