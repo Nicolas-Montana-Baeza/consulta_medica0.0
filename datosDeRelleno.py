@@ -118,8 +118,9 @@ lista_prevision=pacientes_csv["prevision"]
 lista_numero=pacientes_csv["numero de telefono"]
 lista_pacientes=[]
 for i in range (len(lista_nombres)):
-    for j in lista_nombres
-    paciente=clases.Paciente()
+    for j in lista_nombres:
+        
+        paciente=clases.Paciente()
 
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
 
