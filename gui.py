@@ -388,12 +388,6 @@ subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
 
-#dashboard y cita actual
-opciones= LabelFrame(ventana_principal,relief=FLAT,bg =Charade,bd=0)
-cita_gral_btn=Button(ventana_principal, text ="Vista General de Clinica", font=titulo_font)
-cita_gral_btn.pack(side=TOP, pady= 10,padx=5)
-dashboard_btn= Button(ventana_principal, text="Dashboard",font=titulo_font)
-dashboard_btn.pack(side=BOTTOM, pady= 10,padx=5)
 
 
 #Todas las entradas necesarias para una cita
