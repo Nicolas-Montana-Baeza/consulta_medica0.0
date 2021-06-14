@@ -2,7 +2,7 @@ from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,La
 import PIL
 from ttkbootstrap import Style
 from datosDeRelleno import *
-
+import pandas as pd
 from estilo import *
 import datetime as dt
 
@@ -367,7 +367,30 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
    
+def leerArchivos():
+    edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
+    edad_pacientes=edad_pacientes["edad"].values
+    #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
+    especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
+    especialidad_medicos=especialidad_medicos["especialidad"].values
+    #graficarDatos(especialidad_medicos,"Especialidades","pie")
+
+    datos_modalidad = pd.read_csv("./datos/Citas.csv")
+    datos_modalidad = datos_modalidad["modalidad"].values
+    #graficarDatos
+
+    datos_prestacion = pd.read_csv("./datos/Citas.csv")
+    datos_prestacion = datos_prestacion["prestacion"].values
+    #graficarDatos
+
+    datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+    datos_prevision = datos_prevision["prevision"].values
+    #graficarDatos
+
+    confirmados = pd.read_csv('./datos/Citas.csv')
+    confirmados = confirmados["confirmada"].values
+    #graficarDatos
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -494,8 +517,8 @@ nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
-nombre2_img=Label(ingresar_paciente,image=nada_img)
-check_list.append(nombre2_img,bg=Charade)
+nombre2_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(nombre2_img)
 posicion_img.append([5,2])
 
     #Primer Apellido
