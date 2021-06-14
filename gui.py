@@ -135,7 +135,6 @@ def verificarDatosPaciente():
         check_list[i].grid(row=fila, column=columna)
         if i==0:
             if not(clases.Persona.isRut(rut_entry.get())) :
-                #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
                 check_list[i].configure(image=equis_img)
                 cant_error+=1
@@ -162,7 +161,6 @@ def verificarDatosPaciente():
                           
         elif i==6:
             if not(clases.Persona.isMail(email_entry.get())):
-                #messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
                 email_entry.config(bg=Cinnabar)
                 check_list[i].configure(image=equis_img)
                 cant_error+=1
@@ -170,22 +168,26 @@ def verificarDatosPaciente():
                 email_entry.config(bg=JungleGreen)
                 check_list[i].configure(image=check_img)
         elif i==7:
-            if not(edad_entry.get().isdigit()) and int(edad_entry).get() not in range(0,150):
+            if not(edad_entry.get().isdigit()):
                 edad_entry.config(bg=Cinnabar)
                 check_list[i].configure(image=equis_img)
                 cant_error+=1
             else:
-                edad_entry.config(bg=JungleGreen)
-                check_list[i].configure(image=check_img)      
-    
+                if int(edad_entry.get())<150 and int(edad_entry.get())>0:
+                    edad_entry.config(bg=JungleGreen)
+                    check_list[i].configure(image=check_img)
+                else:
+                    edad_entry.config(bg=Cinnabar)
+                    check_list[i].configure(image=equis_img)
+                    cant_error+=1
+                    
+                    
     if cant_error!=0:
         messagebox.showwarning(message="Los datos ingresados son INCORRECTOS, reviselos y vuelva a intentarlo", title="Error")
         return False    
     else:
         return True
        
-        
-    return 
 #agrega un paciente
 
 def agregarDatosPaciente():
@@ -679,7 +681,7 @@ posicion_img.append([10,2])
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 
 botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT,bg=Charade)
-botones_paciente_frame.grid(columnspan=3,row=10,column=0)
+botones_paciente_frame.grid(columnspan=3,row=11,column=0)
 
 confirmar_paciente_ic = PIL.Image.open('./imagenes/confirmar_paciente.png')
 confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
