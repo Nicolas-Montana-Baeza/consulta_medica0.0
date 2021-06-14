@@ -1,10 +1,11 @@
+from pandas.core.frame import DataFrame
 import clases
 from random import randint
 import datetime
 import calendar
 from math import floor
-import csv
 import pandas as pd
+from dateutil import parser
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -133,8 +134,6 @@ for i in range (len(lista_nombres)):
     paciente.setPrevision(lista_prevision[i])
     lista_pacientes.append(paciente)
 
-
-lista_citas=[]
 medicos_csv = pd.read_csv('./datos/Medicos.csv')
 lista_nombres= medicos_csv["nombre completo"]
 lista_ruts=medicos_csv["rut"]
@@ -156,8 +155,46 @@ for i in range (len(lista_nombres)):
     medico=clases.Medico(n1,n2,ap1,ap2,lista_ruts[i],lista_edad[i],lista_emails[i],lista_numero[i],lista_especialidad[i])
     
     lista_medicos.append(medico)
-
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
+
+lista_citas=[]
+cita_vacia=clases.Cita("","","","")
+cita_csv = pd.read_csv('./datos/Citas.csv')
+cita_csv=DataFrame(cita_csv)
+codigo=cita_csv["codigo"].values
+rut_paciente=cita_csv["rut paciente"].values
+rut_medico=cita_csv["rut medico"].values
+fecha_citada=cita_csv["fecha citada"].values
+fecha_creacion=cita_csv["fecha de creacion"].values
+modalidad=cita_csv["modalidad"].values
+prestacion=cita_csv["prestacion"].values
+confirmada=cita_csv["confirmada"].values
+tiempo_restante=cita_csv["tiempo restante"].values
+
+for i in range(len(codigo)):
+    cita_vacia.setCodigo(codigo[i])
+    cita_vacia.setPaciente(clinica_objeto.buscarPaciente(rut_paciente[i])[0])
+    cita_vacia.setMedico(clinica_objeto.buscarMedico(rut_medico[i])[0])
+    cita_vacia.setFechaCitada(parser.parse(fecha_citada[i]))
+    cita_vacia.setFechaCreacion(parser.parse(fecha_creacion[i]))
+    cita_vacia.setModalidad(modalidad[i])
+    cita_vacia.setPrestacion(prestacion[i])
+    cita_vacia.setConfirmada(confirmada[i])
+    cita_vacia.actualizarEstado()
+    lista_citas.append(cita_vacia)
+for paciente in clinica_objeto.getPacientes():
+    citas_paciente=[]
+    for cita in lista_citas:
+        if paciente.getRut()==cita.getPaciente().getRut():
+            citas_paciente.append(cita)
+    paciente.setCitas(citas_paciente)
+
+for medico in clinica_objeto.getMedicos():
+    citas_medico=[]
+    for cita in lista_citas:
+        if medico.getRut()==cita.getMedico().getRut():
+            citas_medico.append(cita)
+    medico.setCitas(citas_medico)      
 #esto lo use para crear los archivos
 """
 medicos_csv = open('./datos/Medicos.csv','w')
@@ -197,3 +234,4 @@ for paciente in clinica_objeto.getPacientes():
 medicos_csv = open('./datos/Medicos.csv','r')
 medicos_reader = csv.DictReader(medicos_csv)
 """
+print(clinica_objeto.getPacientes()[-1].getCitas()[0].getCodigo())

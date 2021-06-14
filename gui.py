@@ -88,7 +88,7 @@ def cancelarCita():
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
-            #actualizarDatosCitas()
+            actualizarDatosCitas()
     return False
 
 #función para confirmar la cita
@@ -329,6 +329,7 @@ def reagendarCita():
 
                 elegir_fecha.destroy()
                 messagebox.showinfo(message="La cita ha sido reagendada con exito", title="Éxito")
+    
 
 
 
@@ -365,6 +366,7 @@ def reagendarCita():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:reagendarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
+    actualizarDatosCitas()
 
 
 
@@ -505,18 +507,33 @@ def actualizarDatosPacientes():
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 
-"""
 def actualizarDatosCitas():
-    citas_csv = open('./datos/Citas.csv', 'w')
-    citas_writer = csv.writer(citas_csv)
-    citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
-    citas_writer.writerow(citas_atributos)
-
+    agregar={'codigo': [],
+             'rut paciente':[],
+             'rut medico':[],
+             'fecha citada': [],
+             'fecha de creacion':[],
+             'modalidad':[],
+             'prestacion':[],
+             'confirmada':[],
+             'tiempo restante':[]
+             }
+    citas_csv=pd.DataFrame(columns=agregar.keys())
     for cita in clinica_objeto.getCitas():
-        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaCreacion(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
-        citas_writer.writerow(cita_info)
-
-"""
+        agregar={'codigo': [cita.getCodigo()],
+             'rut paciente':[cita.getPaciente().getRut()],
+             'rut medico':[cita.getMedico().getRut()],
+             'fecha citada': [cita.getFechaCitada()],
+             'fecha de creacion':[cita.getFechaCreacion()],
+             'modalidad':[cita.getModalidad()],
+             'prestacion':[cita.getPrestacion()],
+             'confirmada':[cita.getConfirmada()],
+             'tiempo restante':[cita.getTiempoRestante()]
+             }
+        agregar=pd.DataFrame(agregar)
+        citas_csv=citas_csv.append(agregar,ignore_index=True)
+    citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
+    citas_csv.to_csv("./datos/Citas.csv")
 
 def informacionCitas():
     

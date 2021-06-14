@@ -177,11 +177,17 @@ class Cita ():
         self.paciente= paciente
         self.direccion=""
         self.codigo=str(shortuuid.uuid())
-        self.prestacion=medico.getEspecialidad()
+        try:
+            self.prestacion=medico.getEspecialidad()
+        except AttributeError:
+            self.prestacion=""
         self.pagado=False
         self.modalidad=modalidad
         self.prioridad=""
-        self.tiempo_restante=self.fecha_citada-self.fecha_creacion
+        try:
+            self.tiempo_restante=self.fecha_citada-self.fecha_creacion
+        except TypeError:
+            self.tiempo_restante=""
         self.confirmada=False
         self.terminada=False
     
@@ -265,7 +271,7 @@ class Cita ():
 
     #funcion para actualizar el estado de una cita segun en cual se encuentre
     def actualizarEstado(self):
-        fecha_creacion=dt.datetime.now()       
+        fecha_creacion=dt.datetime.now()  
         fecha_restante=self.fecha_citada-fecha_creacion
 
         self.tiempo_restante = fecha_restante
@@ -316,7 +322,8 @@ class Persona():
     def setNumeroTelefonico(self,numero_telefonico):
         self.numero_telefonico=numero_telefonico
         
-
+    def setCitas(self,_citas):
+        self.citas=_citas
     def getPrimerNombre(self):
         return self.nombre1
 
@@ -433,12 +440,11 @@ class Persona():
 
     #funcion para eliminar una cita agendada
     def eliminarCita(self,_codigo):
-        print("entre2")
         for cita in self.citas:
             if cita.getCodigo()==_codigo:
-                print("entre3")
                 self.citas.remove(cita)
                 return True
+            
         return False
 
     #funcion para modificar una cita agendada
