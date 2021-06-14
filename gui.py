@@ -387,7 +387,6 @@ def leerArchivos():
 
 def agregarPacienteCSV():
     pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
-    #pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     agregar={'nombre completo': [clinica_objeto.getPacientes()[-1].getNombreCompleto()],
             'rut': [clinica_objeto.getPacientes()[-1].getRut()],
             'edad': [clinica_objeto.getPacientes()[-1].getEdad()],
@@ -400,12 +399,12 @@ def agregarPacienteCSV():
     pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
-"""
+
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
     agregar={'codigo': clinica_objeto.getCitas()[-1].getCodigo(),
-             'rut paciente':clinica_objeto.getCitas()[-1].getRutPaciente(),
-             'rut medico':clinica_objeto.getCitas()[-1].getRutMedico(),
+             'rut paciente':clinica_objeto.getCitas()[-1].getPaciente().getRut(),
+             'rut medico':clinica_objeto.getCitas()[-1].getMedico().getRut(),
              'fecha citada': clinica_objeto.getCitas()[-1].getFechaCitada(),
              'fecha de creacion':clinica_objeto.getCitas()[-1].getFechaCreacion(),
              'modalidad':clinica_objeto.getCitas()[-1].getModalidad(),
@@ -413,9 +412,12 @@ def agregarCitaCSV():
              'confirmada':clinica_objeto.getCitas()[-1].getConfirmada(),
              'tiempo restante':clinica_objeto.getCitas()[-1].getTiempoRestante()
              }
-    with open('./datos/Citas.csv', mode='a') as archivo:
-        agregar.to_csv(archivo, header=archivo.tell()==0)
-"""
+    citas_csv=pd.DataFrame(citas_csv)
+    agregar=pd.DataFrame(agregar)
+    citas_csv=citas_csv.append(agregar,ignore_index=True)
+    citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
+    citas_csv.to_csv("./datos/Pacientes.csv")
+
 def merge_sort(m):
     if len(m) <= 1:
         return m
