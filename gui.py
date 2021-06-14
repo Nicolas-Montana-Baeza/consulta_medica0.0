@@ -397,6 +397,7 @@ def agregarPacienteCSV():
     pacientes_csv=pd.DataFrame(pacientes_csv)
     agregar=pd.DataFrame(agregar)
     pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
+    pacientes_csv=pacientes_csv.drop_duplicates(ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 """
 def agregarCitaCSV():
