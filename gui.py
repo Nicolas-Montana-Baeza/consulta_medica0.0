@@ -484,6 +484,8 @@ nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
+nombre1_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(nombre1_img,bg=Charade)
 posicion_img.append([4,2])
 
     #segundo nombre
@@ -492,6 +494,8 @@ nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
+nombre2_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(nombre2_img,bg=Charade)
 posicion_img.append([5,2])
 
     #Primer Apellido
@@ -500,6 +504,8 @@ apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
+apellido1_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(apellido1_img,bg=Charade)
 posicion_img.append([6,2])
 
     #Segundo Apellido
@@ -507,6 +513,8 @@ apellido2_label=Label(ingresar_paciente, text="Segundo Apellido:", bg=Charade, f
 apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=7,column=1)
+apellido2_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(apellido2_img,bg=Charade)
 lista_entry_datos_paciente.append(apellido2_entry)
 posicion_img.append([7,2])
     
@@ -516,6 +524,8 @@ tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
+tel_contacto_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(tel_contacto_img,bg=Charade)
 posicion_img.append([8,2])
 
     #email
@@ -524,6 +534,8 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+email_img=Label(ingresar_paciente,image=nada_img)
+check_list.append(email_img,bg=Charade)
 posicion_img.append([3,2])
 
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
