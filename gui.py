@@ -89,10 +89,15 @@ def cancelarCita():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
             actualizarDatosCitas()
+    for medico in clinica_objeto.getMedicos():
+            medico.eliminarCita(busqueda)
+            info_cita_txtbox.delete('0.0',END)
+            actualizarDatosCitas()
     return False
 
 #función para confirmar la cita
 def confirmarCita():
+    confirmada=0
     busqueda= ingresar_codigo_entry.get()
     for paciente in clinica_objeto.getPacientes():
         for cita in paciente.getCitas():
@@ -102,10 +107,22 @@ def confirmarCita():
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
                 info_cita_txtbox.insert('0.0',texto)
                 messagebox.showinfo(message="Cita confirmada")
-                #actualizarDatosCitas()
+                actualizarDatosCitas()
 
-                return True
-    return False
+                confirmada=True
+    for medico in clinica_objeto.getMedicos():
+        for cita in medico.getCitas():
+            if cita.getCodigo()==busqueda:
+                info_cita_txtbox.delete('0.0',END)
+                cita.setConfirmada(True)
+                texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nMedico: "+ cita.getMedico().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
+                info_cita_txtbox.insert('0.0',texto)
+                messagebox.showinfo(message="Cita confirmada")
+                actualizarDatosCitas()
+
+                confirmada=True
+    if confirmada:return True
+    else: return False
 
 #buscar cita por codigo
 def buscarCodigo():
