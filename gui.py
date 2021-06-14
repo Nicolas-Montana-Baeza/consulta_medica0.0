@@ -387,6 +387,7 @@ def leerArchivos():
 
 def agregarPacienteCSV():
     pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
+    pacientes_csv=pacientes_csv.drop_duplicates(ignore_index=True)
     agregar={'nombre completo': [clinica_objeto.getPacientes()[-1].getNombreCompleto()],
             'rut': [clinica_objeto.getPacientes()[-1].getRut()],
             'edad': [clinica_objeto.getPacientes()[-1].getEdad()],
