@@ -386,7 +386,7 @@ def leerArchivos():
     return lista_datos
 
 def agregarPacienteCSV():
-    pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
+    pacientes_csv = pd.read_csv('./datos/Pacientes.csv', subset="rut", index_col=0)
     pacientes_csv=pacientes_csv.drop_duplicates(ignore_index=True)
     agregar={'nombre completo': [clinica_objeto.getPacientes()[-1].getNombreCompleto()],
             'rut': [clinica_objeto.getPacientes()[-1].getRut()],
@@ -398,7 +398,7 @@ def agregarPacienteCSV():
     pacientes_csv=pd.DataFrame(pacientes_csv)
     agregar=pd.DataFrame(agregar)
     pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
-    pacientes_csv=pacientes_csv.drop_duplicates(ignore_index=True)
+   # pacientes_csv=pacientes_csv.drop_duplicates(ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 """
 def agregarCitaCSV():
