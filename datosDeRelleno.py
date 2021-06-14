@@ -117,18 +117,21 @@ lista_edad=pacientes_csv["edad"]
 lista_prevision=pacientes_csv["prevision"]
 lista_numero=pacientes_csv["numero de telefono"]
 lista_pacientes=[]
+lista_nombres=formatoNombres(lista_nombres)
+
 for i in range (len(lista_nombres)):
-    for j in lista_nombres:
-        j.split()
-        n1=j[0]
-        n2=j[1]
-        ap1=j[2]
-        ap2=j[3]
+    n1=lista_nombres[i][0]
+    n2=lista_nombres[i][1]
+    ap1=lista_nombres[i][-2]
+    ap2=lista_nombres[i][-1]
+    if lista_nombres[i][-2]==lista_nombres[i][1]:
+        n2=""
+        
     paciente=clases.Paciente(n1,n2,ap1,ap2,lista_ruts[i],lista_edad[i],lista_emails[i],lista_numero[i])
+    paciente.setPrevision(lista_prevision[i])
     lista_pacientes.append(paciente)
 
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
-
 #esto lo use para crear los archivos
 """
 medicos_csv = open('./datos/Medicos.csv','w')

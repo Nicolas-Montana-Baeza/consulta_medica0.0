@@ -379,7 +379,7 @@ def reagendarCita():
 Lista_datos = []
 
 def leerArchivos():
-    #actualizarDatos()
+    actualizarDatos()
     edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
     edad_pacientes=edad_pacientes["edad"].values
     #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
