@@ -399,7 +399,6 @@ def agregarPacienteCSV():
     agregar=pd.DataFrame(agregar)
     print(agregar)
     pacientes_csv.append(agregar)
-    
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
@@ -493,7 +492,7 @@ def actualizarDatosCitas():
     citas_writer.writerow(citas_atributos)
 
     for cita in clinica_objeto.getCitas():
-        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
+        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaCreacion(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
         citas_writer.writerow(cita_info)
 
 

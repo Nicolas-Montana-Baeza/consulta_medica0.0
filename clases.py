@@ -122,10 +122,13 @@ class Clinica():
     def getCitas(self):
         citas=[]
         for persona in self.pacientes:
-            citas.append(persona.getCitas())
+            for cita in persona.getCitas():
+                citas.append(cita)
         for persona in self.medicos:
-            citas.append(persona.getCitas())
+            for cita in persona.getCitas():
+                citas.append(cita)
         citas=set(citas)
+        citas=list(citas)
         return citas
     
     #funcion para agregar un nuevo medico
