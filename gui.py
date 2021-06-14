@@ -441,8 +441,6 @@ def actualizarDatos():
             cita = paciente.buscarCita(codigo)
             cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
             citas_writer.writerow(cita_info)
-    medicos_csv = open('./datos/Medicos.csv','r')
-    medicos_reader = csv.DictReader(medicos_csv)
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -813,5 +811,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-
+ventana_principal.bind("<ButtonRelease-1>",actualizarDatos())
 ventana_principal.mainloop()
