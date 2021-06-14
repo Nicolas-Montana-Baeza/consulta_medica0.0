@@ -168,7 +168,15 @@ def verificarDatosPaciente():
                 cant_error+=1
             else:
                 email_entry.config(bg=JungleGreen)
-                check_list[i].configure(image=check_img)        
+                check_list[i].configure(image=check_img)
+        elif i==7:
+            if not(edad_entry.get().isdigit()) and int(edad_entry).get() not in range(0,150):
+                edad_entry.config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
+                cant_error+=1
+            else:
+                edad_entry.config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)      
     
     if cant_error!=0:
         messagebox.showwarning(message="Los datos ingresados son INCORRECTOS, reviselos y vuelva a intentarlo", title="Error")
@@ -185,7 +193,7 @@ def agregarDatosPaciente():
     if not(verificarDatosPaciente()):
         return False
     else:
-        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
         email_entry.get(), tel_contacto_entry.get())
         if clinica_objeto.agregarPaciente(paciente_temporal):
             messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
@@ -656,6 +664,17 @@ lista_entry_datos_paciente.append(email_entry)
 email_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
 check_list.append(email_img)
 posicion_img.append([9,2])
+
+#edad
+edad_label=Label(ingresar_paciente, text="Edad:", bg=Charade, font=subtitulo4_font)
+edad_label.grid(row=10,column=0)
+edad_entry=Entry(ingresar_paciente, width=10)
+edad_entry.grid(row=10,column=1)
+lista_entry_datos_paciente.append(edad_entry)
+edad_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(edad_img)
+posicion_img.append([10,2])
+
 
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 
