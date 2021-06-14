@@ -394,8 +394,10 @@ def agregarPacienteCSV():
             'numero de telefono': [clinica_objeto.getPacientes()[-1].getNumeroTelefonico()],
             'prevision': [clinica_objeto.getPacientes()[-1].getPrevision()]
             }
-    agregar=pd.DataFrame(agregar,drop=False)
+    agregar=pd.DataFrame(agregar)
+    agregar = agregar.iloc[: , 1:]
     agregar.to_csv("agregar.csv")
+    print(agregar)
     with open('./datos/Pacientes.csv', mode='a') as archivo:
         agregar.to_csv(archivo, header=archivo.tell()==0)
 
