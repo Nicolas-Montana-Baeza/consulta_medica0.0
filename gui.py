@@ -395,11 +395,8 @@ def agregarPacienteCSV():
             'prevision': [clinica_objeto.getPacientes()[-1].getPrevision()]
             }
     pacientes_csv=pd.DataFrame(pacientes_csv)
-    print(pacientes_csv)
     agregar=pd.DataFrame(agregar)
-    print(agregar)
-    pacientes_csv.append(agregar,ignore_index=True)
-    print(pacientes_csv)
+    pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 """
 def agregarCitaCSV():
