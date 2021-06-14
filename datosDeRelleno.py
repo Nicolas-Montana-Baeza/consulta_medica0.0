@@ -4,7 +4,7 @@ import datetime
 import calendar
 from math import floor
 import csv
-
+import pandas as pd
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -109,8 +109,18 @@ lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades 
 for medico in lista_medicos:
     medico.setDisponibilidad(disponibilidad)
 lista_citas=[]
-lista_pacientes=[clases.Paciente("juan", "pedro","perez","gonzalez","14077811-7","23","juanito.perez@gmail.com","950183162")]
-lista_pacientes[0].setPrevision("FONASA")
+pacientes_csv = pd.read_csv('./datos/Pacientes.csv')
+lista_nombres= pacientes_csv["nombre completo"]
+lista_ruts=pacientes_csv["rut"]
+lista_emails=pacientes_csv["email"]
+lista_edad=pacientes_csv["edad"]
+lista_prevision=pacientes_csv["prevision"]
+lista_numero=pacientes_csv["numero de telefono"]
+lista_pacientes=[]
+for i in range (len(lista_nombres)):
+    for j in lista_nombres
+    paciente=clases.Paciente()
+
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
 
 #esto lo use para crear los archivos
