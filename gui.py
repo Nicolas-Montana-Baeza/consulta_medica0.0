@@ -484,22 +484,21 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         datos.append(str(auxOrdenado[a]))
 
     if _f=="pie":
-        plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
-        print(datos)
-        plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
-        plt.title("Porcentaje de "+_titulo)
-        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
-        if caso:plt.show()
+        pie=plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+
+        pie.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+        pie.title("Porcentaje de "+_titulo)
+        pie.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:pie.show()
 
     elif _f=="bar":
-        plt.bar(datos, cantidad, align="center")
-        plt.title(_titulo)
-        plt.ylabel(_titulo_y)
-        plt.xlabel(_titulo_x)
-        plt.grid(axis="y")
-      #  plt.show()
-        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
-        if caso:plt.show()
+        grafbar=plt.bar(datos, cantidad, align="center",title=_titulo,xlabel=_titulo_x,ylabel=_titulo_y)
+        #grafbar.title(_titulo)
+        #grafbar.ylabel(_titulo_y)
+        #grafbar.xlabel(_titulo_x)
+        grafbar.grid(axis="y")
+        grafbar.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:grafbar.show()
    
     
 
