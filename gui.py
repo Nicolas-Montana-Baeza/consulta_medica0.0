@@ -395,7 +395,6 @@ def agregarPacienteCSV():
             'prevision': [clinica_objeto.getPacientes()[-1].getPrevision()]
             }
     agregar=pd.DataFrame(agregar)
-    agregar = agregar.iloc[: , 1:]
     agregar.to_csv("agregar.csv")
     print(agregar)
     with open('./datos/Pacientes.csv', mode='a') as archivo:
