@@ -559,7 +559,7 @@ email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
 email_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
 check_list.append(email_img)
-posicion_img.append([3,2])
+posicion_img.append([9,2])
 
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 
