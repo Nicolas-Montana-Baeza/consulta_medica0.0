@@ -489,6 +489,7 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
         plt.title("Porcentaje de "+_titulo)
         plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:plt.show()
 
     elif _f=="bar":
         plt.bar(datos, cantidad, align="center")
@@ -498,9 +499,14 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.grid(axis="y")
       #  plt.show()
         plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:plt.show()
    
-    if caso:plt.show()
+    
 
+
+def informacionCitas():
+    
+    return
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
