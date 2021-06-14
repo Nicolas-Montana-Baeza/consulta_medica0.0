@@ -234,4 +234,3 @@ for paciente in clinica_objeto.getPacientes():
 medicos_csv = open('./datos/Medicos.csv','r')
 medicos_reader = csv.DictReader(medicos_csv)
 """
-print(clinica_objeto.getPacientes()[-1].getCitas()[0].getCodigo())

@@ -384,7 +384,7 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
     actualizarDatosCitas()
-
+"""
 def actualizarImg():
     lista_datos=leerArchivos()
     graficarDatos(False,lista_datos[0],"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
@@ -424,11 +424,9 @@ def actualizarImg():
     confirmados_grafico_img = PIL.ImageTk.PhotoImage(confirmados_grafico_img)
     confirmados_grafico_btn.config(image =confirmados_grafico_img)
 
-
+"""
 #csv manage
 def leerArchivos():
-    actualizarDatosCitas()
-    actualizarDatosPacientes()
     
     datos_pacientes = pd.read_csv('./datos/Pacientes.csv')
     edad_pacientes=datos_pacientes["edad"].values
@@ -461,7 +459,7 @@ def agregarPacienteCSV():
     pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
-    actualizarImg()
+    actualizarDatosPacientes()
 
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
@@ -480,6 +478,7 @@ def agregarCitaCSV():
     citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
+    actualizarDatosCitas()
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -565,7 +564,7 @@ def actualizarDatosPacientes():
         pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
-
+    
 
 def actualizarDatosCitas():
     agregar={'codigo': [],
@@ -594,6 +593,7 @@ def actualizarDatosCitas():
         citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
+   
 
 
 def informacionCitas():
@@ -913,5 +913,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-dashboard_frame.bind("<FocusIn>",actualizarImg())
+
 ventana_principal.mainloop()
