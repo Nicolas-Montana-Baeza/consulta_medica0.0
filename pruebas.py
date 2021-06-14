@@ -214,7 +214,7 @@ especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
 especialidad_medicos=especialidad_medicos["especialidad"].values
 #graficarDatos(especialidad_medicos,"Especialidades","pie")
 
-
+datos_modalidad = pd.read_csv("./datos/Citas.csv")
 
 ventana_principal=Tk()
 ventana_principal.title("Dashboard") 
