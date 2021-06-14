@@ -208,11 +208,11 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
 
 edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
 edad_pacientes=edad_pacientes["edad"].values
-#graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
+graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
 especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
 especialidad_medicos=especialidad_medicos["especialidad"].values
-#graficarDatos(especialidad_medicos,"Especialidades","pie")
+graficarDatos(especialidad_medicos,"Especialidades","pie")
 
 datos_modalidad = pd.read_csv("./datos/Citas.csv")
 datos_modalidad = datos_modalidad["modalidad"].values
