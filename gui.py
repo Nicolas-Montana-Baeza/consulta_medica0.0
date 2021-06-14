@@ -1,5 +1,5 @@
 from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
-from PIL import Image,ImageTk
+import PIL
 from ttkbootstrap import Style
 from datosDeRelleno import *
 
@@ -116,14 +116,14 @@ def buscarCodigo():
 
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
-check_img = Image.open('./imagenes/check.png')
-check_img = check_img.resize((50, 50), Image.ANTIALIAS)
-check_img = ImageTk.PhotoImage(check_img)
+"""check_img = PIL.Image.open('./imagenes/check.png')
+check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
+check_img = PIL.ImageTk.PhotoImage(check_img)
 
-equis_img = Image.open('./imagenes/equis.png')
-equis_img =equis_img.resize((50, 50), Image.ANTIALIAS)
-equis_img = ImageTk.PhotoImage(equis_img)
-
+equis_img = PIL.Image.open('./imagenes/equis.png')
+equis_img = equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
+equis_img = PIL.ImageTk.PhotoImage(equis_img)
+"""
 def verificarDatosPaciente():
     
     for img in check_list:
@@ -377,9 +377,9 @@ s=Style()
 s.theme_use("darkly")
 posicion_img=[]
 #boton para guardar fecha y hora
-reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
-reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
+reservar_hora_ic = PIL.Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+reservar_hora_ic = PIL.ImageTk.PhotoImage(reservar_hora_ic)
 
 
 #FUENTES
@@ -427,9 +427,9 @@ ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
     #autocompletar con rut
 
-buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
-buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
-buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
+buscar_rut_ic = PIL.Image.open('./imagenes/buscapaciente.png')
+buscar_rut_ic = buscar_rut_ic.resize((30, 30), PIL.Image.ANTIALIAS)
+buscar_rut_ic = PIL.ImageTk.PhotoImage(buscar_rut_ic)
 buscar_rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
 buscar_rut_label.grid(row=0,column=0)
 buscar_rut_entry=Entry(ingresar_paciente, width=10)
@@ -457,15 +457,24 @@ fonasa_btn.pack(side=LEFT)
 #
 check_list=[]
     #rut
-nada_img = Image.open('./imagenes/nada.png')
-nada_img =nada_img.resize((50, 50),Image.ANTIALIAS)
-nada_img = ImageTk.PhotoImage(nada_img)
+nada_img = PIL.Image.open('./imagenes/nada.png')
+nada_img =nada_img.resize((10, 10),PIL.Image.ANTIALIAS)
+nada_img = PIL.ImageTk.PhotoImage(nada_img)
+
+check_img = PIL.Image.open('./imagenes/check.png')
+check_img =check_img.resize((10, 10),PIL.Image.ANTIALIAS)
+check_img = PIL.ImageTk.PhotoImage(check_img)
+
+equis_img = PIL.Image.open('./imagenes/equis.png')
+equis_img =equis_img.resize((10, 10),PIL.Image.ANTIALIAS)
+equis_img = PIL.ImageTk.PhotoImage(equis_img)
+
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(rut_entry)
-rut_img=Label(ingresar_paciente,image=nada_img)
+rut_img=Label(ingresar_paciente,image=nada_img, bg=Charade)
 check_list.append(rut_img)
 posicion_img.append([3,2])
 
@@ -523,21 +532,21 @@ posicion_img.append([3,2])
 botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT,bg=Charade)
 botones_paciente_frame.grid(columnspan=3,row=10,column=0)
 
-confirmar_paciente_ic = Image.open('./imagenes/confirmar_paciente.png')
-confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
+confirmar_paciente_ic = PIL.Image.open('./imagenes/confirmar_paciente.png')
+confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+confirmar_paciente_ic = PIL.ImageTk.PhotoImage(confirmar_paciente_ic)
 confirmar_paciente_btn=Button(botones_paciente_frame,text="Confirmar", image = confirmar_paciente_ic, command=lambda:agregarDatosPaciente())
 confirmar_paciente_btn.pack(side=LEFT,padx=30)
 
-cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
-cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
+cancelar_paciente_ic = PIL.Image.open('./imagenes/cancelar_paciente.png')
+cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+cancelar_paciente_ic = PIL.ImageTk.PhotoImage(cancelar_paciente_ic)
 cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=lambda:cancelarDatosPaciente())
 cancelar_paciente_btn.pack(side=RIGHT,padx=30)
 
-modificar_paciente_ic = Image.open('./imagenes/modificarpaciente.png')
-modificar_paciente_ic = modificar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-modificar_paciente_ic = ImageTk.PhotoImage(modificar_paciente_ic)
+modificar_paciente_ic = PIL.Image.open('./imagenes/modificarpaciente.png')
+modificar_paciente_ic = modificar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+modificar_paciente_ic = PIL.ImageTk.PhotoImage(modificar_paciente_ic)
 modificar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = modificar_paciente_ic, command=lambda:modificarDatosPaciente())
 modificar_paciente_btn.pack(side=RIGHT,padx=30)
 
@@ -558,9 +567,9 @@ ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
 
 #Boton buscar
-buscar_cita_ic = Image.open('./imagenes/buscacita.png')
-buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
-buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
+buscar_cita_ic = PIL.Image.open('./imagenes/buscacita.png')
+buscar_cita_ic = buscar_cita_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+buscar_cita_ic = PIL.ImageTk.PhotoImage(buscar_cita_ic)
 buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic, command=lambda:buscarCodigo())
 buscar_btn.pack(pady=10)
 
@@ -569,22 +578,22 @@ info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 
 info_cita_txtbox.pack(padx=10)
 
-agendar_hora_ic = Image.open('./imagenes/confirmar.png')
-agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_ic = PIL.Image.open('./imagenes/confirmar.png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+agendar_hora_ic = PIL.ImageTk.PhotoImage(agendar_hora_ic)
 agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar", image = agendar_hora_ic,command=lambda:confirmarCita())
 agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
 
-cancelar_hora_ic = Image.open('./imagenes/cancelar.png')
-cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_ic = PIL.Image.open('./imagenes/cancelar.png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+cancelar_hora_ic = PIL.ImageTk.PhotoImage(cancelar_hora_ic)
 cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic, command=lambda:cancelarCita())
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
 #boton reagendar
-reagendar_hora_ic = Image.open('./imagenes/reagendar.png')
-reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
+reagendar_hora_ic = PIL.Image.open('./imagenes/reagendar.png')
+reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+reagendar_hora_ic = PIL.ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 

@@ -10,10 +10,10 @@ from collections import OrderedDict
 import pandas as pd
 
 from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
-from PIL import Image,ImageTk
+
 from ttkbootstrap import Style
 from datosDeRelleno import *
-from PIL import ImageTk
+
 import PIL
 from estilo import *
 import datetime as dt
@@ -241,7 +241,7 @@ grafico_list_btn=[]
 
 edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
 edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
-edades_grafico_img = ImageTk.PhotoImage(edades_grafico_img)
+edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
 edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
 grafico_list_btn.append(edades_grafico_btn)
 
