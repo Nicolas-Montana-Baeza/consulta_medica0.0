@@ -116,11 +116,11 @@ def buscarCodigo():
 
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
-check_img = Image.open('./imagenes/confirmar.png')
+check_img = Image.open('./imagenes/check.png')
 check_img = check_img.resize((50, 50), Image.ANTIALIAS)
 check_img = ImageTk.PhotoImage(check_img)
 
-equis_img = Image.open('./imagenes/cancelar.png')
+equis_img = Image.open('./imagenes/equis.png')
 equis_img =equis_img.resize((50, 50), Image.ANTIALIAS)
 equis_img = ImageTk.PhotoImage(equis_img)
 
@@ -457,8 +457,8 @@ fonasa_btn.pack(side=LEFT)
 #
 check_list=[]
     #rut
-nada_img = PIL.Image.open('./imagenes/nada.png')
-nada_img =nada_img.resize((50, 50), PIL.Image.ANTIALIAS)
+nada_img = Image.open('./imagenes/nada.png')
+nada_img =nada_img.resize((50, 50),Image.ANTIALIAS)
 nada_img = ImageTk.PhotoImage(nada_img)
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
