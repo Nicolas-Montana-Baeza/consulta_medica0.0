@@ -118,6 +118,12 @@ class Clinica():
         return coincidencias    
 
     #funcion para agregar un nuevo medico
+    def getCitas(self):
+        citas=[]
+        for persona in self.pacientes,self.getMedicos():
+            citas.append(persona.getCitas())
+        citas=set(citas)
+        return citas
     def agregarMedico(self, _medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
