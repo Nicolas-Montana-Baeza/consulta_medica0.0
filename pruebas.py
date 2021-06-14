@@ -17,6 +17,7 @@ from PIL import ImageTk
 import PIL
 from estilo import *
 import datetime as dt
+from datosDeRelleno import *
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -147,7 +148,7 @@ cantidad_prevision= pre.value_counts()
 plt.pie(cantidad_prevision.array, labels=cantidad_prevision.index, colors=colors, autopct=lambda p: '{:.2f}%({:.0f})'.format(p,(p/100)*cantidad_prevision.array.sum()))
 plt.title("Previsión de los pacientes")
 plt.show()
-"""
+
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -252,7 +253,7 @@ for btn in grafico_list_btn:
     btn.pack()
 ventana_principal.mainloop()
 
-"""
+
 root = Tk()
 label = Label(root,text="Enter a digit that you guessed:").pack()
 entry= Entry(root,bd=4)
@@ -262,3 +263,14 @@ button1.pack()
 
 root.mainloop()
 """
+pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
+agregar={'nombre completo': clinica_objeto.getPacientes()[-1].getNombreCompleto(),
+             'rut': clinica_objeto.getPacientes()[-1].getRut(),
+             'edad': clinica_objeto.getPacientes()[-1].getEdad(),
+             'email': clinica_objeto.getPacientes()[-1].getEmail(),
+             'numero de telefono': clinica_objeto.getPacientes()[-1].getNumeroTelefonico(),
+             'prevision': clinica_objeto.getPacientes()[-1].getPrevision()
+             }
+agregar=pd.DataFrame(agregar)
+agregar.to_csv("agregar.csv")
+print(agregar)
