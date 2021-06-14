@@ -2,7 +2,7 @@ from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,La
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
-import PIL
+
 from estilo import *
 import datetime as dt
 
@@ -116,14 +116,16 @@ def buscarCodigo():
 
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
+check_img = Image.open('./imagenes/check.png')
+check_img = check_img.resize((50, 50), Image.ANTIALIAS)
+check_img = ImageTk.PhotoImage(check_img)
+
+equis_img = Image.open('./imagenes/equis.png')
+equis_img =equis_img.resize((50, 50), Image.ANTIALIAS)
+equis_img = ImageTk.PhotoImage(equis_img)
+
 def verificarDatosPaciente():
-    check_img = PIL.Image.open('./imagenes/confirmar.png')
-    check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
-    check_img = ImageTk.PhotoImage(check_img)
     
-    equis_img = PIL.Image.open('./imagenes/cancelar.png')
-    equis_img =equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
-    equis_img = ImageTk.PhotoImage(check_img)
     for img in check_list:
         img.configure(image=nada_img)
     
@@ -388,12 +390,6 @@ subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
 
-#dashboard y cita actual
-opciones= LabelFrame(ventana_principal,relief=FLAT,bg =Charade,bd=0)
-cita_gral_btn=Button(ventana_principal, text ="Vista General de Clinica", font=titulo_font)
-cita_gral_btn.pack(side=TOP, pady= 10,padx=5)
-dashboard_btn= Button(ventana_principal, text="Dashboard",font=titulo_font)
-dashboard_btn.pack(side=BOTTOM, pady= 10,padx=5)
 
 
 #Todas las entradas necesarias para una cita
@@ -461,8 +457,8 @@ fonasa_btn.pack(side=LEFT)
 #
 check_list=[]
     #rut
-nada_img = PIL.Image.open('./imagenes/nada.png')
-nada_img =nada_img.resize((50, 50), PIL.Image.ANTIALIAS)
+nada_img = Image.open('./imagenes/nada.png')
+nada_img =nada_img.resize((50, 50),Image.ANTIALIAS)
 nada_img = ImageTk.PhotoImage(nada_img)
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
@@ -592,6 +588,13 @@ reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
+
+#dashboard y cita actual
+dashboard_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
+dashboard_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
+dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
+dashboard_label.pack(fill=X)
+dashboard_btn_lista=[]
 
 
 
