@@ -508,6 +508,7 @@ lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
 posicion_img=[]
+
 #boton para guardar fecha y hora
 reservar_hora_ic = PIL.Image.open('./imagenes/reservarhora.png')
 reservar_hora_ic = reservar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
@@ -748,7 +749,16 @@ dashboard_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
 dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
 dashboard_label.pack(fill=X)
 dashboard_btn_lista=[]
+lista_datos=leerArchivos()
+graficarDatos(False,lista_datos[0],"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
+graficarDatos(False,lista_datos[1],"Especialidades","pie")
 
+
+edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
+edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
+dashboard_btn_lista.append(edades_grafico_btn)
 
 
 modalidad=StringVar()
