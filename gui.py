@@ -196,11 +196,15 @@ def agregarDatosPaciente():
 
 #función para cancelar los datos del paciente
 def cancelarDatosPaciente():
+    for img in check_list:
+        img.configure(image=nada_img)
     
+    prevision_btn.set("Sin Prevision")
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].config(bg="#9ca2a9")
-        prevision_btn.set("Sin Prevision")
+        
+       
         
 
 #función para modificar los datos agregados del paciente
