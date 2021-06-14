@@ -394,12 +394,13 @@ def agregarPacienteCSV():
             'numero de telefono': [clinica_objeto.getPacientes()[-1].getNumeroTelefonico()],
             'prevision': [clinica_objeto.getPacientes()[-1].getPrevision()]
             }
+    pacientes_csv=pd.DataFrame(pacientes_csv)
+    print(pacientes_csv)
     agregar=pd.DataFrame(agregar)
-    agregar.to_csv("agregar.csv")
     print(agregar)
-    with open('./datos/Pacientes.csv', mode='a') as archivo:
-        agregar.to_csv(archivo, header=archivo.tell()==0)
-
+    pacientes_csv.append(agregar)
+    
+    pacientes_csv.to_csv("./datos/Pacientes.csv")
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
     agregar={'codigo': clinica_objeto.getCitas()[-1].getCodigo(),
