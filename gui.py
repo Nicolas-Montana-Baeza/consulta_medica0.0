@@ -458,8 +458,11 @@ def merge_sort(m):
 
 def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
     aux = _datos.tolist()
-    aux = merge_sort(aux)
-    _datos=aux
+    try:
+        aux = merge_sort(aux)
+        _datos=aux
+    except TypeError:
+        _datos=aux
     auxOrdenado = list(dict.fromkeys(_datos))
     count = 0
     cantidad = []
@@ -484,22 +487,23 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         datos.append(str(auxOrdenado[a]))
 
     if _f=="pie":
-        pie=plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
-
-        pie.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
-        pie.title("Porcentaje de "+_titulo)
-        pie.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
-        if caso:pie.show()
+        plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+        plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+        plt.title("Porcentaje de "+_titulo)
+        plt.savefig(f"./imagenes/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:plt.show()
+        plt.close()
 
     elif _f=="bar":
-        grafbar=plt.bar(datos, cantidad, align="center",title=_titulo,xlabel=_titulo_x,ylabel=_titulo_y)
-        #grafbar.title(_titulo)
-        #grafbar.ylabel(_titulo_y)
-        #grafbar.xlabel(_titulo_x)
-        grafbar.grid(axis="y")
-        grafbar.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
-        if caso:grafbar.show()
-   
+        plt.bar(datos, cantidad, align="center")
+        plt.title(_titulo)
+        plt.ylabel(_titulo_y)
+        plt.xlabel(_titulo_x)
+        plt.grid(axis="y")
+        plt.savefig(f"./imagenes/"+_titulo+".png",dpi=300,bbox_inches="tight")
+        if caso:plt.show()
+        plt.close()
+    
     
 
 
@@ -755,7 +759,6 @@ dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=Curi
 dashboard_label.pack(fill=X)
 dashboard_btn_lista=[]
 lista_datos=leerArchivos()
-print(lista_datos)
 graficarDatos(False,lista_datos[0],"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 graficarDatos(False,lista_datos[1],"Especialidades de los doctores","pie", "Especialidades")
 graficarDatos(False,lista_datos[2],"Modalidad","pie", "Modalidad de la cita")

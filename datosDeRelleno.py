@@ -119,8 +119,13 @@ lista_numero=pacientes_csv["numero de telefono"]
 lista_pacientes=[]
 for i in range (len(lista_nombres)):
     for j in lista_nombres:
-        
-        paciente=clases.Paciente()
+        j.split()
+        n1=j[0]
+        n2=j[1]
+        ap1=j[2]
+        ap2=j[3]
+    paciente=clases.Paciente(n1,n2,ap1,ap2,lista_ruts[i],lista_edad[i],lista_emails[i],lista_numero[i])
+    lista_pacientes.append(paciente)
 
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
 
