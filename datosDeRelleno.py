@@ -79,7 +79,7 @@ def crearDisponibilidad():
                             disponibilidad.append(fecha)
     return disponibilidad
 
-
+"""
 #se abren los archivos csv que contienen los datos
 medicos_csv = open('./datos/Medicos.csv','r', newline="")
 medicos_reader = csv.DictReader(medicos_csv)
@@ -89,16 +89,16 @@ pacientes_reader = csv.DictReader(pacientes_csv)
 
 citas_csv = open('./datos/Citas.csv','r',newline="")
 citas_reader = csv.DictReader(citas_csv)
-"""
+
 for linea in medicos_reader:
     for atributo in medicos_reader.fieldnames:
         print(linea[atributo])
     print("##############")
-"""
+
 
 
 #hay que agregar datos a la clinica
-"""
+
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_nombres=formatoNombres(lista_nombres)
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
