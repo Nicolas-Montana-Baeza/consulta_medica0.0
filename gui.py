@@ -140,7 +140,6 @@ def verificarDatosPaciente():
                 #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
                 lista_entry_datos_paciente[i].config(bg=Cinnabar)
                 check_list[i].configure(image=equis_img)
-                
                 cant_error+=1
             else:
                 lista_entry_datos_paciente[i].config(bg=JungleGreen)
@@ -458,15 +457,15 @@ fonasa_btn.pack(side=LEFT)
 check_list=[]
     #rut
 nada_img = PIL.Image.open('./imagenes/nada.png')
-nada_img =nada_img.resize((10, 10),PIL.Image.ANTIALIAS)
+nada_img = nada_img.resize((10, 10),PIL.Image.ANTIALIAS)
 nada_img = PIL.ImageTk.PhotoImage(nada_img)
 
 check_img = PIL.Image.open('./imagenes/check.png')
-check_img =check_img.resize((10, 10),PIL.Image.ANTIALIAS)
+check_img = check_img.resize((10, 10),PIL.Image.ANTIALIAS)
 check_img = PIL.ImageTk.PhotoImage(check_img)
 
 equis_img = PIL.Image.open('./imagenes/equis.png')
-equis_img =equis_img.resize((10, 10),PIL.Image.ANTIALIAS)
+equis_img = equis_img.resize((10, 10),PIL.Image.ANTIALIAS)
 equis_img = PIL.ImageTk.PhotoImage(equis_img)
 
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
