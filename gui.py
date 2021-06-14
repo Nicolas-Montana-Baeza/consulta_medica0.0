@@ -760,7 +760,8 @@ edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
 edades_grafico_btn=Button(dashboard_frame, image =edades_grafico_img)
 dashboard_btn_lista.append(edades_grafico_btn)
 
-
+for btn in dashboard_btn_lista:
+    btn.pack()
 modalidad=StringVar()
 
 
