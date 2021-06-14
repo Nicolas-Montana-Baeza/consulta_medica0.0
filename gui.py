@@ -480,7 +480,6 @@ def agregarCitaCSV():
     citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
-    actualizarImg()
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -566,7 +565,7 @@ def actualizarDatosPacientes():
         pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
-    actualizarImg()
+
 
 def actualizarDatosCitas():
     agregar={'codigo': [],
@@ -595,7 +594,7 @@ def actualizarDatosCitas():
         citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
-    actualizarImg()
+
 
 def informacionCitas():
     
@@ -914,5 +913,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-#ventana_principal.bind("<ButtonRelease-1>",actualizarDatos())
+dashboard_frame.bind("<FocusIn>",actualizarImg())
 ventana_principal.mainloop()
