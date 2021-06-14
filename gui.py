@@ -398,7 +398,7 @@ def agregarPacienteCSV():
     print(pacientes_csv)
     agregar=pd.DataFrame(agregar)
     print(agregar)
-    pacientes_csv.append(agregar)
+    pacientes_csv.append(agregar,ignore_index=True)
     print(pacientes_csv)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
 """
