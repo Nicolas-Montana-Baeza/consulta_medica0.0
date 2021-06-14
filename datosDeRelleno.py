@@ -98,6 +98,7 @@ for linea in medicos_reader:
 
 
 #hay que agregar datos a la clinica
+"""
 lista_nombres=["ADRIANA CAROLINA HERNANDEZ MONTERROZA", "MARCELA ADRIANA  REY SANCHEZ","ANDREA CATALINA ACERO CARO","BRIGITE . POLANCO RUIZ","CRISTINA ELIZABETH BARTHEL GUARDIOLA","GLORIA PATRICIA MENDOZA ALVEAR","LAURA . DIAZ MEJIA","MARIANA DEL PILAR SANTOS MILACHAY","PAOLA ANDREA CORREA LARIOS","YURI CATALINA SALAZAR ARISTIZABAL"]
 lista_nombres=formatoNombres(lista_nombres)
 lista_ruts=["14541798-8","20784145-5","14077811-7","14860117-8","7590500-9","17851414-8","7889811-9","11599665-7","19566898-1","9014730-7"]
@@ -108,6 +109,7 @@ disponibilidad=crearDisponibilidad()
 lista_medicos=crearMedicos(lista_nombres,lista_ruts,lista_emails , lista_edades , lista_especialidades)
 for medico in lista_medicos:
     medico.setDisponibilidad(disponibilidad)
+"""
 lista_citas=[]
 pacientes_csv = pd.read_csv('./datos/Pacientes.csv')
 lista_nombres= pacientes_csv["nombre completo"]
@@ -130,6 +132,30 @@ for i in range (len(lista_nombres)):
     paciente=clases.Paciente(n1,n2,ap1,ap2,lista_ruts[i],lista_edad[i],lista_emails[i],lista_numero[i])
     paciente.setPrevision(lista_prevision[i])
     lista_pacientes.append(paciente)
+
+
+lista_citas=[]
+medicos_csv = pd.read_csv('./datos/Medicos.csv')
+lista_nombres= medicos_csv["nombre completo"]
+lista_ruts=medicos_csv["rut"]
+lista_emails=medicos_csv["email"]
+lista_edad=medicos_csv["edad"]
+lista_especialidad=medicos_csv["especialidad"]
+lista_numero=medicos_csv["numero de telefono"]
+lista_medicos=[]
+lista_nombres=formatoNombres(lista_nombres)
+
+for i in range (len(lista_nombres)):
+    n1=lista_nombres[i][0]
+    n2=lista_nombres[i][1]
+    ap1=lista_nombres[i][-2]
+    ap2=lista_nombres[i][-1]
+    if lista_nombres[i][-2]==lista_nombres[i][1]:
+        n2=""
+        
+    medico=clases.Medico(n1,n2,ap1,ap2,lista_ruts[i],lista_edad[i],lista_emails[i],lista_numero[i],lista_especialidad[i])
+    
+    lista_medicos.append(medico)
 
 clinica_objeto= clases.Clinica("Clinica de la Salud", "Público","Avenida Verdadera #123, Rancagua","", lista_medicos, lista_pacientes)
 #esto lo use para crear los archivos
