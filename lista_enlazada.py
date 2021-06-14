@@ -58,8 +58,6 @@ class listaEncadenada:
             Nodo = Nodo.proximo
 # ________________________________________________
 # Creamos clase nodo
-# ________________________________________________
-
 class Nodo:
     def __init__(self, data = None, proximo = None):
         self.data = data

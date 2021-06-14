@@ -9,6 +9,14 @@ from heapq import merge
 from collections import OrderedDict
 import pandas as pd
 
+from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+from PIL import Image,ImageTk
+from ttkbootstrap import Style
+from datosDeRelleno import *
+from PIL import ImageTk
+import PIL
+from estilo import *
+import datetime as dt
 def formatoNombres(_nombres):
     nombres_aux=[]
    
@@ -155,6 +163,9 @@ def merge_sort(m):
 
 #funcion para graficar f=pie o bar, datos , con titulo y 0=edad, 1=prevision, 2=especialidad, 3= fecha citada, 4= modalidad, 5= prestacion, 6= confirmada,7= fecha de creacion,8=
 def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
+    aux = _datos.tolist()
+    aux = merge_sort(aux)
+    _datos=aux
     auxOrdenado = list(dict.fromkeys(_datos))
     count = 0
     cantidad = []
@@ -183,30 +194,71 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         print(datos)
         plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
         plt.title("Porcentaje de "+_titulo)
-        plt.show()
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+
     elif _f=="bar":
         plt.bar(datos, cantidad, align="center")
-        plt.title("")
+        plt.title(_titulo)
         plt.ylabel(_titulo_y)
         plt.xlabel(_titulo_x)
         plt.grid(axis="y")
-        plt.show()
+      #  plt.show()
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+    plt.show()
 
-edad_pacientes = pd.read_csv('datos/Pacientes.csv')
-edad=edad_pacientes["edad"].values
-aux = edad.tolist()
-aux = merge_sort(aux)
-graficarDatos(aux,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
+edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
+edad_pacientes=edad_pacientes["edad"].values
+#graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
-datos_medicos = pd.read_csv('./datos/Medicos.csv')
-esp=datos_medicos["especialidad"].values
-aux = esp.tolist()
-aux = merge_sort(aux)
-graficarDatos(aux,"Especialidades","pie")
+especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
+especialidad_medicos=especialidad_medicos["especialidad"].values
+#graficarDatos(especialidad_medicos,"Especialidades","pie")
 
-import lista_enlazada
+datos_modalidad = pd.read_csv("./datos/Citas.csv")
+datos_modalidad = datos_modalidad["modalidad"].values
+#graficarDatos
 
-lista = lista_enlazada.listaEncadenada()
-lista.imprimirLista()
-lista.adicionarFrente("caca")
-lista.imprimirLista()
+datos_prestacion = pd.read_csv("./datos/Citas.csv")
+datos_prestacion = datos_prestacion["prestacion"].values
+#graficarDatos
+
+datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+datos_prevision = datos_prevision["prevision"].values
+#graficarDatos
+
+confirmados = pd.read_csv('./datos/Citas.csv')
+confirmados = confirmados["confirmada"].values
+#graficarDatos
+
+#lista que contiene todos los datos
+Lista_datos = [edad_pacientes, especialidad_medicos, datos_modalidad, datos_prestacion, datos_prevision, confirmados]
+
+datos_modalidad = pd.read_csv("./datos/Citas.csv")
+
+ventana_principal=Tk()
+ventana_principal.title("Dashboard") 
+ventana_principal.resizable(0,0)
+ventana_principal.geometry("400x200")
+dashboard_btn= Button(ventana_principal, text="Dashboard")
+grafico_list_btn=[]
+
+edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+edades_grafico_img = ImageTk.PhotoImage(edades_grafico_img)
+edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
+grafico_list_btn.append(edades_grafico_btn)
+
+for btn in grafico_list_btn:
+    btn.pack()
+ventana_principal.mainloop()
+
+"""
+root = Tk()
+label = Label(root,text="Enter a digit that you guessed:").pack()
+entry= Entry(root,bd=4)
+entry.pack()
+button1=Button(root,width=4,height=1,text='ok')
+button1.pack()
+
+root.mainloop()
+"""

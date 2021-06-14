@@ -1,8 +1,8 @@
-from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
-from PIL import Image,ImageTk
+from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+import PIL
 from ttkbootstrap import Style
 from datosDeRelleno import *
-from PIL import Image,ImageTk
+import pandas as pd
 from estilo import *
 import datetime as dt
 
@@ -27,6 +27,10 @@ def autocompletarPaciente():
     for i in range(len(datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
+
+#cambia el color a rojo o verde
+def cambiarColorIn():
+    return
 
 #Permite la actualización de los datos
 def actualizarListbox(datos):
@@ -79,7 +83,7 @@ def cancelarCita():
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
-            
+             
     return False
 
 #función para confirmar la cita
@@ -110,36 +114,98 @@ def buscarCodigo():
                 return
     info_cita_txtbox.insert(END,"Su cita no fue encontrada...\n Revise su codigo o comuniquese con nuestro equipo")
 
+#verifica los datos ingresados para el paciente
+# y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
+"""check_img = PIL.Image.open('./imagenes/check.png')
+check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
+check_img = PIL.ImageTk.PhotoImage(check_img)
+
+equis_img = PIL.Image.open('./imagenes/equis.png')
+equis_img = equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
+equis_img = PIL.ImageTk.PhotoImage(equis_img)
+"""
+def verificarDatosPaciente():
+    
+    for img in check_list:
+        img.configure(image=nada_img)
+    
+    
+    cant_error=0
+    for i in range(len(lista_entry_datos_paciente)):
+        fila=posicion_img[i][0]
+        columna=posicion_img[i][1]
+        check_list[i].grid(row=fila, column=columna)
+        if i==0:
+            if not(clases.Persona.isRut(rut_entry.get())) :
+                #messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
+                cant_error+=1
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
+        elif i in [1,3,4]:       
+            if not(lista_entry_datos_paciente[i].get().isalpha()):
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
+                cant_error+=1
+                    
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
+        elif i==5:
+            if not(lista_entry_datos_paciente[i].get().isdigit()):
+                lista_entry_datos_paciente[i].config(bg=Cinnabar)
+                cant_error+=1
+                check_list[i].configure(image=equis_img)
+            else:
+                lista_entry_datos_paciente[i].config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)
+                          
+        elif i==6:
+            if not(clases.Persona.isMail(email_entry.get())):
+                #messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
+                email_entry.config(bg=Cinnabar)
+                check_list[i].configure(image=equis_img)
+                cant_error+=1
+            else:
+                email_entry.config(bg=JungleGreen)
+                check_list[i].configure(image=check_img)        
+    
+    if cant_error!=0:
+        messagebox.showwarning(message="Los datos ingresados son INCORRECTOS, reviselos y vuelva a intentarlo", title="Error")
+        return False    
+    else:
+        return True
+       
+        
+    return 
 #agrega un paciente
 def agregarDatosPaciente():
-    if not(clases.Persona.isRut(rut_entry.get())) :
-        messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
-
+     
+    if not(verificarDatosPaciente()):
         return False
-    
-    if not(clases.Persona.isMail(email_entry.get())):
-        messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
-
-        return False
-
-    for entrada in lista_entry_datos_paciente:
-        if entrada.get()=="":
-            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
-            return False
+    else:
+        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+        email_entry.get(), tel_contacto_entry.get())
+        if clinica_objeto.agregarPaciente(paciente_temporal):
+            messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
             
-    paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
-    email_entry.get(), tel_contacto_entry.get())
-    if clinica_objeto.agregarPaciente(paciente_temporal):
-        messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
-    elegirFecha()
-    return
+        elegirFecha()
+        return True
 
 #función para cancelar los datos del paciente
 def cancelarDatosPaciente():
+    for img in check_list:
+        img.configure(image=nada_img)
     
+    prevision_btn.set("Sin Prevision")
     for i in range(len(lista_entry_datos_paciente)):
         lista_entry_datos_paciente[i].delete(0,END)
-        prevision_btn.set("Sin Prevision")
+        lista_entry_datos_paciente[i].config(bg="#9ca2a9")
+        
+       
+        
 
 #función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
@@ -302,18 +368,41 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
    
+def leerArchivos():
+    edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
+    edad_pacientes=edad_pacientes["edad"].values
+    #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
+    especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
+    especialidad_medicos=especialidad_medicos["especialidad"].values
+    #graficarDatos(especialidad_medicos,"Especialidades","pie")
+
+    datos_modalidad = pd.read_csv("./datos/Citas.csv")
+    datos_modalidad = datos_modalidad["modalidad"].values
+    #graficarDatos
+
+    datos_prestacion = pd.read_csv("./datos/Citas.csv")
+    datos_prestacion = datos_prestacion["prestacion"].values
+    #graficarDatos
+
+    datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+    datos_prevision = datos_prevision["prevision"].values
+    #graficarDatos
+
+    confirmados = pd.read_csv('./datos/Citas.csv')
+    confirmados = confirmados["confirmada"].values
+    #graficarDatos
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
 lista_entry_datos_paciente=[]
 s=Style()
 s.theme_use("darkly")
-
+posicion_img=[]
 #boton para guardar fecha y hora
-reservar_hora_ic = Image.open('./imagenes/reservarhora.png')
-reservar_hora_ic = reservar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-reservar_hora_ic = ImageTk.PhotoImage(reservar_hora_ic)
+reservar_hora_ic = PIL.Image.open('./imagenes/reservarhora.png')
+reservar_hora_ic = reservar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+reservar_hora_ic = PIL.ImageTk.PhotoImage(reservar_hora_ic)
 
 
 #FUENTES
@@ -323,6 +412,7 @@ subtitulo2_font = font.Font(family="Arial Narrow", weight="bold",size=15)
 subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
+
 
 
 #Todas las entradas necesarias para una cita
@@ -360,9 +450,9 @@ ingresar_paciente.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
     #autocompletar con rut
 
-buscar_rut_ic = Image.open('./imagenes/buscapaciente.png')
-buscar_rut_ic = buscar_rut_ic.resize((30, 30), Image.ANTIALIAS)
-buscar_rut_ic = ImageTk.PhotoImage(buscar_rut_ic)
+buscar_rut_ic = PIL.Image.open('./imagenes/buscapaciente.png')
+buscar_rut_ic = buscar_rut_ic.resize((30, 30), PIL.Image.ANTIALIAS)
+buscar_rut_ic = PIL.ImageTk.PhotoImage(buscar_rut_ic)
 buscar_rut_label=Label(ingresar_paciente, text="Rut(sin puntos): ")
 buscar_rut_label.grid(row=0,column=0)
 buscar_rut_entry=Entry(ingresar_paciente, width=10)
@@ -386,19 +476,41 @@ isapre_btn.pack(side=LEFT)
 fonasa_btn=Radiobutton(opciones_prevision_frame,highlightthickness=0, text="Fonasa", variable=prevision_btn,value="FONASA", bg=Charade, font=subtitulo5_font)
 fonasa_btn.pack(side=LEFT)
 
+
+#
+check_list=[]
     #rut
+nada_img = PIL.Image.open('./imagenes/nada.png')
+nada_img = nada_img.resize((10, 10),PIL.Image.ANTIALIAS)
+nada_img = PIL.ImageTk.PhotoImage(nada_img)
+
+check_img = PIL.Image.open('./imagenes/check.png')
+check_img = check_img.resize((10, 10),PIL.Image.ANTIALIAS)
+check_img = PIL.ImageTk.PhotoImage(check_img)
+
+equis_img = PIL.Image.open('./imagenes/equis.png')
+equis_img = equis_img.resize((10, 10),PIL.Image.ANTIALIAS)
+equis_img = PIL.ImageTk.PhotoImage(equis_img)
+
 rut_label=Label(ingresar_paciente, text="Rut (sin puntos):",bg=Charade, font=subtitulo4_font)
 rut_label.grid(row=3,column=0)
 rut_entry=Entry(ingresar_paciente, width=10)
 rut_entry.grid(row=3,column=1)
 lista_entry_datos_paciente.append(rut_entry)
+rut_img=Label(ingresar_paciente,image=nada_img, bg=Charade)
+check_list.append(rut_img)
+posicion_img.append([3,2])
 
     #primer nombre
+
 nombre1_label=Label(ingresar_paciente, text="Primer Nombre:",bg=Charade, font=subtitulo4_font)
 nombre1_label.grid(row=4,column=0)
 nombre1_entry=Entry(ingresar_paciente, width=10)
 nombre1_entry.grid(row=4,column=1)
 lista_entry_datos_paciente.append(nombre1_entry)
+nombre1_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(nombre1_img)
+posicion_img.append([4,2])
 
     #segundo nombre
 nombre2_label=Label(ingresar_paciente, text="Segundo Nombre:", bg=Charade, font=subtitulo4_font)
@@ -406,6 +518,9 @@ nombre2_label.grid(row=5,column=0)
 nombre2_entry=Entry(ingresar_paciente, width=10)
 nombre2_entry.grid(row=5,column=1)
 lista_entry_datos_paciente.append(nombre2_entry)
+nombre2_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(nombre2_img)
+posicion_img.append([5,2])
 
     #Primer Apellido
 apellido1_label=Label(ingresar_paciente, text="Primer Apellido:", bg=Charade, font=subtitulo4_font)
@@ -413,13 +528,19 @@ apellido1_label.grid(row=6,column=0)
 apellido1_entry=Entry(ingresar_paciente, width=10)
 apellido1_entry.grid(row=6,column=1)
 lista_entry_datos_paciente.append(apellido1_entry)
+apellido1_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(apellido1_img)
+posicion_img.append([6,2])
 
     #Segundo Apellido
 apellido2_label=Label(ingresar_paciente, text="Segundo Apellido:", bg=Charade, font=subtitulo4_font)
 apellido2_label.grid(row=7,column=0)
 apellido2_entry=Entry(ingresar_paciente, width=10)
 apellido2_entry.grid(row=7,column=1)
+apellido2_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(apellido2_img)
 lista_entry_datos_paciente.append(apellido2_entry)
+posicion_img.append([7,2])
     
     #numero contacto
 tel_contacto_label=Label(ingresar_paciente, text="Número Telefono/Celular:", bg=Charade, font=subtitulo4_font)
@@ -427,6 +548,9 @@ tel_contacto_label.grid(row=8,column=0)
 tel_contacto_entry=Entry(ingresar_paciente, width=10)
 tel_contacto_entry.grid(row=8,column=1)
 lista_entry_datos_paciente.append(tel_contacto_entry)
+tel_contacto_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(tel_contacto_img)
+posicion_img.append([8,2])
 
     #email
 email_label=Label(ingresar_paciente, text="Correo Electronico:", bg=Charade, font=subtitulo4_font)
@@ -434,27 +558,30 @@ email_label.grid(row=9,column=0)
 email_entry=Entry(ingresar_paciente, width=10)
 email_entry.grid(row=9,column=1)
 lista_entry_datos_paciente.append(email_entry)
+email_img=Label(ingresar_paciente,image=nada_img,bg=Charade)
+check_list.append(email_img)
+posicion_img.append([9,2])
 
 #Frame de botones para agregar el paciente, borrar todas las entradas de datos de paciente o modificar sus datos.
 
 botones_paciente_frame=LabelFrame(ingresar_paciente, bd=0, relief=FLAT,bg=Charade)
 botones_paciente_frame.grid(columnspan=3,row=10,column=0)
 
-confirmar_paciente_ic = Image.open('./imagenes/confirmar_paciente.png')
-confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-confirmar_paciente_ic = ImageTk.PhotoImage(confirmar_paciente_ic)
+confirmar_paciente_ic = PIL.Image.open('./imagenes/confirmar_paciente.png')
+confirmar_paciente_ic = confirmar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+confirmar_paciente_ic = PIL.ImageTk.PhotoImage(confirmar_paciente_ic)
 confirmar_paciente_btn=Button(botones_paciente_frame,text="Confirmar", image = confirmar_paciente_ic, command=lambda:agregarDatosPaciente())
 confirmar_paciente_btn.pack(side=LEFT,padx=30)
 
-cancelar_paciente_ic = Image.open('./imagenes/cancelar_paciente.png')
-cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-cancelar_paciente_ic = ImageTk.PhotoImage(cancelar_paciente_ic)
+cancelar_paciente_ic = PIL.Image.open('./imagenes/cancelar_paciente.png')
+cancelar_paciente_ic = cancelar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+cancelar_paciente_ic = PIL.ImageTk.PhotoImage(cancelar_paciente_ic)
 cancelar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = cancelar_paciente_ic, command=lambda:cancelarDatosPaciente())
 cancelar_paciente_btn.pack(side=RIGHT,padx=30)
 
-modificar_paciente_ic = Image.open('./imagenes/modificarpaciente.png')
-modificar_paciente_ic = modificar_paciente_ic.resize((50, 50), Image.ANTIALIAS)
-modificar_paciente_ic = ImageTk.PhotoImage(modificar_paciente_ic)
+modificar_paciente_ic = PIL.Image.open('./imagenes/modificarpaciente.png')
+modificar_paciente_ic = modificar_paciente_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+modificar_paciente_ic = PIL.ImageTk.PhotoImage(modificar_paciente_ic)
 modificar_paciente_btn=Button(botones_paciente_frame,text="Cancelar", image = modificar_paciente_ic, command=lambda:modificarDatosPaciente())
 modificar_paciente_btn.pack(side=RIGHT,padx=30)
 
@@ -475,9 +602,9 @@ ingresar_codigo_entry=Entry(gestionar_cita_frame, width=30)
 ingresar_codigo_entry.pack()
 
 #Boton buscar
-buscar_cita_ic = Image.open('./imagenes/buscacita.png')
-buscar_cita_ic = buscar_cita_ic.resize((50, 50), Image.ANTIALIAS)
-buscar_cita_ic = ImageTk.PhotoImage(buscar_cita_ic)
+buscar_cita_ic = PIL.Image.open('./imagenes/buscacita.png')
+buscar_cita_ic = buscar_cita_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+buscar_cita_ic = PIL.ImageTk.PhotoImage(buscar_cita_ic)
 buscar_btn=Button(gestionar_cita_frame,text="Buscar", image=buscar_cita_ic, command=lambda:buscarCodigo())
 buscar_btn.pack(pady=10)
 
@@ -486,24 +613,32 @@ info_cita_txtbox=Text(gestionar_cita_frame,width=50,height=20)
 
 info_cita_txtbox.pack(padx=10)
 
-agendar_hora_ic = Image.open('./imagenes/confirmar.png')
-agendar_hora_ic = agendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-agendar_hora_ic = ImageTk.PhotoImage(agendar_hora_ic)
+agendar_hora_ic = PIL.Image.open('./imagenes/confirmar.png')
+agendar_hora_ic = agendar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+agendar_hora_ic = PIL.ImageTk.PhotoImage(agendar_hora_ic)
 agendar_hora_btn=Button(gestionar_cita_frame,text="Confirmar", image = agendar_hora_ic,command=lambda:confirmarCita())
 agendar_hora_btn.pack(side=LEFT,padx=15,pady=10)
 
-cancelar_hora_ic = Image.open('./imagenes/cancelar.png')
-cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-cancelar_hora_ic = ImageTk.PhotoImage(cancelar_hora_ic)
+cancelar_hora_ic = PIL.Image.open('./imagenes/cancelar.png')
+cancelar_hora_ic = cancelar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+cancelar_hora_ic = PIL.ImageTk.PhotoImage(cancelar_hora_ic)
 cancelar_hora_btn=Button(gestionar_cita_frame,text="Cancelar", image = cancelar_hora_ic, command=lambda:cancelarCita())
 cancelar_hora_btn.pack(side=RIGHT,padx=15,pady=10)
 
 #boton reagendar
-reagendar_hora_ic = Image.open('./imagenes/reagendar.png')
-reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
-reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
+reagendar_hora_ic = PIL.Image.open('./imagenes/reagendar.png')
+reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), PIL.Image.ANTIALIAS)
+reagendar_hora_ic = PIL.ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
+
+
+#dashboard y cita actual
+dashboard_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
+dashboard_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
+dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
+dashboard_label.pack(fill=X)
+dashboard_btn_lista=[]
 
 
 
@@ -512,5 +647,4 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-buscar_doctor_entry.bind("<KeyRelease>", buscarMedico)
 ventana_principal.mainloop()
