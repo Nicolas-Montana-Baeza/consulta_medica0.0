@@ -95,6 +95,7 @@ class Clinica():
                 paciente.setEdad(_paciente.getEdad())
                 paciente.setEmail(_paciente.getEmail())
                 paciente.setNumeroTelefonico(_paciente.getNumeroTelefonico())
+                paciente.setPrevision(_paciente.getPrevision())
                 return True
         return False
 
