@@ -197,7 +197,7 @@ def agregarDatosPaciente():
     else:
         paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
         email_entry.get(), tel_contacto_entry.get())
-        paciente_temporal.setPrevision(prevision_btn)
+        paciente_temporal.setPrevision(prevision_btn.get())
         if clinica_objeto.agregarPaciente(paciente_temporal):
             messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
             agregarPacienteCSV()
@@ -258,7 +258,7 @@ def elegirFecha():
             entry.insert(0,cita_auxiliar.getCodigo())
             entry.config(state="readonly")
             temp.pack()
-            agregarCitaCSV()
+            #agregarCitaCSV()
             return True
 
     if medico_seleccionado_label["text"]=="":
@@ -400,6 +400,7 @@ def agregarPacienteCSV():
     print(agregar)
     pacientes_csv.append(agregar)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
+"""
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
     agregar={'codigo': clinica_objeto.getCitas()[-1].getCodigo(),
@@ -414,7 +415,7 @@ def agregarCitaCSV():
              }
     with open('./datos/Citas.csv', mode='a') as archivo:
         agregar.to_csv(archivo, header=archivo.tell()==0)
-
+"""
 def merge_sort(m):
     if len(m) <= 1:
         return m
