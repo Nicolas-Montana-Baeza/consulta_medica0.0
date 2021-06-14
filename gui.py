@@ -587,6 +587,13 @@ reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagend
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
 
 
+#dashboard y cita actual
+dashboard_frame=LabelFrame(ventana_principal,relief=FLAT, bg=Charade,bd=0)
+dashboard_frame.pack(side=LEFT,fill=Y, expand=True, padx=40, pady=40)
+dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=CuriousBlue, highlightthickness=0)
+dashboard_label.pack(fill=X)
+dashboard_btn_lista=[]
+
 
 
 modalidad=StringVar()
