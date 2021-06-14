@@ -220,9 +220,9 @@ def modificarDatosPaciente():
     if not(verificarDatosPaciente()):
         return False
     else:
-        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), edad_entry.get(),
         email_entry.get(), tel_contacto_entry.get())
-        paciente_temporal.setPrevision(prevision_btn)
+        paciente_temporal.setPrevision(prevision_btn.get())
         if clinica_objeto.modificarPaciente(paciente_temporal):
             messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
             actualizarDatosPacientes()
@@ -366,6 +366,9 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
 
+
+
+#csv manage
 def leerArchivos():
     #actualizarDatos()
     datos_pacientes = pd.read_csv('./datos/Pacientes.csv')
@@ -479,14 +482,28 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.close()
     
 def actualizarDatosPacientes():
-    pacientes_csv = open('./datos/Pacientes.csv', 'w')
-    pacientes_writer = csv.writer(pacientes_csv)
-    pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
-    pacientes_writer.writerow(pacientes_atributos)
+    agregar={'nombre completo': [],
+                'rut': [],
+                'edad': [],
+                'email': [],
+                'numero de telefono': [],
+                'prevision': []
+                }
+    pacientes_csv=pd.DataFrame(columns=agregar.keys())
 
     for paciente in clinica_objeto.getPacientes():
-        paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
-        pacientes_writer.writerow(paciente_info)
+        agregar={'nombre completo': [paciente.getNombreCompleto()],
+                'rut': [paciente.getRut()],
+                'edad': [paciente.getEdad()],
+                'email': [paciente.getEmail()],
+                'numero de telefono': [paciente.getNumeroTelefonico()],
+                'prevision': [paciente.getPrevision()],
+                'ultima prestacion':[paciente.getUltimaPrestacion()]
+                }
+        agregar=pd.DataFrame(agregar)
+        pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
+    pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
+    pacientes_csv.to_csv("./datos/Pacientes.csv")
 """
 def actualizarDatosCitas():
     citas_csv = open('./datos/Citas.csv', 'w')

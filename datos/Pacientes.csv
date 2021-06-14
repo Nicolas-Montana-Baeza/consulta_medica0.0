@@ -1,16 +1,16 @@
-,nombre completo,rut,edad,email,numero de telefono,prevision
-0,Juan Pedro Perez Gonzales,14077811-7,23,juanito.perez@gmail.com,2828282,Sin Prevision
-1,Camila Fernanda González Arias,20595491-0,20,camila@gmail.com,7584937,ISAPRE
-2,Franisco Ignacio Vergara Pavez,18094532-9,26,fco@gmail.com,3583928,ISAPRE
-3,Carla Valeria Gomez Quezada,248571039-5,23,carli@gmail.com,2486946,FONASA
-4,Cacarena Fernanda Pavez Garcia,34817350-4,20,maca@gmail.com,357383958,ISAPRE
-5,Juan Pablo Arias Gonzalez,14057811-6,26,juanito.Arias@gmail.com,8657833,Sin Prevision
-6,Jessica Anais Tapia Ramirez,385739104-9,35,jess@gmail.com,275927583,ISAPRE
-7,Cristian Jesus Cabello Diaz,35829684-6,23,cris@gmailcom,25647289,Sin Prevision
-8,Sandra Cristina Vera Lopez,4869285-2,70,sandra@gmail.com,45787654,ISAPRE
-9,Alberto Nicolas Hurtado Lara,29485710-1,87,Alberto@gmail.com,39582028,Sin Prevision
-10,Nicolas Ignacio Ibarra Nuñez,24356123-2,56,nico@gmail.com,9582955829,ISAPRE
-11,Sofia Anais Perez Araya,24687265-5,15,sofi@gmail.com,593857548,FONASA
-12,Almendra Paz Ramirez Alvarez,582947583-4,26,alme@gmail.com,29485738,FONASA
-13,Fernanda Isidora Salazar Sanchez,234567654-3,46,fer@gmail.com,2457654,ISAPRE
-14,Hgska Askjuhlj Asdua Uystua,19916728-6,24,nicol@gmail.com,2876776,Sin Prevision
+,nombre completo,rut,edad,email,numero de telefono,prevision,ultima prestacion
+0,Juan Pedro Perez Gonzales,14077811-7,23,juanito.perez@gmail.com,2828282,Sin Prevision,
+1,Camila Fernanda González Arias,20595491-0,20,camila@gmail.com,7584937,ISAPRE,
+2,Franisco Ignacio Vergara Pavez,18094532-9,26,fco@gmail.com,3583928,ISAPRE,
+3,Carla Valeria Gomez Quezada,248571039-5,23,carli@gmail.com,2486946,FONASA,
+4,Cacarena Fernanda Pavez Garcia,34817350-4,20,maca@gmail.com,357383958,ISAPRE,
+5,Juan Pablo Arias Gonzalez,14057811-6,26,juanito.Arias@gmail.com,8657833,Sin Prevision,
+6,Jessica Anais Tapia Ramirez,385739104-9,35,jess@gmail.com,275927583,ISAPRE,
+7,Cristian Jesus Cabello Diaz,35829684-6,23,cris@gmailcom,25647289,Sin Prevision,
+8,Sandra Cristina Vera Lopez,4869285-2,70,sandra@gmail.com,45787654,ISAPRE,
+9,Alberto Nicolas Hurtado Lara,29485710-1,87,Alberto@gmail.com,39582028,Sin Prevision,
+10,Nicolas Ignacio Ibarra Nuñez,24356123-2,56,nico@gmail.com,9582955829,ISAPRE,
+11,Sofia Anais Perez Araya,24687265-5,15,sofi@gmail.com,593857548,FONASA,
+12,Almendra Paz Ramirez Alvarez,582947583-4,26,alme@gmail.com,29485738,FONASA,
+13,Fernanda Isidora Salazar Sanchez,234567654-3,46,fer@gmail.com,2457654,ISAPRE,
+14,Nicolas Eduardo Morales Uystua,19916728-6,,nicol@gmail.com,2876776,PY_VAR0,
