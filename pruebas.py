@@ -215,6 +215,22 @@ especialidad_medicos=especialidad_medicos["especialidad"].values
 #graficarDatos(especialidad_medicos,"Especialidades","pie")
 
 datos_modalidad = pd.read_csv("./datos/Citas.csv")
+datos_modalidad=datos_modalidad["modalidad"].values
+#graficarDatos
+
+datos_prestacion=pd.read_csv("./datos/Citas.csv")
+datos_prestacion=datos_prestacion["prestacion"].values
+#graficarDatos
+
+datos_prevision = pd.read_csv('./datos/Pacientes.csv')
+pre=datos_prevision["prevision"].values
+#graficarDatos
+
+confirmados = pd.read_csv('./datos/Citas.csv')
+conf=confirmados["confirmada"].values
+#graficarDatos
+
+datos_modalidad = pd.read_csv("./datos/Citas.csv")
 
 ventana_principal=Tk()
 ventana_principal.title("Dashboard") 
