@@ -5,6 +5,15 @@ from datosDeRelleno import *
 import pandas as pd
 from estilo import *
 import datetime as dt
+import clases
+from random import randint
+from math import floor
+import csv
+import matplotlib.pyplot as plt
+import numpy as np
+from heapq import merge
+from collections import OrderedDict
+
 
 #Esta función permite rellenar los datos del paciente al buscarlo por rut
 def autocompletarPaciente():
@@ -367,8 +376,10 @@ def reagendarCita():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:reagendarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
-   
+Lista_datos = []
+
 def leerArchivos():
+    actualizarDatos()
     edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
     edad_pacientes=edad_pacientes["edad"].values
     #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
@@ -391,7 +402,104 @@ def leerArchivos():
 
     confirmados = pd.read_csv('./datos/Citas.csv')
     confirmados = confirmados["confirmada"].values
+    Lista_datos = [edad_pacientes, especialidad_medicos, datos_modalidad, datos_prestacion, datos_prevision, confirmados]
+    return Lista_datos
     #graficarDatos
+
+def actualizarDatos():
+    medicos_csv = open('./datos/Medicos.csv','w')
+    medicos_writer = csv.writer(medicos_csv)
+
+    medico_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','especialidad']
+    medicos_writer.writerow(medico_atributos)
+
+    for medico in clinica_objeto.getMedicos():
+        medico_info= [medico.getNombreCompleto(), medico.getRut(), medico.getEdad(), medico.getEmail(),medico.getNumeroTelefonico(),medico.getEspecialidad()]
+        medicos_writer.writerow(medico_info)
+
+    pacientes_csv = open('./datos/Pacientes.csv', 'w')
+    pacientes_writer = csv.writer(pacientes_csv)
+    pacientes_reader= csv.DictReader(pacientes_csv)
+    pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
+    pacientes_writer.writerow(pacientes_atributos)
+
+    for paciente in clinica_objeto.getPacientes():
+        paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
+        pacientes_writer.writerow(paciente_info)
+
+    citas_csv = open('./datos/Citas.csv', 'w')
+    citas_writer = csv.writer(citas_csv)
+    citas_reader= csv.DictReader(citas_csv)
+    citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
+    citas_writer.writerow(citas_atributos)
+
+    for paciente in clinica_objeto.getPacientes():
+        cod_citas=[]
+        for cita in paciente.getCitas():
+            cod_citas.append(cita.getCodigo())
+        for codigo in cod_citas:
+            cita = paciente.buscarCita(codigo)
+            cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
+            citas_writer.writerow(cita_info)
+    medicos_csv = open('./datos/Medicos.csv','r')
+    medicos_reader = csv.DictReader(medicos_csv)
+
+def merge_sort(m):
+    if len(m) <= 1:
+        return m
+ 
+    middle = len(m) // 2
+    left = m[:middle]
+    right = m[middle:]
+ 
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return list(merge(left, right))
+
+def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
+    aux = _datos.tolist()
+    aux = merge_sort(aux)
+    _datos=aux
+    auxOrdenado = list(dict.fromkeys(_datos))
+    count = 0
+    cantidad = []
+    for a in range (len(auxOrdenado)):
+        cantidad.append(_datos.count(auxOrdenado[a]))
+  
+
+    porcentajes = []
+    for a in range (len(cantidad)):
+        porcentajes.append((cantidad[a]/(len(_datos)))*100)
+        
+   
+    porAproximados =np.around(porcentajes).tolist()
+    porAproximadosFinal = []
+
+    for a in range (len(cantidad)):
+        porAproximadosFinal.append(str(porAproximados[a])+"%")
+
+   #datos
+    datos=[]
+    for a in range (len(cantidad)):
+        datos.append(str(auxOrdenado[a]))
+
+    if _f=="pie":
+        plt.pie(porAproximados, explode=None, labels=porAproximadosFinal, shadow=True)
+        print(datos)
+        plt.legend(datos, title= "Codigo de Color", loc=0, bbox_to_anchor=(0.1 , 0.3), shadow=True)
+        plt.title("Porcentaje de "+_titulo)
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+
+    elif _f=="bar":
+        plt.bar(datos, cantidad, align="center")
+        plt.title(_titulo)
+        plt.ylabel(_titulo_y)
+        plt.xlabel(_titulo_x)
+        plt.grid(axis="y")
+      #  plt.show()
+        plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
+    plt.show()
+
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -647,4 +755,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
+
 ventana_principal.mainloop()
