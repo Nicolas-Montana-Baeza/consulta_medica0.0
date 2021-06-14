@@ -2,7 +2,7 @@ from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,La
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
-import PIL
+
 from estilo import *
 import datetime as dt
 
@@ -116,14 +116,16 @@ def buscarCodigo():
 
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
+check_img = Image.open('./imagenes/confirmar.png')
+check_img = check_img.resize((50, 50), Image.ANTIALIAS)
+check_img = ImageTk.PhotoImage(check_img)
+
+equis_img = Image.open('./imagenes/cancelar.png')
+equis_img =equis_img.resize((50, 50), Image.ANTIALIAS)
+equis_img = ImageTk.PhotoImage(equis_img)
+
 def verificarDatosPaciente():
-    check_img = PIL.Image.open('./imagenes/confirmar.png')
-    check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
-    check_img = ImageTk.PhotoImage(check_img)
     
-    equis_img = PIL.Image.open('./imagenes/cancelar.png')
-    equis_img =equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
-    equis_img = ImageTk.PhotoImage(check_img)
     for img in check_list:
         img.configure(image=nada_img)
     
