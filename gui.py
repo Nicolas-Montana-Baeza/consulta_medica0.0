@@ -456,7 +456,7 @@ def merge_sort(m):
     right = merge_sort(right)
     return list(merge(left, right))
 
-def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
+def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
     aux = _datos.tolist()
     aux = merge_sort(aux)
     _datos=aux
@@ -498,7 +498,8 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.grid(axis="y")
       #  plt.show()
         plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
-    plt.show()
+   
+    if caso:plt.show()
 
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
