@@ -215,24 +215,21 @@ especialidad_medicos=especialidad_medicos["especialidad"].values
 #graficarDatos(especialidad_medicos,"Especialidades","pie")
 
 
+
 ventana_principal=Tk()
 ventana_principal.title("Dashboard") 
 ventana_principal.resizable(0,0)
 ventana_principal.geometry("400x200")
 dashboard_btn= Button(ventana_principal, text="Dashboard")
-edades_grafico_list_btn=[]
-for i in range(9):
-    
-    edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
-    edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
-    edades_grafico_img = ImageTk.PhotoImage(edades_grafico_img)
-    edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
-#confirmar_paciente_btn.pack(side=LEFT,padx=30)
+grafico_list_btn=[]
 
+edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+edades_grafico_img = ImageTk.PhotoImage(edades_grafico_img)
+edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
+grafico_list_btn.append(edades_grafico_btn)
 
-edades_grafico_list_btn.append(edades_grafico_btn)
-
-for btn in edades_grafico_list_btn:
+for btn in grafico_list_btn:
     btn.pack()
 ventana_principal.mainloop()
 
