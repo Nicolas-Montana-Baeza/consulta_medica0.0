@@ -180,7 +180,6 @@ for i in range(len(codigo)):
     cita_vacia.setModalidad(modalidad[i])
     cita_vacia.setPrestacion(prestacion[i])
     cita_vacia.setConfirmada(confirmada[i])
-    cita_vacia.actualizarEstado()
     lista_citas.append(cita_vacia)
 for paciente in clinica_objeto.getPacientes():
     citas_paciente=[]
