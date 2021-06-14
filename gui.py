@@ -757,7 +757,7 @@ graficarDatos(False,lista_datos[1],"Especialidades","pie")
 edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
 edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
 edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
-edades_grafico_btn=Button(ventana_principal, image =edades_grafico_img)
+edades_grafico_btn=Button(dashboard_frame, image =edades_grafico_img)
 dashboard_btn_lista.append(edades_grafico_btn)
 
 
