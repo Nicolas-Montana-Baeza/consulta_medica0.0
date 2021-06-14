@@ -750,8 +750,14 @@ dashboard_label=Label(dashboard_frame, text="Dashboard",font=titulo_font,bg=Curi
 dashboard_label.pack(fill=X)
 dashboard_btn_lista=[]
 lista_datos=leerArchivos()
+print(lista_datos)
 graficarDatos(False,lista_datos[0],"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
-graficarDatos(False,lista_datos[1],"Especialidades","pie")
+graficarDatos(False,lista_datos[1],"Especialidades de los doctores","pie", "Especialidades")
+graficarDatos(False,lista_datos[2],"Modalidad","pie", "Modalidad de la cita")
+graficarDatos(False,lista_datos[3],"Prestación","pie", "Prestación de los pacientes")
+graficarDatos(False,lista_datos[4],"Previsión del paciente","pie", "Previsión de los pacientes")
+graficarDatos(False,lista_datos[5],"Pacientes confirmados","pie", "Pacientes que han confirmado")
+
 
 
 edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
@@ -759,6 +765,37 @@ edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
 edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
 edades_grafico_btn=Button(dashboard_frame, image =edades_grafico_img)
 dashboard_btn_lista.append(edades_grafico_btn)
+
+especialidades_grafico_img = PIL.Image.open('./imagenes/Especialidades de los doctores.png')
+especialidades_grafico_img =especialidades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+especialidades_grafico_img = PIL.ImageTk.PhotoImage(especialidades_grafico_img)
+especialidades_grafico_btn=Button(dashboard_frame, image =especialidades_grafico_img)
+dashboard_btn_lista.append(especialidades_grafico_btn)
+
+modalidad_grafico_img = PIL.Image.open('./imagenes/Modalidad.png')
+modalidad_grafico_img =modalidad_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+modalidad_grafico_img = PIL.ImageTk.PhotoImage(modalidad_grafico_img)
+modalidad_grafico_btn=Button(dashboard_frame, image =modalidad_grafico_img)
+dashboard_btn_lista.append(modalidad_grafico_btn)
+
+prestacion_grafico_img = PIL.Image.open('./imagenes/Prestación.png')
+prestacion_grafico_img =prestacion_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+prestacion_grafico_img = PIL.ImageTk.PhotoImage(prestacion_grafico_img)
+prestacion_grafico_btn=Button(dashboard_frame, image =prestacion_grafico_img)
+dashboard_btn_lista.append(prestacion_grafico_btn)
+
+prevision_grafico_img = PIL.Image.open('./imagenes/Previsión del paciente.png')
+prevision_grafico_img =prevision_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+prevision_grafico_img = PIL.ImageTk.PhotoImage(prevision_grafico_img)
+prevision_grafico_btn=Button(dashboard_frame, image =prevision_grafico_img)
+dashboard_btn_lista.append(prevision_grafico_btn)
+
+confirmados_grafico_img = PIL.Image.open('./imagenes/Pacientes confirmados.png')
+confirmados_grafico_img =confirmados_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+confirmados_grafico_img = PIL.ImageTk.PhotoImage(confirmados_grafico_img)
+confirmados_grafico_btn=Button(dashboard_frame, image =confirmados_grafico_img)
+dashboard_btn_lista.append(confirmados_grafico_btn)
+
 
 for btn in dashboard_btn_lista:
     btn.pack()
