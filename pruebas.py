@@ -206,7 +206,7 @@ def graficarDatos(_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.savefig(f"./graficos/"+_titulo+".png",dpi=300,bbox_inches="tight")
     plt.show()
 
-edad_pacientes = pd.read_csv('datos/Pacientes.csv')
+edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
 edad_pacientes=edad_pacientes["edad"].values
 #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 

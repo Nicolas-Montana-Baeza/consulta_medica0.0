@@ -1,4 +1,4 @@
-from tkinter import Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
+from tkinter import TOP,Toplevel,BOTTOM,X,font,BOTH, Listbox,S,Tk,Radiobutton,Label,Button,messagebox,Entry,LabelFrame,W,StringVar,FLAT,END,N,Text,ACTIVE,Scrollbar,RIGHT,Y,LEFT,Spinbox
 from PIL import Image,ImageTk
 from ttkbootstrap import Style
 from datosDeRelleno import *
@@ -366,7 +366,8 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
    
-
+def mostrarCitas():
+    return
 ventana_principal=Tk()
 ventana_principal.title(str(clinica_objeto.getNombre())) 
 ventana_principal.resizable(0,0)
@@ -387,6 +388,13 @@ subtitulo2_font = font.Font(family="Arial Narrow", weight="bold",size=15)
 subtitulo3_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo4_font = font.Font (family= "Arial Narrow", size= 15)
 subtitulo5_font = font.Font (family= "Arial Narrow", size= 12)
+
+#dashboard y cita actual
+opciones= LabelFrame(ventana_principal,relief=FLAT,bg =Charade,bd=0)
+cita_gral_btn=Button(ventana_principal, text ="Vista General de Clinica", width=10, height=8)
+cita_gral_btn.pack(side=TOP, pady= 10,padx=5)
+dashboard_btn= Button(ventana_principal, text="Dashboard", width=10, height=8)
+dashboard_btn.pack(side=TOP, pady= 10,padx=5)
 
 
 #Todas las entradas necesarias para una cita
@@ -584,6 +592,7 @@ reagendar_hora_ic = reagendar_hora_ic.resize((50, 50), Image.ANTIALIAS)
 reagendar_hora_ic = ImageTk.PhotoImage(reagendar_hora_ic)
 reagendar_hora_btn=Button(gestionar_cita_frame,text="Reagendar", image = reagendar_hora_ic,command=lambda:reagendarCita())
 reagendar_hora_btn.pack(side=BOTTOM,padx=15,pady=10)
+
 
 
 
