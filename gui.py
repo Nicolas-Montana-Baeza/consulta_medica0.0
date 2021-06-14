@@ -379,32 +379,23 @@ def reagendarCita():
 Lista_datos = []
 
 def leerArchivos():
-    actualizarDatos()
-    edad_pacientes = pd.read_csv('./datos/Pacientes.csv')
-    edad_pacientes=edad_pacientes["edad"].values
+    #actualizarDatos()
+    datos_pacientes = pd.read_csv('./datos/Pacientes.csv')
+    edad_pacientes=datos_pacientes["edad"].values
+    datos_prevision = datos_pacientes["prevision"].values
+    #datos_ultima_prestacion=datos_pacientes["ultima prestacion"]
     #graficarDatos(edad_pacientes,"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
 
     especialidad_medicos = pd.read_csv('./datos/Medicos.csv')
     especialidad_medicos=especialidad_medicos["especialidad"].values
     #graficarDatos(especialidad_medicos,"Especialidades","pie")
 
-    datos_modalidad = pd.read_csv("./datos/Citas.csv")
-    datos_modalidad = datos_modalidad["modalidad"].values
-    #graficarDatos
-
-    datos_prestacion = pd.read_csv("./datos/Citas.csv")
-    datos_prestacion = datos_prestacion["prestacion"].values
-    #graficarDatos
-
-    datos_prevision = pd.read_csv('./datos/Pacientes.csv')
-    datos_prevision = datos_prevision["prevision"].values
-    #graficarDatos
-
-    confirmados = pd.read_csv('./datos/Citas.csv')
-    confirmados = confirmados["confirmada"].values
-    Lista_datos = [edad_pacientes, especialidad_medicos, datos_modalidad, datos_prestacion, datos_prevision, confirmados]
-    return Lista_datos
-    #graficarDatos
+    datos_citas = pd.read_csv("./datos/Citas.csv")
+    datos_modalidad = datos_citas["modalidad"].values
+    datos_prestacion = datos_citas["prestacion"].values
+    confirmados = datos_citas["confirmada"].values
+    lista_datos = [edad_pacientes, especialidad_medicos, datos_modalidad, datos_prestacion, datos_prevision, confirmados]
+    return lista_datos
 
 def actualizarDatos():
     medicos_csv = open('./datos/Medicos.csv','w')
