@@ -88,7 +88,7 @@ def cancelarCita():
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
-            actualizarDatosCitas()
+            #actualizarDatosCitas()
     return False
 
 #función para confirmar la cita
@@ -102,7 +102,7 @@ def confirmarCita():
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
                 info_cita_txtbox.insert('0.0',texto)
                 messagebox.showinfo(message="Cita confirmada")
-                actualizarDatosCitas()
+                #actualizarDatosCitas()
 
                 return True
     return False
@@ -484,7 +484,7 @@ def actualizarDatosPacientes():
     for paciente in clinica_objeto.getPacientes():
         paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
         pacientes_writer.writerow(paciente_info)
-
+"""
 def actualizarDatosCitas():
     citas_csv = open('./datos/Citas.csv', 'w')
     citas_writer = csv.writer(citas_csv)
@@ -495,7 +495,7 @@ def actualizarDatosCitas():
         cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaCreacion(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
         citas_writer.writerow(cita_info)
 
-
+"""
 
 def informacionCitas():
     
