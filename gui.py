@@ -504,6 +504,7 @@ def actualizarDatosPacientes():
         pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
+
 """
 def actualizarDatosCitas():
     citas_csv = open('./datos/Citas.csv', 'w')
