@@ -117,13 +117,15 @@ class Clinica():
 
         return coincidencias    
 
-    #funcion para agregar un nuevo medico
+    #funcion para obtener citas
     def getCitas(self):
         citas=[]
-        for persona in self.pacientes,self.getMedicos():
+        for persona in self.pacientes,self.medicos():
             citas.append(persona.getCitas())
         citas=set(citas)
         return citas
+    
+    #funcion para agregar un nuevo medico
     def agregarMedico(self, _medico):
         for medico in self.medicos:
             if medico.getRut==_medico.getRut():
@@ -164,7 +166,7 @@ class Cita ():
     def __init__(self, fecha_citada, medico, paciente, modalidad):
         
         self.fecha_citada=fecha_citada
-        self.fecha_actual=dt.datetime.now()
+        self.fecha_creacion=dt.datetime.now()
         self.medico= medico
         self.paciente= paciente
         self.direccion=""
@@ -173,7 +175,7 @@ class Cita ():
         self.pagado=False
         self.modalidad=modalidad
         self.prioridad=""
-        self.tiempo_restante=self.fecha_citada-self.fecha_actual
+        self.tiempo_restante=self.fecha_citada-self.fecha_creacion
         self.confirmada=False
         self.terminada=False
     
@@ -183,8 +185,8 @@ class Cita ():
     def setFechaCitada(self,fecha_citada): 
         self.fecha_citada = fecha_citada
     
-    def setFechaActual(self,fecha_actual):
-        self.fecha_actual = fecha_actual
+    def setFechaCreacion(self,fecha_creacion):
+        self.fecha_creacion = fecha_creacion
 
     def setMedico(self,medico):
         self.medico=medico
@@ -222,8 +224,8 @@ class Cita ():
     def getFechaCitada(self):
         return self.fecha_citada
 
-    def getFechaActual(self):
-        return self.fecha_actual
+    def getFechaCreacion(self):
+        return self.fecha_creacion
 
     def getMedico(self):
         return self.medico
@@ -257,14 +259,14 @@ class Cita ():
 
     #funcion para actualizar el estado de una cita segun en cual se encuentre
     def actualizarEstado(self):
-        fecha_actual=dt.datetime.now()       
-        fecha_restante=self.fecha_citada-fecha_actual
+        fecha_creacion=dt.datetime.now()       
+        fecha_restante=self.fecha_citada-fecha_creacion
 
         self.tiempo_restante = fecha_restante
     
     #funcion para mostrar los datos ya recopilados
     def __str__(self):
-        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_actual+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)+" "+self.direccion+" "+self.prioridad+" "+self.tiempo_restante+" "+self.confirmada
+        return self.fecha_citada+" "+ self.codigo+" "+self.fecha_creacion+" "+self.medico+" "+self.paciente+" "+self.modalidad+" "+self.prestacion+" "+str(self.pagado)+" "+self.direccion+" "+self.prioridad+" "+self.tiempo_restante+" "+self.confirmada
 
 class Persona():
     #agregar fecha de nacimiento

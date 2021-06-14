@@ -37,10 +37,6 @@ def autocompletarPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].insert(0,datos_paciente[i])
 
-#cambia el color a rojo o verde
-def cambiarColorIn():
-    return
-
 #Permite la actualización de los datos
 def actualizarListbox(datos):
     lista_medicos_listbox.delete(0,END)
@@ -92,7 +88,7 @@ def cancelarCita():
     for paciente in clinica_objeto.getPacientes():
             paciente.eliminarCita(busqueda)
             info_cita_txtbox.delete('0.0',END)
-             
+            actualizarDatosCitas()
     return False
 
 #función para confirmar la cita
@@ -106,6 +102,7 @@ def confirmarCita():
                 texto= "Fecha Citada: "+str(cita.getFechaCitada())+"\nPaciente: "+ cita.getPaciente().getNombreCompleto()+"\nMedico: "+cita.getMedico().getNombreCompleto()+"\nPrestacion: "+cita.getPrestacion()+"\nModalidad: "+cita.getModalidad()+"\nConfirmada: "+str(cita.getConfirmada())
                 info_cita_txtbox.insert('0.0',texto)
                 messagebox.showinfo(message="Cita confirmada")
+                actualizarDatosCitas()
 
                 return True
     return False
@@ -125,14 +122,6 @@ def buscarCodigo():
 
 #verifica los datos ingresados para el paciente
 # y marca aquellos entry dependiendo de si esta bien(verde) o mal (rojo)
-"""check_img = PIL.Image.open('./imagenes/check.png')
-check_img = check_img.resize((50, 50), PIL.Image.ANTIALIAS)
-check_img = PIL.ImageTk.PhotoImage(check_img)
-
-equis_img = PIL.Image.open('./imagenes/equis.png')
-equis_img = equis_img.resize((50, 50), PIL.Image.ANTIALIAS)
-equis_img = PIL.ImageTk.PhotoImage(equis_img)
-"""
 def verificarDatosPaciente():
     
     for img in check_list:
@@ -190,6 +179,7 @@ def verificarDatosPaciente():
         
     return 
 #agrega un paciente
+
 def agregarDatosPaciente():
      
     if not(verificarDatosPaciente()):
@@ -199,6 +189,7 @@ def agregarDatosPaciente():
         email_entry.get(), tel_contacto_entry.get())
         if clinica_objeto.agregarPaciente(paciente_temporal):
             messagebox.showinfo(message="Se han guardado sus datos correctamente", title="Éxito")
+            agregarPacienteCSV()
             
         elegirFecha()
         return True
@@ -213,31 +204,16 @@ def cancelarDatosPaciente():
         lista_entry_datos_paciente[i].delete(0,END)
         lista_entry_datos_paciente[i].config(bg="#9ca2a9")
         
-       
-        
-
 #función para modificar los datos agregados del paciente
 def modificarDatosPaciente():
-    if not(clases.Persona.isRut(rut_entry.get())) :
-        messagebox.showwarning(message="El rut "+rut_entry.get() +" ingresado es invalido", title="Error")
-    
-
+    if not(verificarDatosPaciente()):
         return False
-    
-    if not(clases.Persona.isMail(email_entry.get())):
-        messagebox.showwarning(message="El Email "+ email_entry.get()+" ingresado es invalido", title="Error")
-
-        return False
-
-    for entrada in lista_entry_datos_paciente:
-        if entrada.get()=="":
-            messagebox.showwarning(message="Complete todos los datos requeridos por favor", title="Error")
-            return False
-
-    paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
-    email_entry.get(), tel_contacto_entry.get())
-    if clinica_objeto.modificarPaciente(paciente_temporal):
-        messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
+    else:
+        paciente_temporal=clases.Paciente(nombre1_entry.get(), nombre2_entry.get(), apellido1_entry.get(), apellido2_entry.get(), rut_entry.get(), "",
+        email_entry.get(), tel_contacto_entry.get())
+        if clinica_objeto.modificarPaciente(paciente_temporal):
+            messagebox.showinfo(message="Los datos se han modificado", title="Éxito")
+            actualizarDatosPacientes()
 
     cancelarDatosPaciente()
    
@@ -261,16 +237,17 @@ def elegirFecha():
             messagebox.showwarning(message="Esa hora no está disponible, intenta otra...", title="Error")
             return False
         
+        else:
+            label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
+            entry=Entry(temp)
+            entry.pack(fill=Y, expand=True)
         
-        label=Label(temp,text="La cita a sido agendada con exito\nGuarde el siguiente codigo para administrar su cita").pack()
-        entry=Entry(temp)
-        entry.pack(fill=Y, expand=True)
-       
-        label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
-        entry.insert(0,cita_auxiliar.getCodigo())
-        entry.config(state="readonly")
-        temp.pack()
-        return True
+            label2=Label(temp,text="RECUERDE CONFIRMAR SU CITA O NO SERÁ ATENDIDO").pack()
+            entry.insert(0,cita_auxiliar.getCodigo())
+            entry.config(state="readonly")
+            temp.pack()
+            agregarCitaCSV()
+            return True
 
     if medico_seleccionado_label["text"]=="":
         messagebox.showwarning(message="Recuerde escoger al Medico", title="Error")
@@ -376,7 +353,6 @@ def reagendarCita():
     boton_hora=Button(disponibilidad_citas_frame,text="Reservar Hora",command=lambda:reagendarCita(), image = reservar_hora_ic)
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
-Lista_datos = []
 
 def leerArchivos():
     #actualizarDatos()
@@ -397,41 +373,33 @@ def leerArchivos():
     lista_datos = [edad_pacientes, especialidad_medicos, datos_modalidad, datos_prestacion, datos_prevision, confirmados]
     return lista_datos
 
-def actualizarDatos():
-    medicos_csv = open('./datos/Medicos.csv','w')
-    medicos_writer = csv.writer(medicos_csv)
+def agregarPacienteCSV():
+    pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
+    agregar={'nombre completo': clinica_objeto.getPacientes()[-1].getNombreCompleto(),
+             'rut':clinica_objeto.getPacientes()[-1].getRut(),
+             'edad':clinica_objeto.getPacientes()[-1].getEdad(),
+             'email': clinica_objeto.getPacientes()[-1].getEmail(),
+             'numero de telefono':clinica_objeto.getPacientes()[-1].getNumeroTelefonico(),
+             'prevision':clinica_objeto.getPacientes()[-1].getPrevision()
+             }
 
-    medico_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','especialidad']
-    medicos_writer.writerow(medico_atributos)
+    with open('./datos/Pacientes.csv', mode='a') as archivo:
+        agregar.to_csv(archivo, header=archivo.tell()==0)
 
-    for medico in clinica_objeto.getMedicos():
-        medico_info= [medico.getNombreCompleto(), medico.getRut(), medico.getEdad(), medico.getEmail(),medico.getNumeroTelefonico(),medico.getEspecialidad()]
-        medicos_writer.writerow(medico_info)
-
-    pacientes_csv = open('./datos/Pacientes.csv', 'w')
-    pacientes_writer = csv.writer(pacientes_csv)
-    pacientes_reader= csv.DictReader(pacientes_csv)
-    pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
-    pacientes_writer.writerow(pacientes_atributos)
-
-    for paciente in clinica_objeto.getPacientes():
-        paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
-        pacientes_writer.writerow(paciente_info)
-
-    citas_csv = open('./datos/Citas.csv', 'w')
-    citas_writer = csv.writer(citas_csv)
-    citas_reader= csv.DictReader(citas_csv)
-    citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
-    citas_writer.writerow(citas_atributos)
-
-    for paciente in clinica_objeto.getPacientes():
-        cod_citas=[]
-        for cita in paciente.getCitas():
-            cod_citas.append(cita.getCodigo())
-        for codigo in cod_citas:
-            cita = paciente.buscarCita(codigo)
-            cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
-            citas_writer.writerow(cita_info)
+def agregarCitaCSV():
+    citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
+    agregar={'codigo': clinica_objeto.getCitas()[-1].getCodigo(),
+             'rut paciente':clinica_objeto.getCitas()[-1].getRutPaciente(),
+             'rut medico':clinica_objeto.getCitas()[-1].getRutMedico(),
+             'fecha citada': clinica_objeto.getCitas()[-1].getFechaCitada(),
+             'fecha de creacion':clinica_objeto.getCitas()[-1].getFechaCreacion(),
+             'modalidad':clinica_objeto.getCitas()[-1].getModalidad(),
+             'prestacion':clinica_objeto.getCitas()[-1].getPrestacion(),
+             'confirmada':clinica_objeto.getCitas()[-1].getConfirmada(),
+             'tiempo restante':clinica_objeto.getCitas()[-1].getTiempoRestante()
+             }
+    with open('./datos/Citas.csv', mode='a') as archivo:
+        agregar.to_csv(archivo, header=archivo.tell()==0)
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -493,7 +461,26 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         if caso:plt.show()
         plt.close()
     
-    
+def actualizarDatosPacientes():
+    pacientes_csv = open('./datos/Pacientes.csv', 'w')
+    pacientes_writer = csv.writer(pacientes_csv)
+    pacientes_atributos= ['nombre completo', 'rut', 'edad', 'email','numero de telefono','prevision']
+    pacientes_writer.writerow(pacientes_atributos)
+
+    for paciente in clinica_objeto.getPacientes():
+        paciente_info= [paciente.getNombreCompleto(), paciente.getRut(), paciente.getEdad(), paciente.getEmail(),paciente.getNumeroTelefonico(),paciente.getPrevision()]
+        pacientes_writer.writerow(paciente_info)
+
+def actualizarDatosCitas():
+    citas_csv = open('./datos/Citas.csv', 'w')
+    citas_writer = csv.writer(citas_csv)
+    citas_atributos= ['codigo', 'rut paciente', 'rut medico', 'fecha citada','fecha de creacion', 'modalidad','prestacion','confirmada','tiempo restante']
+    citas_writer.writerow(citas_atributos)
+
+    for cita in clinica_objeto.getCitas():
+        cita_info= [cita.getCodigo(),cita.getPaciente().getRut(),cita.getMedico().getRut(), cita.getFechaCitada(), cita.getFechaActual(),cita.getModalidad(),cita.getPrestacion(),cita.getConfirmada(),cita.getTiempoRestante()]
+        citas_writer.writerow(cita_info)
+
 
 
 def informacionCitas():
@@ -802,5 +789,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-ventana_principal.bind("<ButtonRelease-1>",actualizarDatos())
+#ventana_principal.bind("<ButtonRelease-1>",actualizarDatos())
 ventana_principal.mainloop()
