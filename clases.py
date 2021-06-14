@@ -338,6 +338,9 @@ class Persona():
     def getNumeroTelefonico(self):
         return self.numero_telefonico
     
+    def getCitas(self):
+        return self.citas
+    
     #funcion para verificar si un correo es valido o no
     def isMail(email):
         regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
