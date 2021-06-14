@@ -264,13 +264,13 @@ button1.pack()
 root.mainloop()
 """
 pacientes_csv = pd.read_csv('./datos/Pacientes.csv', index_col=0)
-agregar={'nombre completo': clinica_objeto.getPacientes()[-1].getNombreCompleto(),
-             'rut': clinica_objeto.getPacientes()[-1].getRut(),
-             'edad': clinica_objeto.getPacientes()[-1].getEdad(),
-             'email': clinica_objeto.getPacientes()[-1].getEmail(),
-             'numero de telefono': clinica_objeto.getPacientes()[-1].getNumeroTelefonico(),
-             'prevision': clinica_objeto.getPacientes()[-1].getPrevision()
-             }
+agregar={'nombre completo': [clinica_objeto.getPacientes()[-1].getNombreCompleto()],
+         'rut': [clinica_objeto.getPacientes()[-1].getRut()],
+         'edad': [clinica_objeto.getPacientes()[-1].getEdad()],
+         'email': [clinica_objeto.getPacientes()[-1].getEmail()],
+         'numero de telefono': [clinica_objeto.getPacientes()[-1].getNumeroTelefonico()],
+         'prevision': [clinica_objeto.getPacientes()[-1].getPrevision()]
+        }
 agregar=pd.DataFrame(agregar)
 agregar.to_csv("agregar.csv")
 print(agregar)
