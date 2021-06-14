@@ -258,7 +258,7 @@ def elegirFecha():
             entry.insert(0,cita_auxiliar.getCodigo())
             entry.config(state="readonly")
             temp.pack()
-            #agregarCitaCSV()
+            agregarCitaCSV()
             return True
 
     if medico_seleccionado_label["text"]=="":
@@ -405,21 +405,21 @@ def agregarPacienteCSV():
 
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
-    agregar={'codigo': clinica_objeto.getCitas()[-1].getCodigo(),
-             'rut paciente':clinica_objeto.getCitas()[-1].getPaciente().getRut(),
-             'rut medico':clinica_objeto.getCitas()[-1].getMedico().getRut(),
-             'fecha citada': clinica_objeto.getCitas()[-1].getFechaCitada(),
-             'fecha de creacion':clinica_objeto.getCitas()[-1].getFechaCreacion(),
-             'modalidad':clinica_objeto.getCitas()[-1].getModalidad(),
-             'prestacion':clinica_objeto.getCitas()[-1].getPrestacion(),
-             'confirmada':clinica_objeto.getCitas()[-1].getConfirmada(),
-             'tiempo restante':clinica_objeto.getCitas()[-1].getTiempoRestante()
+    agregar={'codigo': [clinica_objeto.getCitas()[-1].getCodigo()],
+             'rut paciente':[clinica_objeto.getCitas()[-1].getPaciente().getRut()],
+             'rut medico':[clinica_objeto.getCitas()[-1].getMedico().getRut()],
+             'fecha citada': [clinica_objeto.getCitas()[-1].getFechaCitada()],
+             'fecha de creacion':[clinica_objeto.getCitas()[-1].getFechaCreacion()],
+             'modalidad':[clinica_objeto.getCitas()[-1].getModalidad()],
+             'prestacion':[clinica_objeto.getCitas()[-1].getPrestacion()],
+             'confirmada':[clinica_objeto.getCitas()[-1].getConfirmada()],
+             'tiempo restante':[clinica_objeto.getCitas()[-1].getTiempoRestante()]
              }
     citas_csv=pd.DataFrame(citas_csv)
     agregar=pd.DataFrame(agregar)
     citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
-    citas_csv.to_csv("./datos/Pacientes.csv")
+    citas_csv.to_csv("./datos/Citas.csv")
 
 def merge_sort(m):
     if len(m) <= 1:
