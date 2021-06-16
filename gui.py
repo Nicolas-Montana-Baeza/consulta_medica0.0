@@ -384,12 +384,50 @@ def reagendarCita():
     boton_hora.grid(row=6,column=0, columnspan=2)
     escoger_fecha_frame.pack()
     actualizarDatosCitas()
+"""
+def actualizarImg():
+    lista_datos=leerArchivos()
+    graficarDatos(False,lista_datos[0],"Edades de los Pacientes","bar","Edades", "Pacientes por Edad")
+    graficarDatos(False,lista_datos[1],"Especialidades de los doctores","pie", "Especialidades")
+    graficarDatos(False,lista_datos[2],"Modalidad","pie", "Modalidad de la cita")
+    graficarDatos(False,lista_datos[3],"Prestación","pie", "Prestación de los pacientes")
+    graficarDatos(False,lista_datos[4],"Previsión del paciente","pie", "Previsión de los pacientes")
+    graficarDatos(False,lista_datos[5],"Pacientes confirmados","pie", "Pacientes que han confirmado")
+    edades_grafico_img = PIL.Image.open('./imagenes/Edades de los Pacientes.png')
+    edades_grafico_img =edades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    edades_grafico_img = PIL.ImageTk.PhotoImage(edades_grafico_img)
+    edades_grafico_btn.config(image =edades_grafico_img)
+    
+    especialidades_grafico_img = PIL.Image.open('./imagenes/Especialidades de los doctores.png')
+    especialidades_grafico_img =especialidades_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    especialidades_grafico_img = PIL.ImageTk.PhotoImage(especialidades_grafico_img)
+    especialidades_grafico_btn.config(image =especialidades_grafico_img)
+   
 
+    modalidad_grafico_img = PIL.Image.open('./imagenes/Modalidad.png')
+    modalidad_grafico_img =modalidad_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    modalidad_grafico_img = PIL.ImageTk.PhotoImage(modalidad_grafico_img)
+    modalidad_grafico_btn.config(image =modalidad_grafico_img)
 
+    prestacion_grafico_img = PIL.Image.open('./imagenes/Prestación.png')
+    prestacion_grafico_img =prestacion_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    prestacion_grafico_img = PIL.ImageTk.PhotoImage(prestacion_grafico_img)
+    prestacion_grafico_btn.config(image =prestacion_grafico_img)
 
+    prevision_grafico_img = PIL.Image.open('./imagenes/Previsión del paciente.png')
+    prevision_grafico_img =prevision_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    prevision_grafico_img = PIL.ImageTk.PhotoImage(prevision_grafico_img)
+    prevision_grafico_btn.config(image =prevision_grafico_img)
+
+    confirmados_grafico_img = PIL.Image.open('./imagenes/Pacientes confirmados.png')
+    confirmados_grafico_img =confirmados_grafico_img.resize((200, 100), PIL.Image.ANTIALIAS)
+    confirmados_grafico_img = PIL.ImageTk.PhotoImage(confirmados_grafico_img)
+    confirmados_grafico_btn.config(image =confirmados_grafico_img)
+
+"""
 #csv manage
 def leerArchivos():
-    #actualizarDatos()
+    
     datos_pacientes = pd.read_csv('./datos/Pacientes.csv')
     edad_pacientes=datos_pacientes["edad"].values
     datos_prevision = datos_pacientes["prevision"].values
@@ -421,6 +459,7 @@ def agregarPacienteCSV():
     pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
+    actualizarDatosPacientes()
 
 def agregarCitaCSV():
     citas_csv = pd.read_csv('./datos/Citas.csv', index_col=0)
@@ -439,6 +478,7 @@ def agregarCitaCSV():
     citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
+    actualizarDatosCitas()
 
 def merge_sort(m):
     if len(m) <= 1:
@@ -501,6 +541,7 @@ def graficarDatos(caso,_datos,_titulo,_f,_titulo_x="x",_titulo_y="y"):
         plt.close()
     
 def actualizarDatosPacientes():
+   
     agregar={'nombre completo': [],
                 'rut': [],
                 'edad': [],
@@ -523,6 +564,7 @@ def actualizarDatosPacientes():
         pacientes_csv=pacientes_csv.append(agregar,ignore_index=True)
     pacientes_csv=pacientes_csv.drop_duplicates(subset="rut",ignore_index=True)
     pacientes_csv.to_csv("./datos/Pacientes.csv")
+    
 
 def actualizarDatosCitas():
     agregar={'codigo': [],
@@ -551,6 +593,8 @@ def actualizarDatosCitas():
         citas_csv=citas_csv.append(agregar,ignore_index=True)
     citas_csv=citas_csv.drop_duplicates(subset="codigo",ignore_index=True)
     citas_csv.to_csv("./datos/Citas.csv")
+   
+
 
 def informacionCitas():
     
@@ -869,5 +913,5 @@ modalidad=StringVar()
 
 actualizarListbox(clinica_objeto.getMedicos())
 lista_medicos_listbox.bind("<<ListboxSelect>>", seleccionarMedico)
-#ventana_principal.bind("<ButtonRelease-1>",actualizarDatos())
+
 ventana_principal.mainloop()

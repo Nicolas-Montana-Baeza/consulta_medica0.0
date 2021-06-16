@@ -180,6 +180,7 @@ for i in range(len(codigo)):
     cita_vacia.setModalidad(modalidad[i])
     cita_vacia.setPrestacion(prestacion[i])
     cita_vacia.setConfirmada(confirmada[i])
+    cita_vacia.actualizarEstado()
     lista_citas.append(cita_vacia)
 for paciente in clinica_objeto.getPacientes():
     citas_paciente=[]
@@ -233,4 +234,3 @@ for paciente in clinica_objeto.getPacientes():
 medicos_csv = open('./datos/Medicos.csv','r')
 medicos_reader = csv.DictReader(medicos_csv)
 """
-print(clinica_objeto.getPacientes()[-1].getCitas()[0].getCodigo())
